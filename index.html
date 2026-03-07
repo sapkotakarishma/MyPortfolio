@@ -5,58 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karishma Sapkota | Data Scientist</title>
     <style>
+
+        /* ---------- GLOBAL BACKGROUND (DATA ANALYST STYLE) ---------- */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f5f7fa;
+
+            /* Multi-layer gradient for a data‑visualization feel */
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 200, 200, 0.4), transparent 60%),
+                radial-gradient(circle at 90% 10%, rgba(200, 220, 255, 0.4), transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(200, 255, 220, 0.4), transparent 60%),
+                linear-gradient(135deg, #fdf2f8, #e0f2fe, #fef9c3);
+
+            background-size: 200% 200%;
+            animation: gradientShift 14s ease infinite;
             color: #333;
         }
-        header {
-            background: #1f2937;
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
+
+        /* ---------- HEADER (BEHIND YOUR NAME) ---------- */
+        header {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
+            background-size: 300% 300%;
+            animation: headerShift 10s ease infinite;
+
+            color: white;
+            padding: 90px 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+
+        @keyframes headerShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         header h1 {
             margin: 0;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
+            letter-spacing: 1px;
         }
         header p {
-            margin-top: 10px;
-            font-size: 1.2rem;
-            opacity: 0.9;
+            margin-top: 12px;
+            font-size: 1.3rem;
+            opacity: 0.95;
         }
+
+        /* ---------- NAVIGATION ---------- */
         nav {
-            background: #111827;
-            padding: 10px 0;
+            background: #1e1b4b;
+            padding: 14px 0;
             text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
         nav a {
-            color: #e5e7eb;
-            margin: 0 15px;
+            color: #e0e7ff;
+            margin: 0 20px;
             text-decoration: none;
             font-weight: bold;
+            font-size: 1rem;
         }
         nav a:hover {
-            color: #60a5fa;
+            color: #c7d2fe;
         }
+
+        /* ---------- SECTIONS ---------- */
         section {
             max-width: 900px;
-            margin: 40px auto;
+            margin: 50px auto;
             padding: 0 20px;
         }
         h2 {
-            color: #1f2937;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 5px;
+            color: #1e3a8a;
+            border-bottom: 3px solid #a5b4fc;
+            padding-bottom: 6px;
+            font-size: 1.8rem;
         }
+
+        /* ---------- PROJECT CARDS ---------- */
         .project-card {
             background: white;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 22px;
+            margin: 18px 0;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 8px solid;
+            transition: transform 0.2s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-4px);
         }
         .project-card a {
             color: #2563eb;
@@ -66,12 +113,36 @@
         .project-card a:hover {
             text-decoration: underline;
         }
+
+        /* Color accents for each card */
+        .c1 { border-color: #3b82f6; }
+        .c2 { border-color: #ec4899; }
+        .c3 { border-color: #10b981; }
+        .c4 { border-color: #f59e0b; }
+
+        /* ---------- SKILLS TAGS ---------- */
+        .skills-list li {
+            display: inline-block;
+            background: #e0e7ff;
+            padding: 8px 14px;
+            margin: 6px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #1e3a8a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        /* ---------- FOOTER ---------- */
         .footer {
             text-align: center;
-            padding: 20px;
-            background: #e5e7eb;
-            margin-top: 40px;
+            padding: 25px;
+            background: #1e1b4b;
+            color: #e0e7ff;
+            margin-top: 60px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
         }
+
     </style>
 </head>
 
@@ -101,22 +172,22 @@
 <section id="projects">
     <h2>Projects</h2>
 
-    <div class="project-card">
+    <div class="project-card c1">
         <h3>📊 Spatio-Temporal Modeling for Disease Surveillance</h3>
         <p>Developed predictive models to identify geographic and temporal patterns in public health data.</p>
     </div>
 
-    <div class="project-card">
+    <div class="project-card c2">
         <h3>🧠 Explainable AI for Clinical Decision Support</h3>
         <p>Built interpretable machine learning models to support safe and transparent clinical decisions.</p>
     </div>
 
-    <div class="project-card">
+    <div class="project-card c3">
         <h3>🌍 Health Systems Performance Analysis</h3>
         <p>Led mixed-methods research to evaluate service delivery, equity, and population-level outcomes.</p>
     </div>
 
-    <div class="project-card">
+    <div class="project-card c4">
         <h3>📈 Interactive Data Visualization (Observable)</h3>
         <p>
             An interactive visualization created using Observable. This notebook demonstrates exploratory analysis, 
@@ -133,13 +204,16 @@
 
 <section id="skills">
     <h2>Skills</h2>
-    <ul>
-        <li>Machine Learning & Explainable AI</li>
+    <ul class="skills-list">
+        <li>Machine Learning</li>
+        <li>Explainable AI</li>
         <li>Spatio-Temporal Modeling</li>
-        <li>Public Health Surveillance</li>
-        <li>SQL, Python, R</li>
-        <li>Data Visualization & Storytelling</li>
-        <li>Clinical Reasoning & Health Systems Analysis</li>
+        <li>SQL</li>
+        <li>Python</li>
+        <li>R</li>
+        <li>Data Visualization</li>
+        <li>Storytelling</li>
+        <li>Public Health Analytics</li>
     </ul>
 </section>
 
