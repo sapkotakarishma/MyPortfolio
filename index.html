@@ -391,6 +391,23 @@
     .tags { margin-top: 10px; }
   .tag { display:inline-block; background: rgba(15,23,42,0.6); padding:6px 10px; margin:4px; border-radius:999px; font-size:12px; color:var(--text-main); border:1px solid rgba(148,163,184,0.12); }
 
+  /* project meta, badges and details */
+  .project .meta { display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+  .project .metric-pill { background: rgba(0,0,0,0.14); padding:6px 8px; border-radius:8px; font-weight:700; color:var(--accent); font-size:13px; }
+  .project .project-desc { color:var(--text-muted); margin-bottom:8px; }
+  .project .actions { margin-top:10px; display:flex; gap:8px; align-items:center; }
+  .project .btn.small { padding:6px 10px; font-size:13px; border-radius:8px; }
+  /* animated details panel */
+  .project-detail { max-height:0; overflow:hidden; margin-top:10px; padding:0 10px; border-top:1px dashed rgba(148,163,184,0.06); color:var(--text-muted); transition: max-height 320ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease; opacity:0; }
+  .project.open .project-detail { max-height:420px; padding:10px; opacity:1; }
+  .project { cursor: pointer; }
+
+  /* timeline tweaks */
+  .timeline-item { grid-template-columns: 120px 1fr; }
+  .timeline-date { background: var(--bg-card); padding:8px 10px; border-radius:8px; border:1px solid var(--border-card); text-align:center; }
+  .timeline-content h3 { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+  .timeline-content .company { font-size:13px; color:var(--text-muted); font-weight:600; }
+
     /* DASHBOARD (home) */
     .dashboard-grid {
       display: grid;
@@ -658,42 +675,48 @@
         Selected projects that combine modeling, domain context, and clear communication of results.
       </p>
       <div class="projects">
-        <div class="project">
-          <h3>Emotion Classification (Reddit NLP)</h3>
-          <p>
-            Compared rule‑based emotion lexicons and transformer models to analyze emotional patterns in 37,000+ Reddit posts.
-            Evaluated trade‑offs between interpretability and performance for mental‑health‑related text.
-          </p>
-          <div class="tags">
-            <span class="tag">NLP</span>
-            <span class="tag">Transformers</span>
-            <span class="tag">Python</span>
+        <div class="project" id="proj-reddit" data-key="proj-reddit" tabindex="0" role="button">
+            <div class="meta"><div class="metric-pill">37K+</div><div class="project-title"><h3>Emotion Classification (Reddit NLP)</h3></div></div>
+            <div class="project-desc">Compared rule‑based lexicons and transformer models to analyze emotional patterns in 37,000+ Reddit posts; balanced interpretability vs performance.</div>
+            <div class="tags">
+              <span class="tag">NLP</span>
+              <span class="tag">Transformers</span>
+              <span class="tag">Python</span>
+            </div>
+          <div class="actions"><button class="btn small" onclick="toggleProject('proj-reddit')">Details</button><a class="btn small" href="#" onclick="showSection('learning');openLearning('nlp')">See code</a></div>
+          <div class="project-detail">
+            <div class="thumb"><svg class="sparkline" data-values="24,30,28,34,40,36,32" width="180" height="40" viewBox="0 0 180 40" preserveAspectRatio="none"></svg></div>
+            <div>Model comparisons, confusion matrices, and interpretability notes. <strong>Outcome:</strong> reproducible pipeline and SHAP explanations.</div>
           </div>
-        </div>
-        <div class="project">
-          <h3>Heart Disease Prediction</h3>
-          <p>
-            Built classification models to predict cardiovascular disease risk using clinical variables.
-            Focused on feature importance and model explainability for potential clinical decision support.
-          </p>
-          <div class="tags">
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Scikit‑learn</span>
-            <span class="tag">Healthcare</span>
           </div>
-        </div>
-        <div class="project">
-          <h3>Credit Card Fraud Detection</h3>
-          <p>
-            Developed models to detect fraudulent transactions using imbalanced‑data techniques and anomaly detection.
-            Benchmarked multiple algorithms and evaluated precision‑recall trade‑offs.
-          </p>
-          <div class="tags">
-            <span class="tag">ML</span>
-            <span class="tag">Python</span>
-            <span class="tag">Fraud Detection</span>
+        <div class="project" id="proj-heart" data-key="proj-heart" tabindex="0" role="button">
+            <div class="meta"><div class="metric-pill">AUC 0.86</div><div class="project-title"><h3>Heart Disease Prediction</h3></div></div>
+            <div class="project-desc">Classification models predicting cardiovascular risk using clinical variables; emphasis on feature importance and explainability for clinical review.</div>
+            <div class="tags">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Scikit‑learn</span>
+              <span class="tag">Healthcare</span>
+            </div>
+          <div class="actions"><button class="btn small" onclick="toggleProject('proj-heart')">Details</button><a class="btn small" href="#">Read brief</a></div>
+          <div class="project-detail">
+            <div class="thumb"><svg class="sparkline" data-values="5,8,7,9,12,11,13" width="180" height="40" viewBox="0 0 180 40" preserveAspectRatio="none"></svg></div>
+            <div>Validated model with feature importance analysis and clinical summary. <strong>Outcome:</strong> deployable scoring routine and peer-reviewed report.</div>
           </div>
-        </div>
+          </div>
+        <div class="project" id="proj-fraud" data-key="proj-fraud" tabindex="0" role="button">
+            <div class="meta"><div class="metric-pill">Precision 0.92</div><div class="project-title"><h3>Credit Card Fraud Detection</h3></div></div>
+            <div class="project-desc">Anomaly detection and imbalanced-data modeling to flag suspicious transactions; benchmarked multiple algorithms with precision/recall trade-off analysis.</div>
+            <div class="tags">
+              <span class="tag">ML</span>
+              <span class="tag">Python</span>
+              <span class="tag">Fraud Detection</span>
+            </div>
+          <div class="actions"><button class="btn small" onclick="toggleProject('proj-fraud')">Details</button><a class="btn small" href="#">See metrics</a></div>
+          <div class="project-detail">
+            <div class="thumb"><svg class="sparkline" data-values="2,3,5,7,6,9,8" width="180" height="40" viewBox="0 0 180 40" preserveAspectRatio="none"></svg></div>
+            <div>Deployed scoring pipeline with monitoring and alerting. <strong>Outcome:</strong> operational detection and reduced false positives.</div>
+          </div>
+          </div>
       </div>
     </section>
 
@@ -777,32 +800,95 @@
       <!-- LEARNING HUB DASHBOARD (usage) -->
       <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
         <div class="dash-card" style="min-width:280px; max-width:480px;">
-          <div class="dash-title">
-            <span>Learning Hub Activity</span>
-            <div class="chart-controls">
-              <div class="chart-toggle" id="chartToggle">
-                <button class="btn small" data-type="bar" onclick="setLearningChartType('bar')">Bar</button>
-                <button class="btn small" data-type="line" onclick="setLearningChartType('line')">Line</button>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2023 – Present</div>
+              <div class="timeline-content">
+                <h3>Business Analyst <span class="company">– UPMC Hamot (Pharmacy)</span></h3>
+                <p>
+                  Led analytics and dashboarding for pharmacy operations and inventory. Designed KPIs, automated ETL jobs, and partnered with clinicians to align metrics with care processes.
+                </p>
+                <div class="tags">
+                  <span class="tag">Power BI</span>
+                  <span class="tag">SQL</span>
+                  <span class="tag">Healthcare Analytics</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">2022 – 2023</div>
+              <div class="timeline-content">
+                <h3>Research Assistant <span class="company">– University Projects</span></h3>
+                <p>
+                  Conducted mixed‑methods research on healthcare access and social determinants. Built reproducible workflows, performed statistical analyses, and translated findings for policy and clinical audiences.
+                </p>
+                <div class="tags">
+                  <span class="tag">R</span>
+                  <span class="tag">Survey Design</span>
+                </div>
+              </div>
+            </div>
+        
+            <!-- TEACHING EXPERIENCE -->
+            <div class="timeline-item">
+              <div class="timeline-date">08/2024</div>
+              <div class="timeline-content">
+                <h3>Guest Lecturer <span class="company">– Database & SQL Web Security (MS Cybersecurity), Mercyhurst University</span></h3>
+                <p>
+                  Delivered a hands-on session on SQL querying (SELECT, JOINs, filters, optimization) and connected these fundamentals to web security topics like SQL injection and defensive coding.
+                </p>
+                <div class="tags">
+                  <span class="tag">SQL</span>
+                  <span class="tag">Web Security</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">01/2023 – 05/2024</div>
+              <div class="timeline-content">
+                <h3>Graduate Assistant <span class="company">– Computer & Information Science, Mercyhurst University</span></h3>
+                <p>
+                  Co-developed graduate-level NLP course materials, created standardized code examples and lab notebooks, and supported students in implementing NLP pipelines and debugging assignments.
+                </p>
+                <div class="tags">
+                  <span class="tag">NLP</span>
+                  <span class="tag">Teaching</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">02/2016 – 03/2016</div>
+              <div class="timeline-content">
+                <h3>Guest Lecturer <span class="company">– Nursing (3rd year), Purbanchal University, Nepal</span></h3>
+                <p>
+                  Taught dermatological diseases (etiology, prevention, management), designed assessments, and enhanced student comprehension of clinical care strategies.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">Undergraduate Curriculum Development</div>
+              <div class="timeline-content">
+                <h3>Med-Surg & Clinical Rotations <span class="company">– Purbanchal University</span></h3>
+                <p>
+                  Developed structured curriculum, learning objectives, clinical skill checklists, and evaluation rubrics for 1st–3rd year nursing students.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">08/2015</div>
+              <div class="timeline-content">
+                <h3>Community Health Educator</h3>
+                <p>
+                  Conducted community sessions on hygiene and mosquito-borne disease prevention; promoted behavior change through interactive demonstrations.
+                </p>
               </div>
             </div>
           </div>
-          <div class="dash-meta">Counts of how many times each topic was opened in this browser</div>
-          <canvas id="chartLearning" style="width:100%;height:200px;"></canvas>
-        </div>
-      </div>
-
-      <!-- PYTHON -->
-      <div id="learn-python" class="learn-section" style="display:none;">
-  <h3>Python</h3>
-        <p>Python is my primary language for data science: readable syntax, rich ecosystem, and strong community support.</p>
-
-  <h4 style="margin-top:18px;">1. Basics & Control Flow</h4>
-        <div class="python-card">
-          <pre>
-# Variables
-name = "Bri"
-age = 25
-
 # Loop
 for i in range(3):
     print("Hello", i)
@@ -1855,7 +1941,7 @@ stats.ttest_ind(group1, group2)
         if (typeof Chart === 'undefined') {
           const s = document.createElement('script');
           s.src = 'https://cdn.jsdelivr.net/npm/chart.js';
-          s.onload = renderLearningChart;
+          s.onload = function() { renderLearningChart(); };
           document.head.appendChild(s);
           return;
         }
@@ -1970,6 +2056,20 @@ stats.ttest_ind(group1, group2)
       }
     };
 
+    // add project impact details
+    impactDetails['proj-reddit'] = {
+      title: 'Emotion Classification (Reddit NLP)',
+      html: `<p>Comparative analysis of 37,000+ Reddit posts using lexicons and transformers. Deliverables: reproducible pipeline, evaluation notebooks, and interpretability reports (SHAP).</p><p><strong>Outcome:</strong> reproducible model and stakeholder-ready summaries.</p>`
+    };
+    impactDetails['proj-heart'] = {
+      title: 'Heart Disease Prediction',
+      html: `<p>Clinical risk prediction models with feature importance analysis and performance validation. Deliverables: model artifact, ROC/AUC reports, and executive summary.</p><p><strong>Outcome:</strong> validated scoring routine suitable for integration.</p>`
+    };
+    impactDetails['proj-fraud'] = {
+      title: 'Credit Card Fraud Detection',
+      html: `<p>Anomaly detection and imbalanced-data modeling to identify suspicious transactions. Deliverables: scoring pipeline, monitoring dashboards, and alerting rules.</p><p><strong>Outcome:</strong> operational detection with reduced false positives.</p>`
+    };
+
     function openImpactDetail(key) {
       const data = impactDetails[key];
       if (!data) return;
@@ -1994,6 +2094,54 @@ stats.ttest_ind(group1, group2)
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const k = el.dataset.key; openImpactDetail(k); }
       });
     });
+
+    // project detail toggles
+    function toggleProject(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('open');
+    }
+
+    // render simple SVG sparklines for any .sparkline with data-values
+    function renderSparklines() {
+      document.querySelectorAll('svg.sparkline').forEach(svg => {
+        const values = (svg.dataset.values || '').split(',').map(v=>parseFloat(v.trim())||0);
+        if (!values.length) return;
+        const w = svg.viewBox.baseVal.width || svg.getAttribute('width') || 180;
+        const h = svg.viewBox.baseVal.height || svg.getAttribute('height') || 40;
+        const max = Math.max(...values);
+        const min = Math.min(...values);
+        const span = Math.max(max - min, 1);
+        const step = w / Math.max(values.length - 1, 1);
+        let d = '';
+        values.forEach((v,i)=>{
+          const x = Math.round(i * step);
+          const y = Math.round(h - ((v - min)/span) * h);
+          d += (i===0?`M ${x} ${y}`:` L ${x} ${y}`);
+        });
+        svg.innerHTML = `<path d="${d}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+      });
+    }
+
+    // attach project click -> open modal; buttons inside should not propagate
+    function attachProjectHandlers(){
+      document.querySelectorAll('.project').forEach(card=>{
+        const key = card.dataset.key;
+        if (!key) return;
+        card.addEventListener('click', (e)=>{
+          // ignore clicks if they originated from a control
+          if (e.target.closest('.btn') || e.target.closest('button') || e.target.closest('a')) return;
+          openImpactDetail(key);
+        });
+        // keyboard accessibility
+        card.addEventListener('keydown', (e)=>{ if (e.key==='Enter') { openImpactDetail(card.dataset.key); } });
+        // prevent buttons from opening modal via propagation
+        card.querySelectorAll('.btn').forEach(b=> b.addEventListener('click', (ev)=> ev.stopPropagation()));
+      });
+    }
+
+    // run sparklines and attach handlers on DOM ready
+    document.addEventListener('DOMContentLoaded', () => { renderSparklines(); attachProjectHandlers(); });
   </script>
 
 </body>
