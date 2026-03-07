@@ -591,7 +591,10 @@
             <p class="hero-meta">
               Focus areas: clinical analytics, social determinants of health, operational dashboards, and model‑driven decision support.
             </p>
-            <p id="visits" class="hero-meta" style="margin-top:10px;"></p>
+            <div style="margin-top:10px; display:flex; align-items:center; gap:8px;">
+              <div style="font-size:13px;color:var(--text-muted);">Visits (last 7 days)</div>
+              <canvas id="visitsChart" style="width:140px;height:40px;display:block;" aria-label="Visits over last seven days" role="img"></canvas>
+            </div>
 
             <div class="cta-row">
               <a class="btn" href="#projects" onclick="showSection('projects')">Selected Projects</a>
@@ -602,10 +605,12 @@
             <div class="about-cards">
               <div class="about-card">
                 <div class="about-icon">🧭</div>
-                <div>
-                    <div class="about-title">Domain-first</div>
-                    <div class="about-desc">Clinical & public health context drives metrics and model design</div>
-                    <div class="about-metric">12+ clinical studies · Research-backed approach</div>
+            </div>
+
+            <!-- Intro content for Learning Hub (hidden until a topic is selected) -->
+        <div id="learn-intro" class="learn-section" aria-hidden="true" style="display:none;">
+            <!-- LEARNING HUB DASHBOARD (usage) -->
+            <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
                 </div>
               </div>
               <div class="about-card">
@@ -647,7 +652,7 @@
               <canvas id="chartModel" class="dash-canvas"></canvas>
             </div>
           </aside>
-        </div>
+  </div>
       </section>
     </div>
 
@@ -1079,6 +1084,7 @@ print('ROC AUC:', roc_auc_score(y_test, model.predict_proba(X_test)[:,1]))
 cm = confusion_matrix(y_test, pred)
           </pre>
         </div>
+      </div> <!-- end learn-intro -->
 
   <h4 style="margin-top:18px;">8. Save & Serve (minimal example)</h4>
         <div class="python-card">
@@ -1113,7 +1119,7 @@ def predict():
       </div>
 
   <!-- NLP -->
-  <div id="learn-nlp" class="learn-section" aria-hidden="true">
+  <div id="learn-nlp" class="learn-section" aria-hidden="true" style="display:none;">
   <h3>Natural Language Processing (NLP)</h3>
         <p>NLP lets me work with unstructured text—clinical notes, social media, survey responses—and turn it into signals.</p>
 
@@ -1168,7 +1174,7 @@ print(classifier("This portfolio looks amazing!"))
       </div>
 
   <!-- MACHINE LEARNING -->
-  <div id="learn-ml" class="learn-section" aria-hidden="true">
+  <div id="learn-ml" class="learn-section" aria-hidden="true" style="display:none;">
   <h3>Machine Learning</h3>
         <p>Machine learning is about building models that learn patterns from data and generalize to new cases.</p>
 
@@ -1209,7 +1215,7 @@ pd.DataFrame({"feature": X.columns, "importance": importance})
       </div>
 
   <!-- EXCEL -->
-  <div id="learn-excel" class="learn-section" aria-hidden="true">
+  <div id="learn-excel" class="learn-section" aria-hidden="true" style="display:none;">
   <h3>Excel Analytics</h3>
         <p>Excel remains a practical tool for quick analysis, operational reporting, and stakeholder‑friendly views.</p>
 
@@ -1234,7 +1240,7 @@ pd.DataFrame({"feature": X.columns, "importance": importance})
       </div>
 
   <!-- ENHANCED EXCEL EXAMPLES -->
-  <div id="learn-excel-examples" class="learn-section" aria-hidden="true">
+  <div id="learn-excel-examples" class="learn-section" aria-hidden="true" style="display:none;">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
           <h3 style="margin:0;">Excel Analytics — Examples & Outcomes</h3>
           <div style="display:flex;gap:8px;align-items:center;">
@@ -1325,7 +1331,7 @@ Choose red fill to indicate an alert
       </div>
 
       <!-- SQL -->
-  <div id="learn-sql" class="learn-section" aria-hidden="true">
+  <div id="learn-sql" class="learn-section" aria-hidden="true" style="display:none;">
   <h3>SQL (Structured Query Language)</h3>
         <p>SQL is how I access, filter, and aggregate data stored in relational databases.</p>
 
@@ -1493,7 +1499,7 @@ CREATE TABLE events_2025 PARTITION OF events FOR VALUES FROM ('2025-01-01') TO (
       </div>
 
       <!-- DATA VISUALIZATION -->
-  <div id="learn-viz" class="learn-section" aria-hidden="true">
+  <div id="learn-viz" class="learn-section" aria-hidden="true" style="display:none;">
   <h3>Data Visualization</h3>
         <p>Good visualization is about clarity and context, not just aesthetics.</p>
 
@@ -1516,7 +1522,7 @@ plt.show()
       </div>
 
       <!-- DATA ENGINEERING -->
-  <div id="learn-de" class="learn-section" aria-hidden="true">
+  <div id="learn-de" class="learn-section" aria-hidden="true" style="display:none;">
   <h3>Data Engineering</h3>
         <p>Data engineering ensures that models and dashboards have reliable, well‑structured data to work with.</p>
 
@@ -1548,7 +1554,7 @@ df_spark.groupBy("region").count().show()
       
 
       <!-- STATISTICS -->
-  <div id="learn-stats" class="learn-section" aria-hidden="true">
+  <div id="learn-stats" class="learn-section" aria-hidden="true" style="display:none;">
   <h3>Statistics</h3>
         <p>Statistical thinking underpins how I interpret models, experiments, and uncertainty.</p>
 
@@ -1573,7 +1579,7 @@ stats.ttest_ind(group1, group2)
       </div>
 
       <!-- MINI PROJECTS -->
-  <div id="learn-projects" class="learn-section" aria-hidden="true">
+  <div id="learn-projects" class="learn-section" aria-hidden="true" style="display:none;">
   <h3>Mini Projects</h3>
         <p>Small, focused projects that connect multiple skills into end‑to‑end workflows.</p>
 
@@ -1603,7 +1609,7 @@ stats.ttest_ind(group1, group2)
       </div>
 
       <!-- TEACHING -->
-  <div id="learn-teaching" class="learn-section" aria-hidden="true">
+  <div id="learn-teaching" class="learn-section" aria-hidden="true" style="display:none;">
         <h3>Teaching & Instruction</h3>
         <p>Guest lectures, workshops, and graduate assistant roles where I taught data science, statistics, and practical ML.</p>
 
@@ -1647,21 +1653,63 @@ stats.ttest_ind(group1, group2)
     }
   // initial section will be restored after event handlers are wired (from hash or localStorage)
 
-    /* VISITOR COUNTER */
-    let visits = localStorage.getItem("visits");
-    if (!visits) visits = 0;
-    visits++;
-    localStorage.setItem("visits", visits);
-    const visitsEl = document.getElementById("visits");
-    if (visitsEl) visitsEl.innerText = "Visitors (this browser): " + visits;
+    /* VISITOR SPARKLINE (last 7 days) */
+    function recordVisitAndRender(){
+      try{
+        const key = 'visits_by_date';
+        const raw = localStorage.getItem(key);
+        const map = raw ? JSON.parse(raw) : {};
+        const today = new Date().toISOString().slice(0,10);
+        map[today] = (map[today] || 0) + 1;
+        // prune to last 14 days to avoid unbounded growth
+        const keys = Object.keys(map).sort().slice(-14);
+        const pruned = {};
+        keys.forEach(k=> pruned[k]=map[k]);
+        localStorage.setItem(key, JSON.stringify(pruned));
+        renderVisitsChart();
+      }catch(e){ console.warn('visit record failed', e); }
+    }
+
+    function renderVisitsChart(){
+      try{
+        const key = 'visits_by_date';
+        const raw = localStorage.getItem(key);
+        const map = raw ? JSON.parse(raw) : {};
+        // build last 7 days labels and values
+        const days = [];
+        const values = [];
+        for (let i=6;i>=0;i--){
+          const d = new Date(); d.setDate(d.getDate()-i);
+          const k = d.toISOString().slice(0,10);
+          days.push(k.slice(5)); // MM-DD
+          values.push(map[k] || 0);
+        }
+        const canvas = document.getElementById('visitsChart');
+        if (!canvas) return;
+        // ensure Chart.js is loaded
+        if (typeof Chart === 'undefined') {
+          const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/chart.js'; s.onload = function(){ renderVisitsChart(); }; document.head.appendChild(s); return;
+        }
+        const ctx = canvas.getContext('2d');
+        if (canvas._chart) canvas._chart.destroy();
+        const styles = getComputedStyle(document.documentElement);
+        const accent = styles.getPropertyValue('--accent').trim() || '#3b82f6';
+        canvas._chart = new Chart(ctx, {
+          type: 'line',
+          data: { labels: days, datasets: [{ data: values, borderColor: accent, backgroundColor: 'transparent', pointRadius: 0, borderWidth: 2 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } }, elements: { line: { tension: 0.3 } }, animation: { duration: 300 } }
+        });
+      }catch(e){ console.warn('renderVisitsChart error', e); }
+    }
 
     /* LEARNING HUB SWITCH */
     function openLearning(section) {
-      // hide all sections (for assistive tech and visual state via CSS)
-      document.querySelectorAll(".learn-section").forEach(s => { s.setAttribute('aria-hidden','true'); });
+      // hide all sections (both visually and for assistive tech)
+      document.querySelectorAll(".learn-section").forEach(s => { s.setAttribute('aria-hidden','true'); s.style.display='none'; });
       const el = document.getElementById("learn-" + section);
       if (el) {
         el.setAttribute('aria-hidden','false');
+        el.style.display = 'block';
         // move focus to the opened section for keyboard users
         el.setAttribute('tabindex','-1');
         el.focus();
@@ -1983,7 +2031,20 @@ stats.ttest_ind(group1, group2)
       const hash = (location.hash || '').replace('#','');
       const saved = localStorage.getItem('active_section');
       const sections = ["home","impact","experience","projects","skills","learning"];
-      const toShow = sections.includes(hash) ? hash : (sections.includes(saved) ? saved : 'home');
+      let toShow = sections.includes(hash) ? hash : (sections.includes(saved) ? saved : 'home');
+      // If the saved section is 'learning' but the user never opened any learning topic
+      // (no counts and no examples open), prefer showing home to avoid hiding the hero.
+      try{
+        if (toShow === 'learning' && !hash) {
+          const countsRaw = localStorage.getItem('learning_counts');
+          const counts = countsRaw ? JSON.parse(countsRaw) : {};
+          const hasCounts = Object.keys(counts).length > 0;
+          const excelOpen = localStorage.getItem('excel_examples_open') === 'true';
+          if (!hasCounts && !excelOpen) {
+            toShow = 'home';
+          }
+        }
+      }catch(e){}
       // call the new showSection wrapper to handle persistence and active link
       window.showSection(toShow);
       // Ensure no learning topic content is visible until the user explicitly clicks a topic.
@@ -1991,6 +2052,12 @@ stats.ttest_ind(group1, group2)
   document.querySelectorAll('.learn-section').forEach(s => { s.setAttribute('aria-hidden','true'); });
   try{ updateLearningHelper(); }catch(e){}
       }catch(e){}
+      // additionally hide any direct children under #learning that are not the topic menu, helper, or a learn-section
+      try{
+        document.querySelectorAll('#learning > *:not(.topic-menu):not(#learn-helper):not(.learn-section)').forEach(el=>{ el.style.display='none'; el.setAttribute('data-hidden-by-init','true'); });
+      }catch(e){}
+  // record a visit and render the visits sparkline
+  try{ recordVisitAndRender(); }catch(e){}
     });
 
     /* DASHBOARD CHARTS: load Chart.js and render simple example charts */
@@ -2130,7 +2197,7 @@ stats.ttest_ind(group1, group2)
     // Close all learning topics quickly
     function closeAllLearning(){
       try{
-        document.querySelectorAll('.learn-section').forEach(s=> s.setAttribute('aria-hidden','true'));
+  document.querySelectorAll('.learn-section').forEach(s=> { s.setAttribute('aria-hidden','true'); s.style.display='none'; });
         // clear excel examples stored-open flag
         try{ localStorage.setItem('excel_examples_open','false'); }catch(e){}
         updateLearningHelper();
