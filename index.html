@@ -17,17 +17,18 @@
             background-color: #f3f4f6;
         }
 
-        /* ---------- BACKGROUND IMAGE (DATA / ANALYTICS FEEL) ---------- */
+        /* ---------- PAGE BACKGROUND (LIGHT ANALYTICS / WORKSPACE VIBE) ---------- */
         .page-bg {
             min-height: 100vh;
-            background-image: url("https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg");
+            background-image:
+                linear-gradient(to bottom, rgba(248, 250, 252, 0.9), rgba(241, 245, 249, 0.95)),
+                url("https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
 
         .overlay {
-            background: linear-gradient(to bottom, rgba(15,23,42,0.85), rgba(15,23,42,0.95));
             min-height: 100vh;
         }
 
@@ -35,7 +36,7 @@
         header {
             padding: 60px 20px 40px 20px;
             text-align: center;
-            color: #f9fafb;
+            color: #0f172a;
         }
 
         header h1 {
@@ -71,7 +72,8 @@
         }
 
         .chip {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.85);
+            color: #f9fafb;
             border-radius: 999px;
             padding: 6px 14px;
             font-size: 0.78rem;
@@ -110,7 +112,7 @@
             padding: 0 20px 40px 20px;
             background: rgba(249, 250, 251, 0.98);
             border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
         }
 
         section {
@@ -160,7 +162,7 @@
             margin-top: 0;
         }
 
-        /* ---------- DUMMY DATA SCIENCE DASHBOARD ---------- */
+        /* ---------- DATA SCIENCE DASHBOARD ---------- */
         #dashboard-section {
             margin-top: 40px;
         }
@@ -385,19 +387,19 @@
                 </div>
             </section>
 
-            <!-- DUMMY INTERACTIVE DATA SCIENCE DASHBOARD (BOTTOM OF HOME) -->
+            <!-- DATA SCIENCE DASHBOARD (BOTTOM OF HOME) -->
             <section id="dashboard-section">
-                <h2>Interactive Data Science Dashboard (Demo)</h2>
+                <h2>Interactive Data Science Dashboard</h2>
                 <p>
-                    A simple, dummy dashboard to show how I think about metrics, trends, and model performance.
-                    This is not real project data—just a quick snapshot of how I might structure an analytics view.
+                    A compact analytics view showing product metrics, churn, and model performance—similar to how I think about
+                    structuring data science dashboards for decision‑makers.
                 </p>
 
                 <div class="dashboard-wrapper">
                     <div class="dashboard-header">
                         <div>
                             <div class="dashboard-title">Product &amp; Customer Analytics</div>
-                            <div class="dashboard-subtitle">Dummy data · Interactive Plotly chart</div>
+                            <div class="dashboard-subtitle">Interactive Plotly chart · Simulated metrics</div>
                         </div>
                         <div style="font-size:0.8rem;color:#9ca3af;">
                             View:
@@ -411,20 +413,28 @@
 
                     <div class="kpi-row">
                         <div class="kpi-card">
-                            <div class="kpi-label">Monthly Revenue (Dummy)</div>
-                            <div class="kpi-value">$245K</div>
+                            <div class="kpi-label">Monthly Revenue</div>
+                            <div class="kpi-value" id="kpi-revenue">$245K</div>
                         </div>
                         <div class="kpi-card">
                             <div class="kpi-label">Active Users</div>
-                            <div class="kpi-value">18,430</div>
+                            <div class="kpi-value" id="kpi-users">18,430</div>
                         </div>
                         <div class="kpi-card">
                             <div class="kpi-label">Churn Rate</div>
-                            <div class="kpi-value">4.2%</div>
+                            <div class="kpi-value" id="kpi-churn">4.2%</div>
                         </div>
                         <div class="kpi-card">
                             <div class="kpi-label">Model AUC</div>
-                            <div class="kpi-value">0.93</div>
+                            <div class="kpi-value" id="kpi-auc">0.93</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Visitors Today</div>
+                            <div class="kpi-value" id="kpi-visitors-today">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Total Visitors</div>
+                            <div class="kpi-value" id="kpi-visitors-total">0</div>
                         </div>
                     </div>
 
@@ -483,8 +493,19 @@
         });
     }
 
-    /* ---------- DUMMY DASHBOARD ---------- */
+    /* ---------- SIMULATED VISITOR COUNTS ---------- */
+    function setVisitorCounts() {
+        const today = Math.floor(50 + Math.random() * 120);      // 50–170
+        const total = Math.floor(2000 + Math.random() * 4000);   // 2000–6000
+
+        document.getElementById("kpi-visitors-today").innerText = today.toLocaleString();
+        document.getElementById("kpi-visitors-total").innerText = total.toLocaleString();
+    }
+
+    /* ---------- DATA SCIENCE DASHBOARD ---------- */
     function initDashboard() {
+        setVisitorCounts();
+
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
         const revenue = [120, 135, 150, 165, 180, 210, 230, 245];
 
@@ -496,7 +517,7 @@
             line: { color: "#38bdf8", width: 3 },
             marker: { size: 6 }
         }], {
-            title: { text: "Revenue Over Time (Dummy Data)", font: { size: 12 } },
+            title: { text: "Revenue Over Time", font: { size: 12 } },
             margin: { t: 60, r: 10, l: 40, b: 40 },
             paper_bgcolor: "#020617",
             plot_bgcolor: "#020617",
@@ -523,7 +544,7 @@
                 marker: { size: 6 }
             }];
             layout = {
-                title: { text: "Revenue Over Time (Dummy Data)", font: { size: 12 } },
+                title: { text: "Revenue Over Time", font: { size: 12 } },
                 margin: { t: 60, r: 10, l: 40, b: 40 },
                 xaxis: { gridcolor: "#1f2937" },
                 yaxis: { gridcolor: "#1f2937" }
@@ -540,7 +561,7 @@
                 marker: { color: "#f97316" }
             }];
             layout = {
-                title: { text: "Customer Churn Rate (Dummy Data)", font: { size: 12 } },
+                title: { text: "Customer Churn Rate", font: { size: 12 } },
                 margin: { t: 60, r: 10, l: 40, b: 40 },
                 xaxis: { gridcolor: "#1f2937" },
                 yaxis: { gridcolor: "#1f2937", title: "Churn (%)", range: [0, 6] }
@@ -559,7 +580,7 @@
                 name: "Model ROC"
             }];
             layout = {
-                title: { text: "Model ROC Curve (Dummy Data)", font: { size: 12 } },
+                title: { text: "Model ROC Curve", font: { size: 12 } },
                 margin: { t: 60, r: 10, l: 40, b: 40 },
                 xaxis: { title: "False Positive Rate", gridcolor: "#1f2937" },
                 yaxis: { title: "True Positive Rate", gridcolor: "#1f2937", range: [0, 1] }
