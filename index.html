@@ -771,6 +771,9 @@ def add(a, b):
     return a + b
           </pre>
         </div>
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Simple filtered result sets ordered by age for direct analysis or export.</p>
+
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Small runnable examples that produce cleaned dataframes and simple outputs you can paste into a REPL or notebook.</p>
 
   <h4 style="margin-top:18px;">2. Data Structures</h4>
         <div class="python-card">
@@ -780,6 +783,8 @@ my_dict = {"name": "Andrea", "role": "Data Scientist"}
 my_tuple = (10, 20, 30)
           </pre>
         </div>
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Joined tables producing combined rows (patient + visit) ready for aggregation or dashboard inputs.</p>
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Structured weekly pivot tables suitable for visualization or export to a dashboard.</p>
 
   <h4 style="margin-top:18px;">3. Pandas</h4>
         <div class="python-card">
@@ -792,6 +797,8 @@ df.describe()
 df["bmi"] = df["weight_kg"] / (df["height_m"]**2)
           </pre>
         </div>
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Aggregated counts by diagnosis that can be used as KPI inputs (CSV/visualization).</p>
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> A trained pipeline object ready for predictions; typical outputs are classification labels and probability scores.</p>
 
   <h4 style="margin-top:18px;">4. NumPy</h4>
         <div class="python-card">
@@ -803,6 +810,8 @@ matrix = np.random.rand(3, 3)
 mean_val = np.mean(arr)
           </pre>
         </div>
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Row-level ranks that help identify top records (e.g., oldest patients) for review.</p>
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Evaluation metrics and plots (confusion matrix, ROC AUC) summarizing model performance for stakeholders.</p>
 
   <h4 style="margin-top:18px;">5. Practical Pandas Example</h4>
         <div class="python-card">
@@ -823,6 +832,7 @@ weekly = df.groupby(['clinic','week'])['prescriptions'].sum().reset_index()
 pivot = weekly.pivot_table(index='week', columns='clinic', values='prescriptions', aggfunc='sum').fillna(0)
           </pre>
         </div>
+  <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> A persisted model file (joblib) and a minimal prediction API returning JSON labels for integration.</p>
 
   <h4 style="margin-top:18px;">6. NLP — small pipeline (tokenize → features → model)</h4>
         <div class="python-card">
@@ -1788,7 +1798,7 @@ stats.ttest_ind(group1, group2)
     })();
 
     // Render learning usage chart (reads localStorage 'learning_counts')
-    function renderLearningChart() {
+  function renderLearningChart(chartType) {
       try {
         const key = 'learning_counts';
         const raw = localStorage.getItem(key);
@@ -1796,7 +1806,7 @@ stats.ttest_ind(group1, group2)
         const labels = Object.keys(counts).length ? Object.keys(counts) : ['python','nlp','ml','excel','sql','viz','de','stats','projects'];
         const data = labels.map(l => counts[l] || 0);
 
-        // ensure Chart is loaded — if not, load and retry
+    // ensure Chart is loaded — if not, load and retry
         if (typeof Chart === 'undefined') {
           const s = document.createElement('script');
           s.src = 'https://cdn.jsdelivr.net/npm/chart.js';
@@ -1808,10 +1818,7 @@ stats.ttest_ind(group1, group2)
   const ctx = document.getElementById('chartLearning');
         if (!ctx) return;
 
-        // destroy previous instance if present
-        if (ctx._chartInstance) { ctx._chartInstance.destroy(); }
-
-        // compute colors from CSS vars so Chart.js gets concrete color values
+    // compute colors from CSS vars so Chart.js gets concrete color values
         const styles = getComputedStyle(document.documentElement);
         const chartMuted = styles.getPropertyValue('--text-muted').trim() || '#6b7280';
         const chartAccent = styles.getPropertyValue('--accent').trim() || 'rgba(59,130,246,0.9)';
@@ -1820,20 +1827,23 @@ stats.ttest_ind(group1, group2)
         const chartTypeKey = 'learning_chart_type';
         const savedType = localStorage.getItem(chartTypeKey) || 'bar';
 
+        // decide effective type
+        const effectiveType = (typeof chartType !== 'undefined' && chartType) ? chartType : savedType;
+
         // destroy previous instance if present
         if (ctx._chartInstance) { ctx._chartInstance.destroy(); }
 
-        const dataset = { label: 'Opens', data, backgroundColor: labels.map(() => chartAccent), borderColor: chartAccent, fill: chartType === 'line' };
+        const dataset = { label: 'Opens', data, backgroundColor: labels.map(() => chartAccent), borderColor: chartAccent, fill: effectiveType === 'line' };
 
         ctx._chartInstance = new Chart(ctx.getContext('2d'), {
-          type: (typeof chartType !== 'undefined' && chartType) ? chartType : savedType,
+          type: effectiveType,
           data: { labels, datasets: [dataset] },
           options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: chartMuted } }, x: { ticks: { color: chartMuted } } } }
         });
         // update toggle active state
         try {
           document.querySelectorAll('#chartToggle .btn.small').forEach(b => { b.classList.remove('active'); });
-          const activeBtn = document.querySelector(`#chartToggle .btn.small[data-type="${(typeof chartType !== 'undefined' && chartType) ? chartType : savedType}"]`);
+          const activeBtn = document.querySelector(`#chartToggle .btn.small[data-type="${effectiveType}"]`);
           if (activeBtn) activeBtn.classList.add('active');
         } catch (e) { /* ignore DOM update errors */ }
       } catch (err) { console.warn('renderLearningChart error', err); }
