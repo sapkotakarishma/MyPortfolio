@@ -11,13 +11,11 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-
-            background: 
+            background:
                 radial-gradient(circle at 10% 20%, rgba(255, 200, 200, 0.4), transparent 60%),
                 radial-gradient(circle at 90% 10%, rgba(200, 220, 255, 0.4), transparent 60%),
                 radial-gradient(circle at 80% 80%, rgba(200, 255, 220, 0.4), transparent 60%),
                 linear-gradient(135deg, #fdf2f8, #e0f2fe, #fef9c3);
-
             background-size: 200% 200%;
             animation: gradientShift 14s ease infinite;
             color: #333;
@@ -29,19 +27,51 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* ---------- HEADER WITH GRAPH ---------- */
+        /* ---------- LAYOUT ---------- */
+        .layout {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .main-panel {
+            width: 68%;
+            padding-bottom: 60px;
+        }
+
+        .side-panel {
+            width: 32%;
+            min-height: 100vh;
+            border-left: 1px solid rgba(0,0,0,0.08);
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+            box-shadow: -4px 0 12px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            padding: 20px 18px 30px 18px;
+        }
+
+        @media (max-width: 900px) {
+            .layout {
+                flex-direction: column;
+            }
+            .main-panel, .side-panel {
+                width: 100%;
+                position: static;
+                box-shadow: none;
+            }
+        }
+
+        /* ---------- HEADER ---------- */
         header {
-            position: relative;
-            overflow: hidden;
             background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
             background-size: 300% 300%;
             animation: headerShift 10s ease infinite;
-
             color: white;
-            padding: 120px 20px;
+            padding: 70px 20px 80px 20px;
             text-align: center;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
             box-shadow: 0 6px 20px rgba(0,0,0,0.25);
         }
 
@@ -51,43 +81,35 @@
             100% { background-position: 0% 50%; }
         }
 
-        #headerGraph {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.25;
-            z-index: 1;
-        }
-
-        header h1, header p {
-            position: relative;
-            z-index: 2;
-        }
-
         header h1 {
             margin: 0;
-            font-size: 3.4rem;
+            font-size: 3.1rem;
             letter-spacing: 1px;
-            cursor: pointer;
         }
 
-        /* ---------- NAVIGATION ---------- */
+        header p {
+            margin-top: 10px;
+            font-size: 1.3rem;
+            opacity: 0.96;
+        }
+
+        /* ---------- NAV ---------- */
         nav {
             background: #1e1b4b;
-            padding: 14px 0;
+            padding: 12px 0;
             text-align: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
+
         nav a {
             color: #e0e7ff;
-            margin: 0 20px;
+            margin: 0 18px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.98rem;
             cursor: pointer;
         }
+
         nav a:hover {
             color: #c7d2fe;
         }
@@ -95,13 +117,8 @@
         /* ---------- SECTIONS ---------- */
         section {
             max-width: 900px;
-            margin: 50px auto;
+            margin: 40px auto;
             padding: 0 20px;
-            display: none; /* hidden by default */
-        }
-
-        section.active {
-            display: block; /* show when clicked */
         }
 
         h2 {
@@ -111,27 +128,120 @@
             font-size: 1.8rem;
         }
 
-        /* ---------- SKILLS CARDS ---------- */
-        .skill-card {
+        /* ---------- PROJECT CARDS ---------- */
+        .project-card {
             background: white;
             padding: 20px;
-            margin: 15px 0;
+            margin: 16px 0;
             border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            border-left: 6px solid #6366f1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border-left: 6px solid;
         }
+
+        .c1 { border-color: #3b82f6; }
+        .c2 { border-color: #ec4899; }
+        .c3 { border-color: #10b981; }
+        .c4 { border-color: #f59e0b; }
+
+        .project-card h3 {
+            margin-top: 0;
+        }
+
+        .project-card a {
+            color: #2563eb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .project-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- SKILLS ---------- */
+        .skill-card {
+            background: white;
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 9px rgba(0,0,0,0.08);
+            border-left: 6px solid #6366f1;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+        }
+
         .skill-card h3 {
             margin-top: 0;
+            margin-bottom: 6px;
             color: #4338ca;
         }
 
-        /* ---------- FOOTER ---------- */
+        .skill-card p {
+            margin: 4px 0;
+            font-size: 0.95rem;
+        }
+
+        /* ---------- SIDE PANEL (AGENTIC DASHBOARD) ---------- */
+        .side-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+        }
+
+        .side-subtitle {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-bottom: 14px;
+        }
+
+        #agent-console {
+            background: #020617;
+            border-radius: 8px;
+            padding: 10px 10px 8px 10px;
+            font-family: "Courier New", monospace;
+            font-size: 0.78rem;
+            color: #e5e7eb;
+            height: 120px;
+            overflow-y: auto;
+            border: 1px solid #111827;
+            margin-bottom: 14px;
+        }
+
+        #agent-console-line {
+            color: #22c55e;
+        }
+
+        #dashboard {
+            background: #020617;
+            border-radius: 10px;
+            padding: 6px;
+            border: 1px solid #111827;
+        }
+
+        #dashboard-chart {
+            width: 100%;
+            height: 260px;
+        }
+
+        .console-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #9ca3af;
+            margin-bottom: 4px;
+        }
+
         .footer {
             text-align: center;
             padding: 25px;
             background: #1e1b4b;
             color: #e0e7ff;
-            margin-top: 60px;
+            margin-top: 40px;
             border-top-left-radius: 40px;
             border-top-right-radius: 40px;
         }
@@ -140,138 +250,401 @@
 
 <body>
 
-<!-- ---------- HEADER WITH GRAPH ---------- -->
-<header onclick="showSection('home')">
-    <div id="headerGraph"></div>
-    <h1 onclick="showSection('home')">Karishma Sapkota</h1>
-    <p>Data Scientist • Public Health • Clinical Analytics</p>
+<header>
+    <h1>Karishma Sapkota</h1>
+    <p>Data Scientist • Public Health • Clinical Analytics • Agentic & Generative AI</p>
 </header>
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script>
-    let x = [], y = [];
-    for (let i = 0; i < 60; i++) {
-        x.push(i);
-        y.push(Math.sin(i / 6) + (Math.random() * 0.2));
-    }
-
-    Plotly.newPlot('headerGraph', [{
-        x: x,
-        y: y,
-        mode: "lines",
-        line: { color: "rgba(255,255,255,0.55)", width: 2 }
-    }], {
-        margin: { t: 0, b: 0, l: 0, r: 0 },
-        paper_bgcolor: "rgba(0,0,0,0)",
-        plot_bgcolor: "rgba(0,0,0,0)",
-        xaxis: { visible: false },
-        yaxis: { visible: false }
-    });
-
-    setInterval(() => {
-        y.shift();
-        y.push(Math.sin(Math.random() * 10) + (Math.random() * 0.2));
-        Plotly.update('headerGraph', { y: [y] });
-    }, 1000);
-</script>
-
-<!-- ---------- NAVIGATION ---------- -->
 <nav>
-    <a onclick="showSection('about')">About</a>
-    <a onclick="showSection('projects')">Projects</a>
-    <a onclick="showSection('skills')">Skills</a>
-    <a onclick="showSection('contact')">Contact</a>
+    <a onclick="scrollToSection('about')">About</a>
+    <a onclick="scrollToSection('projects')">Projects</a>
+    <a onclick="scrollToSection('skills')">Skills</a>
+    <a onclick="scrollToSection('contact')">Contact</a>
 </nav>
 
-<!-- ---------- HOME (DEFAULT) ---------- -->
-<section id="home" class="active">
-    <h2>Welcome</h2>
-    <p>Explore my work, skills, and interactive visualizations.</p>
-</section>
+<div class="layout">
+    <!-- MAIN PANEL -->
+    <div class="main-panel">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I bridge clinical experience, public health systems, and advanced data science. My work spans population‑level surveillance,
+                behavioral and social determinants, explainable AI, and health systems analytics. I design interpretable models, interactive
+                visualizations, and mixed‑methods frameworks that translate complex data into actionable insights for vulnerable populations.
+            </p>
+        </section>
 
-<!-- ---------- ABOUT ---------- -->
-<section id="about">
-    <h2>About Me</h2>
-    <p>
-        I am a versatile data scientist skilled in analytics, modeling, and research across diverse domains...
-    </p>
-</section>
+        <section id="projects">
+            <h2>Projects</h2>
 
-<!-- ---------- PROJECTS ---------- -->
-<section id="projects">
-    <h2>Projects</h2>
-    <p>Projects will appear here.</p>
-</section>
+            <div class="project-card c1">
+                <h3>📊 Spatio-Temporal Modeling for Disease Surveillance</h3>
+                <p>Predictive modeling to identify geographic and temporal patterns in public health data, supporting early detection and targeted interventions.</p>
+            </div>
 
-<!-- ---------- SKILLS ---------- -->
-<section id="skills">
-    <h2>Skills</h2>
+            <div class="project-card c2">
+                <h3>🧠 Explainable AI for Clinical Decision Support</h3>
+                <p>Interpretable ML models that support safe, transparent clinical decisions and align with real-world workflows and constraints.</p>
+            </div>
 
-    <div class="skill-card">
-        <h3>Programming Languages</h3>
-        <p>Python, R, JavaScript</p>
+            <div class="project-card c3">
+                <h3>🌍 Health Systems Performance Analysis</h3>
+                <p>Mixed‑methods evaluation of service delivery, equity, and outcomes, integrating quantitative indicators with qualitative insights.</p>
+            </div>
+
+            <div class="project-card c4">
+                <h3>📈 Interactive Data Visualization (Observable)</h3>
+                <p>Interactive notebook demonstrating exploratory analysis, dynamic charting, and narrative data storytelling.</p>
+                <p>
+                    <a href="https://observablehq.com/d/2b86322043a4ca55" target="_blank">
+                        View Observable Notebook →
+                    </a>
+                </p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+
+            <div class="skill-card" onclick="updateDashboard('programming')">
+                <h3>Programming Languages</h3>
+                <p>Python, R, JavaScript</p>
+            </div>
+
+            <div class="skill-card" onclick="updateDashboard('stats')">
+                <h3>Statistical Modeling</h3>
+                <p>
+                    Hypothesis testing, Discriminant Analysis, Exploratory Data Analysis (EDA), PCA (Principal Component Analysis),
+                    Correlational & Covariance Analysis, Time Series Analysis, Regression Analysis (Linear, Logistic, Multinomial), SPSS
+                </p>
+            </div>
+
+            <div class="skill-card" onclick="updateDashboard('health')">
+                <h3>Health Informatics & Research Skills</h3>
+                <p>
+                    Hypothesis generation, Survey design & validation, Mixed‑methods data collection (key informant interviews, focus groups,
+                    structured & unstructured questionnaires, group interviews, observational studies), Health systems research,
+                    Program monitoring & evaluation, Data‑driven policy analysis
+                </p>
+            </div>
+
+            <div class="skill-card" onclick="updateDashboard('ml')">
+                <h3>Machine Learning & AI</h3>
+                <p>
+                    Scikit‑learn, TensorFlow, PyTorch, Keras, XGBoost, Random Forest, Linear & Logistic Regression, Decision Tree classifiers,
+                    SVM, CNN (Convolutional Neural Networks), RNN (Recurrent Neural Networks), Computer Vision
+                </p>
+            </div>
+
+            <div class="skill-card" onclick="updateDashboard('data')">
+                <h3>Data Collection, Manipulation & Analysis</h3>
+                <p>
+                    Web scraping (Scrapy, BeautifulSoup, Requests), Pandas, NumPy, SciPy, Excel, SAS, ETL processes
+                </p>
+            </div>
+
+            <div class="skill-card" onclick="updateDashboard('viz')">
+                <h3>Data Visualization</h3>
+                <p>
+                    Power BI, Tableau, JavaScript, Matplotlib, Seaborn, Heatmaps, Plotly, Pandas
+                </p>
+            </div>
+
+            <div class="skill-card" onclick="updateDashboard('bigdata')">
+                <h3>Big Data Analytics</h3>
+                <p>PySpark, PySpark SQL</p>
+            </div>
+
+            <div class="skill-card" onclick="updateDashboard('nlp')">
+                <h3>Natural Language Processing (NLP)</h3>
+                <p>
+                    NLTK, SpaCy, TextBlob, BERT, Word2vec, Gensim, GloVe, LangChain
+                </p>
+            </div>
+
+            <div class="skill-card" onclick="updateDashboard('db')">
+                <h3>Database</h3>
+                <p>
+                    Data modeling (Conceptual & Physical), Schema design, Querying and manipulating databases,
+                    SQL Server / PostgreSQL, MongoDB (NoSQL)
+                </p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Email: your-email@example.com</p>
+            <p>LinkedIn: <a href="#" target="_blank">Your LinkedIn Profile</a></p>
+        </section>
+
+        <div class="footer">
+            © 2026 Karishma Sapkota
+        </div>
     </div>
 
-    <div class="skill-card">
-        <h3>Statistical Modeling</h3>
-        <p>Hypothesis testing, Discriminant Analysis, EDA, PCA, Correlation & Covariance Analysis, Time Series, Regression, SPSS</p>
+    <!-- SIDE PANEL: AGENTIC DASHBOARD -->
+    <div class="side-panel">
+        <div class="side-title">Interactive Skill Dashboard</div>
+        <div class="side-subtitle">Click any skill to see a related visualization and agentic reasoning trace.</div>
+
+        <div class="console-label">Agent Console</div>
+        <div id="agent-console">
+            <div>> System initialized.</div>
+            <div>> Waiting for skill selection...</div>
+            <div id="agent-console-line">> Ready.</div>
+        </div>
+
+        <div class="console-label">Visualization</div>
+        <div id="dashboard">
+            <div id="dashboard-chart"></div>
+        </div>
     </div>
-
-    <div class="skill-card">
-        <h3>Health Informatics & Research</h3>
-        <p>Survey design, Mixed‑methods research, Interviews, Focus groups, Observational studies, M&E, Policy Analysis</p>
-    </div>
-
-    <div class="skill-card">
-        <h3>Machine Learning & AI</h3>
-        <p>Scikit‑learn, TensorFlow, PyTorch, Keras, XGBoost, Random Forest, SVM, CNN, RNN, Computer Vision</p>
-    </div>
-
-    <div class="skill-card">
-        <h3>Data Collection & Analysis</h3>
-        <p>Web scraping, Pandas, NumPy, SciPy, Excel, SAS, ETL</p>
-    </div>
-
-    <div class="skill-card">
-        <h3>Data Visualization</h3>
-        <p>Power BI, Tableau, Matplotlib, Seaborn, Plotly, Heatmaps</p>
-    </div>
-
-    <div class="skill-card">
-        <h3>Big Data Analytics</h3>
-        <p>PySpark, PySpark SQL</p>
-    </div>
-
-    <div class="skill-card">
-        <h3>NLP</h3>
-        <p>NLTK, SpaCy, TextBlob, BERT, Word2Vec, Gensim, GloVe, LangChain</p>
-    </div>
-
-    <div class="skill-card">
-        <h3>Databases</h3>
-        <p>SQL Server, PostgreSQL, MongoDB, Schema Design, Data Modeling</p>
-    </div>
-</section>
-
-<!-- ---------- CONTACT ---------- -->
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Email: your-email@example.com</p>
-</section>
-
-<!-- ---------- FOOTER ---------- -->
-<div class="footer">
-    © 2026 Karishma Sapkota
 </div>
 
-<script>
-function showSection(sectionId) {
-    document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
-    document.getElementById(sectionId).classList.add("active");
+<!-- PLOTLY -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    // Scroll to top for better UX
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
+<script>
+    function scrollToSection(id) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+
+    const consoleEl = document.getElementById("agent-console");
+    const consoleLine = document.getElementById("agent-console-line");
+
+    function logToConsole(lines) {
+        lines.forEach(text => {
+            const div = document.createElement("div");
+            div.textContent = "> " + text;
+            consoleEl.insertBefore(div, consoleLine);
+        });
+        consoleLine.textContent = "> Ready.";
+        consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+
+    function initDashboard() {
+        const x = [1, 2, 3, 4];
+        const y = [2, 4, 3, 5];
+
+        Plotly.newPlot("dashboard-chart", [{
+            x: x,
+            y: y,
+            type: "scatter",
+            mode: "lines+markers",
+            line: { color: "#38bdf8" }
+        }], {
+            margin: { t: 20, r: 10, l: 40, b: 30 },
+            paper_bgcolor: "#020617",
+            plot_bgcolor: "#020617",
+            font: { color: "#e5e7eb" },
+            xaxis: { gridcolor: "#1f2937" },
+            yaxis: { gridcolor: "#1f2937" },
+            title: { text: "Skill‑linked visualization", font: { size: 14 } }
+        });
+    }
+
+    function updateDashboard(skill) {
+        let data, layout, messages;
+
+        if (skill === "programming") {
+            data = [{
+                x: ["Python", "R", "JavaScript"],
+                y: [9, 7, 6],
+                type: "bar",
+                marker: { color: ["#22c55e", "#3b82f6", "#f97316"] }
+            }];
+            layout = {
+                title: "Language Usage & Proficiency",
+                margin: { t: 30, r: 10, l: 40, b: 40 }
+            };
+            messages = [
+                "Skill selected: Programming Languages.",
+                "Highlighting Python, R, and JavaScript usage.",
+                "Emphasizing versatility across analytical and web contexts."
+            ];
+        } else if (skill === "stats") {
+            const x = Array.from({ length: 30 }, (_, i) => i);
+            const y = x.map(v => 0.5 * v + (Math.random() * 4 - 2));
+            data = [{
+                x: x,
+                y: y,
+                mode: "markers",
+                type: "scatter",
+                marker: { color: "#f97316" }
+            }];
+            layout = {
+                title: "Regression & Correlation Pattern (Simulated)",
+                margin: { t: 30, r: 10, l: 40, b: 40 }
+            };
+            messages = [
+                "Skill selected: Statistical Modeling.",
+                "Simulating regression‑like relationship with noise.",
+                "Reflecting experience in regression, PCA, and EDA."
+            ];
+        } else if (skill === "health") {
+            data = [{
+                labels: ["Surveys", "Interviews", "Focus Groups", "Observational"],
+                values: [30, 25, 20, 25],
+                type: "pie",
+                marker: { colors: ["#22c55e", "#3b82f6", "#a855f7", "#f97316"] }
+            }];
+            layout = {
+                title: "Mixed‑Methods Data Collection Portfolio",
+                margin: { t: 40, r: 10, l: 10, b: 10 }
+            };
+            messages = [
+                "Skill selected: Health Informatics & Research.",
+                "Visualizing balance across mixed‑methods approaches.",
+                "Aligns with health systems research and policy analysis."
+            ];
+        } else if (skill === "ml") {
+            const x1 = [], y1 = [], x2 = [], y2 = [];
+            for (let i = 0; i < 40; i++) {
+                x1.push(Math.random() * 2 + 1);
+                y1.push(Math.random() * 2 + 1);
+                x2.push(Math.random() * 2 + 4);
+                y2.push(Math.random() * 2 + 4);
+            }
+            data = [
+                { x: x1, y: y1, mode: "markers", type: "scatter", name: "Class A", marker: { color: "#22c55e" } },
+                { x: x2, y: y2, mode: "markers", type: "scatter", name: "Class B", marker: { color: "#ef4444" } }
+            ];
+            layout = {
+                title: "Decision Boundary‑Like Cluster Separation (Simulated)",
+                margin: { t: 30, r: 10, l: 40, b: 40 }
+            };
+            messages = [
+                "Skill selected: Machine Learning & AI.",
+                "Simulating separable classes for classification intuition.",
+                "Reflects experience with tree‑based models, SVMs, CNNs, and RNNs."
+            ];
+        } else if (skill === "data") {
+            const x = ["Web Scraping", "Pandas", "NumPy", "ETL", "SAS"];
+            const y = [8, 9, 8, 7, 6];
+            data = [{
+                x: x,
+                y: y,
+                type: "bar",
+                marker: { color: "#a855f7" }
+            }];
+            layout = {
+                title: "Data Collection & Transformation Stack",
+                margin: { t: 30, r: 10, l: 40, b: 60 }
+            };
+            messages = [
+                "Skill selected: Data Collection, Manipulation & Analysis.",
+                "Emphasizing web scraping, Pandas, NumPy, and ETL workflows.",
+                "Signals readiness for complex, messy real‑world datasets."
+            ];
+        } else if (skill === "viz") {
+            const z = [];
+            for (let i = 0; i < 10; i++) {
+                const row = [];
+                for (let j = 0; j < 10; j++) {
+                    row.push(Math.random());
+                }
+                z.push(row);
+            }
+            data = [{
+                z: z,
+                type: "heatmap",
+                colorscale: "Viridis"
+            }];
+            layout = {
+                title: "Visualization Density Map (Simulated)",
+                margin: { t: 30, r: 10, l: 40, b: 40 }
+            };
+            messages = [
+                "Skill selected: Data Visualization.",
+                "Rendering a heatmap to echo experience with Tableau, Power BI, and Plotly.",
+                "Highlights comfort with visual storytelling and dashboard design."
+            ];
+        } else if (skill === "bigdata") {
+            const x = ["Job 1", "Job 2", "Job 3", "Job 4"];
+            const y = [120, 90, 150, 110];
+            data = [{
+                x: x,
+                y: y,
+                type: "bar",
+                marker: { color: "#38bdf8" }
+            }];
+            layout = {
+                title: "Distributed Job Durations (Simulated PySpark Workloads)",
+                margin: { t: 30, r: 10, l: 40, b: 40 }
+            };
+            messages = [
+                "Skill selected: Big Data Analytics.",
+                "Simulating PySpark job durations across tasks.",
+                "Reflects ability to scale analytics to larger systems."
+            ];
+        } else if (skill === "nlp") {
+            const x = [], y = [], text = [];
+            const words = ["equity", "access", "burden", "risk", "behavior", "policy", "care", "outcome"];
+            for (let i = 0; i < words.length; i++) {
+                x.push(Math.random() * 2 + i);
+                y.push(Math.random() * 2 + i / 2);
+                text.push(words[i]);
+            }
+            data = [{
+                x: x,
+                y: y,
+                mode: "markers+text",
+                type: "scatter",
+                text: text,
+                textposition: "top center",
+                marker: { color: "#f97316", size: 10 }
+            }];
+            layout = {
+                title: "Semantic Space (Simulated Word Embeddings)",
+                margin: { t: 30, r: 10, l: 40, b: 40 }
+            };
+            messages = [
+                "Skill selected: Natural Language Processing (NLP).",
+                "Simulating an embedding‑like space for health‑related concepts.",
+                "Connects to experience with BERT, Word2Vec, GloVe, and LangChain."
+            ];
+        } else if (skill === "db") {
+            const x = ["SQL Server", "PostgreSQL", "MongoDB"];
+            const y = [8, 9, 7];
+            data = [{
+                x: x,
+                y: y,
+                type: "bar",
+                marker: { color: "#22c55e" }
+            }];
+            layout = {
+                title: "Relational & NoSQL Experience Profile",
+                margin: { t: 30, r: 10, l: 40, b: 40 }
+            };
+            messages = [
+                "Skill selected: Database & Data Modeling.",
+                "Visualizing balance across relational and NoSQL systems.",
+                "Signals comfort with schema design and complex querying."
+            ];
+        } else {
+            initDashboard();
+            messages = [
+                "No specific skill matched. Resetting dashboard.",
+                "Ready for next selection."
+            ];
+        }
+
+        Plotly.newPlot("dashboard-chart", data, {
+            ...layout,
+            paper_bgcolor: "#020617",
+            plot_bgcolor: "#020617",
+            font: { color: "#e5e7eb", size: 11 },
+            xaxis: { gridcolor: "#1f2937" },
+            yaxis: { gridcolor: "#1f2937" }
+        });
+
+        logToConsole(messages);
+    }
+
+    initDashboard();
 </script>
 
 </body>
