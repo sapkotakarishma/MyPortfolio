@@ -12,7 +12,6 @@
             margin: 0;
             padding: 0;
 
-            /* Multi-layer gradient for a data‑visualization feel */
             background: 
                 radial-gradient(circle at 10% 20%, rgba(255, 200, 200, 0.4), transparent 60%),
                 radial-gradient(circle at 90% 10%, rgba(200, 220, 255, 0.4), transparent 60%),
@@ -30,7 +29,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* ---------- HEADER (BEHIND YOUR NAME) ---------- */
+        /* ---------- HEADER ---------- */
         header {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
             background-size: 300% 300%;
@@ -114,11 +113,11 @@
             text-decoration: underline;
         }
 
-        /* Color accents for each card */
         .c1 { border-color: #3b82f6; }
         .c2 { border-color: #ec4899; }
         .c3 { border-color: #10b981; }
         .c4 { border-color: #f59e0b; }
+        .c5 { border-color: #8b5cf6; }
 
         /* ---------- SKILLS TAGS ---------- */
         .skills-list li {
@@ -198,6 +197,44 @@
                 View Observable Notebook →
             </a>
         </p>
+    </div>
+
+    <!-- ⭐ NEW LIVE AUTO-UPDATING CHART -->
+    <div class="project-card c5">
+        <h3>📊 Live Auto‑Updating Interactive Chart</h3>
+        <p>This chart updates itself every 2 seconds to demonstrate dynamic, real‑time visualization.</p>
+
+        <div id="liveChart" style="width:100%;height:400px;"></div>
+
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script>
+            let x = [0];
+            let y = [Math.random() * 10];
+
+            Plotly.newPlot("liveChart", [{
+                x: x,
+                y: y,
+                mode: "lines+markers",
+                line: { color: "#8b5cf6" }
+            }], {
+                title: "Live Updating Chart",
+                xaxis: { title: "Time (seconds)" },
+                yaxis: { title: "Random Value" }
+            });
+
+            let counter = 1;
+            setInterval(() => {
+                x.push(counter);
+                y.push(Math.random() * 10);
+
+                Plotly.update("liveChart", {
+                    x: [x],
+                    y: [y]
+                });
+
+                counter++;
+            }, 2000);
+        </script>
     </div>
 
 </section>
