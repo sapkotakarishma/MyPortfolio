@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karishma Sapkota | Data Scientist</title>
+    <title>Karishma Sapkota | Population Health & Applied Data Scientist</title>
 
     <style>
         /* ---------- GLOBAL BACKGROUND ---------- */
@@ -43,7 +43,7 @@
             width: 32%;
             min-height: 100vh;
             border-left: 1px solid rgba(0,0,0,0.08);
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.96);
             color: #e5e7eb;
             box-shadow: -4px 0 12px rgba(0,0,0,0.2);
             position: sticky;
@@ -64,11 +64,13 @@
 
         /* ---------- HEADER ---------- */
         header {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1d4ed8, #7c3aed, #ec4899, #f97316);
             background-size: 300% 300%;
             animation: headerShift 10s ease infinite;
             color: white;
-            padding: 70px 20px 80px 20px;
+            padding: 60px 20px 80px 20px;
             text-align: center;
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
@@ -81,24 +83,74 @@
             100% { background-position: 0% 50%; }
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 3.1rem;
-            letter-spacing: 1px;
+        #headerWave {
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            opacity: 0.25;
         }
 
-        header p {
-            margin-top: 10px;
-            font-size: 1.3rem;
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-title {
+            margin-top: 8px;
+            font-size: 1.2rem;
             opacity: 0.96;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-subtitle {
+            margin-top: 6px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            font-style: italic;
+        }
+
+        .header-tagline {
+            margin-top: 12px;
+            font-size: 0.98rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-chips {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .chip {
+            background: rgba(15, 23, 42, 0.35);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border: 1px solid rgba(248, 250, 252, 0.3);
         }
 
         /* ---------- NAV ---------- */
         nav {
-            background: #1e1b4b;
+            background: #020617;
             padding: 12px 0;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
 
         nav a {
@@ -142,6 +194,7 @@
         .c2 { border-color: #ec4899; }
         .c3 { border-color: #10b981; }
         .c4 { border-color: #f59e0b; }
+        .c5 { border-color: #6366f1; }
 
         .project-card h3 {
             margin-top: 0;
@@ -189,12 +242,12 @@
         .side-title {
             font-size: 1.1rem;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #e5e7eb;
         }
 
         .side-subtitle {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: #9ca3af;
             margin-bottom: 14px;
         }
@@ -239,11 +292,20 @@
         .footer {
             text-align: center;
             padding: 25px;
-            background: #1e1b4b;
+            background: #020617;
             color: #e0e7ff;
             margin-top: 40px;
             border-top-left-radius: 40px;
             border-top-right-radius: 40px;
+        }
+
+        .footer a {
+            color: #a5b4fc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -251,8 +313,18 @@
 <body>
 
 <header>
+    <canvas id="headerWave"></canvas>
     <h1>Karishma Sapkota</h1>
-    <p>Data Scientist • Public Health • Clinical Analytics • Agentic & Generative AI</p>
+    <div class="header-title">Population Health & Applied Data Scientist</div>
+    <div class="header-subtitle">(with experience in clinical, operational, and public health analytics)</div>
+    <div class="header-tagline">
+        Designing explainable, operational, and equity‑focused analytics across public health, clinical systems, and generative AI.
+    </div>
+    <div class="header-chips">
+        <div class="chip">Population Health Surveillance</div>
+        <div class="chip">Clinical & Operational Analytics</div>
+        <div class="chip">Agentic & Generative AI Systems</div>
+    </div>
 </header>
 
 <nav>
@@ -268,33 +340,66 @@
         <section id="about">
             <h2>About Me</h2>
             <p>
-                I bridge clinical experience, public health systems, and advanced data science. My work spans population‑level surveillance,
-                behavioral and social determinants, explainable AI, and health systems analytics. I design interpretable models, interactive
-                visualizations, and mixed‑methods frameworks that translate complex data into actionable insights for vulnerable populations.
+                I am a population health and applied data scientist who bridges clinical practice, public health systems, and advanced
+                analytics. My work spans neglected tropical disease elimination, malaria surveillance, basic health service coverage,
+                pharmacy operations, and digital behavioral health. I design interpretable models, interactive dashboards, and mixed‑methods
+                research frameworks that translate complex data into actionable insights for decision‑makers.
+            </p>
+            <p>
+                My experience includes provincial‑level NTD analytics, municipal health profiling, medication safety surveillance,
+                predictive modeling (heart disease, fraud detection), and NLP for sentiment and emotion classification. I am particularly
+                interested in explainable and agentic AI systems that support safe, equitable, and context‑aware decision‑making in
+                health and operational settings.
             </p>
         </section>
 
         <section id="projects">
-            <h2>Projects</h2>
+            <h2>Selected Projects & Analytics Work</h2>
 
             <div class="project-card c1">
-                <h3>📊 Spatio-Temporal Modeling for Disease Surveillance</h3>
-                <p>Predictive modeling to identify geographic and temporal patterns in public health data, supporting early detection and targeted interventions.</p>
+                <h3>📊 NTD & Malaria Surveillance Analytics</h3>
+                <p>
+                    Designed and implemented provincial‑level analytics for Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria
+                    elimination programs. Consolidated fragmented municipal datasets, monitored coverage and completion rates, and
+                    identified high‑risk areas to guide targeted interventions and resource allocation.
+                </p>
             </div>
 
             <div class="project-card c2">
-                <h3>🧠 Explainable AI for Clinical Decision Support</h3>
-                <p>Interpretable ML models that support safe, transparent clinical decisions and align with real-world workflows and constraints.</p>
+                <h3>💊 Pharmacy Operations & Medication Safety Dashboards</h3>
+                <p>
+                    Built enterprise‑level Power BI dashboards for pharmacy operations, including verification workload, order volume,
+                    inventory levels, revenue trends, and medication safety interventions. Developed a centralized error monitoring
+                    system integrating Microsoft Forms and Power BI to track near‑misses and error types, supporting continuous quality
+                    improvement.
+                </p>
             </div>
 
             <div class="project-card c3">
-                <h3>🌍 Health Systems Performance Analysis</h3>
-                <p>Mixed‑methods evaluation of service delivery, equity, and outcomes, integrating quantitative indicators with qualitative insights.</p>
+                <h3>🧠 Emotion Classification in Social Media Content</h3>
+                <p>
+                    Conducted a comparative study on 37,000+ Reddit posts using rule‑based lexicons and a DistilRoBERTa transformer model.
+                    Evaluated performance across Ekman’s and Plutchik’s emotion taxonomies, highlighting trade‑offs between accuracy,
+                    recall, and interpretability for digital mental health applications.
+                </p>
             </div>
 
             <div class="project-card c4">
-                <h3>📈 Interactive Data Visualization (Observable)</h3>
-                <p>Interactive notebook demonstrating exploratory analysis, dynamic charting, and narrative data storytelling.</p>
+                <h3>💳 Credit Card Fraud Detection</h3>
+                <p>
+                    Developed a logistic regression model on a highly imbalanced Kaggle dataset to distinguish fraudulent from
+                    non‑fraudulent transactions. Evaluated performance using ROC and AUC, achieving high discrimination while
+                    maintaining sensitivity to rare events.
+                </p>
+            </div>
+
+            <div class="project-card c5">
+                <h3>📈 Interactive Data Visualization & Network Analysis</h3>
+                <p>
+                    Built interactive visualizations and network analyses, including Facebook network community detection (Louvain,
+                    Girvan‑Newman) and sentiment analysis on Yelp, IMDB, and Amazon reviews using SVM, Naive Bayes, and Logistic
+                    Regression. Developed Observable notebooks for exploratory analysis and narrative data storytelling.
+                </p>
                 <p>
                     <a href="https://observablehq.com/d/2b86322043a4ca55" target="_blank">
                         View Observable Notebook →
@@ -311,28 +416,28 @@
                 <p>Python, R, JavaScript</p>
             </div>
 
+            <div class="skill-card" onclick="updateDashboard('ml')">
+                <h3>Machine Learning & AI</h3>
+                <p>
+                    Scikit‑learn, TensorFlow, PyTorch, Keras, XGBoost, Random Forest, Linear & Logistic Regression,
+                    Decision Tree classifiers, SVM, CNN, RNN, Computer Vision
+                </p>
+            </div>
+
             <div class="skill-card" onclick="updateDashboard('stats')">
                 <h3>Statistical Modeling</h3>
                 <p>
-                    Hypothesis testing, Discriminant Analysis, Exploratory Data Analysis (EDA), PCA (Principal Component Analysis),
-                    Correlational & Covariance Analysis, Time Series Analysis, Regression Analysis (Linear, Logistic, Multinomial), SPSS
+                    SPSS, Hypothesis testing, Discriminant Analysis, Exploratory Data Analysis (EDA), PCA, Correlational & Covariance
+                    Analysis, Time Series Analysis, Regression (Linear, Logistic, Multinomial)
                 </p>
             </div>
 
             <div class="skill-card" onclick="updateDashboard('health')">
-                <h3>Health Informatics & Research Skills</h3>
+                <h3>Health Informatics & Research Methods</h3>
                 <p>
-                    Hypothesis generation, Survey design & validation, Mixed‑methods data collection (key informant interviews, focus groups,
-                    structured & unstructured questionnaires, group interviews, observational studies), Health systems research,
-                    Program monitoring & evaluation, Data‑driven policy analysis
-                </p>
-            </div>
-
-            <div class="skill-card" onclick="updateDashboard('ml')">
-                <h3>Machine Learning & AI</h3>
-                <p>
-                    Scikit‑learn, TensorFlow, PyTorch, Keras, XGBoost, Random Forest, Linear & Logistic Regression, Decision Tree classifiers,
-                    SVM, CNN (Convolutional Neural Networks), RNN (Recurrent Neural Networks), Computer Vision
+                    Survey design & validation, mixed‑methods data collection (key informant interviews, focus groups, structured &
+                    unstructured questionnaires, group interviews, observational studies), health systems research, program monitoring &
+                    evaluation, data‑driven policy analysis
                 </p>
             </div>
 
@@ -358,15 +463,15 @@
             <div class="skill-card" onclick="updateDashboard('nlp')">
                 <h3>Natural Language Processing (NLP)</h3>
                 <p>
-                    NLTK, SpaCy, TextBlob, BERT, Word2vec, Gensim, GloVe, LangChain
+                    NLTK, SpaCy, TextBlob, BERT, Word2Vec, Gensim, GloVe, LangChain
                 </p>
             </div>
 
             <div class="skill-card" onclick="updateDashboard('db')">
-                <h3>Database</h3>
+                <h3>Database & Data Modeling</h3>
                 <p>
-                    Data modeling (Conceptual & Physical), Schema design, Querying and manipulating databases,
-                    SQL Server / PostgreSQL, MongoDB (NoSQL)
+                    Data modeling (Conceptual & Physical), schema design, querying and manipulating databases,
+                    SQL Server, PostgreSQL, MongoDB (NoSQL)
                 </p>
             </div>
         </section>
@@ -378,14 +483,17 @@
         </section>
 
         <div class="footer">
-            © 2026 Karishma Sapkota
+            © 2026 Karishma Sapkota · Built as an interactive analytics workspace.<br>
+            <span>Shareable with PhD programs, research labs, public health agencies, and industry data science teams.</span>
         </div>
     </div>
 
     <!-- SIDE PANEL: AGENTIC DASHBOARD -->
     <div class="side-panel">
         <div class="side-title">Interactive Skill Dashboard</div>
-        <div class="side-subtitle">Click any skill to see a related visualization and agentic reasoning trace.</div>
+        <div class="side-subtitle">
+            Click any skill to see a domain‑specific visualization and a light agentic reasoning trace.
+        </div>
 
         <div class="console-label">Agent Console</div>
         <div id="agent-console">
@@ -405,6 +513,7 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
+    /* ---------- SMOOTH SCROLL ---------- */
     function scrollToSection(id) {
         const el = document.getElementById(id);
         if (el) {
@@ -412,6 +521,36 @@
         }
     }
 
+    /* ---------- HEADER MICRO-VIZ (WAVEFORM) ---------- */
+    const waveCanvas = document.getElementById("headerWave");
+    const ctx = waveCanvas.getContext("2d");
+    function resizeWave() {
+        waveCanvas.width = waveCanvas.offsetWidth;
+        waveCanvas.height = waveCanvas.offsetHeight;
+    }
+    window.addEventListener("resize", resizeWave);
+    resizeWave();
+
+    let t = 0;
+    function drawWave() {
+        const w = waveCanvas.width;
+        const h = waveCanvas.height;
+        ctx.clearRect(0, 0, w, h);
+        ctx.beginPath();
+        for (let x = 0; x < w; x++) {
+            const y = h / 2 + Math.sin((x + t) * 0.02) * 10;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = "rgba(248, 250, 252, 0.7)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        t += 1.5;
+        requestAnimationFrame(drawWave);
+    }
+    drawWave();
+
+    /* ---------- AGENTIC DASHBOARD ---------- */
     const consoleEl = document.getElementById("agent-console");
     const consoleLine = document.getElementById("agent-console-line");
 
@@ -426,23 +565,23 @@
     }
 
     function initDashboard() {
-        const x = [1, 2, 3, 4];
-        const y = [2, 4, 3, 5];
+        const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+        const counts = [120, 150, 140, 160, 180];
 
         Plotly.newPlot("dashboard-chart", [{
-            x: x,
-            y: y,
+            x: days,
+            y: counts,
             type: "scatter",
             mode: "lines+markers",
             line: { color: "#38bdf8" }
         }], {
-            margin: { t: 20, r: 10, l: 40, b: 30 },
+            title: "Daily Records Processed (Simulated)",
+            margin: { t: 30, r: 10, l: 40, b: 40 },
             paper_bgcolor: "#020617",
             plot_bgcolor: "#020617",
-            font: { color: "#e5e7eb" },
+            font: { color: "#e5e7eb", size: 11 },
             xaxis: { gridcolor: "#1f2937" },
-            yaxis: { gridcolor: "#1f2937" },
-            title: { text: "Skill‑linked visualization", font: { size: 14 } }
+            yaxis: { gridcolor: "#1f2937" }
         });
     }
 
@@ -450,180 +589,203 @@
         let data, layout, messages;
 
         if (skill === "programming") {
-            data = [{
-                x: ["Python", "R", "JavaScript"],
-                y: [9, 7, 6],
-                type: "bar",
-                marker: { color: ["#22c55e", "#3b82f6", "#f97316"] }
-            }];
+            const stages = ["Ingest", "Clean", "Model", "Report"];
+            const timePython = [5, 8, 12, 4];
+            const timeR = [6, 7, 10, 5];
+
+            data = [
+                { x: stages, y: timePython, type: "bar", name: "Python", marker: { color: "#22c55e" } },
+                { x: stages, y: timeR, type: "bar", name: "R", marker: { color: "#3b82f6" } }
+            ];
             layout = {
-                title: "Language Usage & Proficiency",
-                margin: { t: 30, r: 10, l: 40, b: 40 }
+                barmode: "group",
+                title: "Pipeline Time by Stage (Simulated Python & R Workflow)",
+                margin: { t: 40, r: 10, l: 40, b: 60 }
             };
             messages = [
                 "Skill selected: Programming Languages.",
-                "Highlighting Python, R, and JavaScript usage.",
-                "Emphasizing versatility across analytical and web contexts."
+                "Initializing end‑to‑end analytics pipeline view.",
+                "Comparing simulated execution time across Python and R stages."
             ];
-        } else if (skill === "stats") {
-            const x = Array.from({ length: 30 }, (_, i) => i);
-            const y = x.map(v => 0.5 * v + (Math.random() * 4 - 2));
-            data = [{
-                x: x,
-                y: y,
-                mode: "markers",
-                type: "scatter",
-                marker: { color: "#f97316" }
-            }];
-            layout = {
-                title: "Regression & Correlation Pattern (Simulated)",
-                margin: { t: 30, r: 10, l: 40, b: 40 }
-            };
-            messages = [
-                "Skill selected: Statistical Modeling.",
-                "Simulating regression‑like relationship with noise.",
-                "Reflecting experience in regression, PCA, and EDA."
-            ];
-        } else if (skill === "health") {
-            data = [{
-                labels: ["Surveys", "Interviews", "Focus Groups", "Observational"],
-                values: [30, 25, 20, 25],
-                type: "pie",
-                marker: { colors: ["#22c55e", "#3b82f6", "#a855f7", "#f97316"] }
-            }];
-            layout = {
-                title: "Mixed‑Methods Data Collection Portfolio",
-                margin: { t: 40, r: 10, l: 10, b: 10 }
-            };
-            messages = [
-                "Skill selected: Health Informatics & Research.",
-                "Visualizing balance across mixed‑methods approaches.",
-                "Aligns with health systems research and policy analysis."
-            ];
+
         } else if (skill === "ml") {
             const x1 = [], y1 = [], x2 = [], y2 = [];
             for (let i = 0; i < 40; i++) {
-                x1.push(Math.random() * 2 + 1);
-                y1.push(Math.random() * 2 + 1);
-                x2.push(Math.random() * 2 + 4);
-                y2.push(Math.random() * 2 + 4);
+                x1.push(Math.random() * 1.5 + 1);
+                y1.push(Math.random() * 1.5 + 1);
+                x2.push(Math.random() * 1.5 + 4);
+                y2.push(Math.random() * 1.5 + 4);
             }
             data = [
                 { x: x1, y: y1, mode: "markers", type: "scatter", name: "Class A", marker: { color: "#22c55e" } },
                 { x: x2, y: y2, mode: "markers", type: "scatter", name: "Class B", marker: { color: "#ef4444" } }
             ];
             layout = {
-                title: "Decision Boundary‑Like Cluster Separation (Simulated)",
-                margin: { t: 30, r: 10, l: 40, b: 40 }
+                title: "Cluster Separation (Simulated Classification Problem)",
+                margin: { t: 40, r: 10, l: 40, b: 40 }
             };
             messages = [
                 "Skill selected: Machine Learning & AI.",
-                "Simulating separable classes for classification intuition.",
-                "Reflects experience with tree‑based models, SVMs, CNNs, and RNNs."
+                "Initializing classification scenario.",
+                "Rendering separable clusters to evoke decision boundaries and model behavior."
             ];
-        } else if (skill === "data") {
-            const x = ["Web Scraping", "Pandas", "NumPy", "ETL", "SAS"];
-            const y = [8, 9, 8, 7, 6];
+
+        } else if (skill === "stats") {
+            const x = Array.from({ length: 40 }, (_, i) => i);
+            const trend = x.map(v => 0.4 * v);
+            const noise = x.map(() => (Math.random() * 8 - 4));
+            const y = trend.map((t, i) => t + noise[i]);
+
             data = [{
                 x: x,
                 y: y,
+                mode: "markers",
+                type: "scatter",
+                marker: { color: "#f97316" },
+                name: "Observed"
+            },
+            {
+                x: x,
+                y: trend,
+                mode: "lines",
+                type: "scatter",
+                line: { color: "#e5e7eb", dash: "dash" },
+                name: "Fitted Trend"
+            }];
+            layout = {
+                title: "Observed vs Fitted Trend (Simulated Regression Scenario)",
+                margin: { t: 40, r: 10, l: 40, b: 40 }
+            };
+            messages = [
+                "Skill selected: Statistical Modeling.",
+                "Loading simulated regression context.",
+                "Contrasting observed data with an underlying fitted trend."
+            ];
+
+        } else if (skill === "health") {
+            data = [{
+                x: ["Urban", "Rural", "Remote"],
+                y: [85, 68, 54],
+                type: "bar",
+                marker: { color: ["#22c55e", "#3b82f6", "#f97316"] }
+            }];
+            layout = {
+                title: "Service Coverage by Setting (Simulated Health System Metric)",
+                margin: { t: 40, r: 10, l: 40, b: 60 },
+                yaxis: { title: "Coverage (%)", range: [0, 100] }
+            };
+            messages = [
+                "Skill selected: Health Informatics & Research Methods.",
+                "Loading simulated service coverage indicators.",
+                "Highlighting equity gaps across urban, rural, and remote settings."
+            ];
+
+        } else if (skill === "data") {
+            const vars = ["Demographics", "Labs", "Visits", "Medications", "Outcomes"];
+            const missing = [5, 12, 8, 15, 6];
+
+            data = [{
+                x: vars,
+                y: missing,
                 type: "bar",
                 marker: { color: "#a855f7" }
             }];
             layout = {
-                title: "Data Collection & Transformation Stack",
-                margin: { t: 30, r: 10, l: 40, b: 60 }
+                title: "Missingness by Data Domain (Simulated Dataset)",
+                margin: { t: 40, r: 10, l: 40, b: 80 },
+                yaxis: { title: "Missing (%)", range: [0, 30] }
             };
             messages = [
                 "Skill selected: Data Collection, Manipulation & Analysis.",
-                "Emphasizing web scraping, Pandas, NumPy, and ETL workflows.",
-                "Signals readiness for complex, messy real‑world datasets."
+                "Inspecting simulated missingness across key domains.",
+                "Echoing real‑world work with messy health and operational datasets."
             ];
+
         } else if (skill === "viz") {
-            const z = [];
-            for (let i = 0; i < 10; i++) {
-                const row = [];
-                for (let j = 0; j < 10; j++) {
-                    row.push(Math.random());
-                }
-                z.push(row);
-            }
+            const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+            const views = [120, 180, 160, 190, 210, 140, 130];
+
             data = [{
-                z: z,
-                type: "heatmap",
-                colorscale: "Viridis"
+                x: days,
+                y: views,
+                type: "scatter",
+                mode: "lines+markers",
+                line: { color: "#38bdf8" }
             }];
             layout = {
-                title: "Visualization Density Map (Simulated)",
-                margin: { t: 30, r: 10, l: 40, b: 40 }
+                title: "Dashboard Engagement Over a Week (Simulated)",
+                margin: { t: 40, r: 10, l: 40, b: 40 },
+                yaxis: { title: "Views" }
             };
             messages = [
                 "Skill selected: Data Visualization.",
-                "Rendering a heatmap to echo experience with Tableau, Power BI, and Plotly.",
-                "Highlights comfort with visual storytelling and dashboard design."
+                "Simulating dashboard engagement over a week.",
+                "Reflecting experience with Power BI, Tableau, and narrative visual analytics."
             ];
+
         } else if (skill === "bigdata") {
-            const x = ["Job 1", "Job 2", "Job 3", "Job 4"];
-            const y = [120, 90, 150, 110];
+            const batches = ["Batch 1", "Batch 2", "Batch 3", "Batch 4", "Batch 5"];
+            const records = [50000, 80000, 65000, 90000, 75000];
+
             data = [{
-                x: x,
-                y: y,
-                type: "bar",
-                marker: { color: "#38bdf8" }
-            }];
-            layout = {
-                title: "Distributed Job Durations (Simulated PySpark Workloads)",
-                margin: { t: 30, r: 10, l: 40, b: 40 }
-            };
-            messages = [
-                "Skill selected: Big Data Analytics.",
-                "Simulating PySpark job durations across tasks.",
-                "Reflects ability to scale analytics to larger systems."
-            ];
-        } else if (skill === "nlp") {
-            const x = [], y = [], text = [];
-            const words = ["equity", "access", "burden", "risk", "behavior", "policy", "care", "outcome"];
-            for (let i = 0; i < words.length; i++) {
-                x.push(Math.random() * 2 + i);
-                y.push(Math.random() * 2 + i / 2);
-                text.push(words[i]);
-            }
-            data = [{
-                x: x,
-                y: y,
-                mode: "markers+text",
-                type: "scatter",
-                text: text,
-                textposition: "top center",
-                marker: { color: "#f97316", size: 10 }
-            }];
-            layout = {
-                title: "Semantic Space (Simulated Word Embeddings)",
-                margin: { t: 30, r: 10, l: 40, b: 40 }
-            };
-            messages = [
-                "Skill selected: Natural Language Processing (NLP).",
-                "Simulating an embedding‑like space for health‑related concepts.",
-                "Connects to experience with BERT, Word2Vec, GloVe, and LangChain."
-            ];
-        } else if (skill === "db") {
-            const x = ["SQL Server", "PostgreSQL", "MongoDB"];
-            const y = [8, 9, 7];
-            data = [{
-                x: x,
-                y: y,
+                x: batches,
+                y: records,
                 type: "bar",
                 marker: { color: "#22c55e" }
             }];
             layout = {
-                title: "Relational & NoSQL Experience Profile",
-                margin: { t: 30, r: 10, l: 40, b: 40 }
+                title: "Records Processed per Batch (Simulated PySpark Workload)",
+                margin: { t: 40, r: 10, l: 40, b: 60 },
+                yaxis: { title: "Records" }
+            };
+            messages = [
+                "Skill selected: Big Data Analytics.",
+                "Activating simulated PySpark batch processing view.",
+                "Emphasizing readiness for scalable, distributed analytics."
+            ];
+
+        } else if (skill === "nlp") {
+            const terms = ["equity", "access", "burden", "risk", "behavior", "policy", "care", "outcome"];
+            const freq = terms.map(() => Math.floor(Math.random() * 40) + 10);
+
+            data = [{
+                x: terms,
+                y: freq,
+                type: "bar",
+                marker: { color: "#f97316" }
+            }];
+            layout = {
+                title: "Term Frequency in Corpus (Simulated NLP Task)",
+                margin: { t: 40, r: 10, l: 40, b: 80 },
+                yaxis: { title: "Frequency" }
+            };
+            messages = [
+                "Skill selected: Natural Language Processing (NLP).",
+                "Activating simulated corpus analysis.",
+                "Rendering term frequencies for health‑related concepts."
+            ];
+
+        } else if (skill === "db") {
+            const queries = ["Read", "Write", "Aggregate", "Join"];
+            const latency = [40, 60, 90, 120];
+
+            data = [{
+                x: queries,
+                y: latency,
+                type: "bar",
+                marker: { color: "#3b82f6" }
+            }];
+            layout = {
+                title: "Query Latency by Operation (Simulated)",
+                margin: { t: 40, r: 10, l: 40, b: 60 },
+                yaxis: { title: "Latency (ms)" }
             };
             messages = [
                 "Skill selected: Database & Data Modeling.",
-                "Visualizing balance across relational and NoSQL systems.",
-                "Signals comfort with schema design and complex querying."
+                "Inspecting simulated latency across query types.",
+                "Echoing work with SQL Server, PostgreSQL, and MongoDB pipelines."
             ];
+
         } else {
             initDashboard();
             messages = [
