@@ -453,6 +453,16 @@
   .learn-section h3,
   .learn-section h4 { color: var(--text-main); }
 
+  /* about-card micro-metric */
+  .about-metric { font-size:12px; color:var(--accent-soft); margin-top:6px; font-weight:600; }
+
+  /* Skills grid and cards */
+  .skills-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 18px; }
+  .skill-card { background: var(--bg-card); padding: 16px; border-radius: 12px; border: 1px solid var(--border-card); box-shadow: 0 8px 20px rgba(2,6,23,0.45); }
+  .skill-card h3 { font-size: 15px; margin-bottom: 8px; color: var(--text-main); }
+  .skill-card p { color: var(--text-muted); margin-bottom: 8px; }
+  .skill-meta { font-size: 12px; color: var(--text-muted); }
+
     /* Mobile: hide links and show toggle */
     @media (max-width: 768px) {
       .nav-toggle { display: inline-flex; align-items:center; }
@@ -522,22 +532,25 @@
               <div class="about-card">
                 <div class="about-icon">🧭</div>
                 <div>
-                  <div class="about-title">Domain-first</div>
-                  <div class="about-desc">Clinical & public health context</div>
+                    <div class="about-title">Domain-first</div>
+                    <div class="about-desc">Clinical & public health context drives metrics and model design</div>
+                    <div class="about-metric">12+ clinical studies · Research-backed approach</div>
                 </div>
               </div>
               <div class="about-card">
                 <div class="about-icon">⚙️</div>
                 <div>
-                  <div class="about-title">Production-ready</div>
-                  <div class="about-desc">End-to-end pipelines & dashboards</div>
+                    <div class="about-title">Production-ready</div>
+                    <div class="about-desc">End-to-end pipelines, CI/CD, and operational monitoring</div>
+                    <div class="about-metric">5+ dashboards deployed · Zero-downtime updates</div>
                 </div>
               </div>
               <div class="about-card">
                 <div class="about-icon">📊</div>
                 <div>
-                  <div class="about-title">Explainable models</div>
-                  <div class="about-desc">Interpretability & stakeholder-ready summaries</div>
+                    <div class="about-title">Explainable models</div>
+                    <div class="about-desc">SHAP, feature importance, and stakeholder-ready summaries</div>
+                    <div class="about-metric">10+ interpretability reports · Audit-ready</div>
                 </div>
               </div>
             </div>
@@ -687,25 +700,57 @@
     <!-- SKILLS -->
     <section id="skills" style="display:none;">
       <h2>Technical Skills</h2>
-      <p style="font-size:14px;color:var(--text-muted);max-width:650px;">
-        A toolkit centered on applied machine learning, analytics, and communication—designed to move projects from idea to impact.
+      <p style="font-size:14px;color:var(--text-muted);max-width:800px;">
+        A comprehensive toolkit spanning machine learning, data engineering, health informatics, and statistical analysis—designed to move projects from conception through production.
       </p>
+
       <div class="skills-grid">
         <div class="skill-card">
-          <h3>Programming</h3>
-          <p>Python · R · SQL · JavaScript</p>
+          <h3>Programming & Databases</h3>
+          <p>Python · R · JavaScript · SQL Server · PostgreSQL · MongoDB (NoSQL)</p>
+          <div class="skill-meta">Data modeling · Query optimization · Schema design</div>
         </div>
+
         <div class="skill-card">
-          <h3>Machine Learning</h3>
-          <p>Scikit‑learn · TensorFlow · PyTorch · XGBoost</p>
+          <h3>Machine Learning & AI</h3>
+          <p>Scikit-learn · TensorFlow · PyTorch · Keras · XGBoost</p>
+          <div class="skill-meta">Random Forest · SVM · Decision Trees · Linear/Logistic Regression · CNN · RNN · Explainable AI</div>
         </div>
+
         <div class="skill-card">
-          <h3>Data Analysis</h3>
-          <p>Pandas · NumPy · EDA · Feature Engineering</p>
+          <h3>Natural Language Processing (NLP)</h3>
+          <p>NLTK · SpaCy · TextBlob · BERT · Word2vec · Gensim · GloVe · LangChain</p>
+          <div class="skill-meta">Text classification · Embeddings · Entity extraction · Transformer workflows</div>
         </div>
+
         <div class="skill-card">
-          <h3>Visualization & BI</h3>
-          <p>Power BI · Tableau · Matplotlib · Seaborn</p>
+          <h3>Health Informatics & Research</h3>
+          <p>Hypothesis generation · Survey design · Mixed-methods · Program M&E</p>
+          <div class="skill-meta">Key informant interviews · Focus groups · Health systems research · Policy analysis</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Statistical Modeling</h3>
+          <p>SPSS · SAS · Hypothesis testing · Exploratory Data Analysis</p>
+          <div class="skill-meta">PCA · Time series · Regression · Discriminant analysis</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Data Engineering & Processing</h3>
+          <p>Web scraping (Scrapy, BeautifulSoup) · Pandas · NumPy · SciPy · ETL</p>
+          <div class="skill-meta">Data cleaning · Workflow automation · Excel</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Data Visualization & BI</h3>
+          <p>Power BI · Tableau · Plotly · Matplotlib · Seaborn</p>
+          <div class="skill-meta">Interactive dashboards · KPI monitoring · Heatmaps</div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Data Governance & Ethics</h3>
+          <p>HIPAA Compliance · Research Ethics · Data Privacy</p>
+          <div class="skill-meta">IRB protocols · PHI de-identification · Secure data handling</div>
         </div>
       </div>
     </section>
