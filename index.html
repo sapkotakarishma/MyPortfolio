@@ -527,9 +527,12 @@
   .skill-card.expanded .skill-examples { display:block; }
 
   /* learn-section show/hide with aria for smoother, accessible toggles */
-  .learn-section { transition: opacity 0.28s ease, max-height 0.36s ease; overflow: hidden; }
-  .learn-section[aria-hidden="true"] { opacity: 0; max-height: 0; padding: 0 0; }
-  .learn-section[aria-hidden="false"] { opacity: 1; max-height: 2000px; }
+  .learn-section { transition: opacity 0.28s ease, max-height 0.36s ease, padding 0.28s ease; overflow: hidden; }
+  .learn-section[aria-hidden="true"] { opacity: 0; max-height: 0; padding: 0 0; pointer-events: none; }
+  .learn-section[aria-hidden="false"] { opacity: 1; max-height: 2000px; padding: 12px 0; pointer-events: auto; }
+
+  /* Helper shown when no learning topic is open */
+  .learn-helper { margin:14px 0; padding:12px; background:var(--card-soft,rgba(0,0,0,0.03)); border-radius:8px; color:var(--text-muted); }
 
     /* Mobile: hide links and show toggle */
     @media (max-width: 768px) {
@@ -944,7 +947,7 @@
         A structured space where I break down core topics I use in practice—Python, NLP, ML, SQL, Excel, visualization, data engineering, statistics, and mini‑projects.
       </p>
 
-      <div class="topic-menu">
+  <div class="topic-menu">
         <button class="btn" onclick="openLearning('python')">Python</button>
         <button class="btn" onclick="openLearning('nlp')">Natural Language Processing</button>
         <button class="btn" onclick="openLearning('ml')">Machine Learning</button>
@@ -956,6 +959,8 @@
         <button class="btn" onclick="openLearning('stats')">Statistics</button>
         <button class="btn" onclick="openLearning('projects')">Mini Projects</button>
       </div>
+
+  <div id="learn-helper" class="learn-helper" tabindex="-1">No topic selected — click a topic above to open learning content. <button class="btn small" id="learnResetBtn" onclick="closeAllLearning()" style="margin-left:8px;">Close all</button></div>
 
       <!-- LEARNING HUB DASHBOARD (usage) -->
       <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
@@ -972,19 +977,7 @@
           <div class="dash-meta">Counts of how many times each topic was opened in this browser</div>
           <canvas id="chartLearning" style="width:100%;height:200px;"></canvas>
         </div>
-      </div>
-for i in range(3):
-    print("Hello", i)
-
-# Condition
-if age > 18:
-    print("Adult")
-
-# Function
-def add(a, b):
-    return a + b
-          </pre>
-        </div>
+    </div>
   <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Simple filtered result sets ordered by age for direct analysis or export.</p>
 
   <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Small runnable examples that produce cleaned dataframes and simple outputs you can paste into a REPL or notebook.</p>
@@ -1119,8 +1112,8 @@ def predict():
         </div>
       </div>
 
-      <!-- NLP -->
-      <div id="learn-nlp" class="learn-section" style="display:none;">
+  <!-- NLP -->
+  <div id="learn-nlp" class="learn-section" aria-hidden="true">
   <h3>Natural Language Processing (NLP)</h3>
         <p>NLP lets me work with unstructured text—clinical notes, social media, survey responses—and turn it into signals.</p>
 
@@ -1174,8 +1167,8 @@ print(classifier("This portfolio looks amazing!"))
         </div>
       </div>
 
-      <!-- MACHINE LEARNING -->
-      <div id="learn-ml" class="learn-section" style="display:none;">
+  <!-- MACHINE LEARNING -->
+  <div id="learn-ml" class="learn-section" aria-hidden="true">
   <h3>Machine Learning</h3>
         <p>Machine learning is about building models that learn patterns from data and generalize to new cases.</p>
 
@@ -1215,8 +1208,8 @@ pd.DataFrame({"feature": X.columns, "importance": importance})
         </div>
       </div>
 
-      <!-- EXCEL -->
-      <div id="learn-excel" class="learn-section" style="display:none;">
+  <!-- EXCEL -->
+  <div id="learn-excel" class="learn-section" aria-hidden="true">
   <h3>Excel Analytics</h3>
         <p>Excel remains a practical tool for quick analysis, operational reporting, and stakeholder‑friendly views.</p>
 
@@ -1241,7 +1234,7 @@ pd.DataFrame({"feature": X.columns, "importance": importance})
       </div>
 
   <!-- ENHANCED EXCEL EXAMPLES -->
-  <div id="learn-excel-examples" class="learn-section" style="display:none;" aria-hidden="true">
+  <div id="learn-excel-examples" class="learn-section" aria-hidden="true">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
           <h3 style="margin:0;">Excel Analytics — Examples & Outcomes</h3>
           <div style="display:flex;gap:8px;align-items:center;">
@@ -1332,7 +1325,7 @@ Choose red fill to indicate an alert
       </div>
 
       <!-- SQL -->
-      <div id="learn-sql" class="learn-section" style="display:none;">
+  <div id="learn-sql" class="learn-section" aria-hidden="true">
   <h3>SQL (Structured Query Language)</h3>
         <p>SQL is how I access, filter, and aggregate data stored in relational databases.</p>
 
@@ -1500,7 +1493,7 @@ CREATE TABLE events_2025 PARTITION OF events FOR VALUES FROM ('2025-01-01') TO (
       </div>
 
       <!-- DATA VISUALIZATION -->
-      <div id="learn-viz" class="learn-section" style="display:none;">
+  <div id="learn-viz" class="learn-section" aria-hidden="true">
   <h3>Data Visualization</h3>
         <p>Good visualization is about clarity and context, not just aesthetics.</p>
 
@@ -1523,7 +1516,7 @@ plt.show()
       </div>
 
       <!-- DATA ENGINEERING -->
-      <div id="learn-de" class="learn-section" style="display:none;">
+  <div id="learn-de" class="learn-section" aria-hidden="true">
   <h3>Data Engineering</h3>
         <p>Data engineering ensures that models and dashboards have reliable, well‑structured data to work with.</p>
 
@@ -1552,35 +1545,10 @@ df_spark.groupBy("region").count().show()
   </pre>
 </div>
 
-              <!-- DATA ENGINEERING -->
-      <div id="learn-de" class="learn-section" style="display:none;">
-        <h3>Data Engineering</h3>
-        <p>Data engineering ensures that models and dashboards have reliable, well‑structured data to work with.</p>
-
-        <h4 style="margin-top:18px;">1. ETL Pipelines</h4>
-        <div class="python-card">
-          <pre>
-# Example: simple ETL pattern in Python
-data = extract()
-clean = transform(data)
-load(clean)
-          </pre>
-        </div>
-
-  <h4 style="margin-top:18px;">2. PySpark</h4>
-        <div class="python-card">
-          <pre>
-from pyspark.sql import SparkSession
-
-spark = SparkSession.builder.appName("example").getOrCreate()
-df_spark = spark.read.csv("big_data.csv", header=True, inferSchema=True)
-df_spark.groupBy("region").count().show()
-          </pre>
-        </div>
-      </div>
+      
 
       <!-- STATISTICS -->
-      <div id="learn-stats" class="learn-section" style="display:none;">
+  <div id="learn-stats" class="learn-section" aria-hidden="true">
   <h3>Statistics</h3>
         <p>Statistical thinking underpins how I interpret models, experiments, and uncertainty.</p>
 
@@ -1605,7 +1573,7 @@ stats.ttest_ind(group1, group2)
       </div>
 
       <!-- MINI PROJECTS -->
-      <div id="learn-projects" class="learn-section" style="display:none;">
+  <div id="learn-projects" class="learn-section" aria-hidden="true">
   <h3>Mini Projects</h3>
         <p>Small, focused projects that connect multiple skills into end‑to‑end workflows.</p>
 
@@ -1635,7 +1603,7 @@ stats.ttest_ind(group1, group2)
       </div>
 
       <!-- TEACHING -->
-      <div id="learn-teaching" class="learn-section" style="display:none;">
+  <div id="learn-teaching" class="learn-section" aria-hidden="true">
         <h3>Teaching & Instruction</h3>
         <p>Guest lectures, workshops, and graduate assistant roles where I taught data science, statistics, and practical ML.</p>
 
@@ -1689,21 +1657,29 @@ stats.ttest_ind(group1, group2)
 
     /* LEARNING HUB SWITCH */
     function openLearning(section) {
-      document.querySelectorAll(".learn-section").forEach(s => s.style.display = "none");
+      // hide all sections (for assistive tech and visual state via CSS)
+      document.querySelectorAll(".learn-section").forEach(s => { s.setAttribute('aria-hidden','true'); });
       const el = document.getElementById("learn-" + section);
-      if (el) el.style.display = "block";
+      if (el) {
+        el.setAttribute('aria-hidden','false');
+        // move focus to the opened section for keyboard users
+        el.setAttribute('tabindex','-1');
+        el.focus();
+      }
 
       // Track opens per topic in localStorage
       try {
-        const key = 'learning_counts';
+  const key = 'learning_counts';
         const raw = localStorage.getItem(key);
         const counts = raw ? JSON.parse(raw) : {};
         counts[section] = (counts[section] || 0) + 1;
         localStorage.setItem(key, JSON.stringify(counts));
         renderLearningChart();
-      } catch (err) {
+  } catch (err) {
         // ignore localStorage failures
       }
+  // update helper visibility
+  try{ updateLearningHelper(); }catch(e){}
     }
 
     /* THEME INDICATOR */
@@ -2010,6 +1986,11 @@ stats.ttest_ind(group1, group2)
       const toShow = sections.includes(hash) ? hash : (sections.includes(saved) ? saved : 'home');
       // call the new showSection wrapper to handle persistence and active link
       window.showSection(toShow);
+      // Ensure no learning topic content is visible until the user explicitly clicks a topic.
+      try{
+  document.querySelectorAll('.learn-section').forEach(s => { s.setAttribute('aria-hidden','true'); });
+  try{ updateLearningHelper(); }catch(e){}
+      }catch(e){}
     });
 
     /* DASHBOARD CHARTS: load Chart.js and render simple example charts */
@@ -2136,35 +2117,61 @@ stats.ttest_ind(group1, group2)
       renderLearningChart(saved);
     })();
 
+    // Helper: show a message when no learning topic is open
+    function updateLearningHelper(){
+      try{
+        const helper = document.getElementById('learn-helper');
+        if (!helper) return;
+        const anyOpen = Array.from(document.querySelectorAll('.learn-section')).some(s => s.getAttribute('aria-hidden') === 'false');
+        helper.style.display = anyOpen ? 'none' : 'block';
+      }catch(e){}
+    }
+
+    // Close all learning topics quickly
+    function closeAllLearning(){
+      try{
+        document.querySelectorAll('.learn-section').forEach(s=> s.setAttribute('aria-hidden','true'));
+        // clear excel examples stored-open flag
+        try{ localStorage.setItem('excel_examples_open','false'); }catch(e){}
+        updateLearningHelper();
+        const helper = document.getElementById('learn-helper'); if (helper) helper.focus();
+      }catch(e){}
+    }
+
     // Toggle examples block for Excel learning section
     function toggleExcelExamples(){
       const examples = document.getElementById('learn-excel-examples');
       const btn = document.getElementById('excelExamplesBtn');
       if (!examples || !btn) return;
-      const isOpen = examples.getAttribute('aria-hidden') === 'false';
+  const isOpen = examples.getAttribute('aria-hidden') === 'false';
       if (isOpen){
-        examples.setAttribute('aria-hidden','true');
+    examples.setAttribute('aria-hidden','true');
         btn.setAttribute('aria-expanded','false');
         announce('Excel examples closed');
+    try{ localStorage.setItem('excel_examples_open','false'); }catch(e){}
         // return focus
         btn.focus();
       } else {
         // hide other learn sections for clarity (use aria-hidden)
-        document.querySelectorAll('.learn-section').forEach(s=>{ if (s.id !== 'learn-excel-examples') s.setAttribute('aria-hidden','true'); });
+    document.querySelectorAll('.learn-section').forEach(s=>{ if (s.id !== 'learn-excel-examples') { s.setAttribute('aria-hidden','true'); } });
   examples.setAttribute('aria-hidden','false');
   btn.setAttribute('aria-expanded','true');
   announce('Excel examples opened');
+  try{ localStorage.setItem('excel_examples_open','true'); }catch(e){}
   // smooth scroll
   setTimeout(()=> examples.scrollIntoView({behavior:'smooth', block:'center'}),120);
       }
+      try{ updateLearningHelper(); }catch(e){}
     }
 
     function closeExcelExamples(){
       const examples = document.getElementById('learn-excel-examples');
       const btn = document.getElementById('excelExamplesBtn');
       if (!examples) return;
-      examples.setAttribute('aria-hidden','true');
+  examples.setAttribute('aria-hidden','true');
+  try{ localStorage.setItem('excel_examples_open','false'); }catch(e){}
       if (btn) { btn.setAttribute('aria-expanded','false'); btn.focus(); }
+  try{ updateLearningHelper(); }catch(e){}
     }
 
     // announcer for screen readers
