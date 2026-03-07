@@ -354,6 +354,39 @@
       align-items: start;
     }
 
+    /* collapsible experience details */
+    .timeline-item[aria-expanded="true"] .experience-detail { display:block; }
+    .timeline-item[aria-expanded="false"] .experience-detail { display:none; }
+
+    /* Animated reveal for experience-detail */
+    .experience-detail {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: max-height 360ms cubic-bezier(.2,.9,.2,1), opacity 280ms ease, transform 280ms ease, padding 280ms ease;
+      padding-top: 0;
+    }
+    .timeline-item[aria-expanded="true"] .experience-detail {
+      max-height: 640px; /* generous */
+      opacity: 1;
+      transform: translateY(0);
+      padding-top: 10px;
+    }
+
+    /* chevron indicator on each entry header */
+  .timeline-content h4 { position: relative; padding-right: 34px; margin: 0; cursor: pointer; display:block; }
+  /* inline SVG chevron (crisper) */
+  .timeline-content h4 .chev { position:absolute; right:6px; top:50%; transform: translateY(-50%) rotate(0deg); transition: transform 260ms ease, stroke 200ms ease; width:14px; height:14px; }
+  .timeline-content h4 .chev path { stroke: var(--accent-soft); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; fill:none; }
+  .timeline-item[aria-expanded="true"] .timeline-content h4 .chev { transform: translateY(-50%) rotate(90deg); }
+  .timeline-item[aria-expanded="true"] .timeline-content h4 .chev path { stroke: var(--accent); }
+
+    /* list icon bullets for experience details */
+    .experience-detail ul { list-style: none; margin: 0; padding-left: 0.6rem; }
+    .experience-detail li { position: relative; padding-left: 18px; margin-bottom: 6px; }
+    .experience-detail li::before { content: ""; position: absolute; left: 0; top: 6px; width:10px; height:10px; border-radius:2px; background:var(--accent); display:inline-block; }
+
     .timeline-date {
       font-size: 13px;
       font-weight: 700;
@@ -475,10 +508,28 @@
 
   /* Skills grid and cards */
   .skills-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 18px; }
-  .skill-card { background: var(--bg-card); padding: 16px; border-radius: 12px; border: 1px solid var(--border-card); box-shadow: 0 8px 20px rgba(2,6,23,0.45); }
+  .skill-card { background: var(--bg-card); padding: 16px; border-radius: 12px; border: 1px solid var(--border-card); box-shadow: 0 8px 20px rgba(2,6,23,0.45); position: relative; }
   .skill-card h3 { font-size: 15px; margin-bottom: 8px; color: var(--text-main); }
   .skill-card p { color: var(--text-muted); margin-bottom: 8px; }
   .skill-meta { font-size: 12px; color: var(--text-muted); }
+
+  /* skills filter input and chips */
+  .skill-filter { margin-top:12px; display:flex; gap:8px; align-items:center; }
+  .skill-filter input { flex:1; padding:8px 10px; border-radius:8px; border:1px solid var(--border-card); background:var(--bg-card-soft); color:var(--text-main); outline:none; }
+  .skill-filter .chip { font-size:12px; padding:6px 8px; border-radius:999px; background:var(--bg-card); border:1px solid var(--border-card); color:var(--text-muted); cursor:pointer; }
+
+  /* proficiency bar */
+  .proficiency { margin-top:8px; height:10px; background:var(--bg-card-soft); border-radius:999px; overflow:hidden; border:1px solid rgba(148,163,184,0.06); }
+  .proficiency-bar { height:100%; background: linear-gradient(90deg,var(--accent),var(--accent-soft)); width:0%; transition: width 0.6s ease; }
+
+  /* examples/details inside a card */
+  .skill-examples { margin-top:10px; display:none; font-size:13px; color:var(--text-muted); }
+  .skill-card.expanded .skill-examples { display:block; }
+
+  /* learn-section show/hide with aria for smoother, accessible toggles */
+  .learn-section { transition: opacity 0.28s ease, max-height 0.36s ease; overflow: hidden; }
+  .learn-section[aria-hidden="true"] { opacity: 0; max-height: 0; padding: 0 0; }
+  .learn-section[aria-hidden="false"] { opacity: 1; max-height: 2000px; }
 
     /* Mobile: hide links and show toggle */
     @media (max-width: 768px) {
@@ -666,6 +717,88 @@
           </div>
         </div>
       </div>
+      <!-- TEACHING EXPERIENCE (collapsible) -->
+      <h3 style="margin-top:24px;">Teaching Experience</h3>
+      <div class="timeline" id="teachingTimeline">
+        <div class="timeline-item" id="teach-guest-db" tabindex="0" role="button" onclick="toggleExperienceDetail('teach-guest-db')">
+          <div class="timeline-date">08/2024</div>
+          <div class="timeline-content">
+            <h4>Guest Lecturer — Database & SQL Web Security (MS Cybersecurity)
+              <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 2 L8 5 L2 8"/></svg>
+            </h4>
+            <div class="experience-detail" style="display:none; color:var(--text-muted);">
+              <ul>
+                <li>Delivered hands-on session on SELECT, JOINs, filtering, and query optimization.</li>
+                <li>Explained why foundational SQL skills are critical for understanding SQL injection and web security.</li>
+                <li>Connected SQL skills to cybersecurity concepts to prepare students for defensive programming.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" id="teach-ga" tabindex="0" role="button" onclick="toggleExperienceDetail('teach-ga')">
+          <div class="timeline-date">01/2023 – 05/2024</div>
+          <div class="timeline-content">
+            <h4>Graduate Assistant — Computer & Information Science Dept.
+              <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 2 L8 5 L2 8"/></svg>
+            </h4>
+            <div class="experience-detail" style="display:none; color:var(--text-muted);">
+              <ul>
+                <li>Co-developed graduate NLP course materials, labs, and standardized code examples used by faculty.</li>
+                <li>Built modular NLP pipelines for sentiment classification, summarization, and NER (transformers & rule-based).</li>
+                <li>Maintained a shared repo of sample code and notebooks to support consistent instruction.</li>
+                <li>Assisted students with debugging and translating theory into practical Python implementations.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" id="teach-nursing" tabindex="0" role="button" onclick="toggleExperienceDetail('teach-nursing')">
+          <div class="timeline-date">02/2016 – 03/2016</div>
+          <div class="timeline-content">
+            <h4>Guest Lecturer — Nursing (3rd year students)
+              <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 2 L8 5 L2 8"/></svg>
+            </h4>
+            <div class="experience-detail" style="display:none; color:var(--text-muted);">
+              <ul>
+                <li>Taught dermatological diseases: etiology, prevention, and clinical management.</li>
+                <li>Designed and conducted exams to assess applied knowledge.</li>
+                <li>Enhanced student comprehension of clinical conditions and patient care strategies.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" id="teach-curriculum" tabindex="0" role="button" onclick="toggleExperienceDetail('teach-curriculum')">
+          <div class="timeline-date">Curriculum Development</div>
+          <div class="timeline-content">
+            <h4>Undergraduate Curriculum Development — Med‑Surg & Clinical Rotations
+              <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 2 L8 5 L2 8"/></svg>
+            </h4>
+            <div class="experience-detail" style="display:none; color:var(--text-muted);">
+              <ul>
+                <li>Developed structured curriculum for medical‑surgical nursing and clinical rotations (1st–3rd year).</li>
+                <li>Designed learning objectives, clinical skill checklists, and evaluation rubrics.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item" id="teach-community" tabindex="0" role="button" onclick="toggleExperienceDetail('teach-community')">
+          <div class="timeline-date">08/2015</div>
+          <div class="timeline-content">
+            <h4>Community Health Educator
+              <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 2 L8 5 L2 8"/></svg>
+            </h4>
+            <div class="experience-detail" style="display:none; color:var(--text-muted);">
+              <ul>
+                <li>Conducted sessions on hygiene and preventing mosquito‑borne diseases.</li>
+                <li>Promoted behavior change through demonstrations and discussions.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- PROJECTS -->
@@ -728,52 +861,78 @@
       </p>
 
       <div class="skills-grid">
-        <div class="skill-card">
-          <h3>Programming & Databases</h3>
-          <p>Python · R · JavaScript · SQL Server · PostgreSQL · MongoDB (NoSQL)</p>
-          <div class="skill-meta">Data modeling · Query optimization · Schema design</div>
-        </div>
+          <!-- skill filter controls -->
+          <div style="grid-column: 1 / -1;">
+            <div class="skill-filter">
+              <input id="skillSearch" placeholder="Filter skills or tags (try: Python, NLP, SQL)" aria-label="Filter skills" />
+              <div class="chip" data-filter="Python">Python</div>
+              <div class="chip" data-filter="SQL">SQL</div>
+              <div class="chip" data-filter="ML">ML</div>
+            </div>
+          </div>
 
-        <div class="skill-card">
+          <div class="skill-card" data-tags="Python,Databases" data-proficiency="95" id="skill-programming">
+            <h3>Programming & Databases</h3>
+            <p>Python · R · JavaScript · SQL Server · PostgreSQL · MongoDB (NoSQL)</p>
+            <div class="proficiency"><div class="proficiency-bar"></div></div>
+            <div class="skill-meta">Data modeling · Query optimization · Schema design</div>
+            <div class="skill-examples">Example: parameterized SQL queries, ETL scripts, and data model diagrams. <button class="btn small" onclick="toggleSkill('skill-programming')">More</button></div>
+          </div>
+
+        <div class="skill-card" data-tags="ML,AI,Scikit-learn,TensorFlow,PyTorch" data-proficiency="90" id="skill-ml">
           <h3>Machine Learning & AI</h3>
           <p>Scikit-learn · TensorFlow · PyTorch · Keras · XGBoost</p>
+          <div class="proficiency"><div class="proficiency-bar"></div></div>
           <div class="skill-meta">Random Forest · SVM · Decision Trees · Linear/Logistic Regression · CNN · RNN · Explainable AI</div>
+          <div class="skill-examples">Example: end-to-end training pipelines, cross-validation, and explainability (SHAP). <button class="btn small" onclick="toggleSkill('skill-ml')">More</button></div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card" data-tags="NLP,Transformers,Text" data-proficiency="88" id="skill-nlp">
           <h3>Natural Language Processing (NLP)</h3>
           <p>NLTK · SpaCy · TextBlob · BERT · Word2vec · Gensim · GloVe · LangChain</p>
+          <div class="proficiency"><div class="proficiency-bar"></div></div>
           <div class="skill-meta">Text classification · Embeddings · Entity extraction · Transformer workflows</div>
+          <div class="skill-examples">Example: tokenization, TF-IDF baselines, and small transformer fine-tuning. <button class="btn small" onclick="toggleSkill('skill-nlp')">More</button></div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card" data-tags="Health,Informatics,Research" data-proficiency="82" id="skill-health">
           <h3>Health Informatics & Research</h3>
           <p>Hypothesis generation · Survey design · Mixed-methods · Program M&E</p>
+          <div class="proficiency"><div class="proficiency-bar"></div></div>
           <div class="skill-meta">Key informant interviews · Focus groups · Health systems research · Policy analysis</div>
+          <div class="skill-examples">Example: study design notes, codebook snippets, and outcomes summaries. <button class="btn small" onclick="toggleSkill('skill-health')">More</button></div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card" data-tags="Statistics,Modeling" data-proficiency="80" id="skill-stats">
           <h3>Statistical Modeling</h3>
           <p>SPSS · SAS · Hypothesis testing · Exploratory Data Analysis</p>
+          <div class="proficiency"><div class="proficiency-bar"></div></div>
           <div class="skill-meta">PCA · Time series · Regression · Discriminant analysis</div>
+          <div class="skill-examples">Example: hypothesis testing workflows and time-series decomposition snippets. <button class="btn small" onclick="toggleSkill('skill-stats')">More</button></div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card" data-tags="ETL,Data Engineering,Python" data-proficiency="84" id="skill-de">
           <h3>Data Engineering & Processing</h3>
           <p>Web scraping (Scrapy, BeautifulSoup) · Pandas · NumPy · SciPy · ETL</p>
+          <div class="proficiency"><div class="proficiency-bar"></div></div>
           <div class="skill-meta">Data cleaning · Workflow automation · Excel</div>
+          <div class="skill-examples">Example: ETL pipelines, data validation rules, and job scheduling notes. <button class="btn small" onclick="toggleSkill('skill-de')">More</button></div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card" data-tags="Viz,BI,Tableau,Power BI" data-proficiency="86" id="skill-viz">
           <h3>Data Visualization & BI</h3>
           <p>Power BI · Tableau · Plotly · Matplotlib · Seaborn</p>
+          <div class="proficiency"><div class="proficiency-bar"></div></div>
           <div class="skill-meta">Interactive dashboards · KPI monitoring · Heatmaps</div>
+          <div class="skill-examples">Example: dashboard wireframes, DAX measures, and visualization guidelines. <button class="btn small" onclick="toggleSkill('skill-viz')">More</button></div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card" data-tags="Governance,Ethics,HIPAA" data-proficiency="78" id="skill-ethics">
           <h3>Data Governance & Ethics</h3>
           <p>HIPAA Compliance · Research Ethics · Data Privacy</p>
+          <div class="proficiency"><div class="proficiency-bar"></div></div>
           <div class="skill-meta">IRB protocols · PHI de-identification · Secure data handling</div>
+          <div class="skill-examples">Example: data access controls, de-identification notes, and protocol snippets. <button class="btn small" onclick="toggleSkill('skill-ethics')">More</button></div>
         </div>
       </div>
     </section>
@@ -789,7 +948,8 @@
         <button class="btn" onclick="openLearning('python')">Python</button>
         <button class="btn" onclick="openLearning('nlp')">Natural Language Processing</button>
         <button class="btn" onclick="openLearning('ml')">Machine Learning</button>
-        <button class="btn" onclick="openLearning('excel')">Excel Analytics</button>
+  <button class="btn" onclick="openLearning('excel')">Excel Analytics</button>
+  <button class="btn" onclick="openLearning('teaching')">Teaching</button>
         <button class="btn" onclick="openLearning('sql')">SQL</button>
         <button class="btn" onclick="openLearning('viz')">Data Visualization</button>
         <button class="btn" onclick="openLearning('de')">Data Engineering</button>
@@ -800,96 +960,19 @@
       <!-- LEARNING HUB DASHBOARD (usage) -->
       <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
         <div class="dash-card" style="min-width:280px; max-width:480px;">
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-date">2023 – Present</div>
-              <div class="timeline-content">
-                <h3>Business Analyst <span class="company">– UPMC Hamot (Pharmacy)</span></h3>
-                <p>
-                  Led analytics and dashboarding for pharmacy operations and inventory. Designed KPIs, automated ETL jobs, and partnered with clinicians to align metrics with care processes.
-                </p>
-                <div class="tags">
-                  <span class="tag">Power BI</span>
-                  <span class="tag">SQL</span>
-                  <span class="tag">Healthcare Analytics</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-date">2022 – 2023</div>
-              <div class="timeline-content">
-                <h3>Research Assistant <span class="company">– University Projects</span></h3>
-                <p>
-                  Conducted mixed‑methods research on healthcare access and social determinants. Built reproducible workflows, performed statistical analyses, and translated findings for policy and clinical audiences.
-                </p>
-                <div class="tags">
-                  <span class="tag">R</span>
-                  <span class="tag">Survey Design</span>
-                </div>
-              </div>
-            </div>
-        
-            <!-- TEACHING EXPERIENCE -->
-            <div class="timeline-item">
-              <div class="timeline-date">08/2024</div>
-              <div class="timeline-content">
-                <h3>Guest Lecturer <span class="company">– Database & SQL Web Security (MS Cybersecurity), Mercyhurst University</span></h3>
-                <p>
-                  Delivered a hands-on session on SQL querying (SELECT, JOINs, filters, optimization) and connected these fundamentals to web security topics like SQL injection and defensive coding.
-                </p>
-                <div class="tags">
-                  <span class="tag">SQL</span>
-                  <span class="tag">Web Security</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-date">01/2023 – 05/2024</div>
-              <div class="timeline-content">
-                <h3>Graduate Assistant <span class="company">– Computer & Information Science, Mercyhurst University</span></h3>
-                <p>
-                  Co-developed graduate-level NLP course materials, created standardized code examples and lab notebooks, and supported students in implementing NLP pipelines and debugging assignments.
-                </p>
-                <div class="tags">
-                  <span class="tag">NLP</span>
-                  <span class="tag">Teaching</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-date">02/2016 – 03/2016</div>
-              <div class="timeline-content">
-                <h3>Guest Lecturer <span class="company">– Nursing (3rd year), Purbanchal University, Nepal</span></h3>
-                <p>
-                  Taught dermatological diseases (etiology, prevention, management), designed assessments, and enhanced student comprehension of clinical care strategies.
-                </p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-date">Undergraduate Curriculum Development</div>
-              <div class="timeline-content">
-                <h3>Med-Surg & Clinical Rotations <span class="company">– Purbanchal University</span></h3>
-                <p>
-                  Developed structured curriculum, learning objectives, clinical skill checklists, and evaluation rubrics for 1st–3rd year nursing students.
-                </p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-date">08/2015</div>
-              <div class="timeline-content">
-                <h3>Community Health Educator</h3>
-                <p>
-                  Conducted community sessions on hygiene and mosquito-borne disease prevention; promoted behavior change through interactive demonstrations.
-                </p>
+          <div class="dash-title">
+            <span>Learning Hub Activity</span>
+            <div class="chart-controls">
+              <div class="chart-toggle" id="chartToggle">
+                <button class="btn small" data-type="bar" onclick="setLearningChartType('bar')">Bar</button>
+                <button class="btn small" data-type="line" onclick="setLearningChartType('line')">Line</button>
               </div>
             </div>
           </div>
-# Loop
+          <div class="dash-meta">Counts of how many times each topic was opened in this browser</div>
+          <canvas id="chartLearning" style="width:100%;height:200px;"></canvas>
+        </div>
+      </div>
 for i in range(3):
     print("Hello", i)
 
@@ -1137,6 +1220,10 @@ pd.DataFrame({"feature": X.columns, "importance": importance})
   <h3>Excel Analytics</h3>
         <p>Excel remains a practical tool for quick analysis, operational reporting, and stakeholder‑friendly views.</p>
 
+  <div style="margin-top:10px;">
+    <button class="btn small" id="excelExamplesBtn" onclick="toggleExcelExamples()" aria-expanded="false">Examples</button>
+  </div>
+
   <h4 style="margin-top:18px;">1. Data Cleaning</h4>
         <div class="python-card">
           <p>Removing duplicates, trimming spaces, and validating data types are the first steps to reliable reporting.</p>
@@ -1153,9 +1240,22 @@ pd.DataFrame({"feature": X.columns, "importance": importance})
         </div>
       </div>
 
-      <!-- ENHANCED EXCEL EXAMPLES -->
-      <div id="learn-excel" class="learn-section" style="display:none;">
-        <h3>Excel Analytics — Examples & Outcomes</h3>
+  <!-- ENHANCED EXCEL EXAMPLES -->
+  <div id="learn-excel-examples" class="learn-section" style="display:none;" aria-hidden="true">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <h3 style="margin:0;">Excel Analytics — Examples & Outcomes</h3>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <a class="btn small" id="downloadSampleCsv" download="sample_excel_example.csv">Download sample CSV</a>
+            <button class="btn small" id="excelExamplesClose" onclick="closeExcelExamples()" aria-label="Close examples">Close</button>
+          </div>
+        </div>
+        <div style="margin-top:12px; max-width:480px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;">
+            <div style="font-size:13px;color:var(--text-muted);">Downloads (this browser)</div>
+            <div id="downloadTotalBadge" style="font-size:13px;color:var(--text-main);background:var(--accent);padding:4px 8px;border-radius:999px;">0</div>
+          </div>
+          <canvas id="chartDownloads" style="width:100%;height:120px;"></canvas>
+        </div>
         <p>Below are short, copyable examples and a description of how the final outcome (dashboard / KPI) typically looks.</p>
 
         <h4 style="margin-top:16px;">Data Cleaning (Power Query)</h4>
@@ -1191,7 +1291,7 @@ in
           </pre>
         </div>
 
-        <h4 style="margin-top:16px;">DAX (Power BI) — example measures</h4>
+  <h4 style="margin-top:16px;">DAX (Power BI) — example measures</h4>
         <div class="python-card">
           <pre>
 Total Sales = SUM(Sales[Amount])
@@ -1533,6 +1633,27 @@ stats.ttest_ind(group1, group2)
           </pre>
         </div>
       </div>
+
+      <!-- TEACHING -->
+      <div id="learn-teaching" class="learn-section" style="display:none;">
+        <h3>Teaching & Instruction</h3>
+        <p>Guest lectures, workshops, and graduate assistant roles where I taught data science, statistics, and practical ML.</p>
+
+        <h4 style="margin-top:18px;">Guest Lecturer — Advanced ML (University)</h4>
+        <div class="python-card">
+          <p>Delivered a 90-minute guest lecture on model interpretability, SHAP explanations, and communicating results to clinicians.</p>
+        </div>
+
+        <h4 style="margin-top:18px;">Graduate Assistant — Data Science Lab</h4>
+        <div class="python-card">
+          <p>Led weekly lab sessions, graded assignments, and mentored students on end-to-end projects using Python and scikit-learn.</p>
+        </div>
+
+        <h4 style="margin-top:18px;">Workshop — Data Visualization for Health Programs</h4>
+        <div class="python-card">
+          <p>Half-day workshop on dashboard design, DAX basics, and effective visual storytelling for health program managers.</p>
+        </div>
+      </div>
     </section>
     <footer>
       © 2026 Karishma Sapkota · Applied Data Science & Public Health Analytics
@@ -1556,7 +1677,7 @@ stats.ttest_ind(group1, group2)
         }
       });
     }
-    showSection("home");
+  // initial section will be restored after event handlers are wired (from hash or localStorage)
 
     /* VISITOR COUNTER */
     let visits = localStorage.getItem("visits");
@@ -1869,14 +1990,27 @@ stats.ttest_ind(group1, group2)
     // update active when showing sections
     const originalShowSection = showSection;
     window.showSection = function(sectionId) {
-      originalShowSection(sectionId);
-      setActiveLink(sectionId);
-      // close mobile nav after selection
-      closeNav();
+  originalShowSection(sectionId);
+  setActiveLink(sectionId);
+  // persist last active section to localStorage and URL hash
+  try { localStorage.setItem('active_section', sectionId); } catch (e) {}
+  try { history.replaceState(null, '', '#' + sectionId); } catch (e) {}
+  // close mobile nav after selection
+  closeNav();
     };
 
     // initialize active link
     setActiveLink('home');
+
+    // restore last active section from URL hash or localStorage on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const hash = (location.hash || '').replace('#','');
+      const saved = localStorage.getItem('active_section');
+      const sections = ["home","impact","experience","projects","skills","learning"];
+      const toShow = sections.includes(hash) ? hash : (sections.includes(saved) ? saved : 'home');
+      // call the new showSection wrapper to handle persistence and active link
+      window.showSection(toShow);
+    });
 
     /* DASHBOARD CHARTS: load Chart.js and render simple example charts */
     (function() {
@@ -2000,6 +2134,55 @@ stats.ttest_ind(group1, group2)
         });
       } catch (e) {}
       renderLearningChart(saved);
+    })();
+
+    // Toggle examples block for Excel learning section
+    function toggleExcelExamples(){
+      const examples = document.getElementById('learn-excel-examples');
+      const btn = document.getElementById('excelExamplesBtn');
+      if (!examples || !btn) return;
+      const isOpen = examples.getAttribute('aria-hidden') === 'false';
+      if (isOpen){
+        examples.setAttribute('aria-hidden','true');
+        btn.setAttribute('aria-expanded','false');
+        announce('Excel examples closed');
+        // return focus
+        btn.focus();
+      } else {
+        // hide other learn sections for clarity (use aria-hidden)
+        document.querySelectorAll('.learn-section').forEach(s=>{ if (s.id !== 'learn-excel-examples') s.setAttribute('aria-hidden','true'); });
+  examples.setAttribute('aria-hidden','false');
+  btn.setAttribute('aria-expanded','true');
+  announce('Excel examples opened');
+  // smooth scroll
+  setTimeout(()=> examples.scrollIntoView({behavior:'smooth', block:'center'}),120);
+      }
+    }
+
+    function closeExcelExamples(){
+      const examples = document.getElementById('learn-excel-examples');
+      const btn = document.getElementById('excelExamplesBtn');
+      if (!examples) return;
+      examples.setAttribute('aria-hidden','true');
+      if (btn) { btn.setAttribute('aria-expanded','false'); btn.focus(); }
+    }
+
+    // announcer for screen readers
+    (function(){
+      const ann = document.createElement('div');
+      ann.id = 'srAnnouncer';
+      ann.setAttribute('aria-live','polite');
+      ann.setAttribute('aria-atomic','true');
+      ann.style.position = 'absolute';
+      ann.style.width = '1px';
+      ann.style.height = '1px';
+      ann.style.margin = '-1px';
+      ann.style.border = '0';
+      ann.style.padding = '0';
+      ann.style.clip = 'rect(0 0 0 0)';
+      ann.style.overflow = 'hidden';
+      document.body.appendChild(ann);
+      window.announce = function(msg){ try{ ann.textContent = msg; }catch(e){} };
     })();
 
     /* IMPACT DETAIL MODAL HANDLING */
@@ -2141,7 +2324,136 @@ stats.ttest_ind(group1, group2)
     }
 
     // run sparklines and attach handlers on DOM ready
-    document.addEventListener('DOMContentLoaded', () => { renderSparklines(); attachProjectHandlers(); });
+    document.addEventListener('DOMContentLoaded', () => { 
+      renderSparklines(); 
+      attachProjectHandlers(); 
+      renderProficiencyBars();
+      wireSkillFilters();
+      // teaching timeline keyboard handlers
+      document.querySelectorAll('#teachingTimeline .timeline-item').forEach(item=>{
+        item.setAttribute('aria-expanded','false');
+        item.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExperienceDetail(item.id); } });
+  // click on header h4 toggles detail
+  const h4 = item.querySelector('.timeline-content h4');
+  if (h4) h4.addEventListener('click', (ev)=>{ ev.stopPropagation(); toggleExperienceDetail(item.id); });
+      });
+    });
+
+    function toggleExperienceDetail(id){
+      const el = document.getElementById(id);
+      if (!el) return;
+      const expanded = el.getAttribute('aria-expanded') === 'true';
+      el.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      // smooth scroll into view when expanded
+      if (!expanded) setTimeout(()=> el.scrollIntoView({behavior:'smooth', block:'center'}), 80);
+    }
+
+    // populate sample CSV download as a data URI to avoid external files
+    (function(){
+      const csv = 'clinic,date,prescriptions\nCentral,2026-03-01,120\nCentral,2026-03-08,140\nNorth,2026-03-01,95\nSouth,2026-03-01,80\nEast,2026-03-01,60\n';
+      const a = document.getElementById('downloadSampleCsv');
+      if (a){
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        a.href = url;
+        // revoke on click after a short delay
+        a.addEventListener('click', (e)=>{ 
+          // increment download counter then allow download
+          try { trackExcelDownload(); } catch(err) {}
+          setTimeout(()=> URL.revokeObjectURL(url), 1500);
+        });
+      }
+    })();
+
+    // Download tracking (localStorage) and small chart
+    function trackExcelDownload(){
+      try{
+        const key = 'excel_downloads';
+        const raw = localStorage.getItem(key);
+        const data = raw ? JSON.parse(raw) : {};
+        const today = new Date().toISOString().slice(0,10);
+        data[today] = (data[today]||0) + 1;
+        localStorage.setItem(key, JSON.stringify(data));
+        renderDownloadChart();
+      }catch(e){ console.warn('trackExcelDownload', e); }
+    }
+
+    function renderDownloadChart(){
+      try{
+        if (typeof Chart === 'undefined') return; // Chart may not be loaded yet
+        const key = 'excel_downloads';
+        const raw = localStorage.getItem(key);
+        const data = raw ? JSON.parse(raw) : {};
+        // last 7 days labels
+        const labels = [];
+        const counts = [];
+        for (let i=6;i>=0;i--){ const d = new Date(Date.now() - i*24*60*60*1000); const s = d.toISOString().slice(0,10); labels.push(s); counts.push(data[s]||0); }
+        const ctx = document.getElementById('chartDownloads');
+        if (!ctx) return;
+        if (ctx._chartInstance) ctx._chartInstance.destroy();
+        // colors from CSS
+        const styles = getComputedStyle(document.documentElement);
+        const accent = styles.getPropertyValue('--accent').trim() || '#3b82f6';
+        const muted = styles.getPropertyValue('--text-muted').trim() || '#6b7280';
+  ctx._chartInstance = new Chart(ctx.getContext('2d'), { type: 'bar', data: { labels, datasets: [{ label: 'Downloads', data: counts, backgroundColor: labels.map(()=>accent) }] }, options: { responsive:true, plugins:{ legend:{ display:false } }, scales: { x: { ticks:{ color: muted } }, y: { ticks:{ color: muted, stepSize: 1, beginAtZero:true } } } } });
+  try{ const badge = document.getElementById('downloadTotalBadge'); if (badge){ const total = counts.reduce((s,n)=>s+(n||0),0); badge.innerText = total; } }catch(e){}
+      }catch(e){ console.warn('renderDownloadChart', e); }
+    }
+
+    // initial render for download chart
+    try{ setTimeout(()=> renderDownloadChart(), 400); } catch(e){}
+
+    /* SKILLS: filtering, proficiency bars, expand details */
+    function normalize(s){ return (s||'').toString().toLowerCase(); }
+
+    function filterSkills(q){
+      const query = normalize(q);
+      document.querySelectorAll('.skills-grid .skill-card').forEach(card=>{
+        // skip the full-row filter controls which has no id
+        if (!card.id) return;
+        const tags = normalize(card.dataset.tags || '');
+        const title = normalize(card.querySelector('h3')?.innerText || '');
+        const body = normalize(card.querySelector('p')?.innerText || '');
+        const match = !query || title.includes(query) || body.includes(query) || tags.includes(query);
+        card.style.display = match ? '' : 'none';
+      });
+    }
+
+    function wireSkillFilters(){
+      const input = document.getElementById('skillSearch');
+      if (input){
+        input.addEventListener('input', (e)=> filterSkills(e.target.value));
+        input.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') { input.value=''; filterSkills(''); } });
+      }
+      document.querySelectorAll('.skill-filter .chip').forEach(chip=>{
+        chip.addEventListener('click', ()=>{
+          const f = chip.dataset.filter || chip.innerText;
+          if (input) input.value = f;
+          filterSkills(f);
+        });
+      });
+    }
+
+    function toggleSkill(id){
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('expanded');
+      // smooth scroll into view for small screens
+      if (el.classList.contains('expanded')) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function renderProficiencyBars(){
+      document.querySelectorAll('.skill-card').forEach(card=>{
+        const prof = parseInt(card.dataset.proficiency || '0',10);
+        const bar = card.querySelector('.proficiency-bar');
+        if (bar){
+          // clamp 0-100
+          const val = Math.max(0, Math.min(100, isNaN(prof)?0:prof));
+          // small timeout to animate after paint
+          setTimeout(()=>{ bar.style.width = val + '%'; }, 80);
+        }
+      });
+    }
   </script>
 
 </body>
