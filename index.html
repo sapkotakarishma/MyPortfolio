@@ -413,8 +413,13 @@
       color: var(--text-main);
     }
 
-  .dash-title { font-size: 13px; font-weight: 600; color: var(--dash-title-color); }
-    .dash-meta { font-size: 12px; color: rgba(203,213,245,0.65); }
+  .dash-title { font-size: 13px; font-weight: 600; color: var(--dash-title-color); display:flex; align-items:center; gap:8px; justify-content:space-between; }
+  .dash-meta { font-size: 12px; color: var(--text-muted); }
+  /* small chart controls (bar / line) */
+  .chart-controls { display:flex; gap:8px; align-items:center; }
+  .chart-toggle .btn.small { padding:6px 8px; font-size:12px; background:transparent; color:var(--text-main); border:1px solid rgba(148,163,184,0.08); }
+  .chart-toggle .btn.small:hover { background: rgba(255,255,255,0.02); }
+  .chart-toggle .btn.small.active { background: var(--accent); color: var(--btn-text); border-color: var(--accent); }
     .dash-canvas { width: 100%; height: 160px; }
 
     @media (max-width: 900px) {
@@ -580,7 +585,7 @@
         </div>
         <div class="impact-card" role="button" tabindex="0" data-key="dashboards" onclick="openImpactDetail('dashboards')">
           <div class="metric">5+</div>
-          <div class="metric-desc">Operational dashboards implemented (pharmacy, inventory, clinical).</div>
+          <div class="metric-desc">5+ enterprise dashboards & analytics projects (pharmacy, inventory, clinical) — click to view role details.</div>
         </div>
         <div class="impact-card" role="button" tabindex="0" data-key="automation" onclick="openImpactDetail('automation')">
           <div class="metric">25%</div>
@@ -727,7 +732,15 @@
       <!-- LEARNING HUB DASHBOARD (usage) -->
       <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
         <div class="dash-card" style="min-width:280px; max-width:480px;">
-          <div class="dash-title">Learning Hub Activity</div>
+          <div class="dash-title">
+            <span>Learning Hub Activity</span>
+            <div class="chart-controls">
+              <div class="chart-toggle" id="chartToggle">
+                <button class="btn small" data-type="bar" onclick="setLearningChartType('bar')">Bar</button>
+                <button class="btn small" data-type="line" onclick="setLearningChartType('line')">Line</button>
+              </div>
+            </div>
+          </div>
           <div class="dash-meta">Counts of how many times each topic was opened in this browser</div>
           <canvas id="chartLearning" style="width:100%;height:200px;"></canvas>
         </div>
@@ -789,6 +802,96 @@ arr = np.array([1, 2, 3, 4])
 matrix = np.random.rand(3, 3)
 mean_val = np.mean(arr)
           </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">5. Practical Pandas Example</h4>
+        <div class="python-card">
+          <pre>
+import pandas as pd
+
+# load
+df = pd.read_csv('visits.csv', parse_dates=['visit_date'])
+
+# clean
+df['patient_name'] = df['patient_name'].str.strip().str.title()
+
+# aggregate: weekly prescriptions by clinic
+df['week'] = df['visit_date'].dt.to_period('W').apply(lambda r: r.start_time)
+weekly = df.groupby(['clinic','week'])['prescriptions'].sum().reset_index()
+
+# pivot for a dashboard
+pivot = weekly.pivot_table(index='week', columns='clinic', values='prescriptions', aggfunc='sum').fillna(0)
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">6. NLP — small pipeline (tokenize → features → model)</h4>
+        <div class="python-card">
+          <pre>
+import re
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+
+def clean_text(s):
+    s = re.sub(r'[^\w\s]', '', s.lower()).strip()
+    return s
+
+docs = [clean_text(t) for t in texts]
+
+pipe = Pipeline([
+    ('tfidf', TfidfVectorizer(ngram_range=(1,2), max_features=10000)),
+    ('clf', LogisticRegression(max_iter=1000))
+])
+
+pipe.fit(train_texts, train_labels)
+preds = pipe.predict(test_texts)
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">7. Model Training & Evaluation (scikit-learn)</h4>
+        <div class="python-card">
+          <pre>
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import classification_report, roc_auc_score, confusion_matrix
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model.fit(X_train, y_train)
+pred = model.predict(X_test)
+print(classification_report(y_test, pred))
+print('ROC AUC:', roc_auc_score(y_test, model.predict_proba(X_test)[:,1]))
+cm = confusion_matrix(y_test, pred)
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">8. Save & Serve (minimal example)</h4>
+        <div class="python-card">
+          <pre>
+import joblib
+joblib.dump(pipe, 'nlp_pipeline.joblib')
+
+# simple Flask serve (sketch)
+from flask import Flask, request, jsonify
+app = Flask(__name__)
+model = joblib.load('nlp_pipeline.joblib')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    text = request.json.get('text','')
+    pred = model.predict([text])[0]
+    return jsonify({'label': str(pred)})
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">How the outcome looks</h4>
+        <div class="python-card">
+          <ul>
+            <li><strong>Notebook + reproducible outputs:</strong> Cleaned dataframes, summary tables, and visualizations (matplotlib/seaborn) in a Jupyter notebook with runnable cells.</li>
+            <li><strong>Model evaluation:</strong> Confusion matrix, ROC curve, precision/recall table, and a short one-page summary of model strengths/weaknesses.</li>
+            <li><strong>Dashboard-ready artifacts:</strong> Aggregated CSVs or parquet files and a small set of KPI CSVs that feed into Power BI or Tableau for operational dashboards.</li>
+            <li><strong>Deployed service:</strong> A lightweight prediction API (Flask/FastAPI) serving the trained pipeline for integration into dashboards or apps.</li>
+            <li><strong>Interpretability:</strong> Feature importance plots, SHAP/partial dependence snippets, and a stakeholder‑friendly note explaining model limitations.</li>
+          </ul>
+          <p style="margin-top:8px;color:var(--text-muted);">Together these produce reproducible deliverables stakeholders can inspect, run, and connect to operational dashboards for monitoring and action.</p>
         </div>
       </div>
 
@@ -909,6 +1012,84 @@ pd.DataFrame({"feature": X.columns, "importance": importance})
         </div>
       </div>
 
+      <!-- ENHANCED EXCEL EXAMPLES -->
+      <div id="learn-excel" class="learn-section" style="display:none;">
+        <h3>Excel Analytics — Examples & Outcomes</h3>
+        <p>Below are short, copyable examples and a description of how the final outcome (dashboard / KPI) typically looks.</p>
+
+        <h4 style="margin-top:16px;">Data Cleaning (Power Query)</h4>
+        <div class="python-card">
+          <pre>
+let
+  Source = Excel.CurrentWorkbook(){[Name="Table1"]}[Content],
+  Trimmed = Table.TransformColumns(Source, {{"Name", Text.Trim}}),
+  Filled = Table.FillDown(Trimmed, {"Region"}),
+  ChangedTypes = Table.TransformColumnTypes(Filled, {{"Date", type date}, {"Qty", Int64.Type}})
+in
+  ChangedTypes
+          </pre>
+          <p style="margin-top:6px;color:var(--text-muted);">Use Power Query to enforce types, trim whitespace, and fill gaps before analysis.</p>
+        </div>
+
+        <h4 style="margin-top:16px;">Lookup & Join (XLOOKUP)</h4>
+        <div class="python-card">
+          <pre>
+=XLOOKUP($A2, Products[SKU], Products[Description], "Not found")
+
+// fallback example with INDEX/MATCH
+=IFERROR(INDEX(Products[Description],MATCH($A2,Products[SKU],0)),"Not found")
+          </pre>
+          <p style="margin-top:6px;color:var(--text-muted);">Lookup product labels, costs, or categories quickly without complex joins.</p>
+        </div>
+
+        <h4 style="margin-top:16px;">Conditional Aggregation & KPI (SUMIFS / AVERAGEIFS)</h4>
+        <div class="python-card">
+          <pre>
+=SUMIFS(Sales[Amount], Sales[Region], "West", Sales[Date], ">="&EOMONTH(TODAY(),-1)+1)
+=COUNTIFS(Inventory[SKU], A2, Inventory[Status], "In Stock")
+          </pre>
+        </div>
+
+        <h4 style="margin-top:16px;">DAX (Power BI) — example measures</h4>
+        <div class="python-card">
+          <pre>
+Total Sales = SUM(Sales[Amount])
+
+Inventory Turnover = DIVIDE(SUM(Sales[COGS]), AVERAGE(Inventory[Value]))
+
+OnTimeRate = DIVIDE(CALCULATE(COUNTROWS(Orders), Orders[OnTime]=TRUE), COUNTROWS(Orders))
+          </pre>
+          <p style="margin-top:6px;color:var(--text-muted);">DAX measures let dashboards compute ratios and rolling metrics used in KPI cards.</p>
+        </div>
+
+        <h4 style="margin-top:16px;">Conditional Formatting & Alerts</h4>
+        <div class="python-card">
+          <pre>
+// Example rule: highlight low stock
+Select range -> Conditional Formatting -> New Rule -> Use a formula:
+=A2 < Threshold
+Choose red fill to indicate an alert
+          </pre>
+        </div>
+
+        <h4 style="margin-top:16px;">Automation (Power Automate)</h4>
+        <div class="python-card">
+          <p style="color:var(--text-muted);">Automate refreshes and email delivery of weekly snapshot reports to stakeholders (e.g., send PDF export of key dashboard every Monday).</p>
+        </div>
+
+        <h4 style="margin-top:16px;">How the outcome looks</h4>
+        <div class="python-card">
+          <ul>
+            <li><strong>Top KPI cards:</strong> Prescription turnaround time (median & 95th percentile), Stock‑out rate (%), Inventory Days on Hand.</li>
+            <li><strong>Time series chart:</strong> Weekly trend of prescriptions and interventions with slicers for department & drug category.</li>
+            <li><strong>Pivot table + slicers:</strong> Quick breakdown by clinic, pharmacy shift, or supplier with drill-through to transaction-level rows.</li>
+            <li><strong>Heatmap / conditional formatting:</strong> Low-stock alerts and hotspots on a grid for faster operational triage.</li>
+            <li><strong>Automated snapshot:</strong> Weekly emailed PDF and a SharePoint link to the single-source workbook/report.</li>
+          </ul>
+          <p style="margin-top:8px;color:var(--text-muted);">Together these translate raw logs and tables into a single, actionable operations dashboard stakeholders can use to spot issues and make decisions.</p>
+        </div>
+      </div>
+
       <!-- SQL -->
       <div id="learn-sql" class="learn-section" style="display:none;">
   <h3>SQL (Structured Query Language)</h3>
@@ -953,6 +1134,127 @@ SELECT
     RANK() OVER (ORDER BY age DESC) AS age_rank
 FROM patients;
           </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">5. Window Aggregates (running totals)</h4>
+        <div class="python-card">
+          <pre>
+SELECT
+  patient_id,
+  visit_date,
+  prescriptions,
+  SUM(prescriptions) OVER (PARTITION BY patient_id ORDER BY visit_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS prescriptions_7day
+FROM visits;
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">6. Common Table Expressions (CTE) & Stepwise Queries</h4>
+        <div class="python-card">
+          <pre>
+WITH recent_visits AS (
+  SELECT patient_id, clinic, visit_date, prescriptions
+  FROM visits
+  WHERE visit_date >= CURRENT_DATE - INTERVAL '90 days'
+),
+clinic_agg AS (
+  SELECT clinic, COUNT(*) AS visits, SUM(prescriptions) AS total_rx
+  FROM recent_visits
+  GROUP BY clinic
+)
+SELECT * FROM clinic_agg ORDER BY total_rx DESC LIMIT 10;
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">7. Upsert / Merge (safely update or insert)</h4>
+        <div class="python-card">
+          <pre>
+-- Postgres (INSERT ... ON CONFLICT)
+INSERT INTO inventory (sku, qty, last_seen)
+VALUES ('ABC123', 10, now())
+ON CONFLICT (sku) DO UPDATE
+SET qty = EXCLUDED.qty, last_seen = EXCLUDED.last_seen;
+
+-- SQL Server / Oracle: MERGE
+MERGE INTO inventory tgt
+USING (SELECT ? AS sku, ? AS qty) src
+ON (tgt.sku = src.sku)
+WHEN MATCHED THEN UPDATE SET qty = src.qty
+WHEN NOT MATCHED THEN INSERT (sku, qty) VALUES (src.sku, src.qty);
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">8. JSON & Semi-structured Data</h4>
+        <div class="python-card">
+          <pre>
+-- Postgres: extract JSON fields
+SELECT
+  payload->>'user_id' AS user_id,
+  (payload->'metrics'->>'score')::numeric AS score
+FROM events
+WHERE payload->>'event_type' = 'survey_response';
+
+-- unnest JSON array
+SELECT e.id, choice
+FROM events e, jsonb_array_elements_text(e.payload->'choices') AS choice;
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">9. Query Performance & EXPLAIN</h4>
+        <div class="python-card">
+          <pre>
+-- Check plan and cost
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT clinic, COUNT(*) FROM visits WHERE visit_date >= '2025-01-01' GROUP BY clinic;
+
+-- Indexing example
+CREATE INDEX idx_visits_visit_date ON visits(visit_date);
+
+-- Partial index for hot ranges
+CREATE INDEX idx_recent_visits ON visits(visit_date) WHERE visit_date >= now() - INTERVAL '90 days';
+          </pre>
+          <p style="margin-top:6px;color:var(--text-muted);">Use EXPLAIN to identify slow scans and add targeted indexes or materialized views for heavy aggregations.</p>
+        </div>
+
+  <h4 style="margin-top:18px;">10. Advanced Analytics (ROLLUP / FILTER)</h4>
+        <div class="python-card">
+          <pre>
+-- running totals and filter clause
+SELECT clinic, visit_date,
+  SUM(prescriptions) OVER (PARTITION BY clinic ORDER BY visit_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total,
+  COUNT(*) FILTER (WHERE prescriptions > 0) OVER (PARTITION BY clinic) AS nonzero_visits
+FROM visits;
+
+-- rollup for subtotals
+SELECT clinic, department, SUM(prescriptions)
+FROM visits
+GROUP BY ROLLUP(clinic, department);
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">11. Data Engineering Patterns (materialized views, partitioning)</h4>
+        <div class="python-card">
+          <pre>
+-- materialized view for heavy aggregation
+CREATE MATERIALIZED VIEW mv_weekly_rx AS
+SELECT date_trunc('week', visit_date) AS wk, clinic, SUM(prescriptions) AS total_rx
+FROM visits
+GROUP BY wk, clinic;
+
+-- partition large tables by date
+CREATE TABLE events_2025 PARTITION OF events FOR VALUES FROM ('2025-01-01') TO ('2026-01-01');
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">How the outcome looks</h4>
+        <div class="python-card">
+          <ul>
+            <li><strong>Fast, repeatable KPIs:</strong> Aggregated views or materialized tables that feed dashboards with minimal latency.</li>
+            <li><strong>Explainable query plans:</strong> EXPLAIN outputs used to tune indexes and reduce expensive sequential scans.</li>
+            <li><strong>Robust upserts:</strong> Upsert patterns that keep inventory and transaction records consistent and deduplicated.</li>
+            <li><strong>Operational dashboards:</strong> Sliced metrics by clinic, drug class, and time window with drill-down to transaction rows.</li>
+            <li><strong>Data products:</strong> Partitioned tables and scheduled refreshes powering scheduled reports and BI dashboards.</li>
+          </ul>
+          <p style="margin-top:8px;color:var(--text-muted);">These techniques produce reliable, performant queries and data artifacts that scale from ad-hoc analysis to production dashboards.</p>
         </div>
       </div>
 
@@ -1503,7 +1805,7 @@ stats.ttest_ind(group1, group2)
           return;
         }
 
-        const ctx = document.getElementById('chartLearning');
+  const ctx = document.getElementById('chartLearning');
         if (!ctx) return;
 
         // destroy previous instance if present
@@ -1514,16 +1816,50 @@ stats.ttest_ind(group1, group2)
         const chartMuted = styles.getPropertyValue('--text-muted').trim() || '#6b7280';
         const chartAccent = styles.getPropertyValue('--accent').trim() || 'rgba(59,130,246,0.9)';
 
+        // respect persisted chart type (bar or line)
+        const chartTypeKey = 'learning_chart_type';
+        const savedType = localStorage.getItem(chartTypeKey) || 'bar';
+
+        // destroy previous instance if present
+        if (ctx._chartInstance) { ctx._chartInstance.destroy(); }
+
+        const dataset = { label: 'Opens', data, backgroundColor: labels.map(() => chartAccent), borderColor: chartAccent, fill: chartType === 'line' };
+
         ctx._chartInstance = new Chart(ctx.getContext('2d'), {
-          type: 'bar',
-          data: { labels, datasets: [{ label: 'Opens', data, backgroundColor: labels.map(() => chartAccent) }] },
+          type: (typeof chartType !== 'undefined' && chartType) ? chartType : savedType,
+          data: { labels, datasets: [dataset] },
           options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { color: chartMuted } }, x: { ticks: { color: chartMuted } } } }
         });
+        // update toggle active state
+        try {
+          document.querySelectorAll('#chartToggle .btn.small').forEach(b => { b.classList.remove('active'); });
+          const activeBtn = document.querySelector(`#chartToggle .btn.small[data-type="${(typeof chartType !== 'undefined' && chartType) ? chartType : savedType}"]`);
+          if (activeBtn) activeBtn.classList.add('active');
+        } catch (e) { /* ignore DOM update errors */ }
       } catch (err) { console.warn('renderLearningChart error', err); }
     }
 
+    function setLearningChartType(type) {
+      try {
+        const key = 'learning_chart_type';
+        localStorage.setItem(key, type);
+        // re-render passing chartType
+        renderLearningChart(type);
+      } catch (e) { console.warn('setLearningChartType error', e); }
+    }
+
     // initial render
-    renderLearningChart();
+    // ensure toggle shows saved selection and render
+    (function initLearningChartToggle(){
+      const key = 'learning_chart_type';
+      const saved = localStorage.getItem(key) || 'bar';
+      try {
+        document.querySelectorAll('#chartToggle .btn.small').forEach(b => {
+          if (b.dataset.type === saved) b.classList.add('active');
+        });
+      } catch (e) {}
+      renderLearningChart(saved);
+    })();
 
     /* IMPACT DETAIL MODAL HANDLING */
     const impactModal = document.getElementById('impactModal');
@@ -1547,8 +1883,31 @@ stats.ttest_ind(group1, group2)
         html: `<p>Conducted a comparative study analyzing 37,000+ Reddit posts using rule‑based lexicons and transformer models to detect emotional signals in social media. Evaluated taxonomies, model trade‑offs, and produced analyses for digital mental‑health research.</p>`
       },
       dashboards: {
-        title: 'Operational Dashboards & Analytics',
-        html: `<p>Designed and deployed enterprise dashboards (pharmacy, inventory, clinical) and developed end‑to‑end data pipelines. Implemented KPIs, automated ETL, and interactive reports to support operational decision‑making.</p>`
+        title: 'Operational Dashboards & Analytics — 5 Major Projects',
+        html: `<p><strong>Summary:</strong> Below are five representative, major projects delivered as part of the 5+ enterprise dashboards & analytics initiatives.</p>
+        <ol>
+          <li>
+            <strong>Pharmacy Operations Dashboards (Clinical Decision Support)</strong>
+            <p>Real-time Power BI dashboards monitoring pharmacist verification cycles, order volume, and staff workload to optimize medication delivery workflows.</p>
+          </li>
+          <li>
+            <strong>Medication Safety Surveillance & Near-Miss Tracking</strong>
+            <p>Automated surveillance dashboards to capture pharmacist interventions and near-miss events, enabling monthly CQI and safety reviews.</p>
+          </li>
+          <li>
+            <strong>Technician Workflow & Error Monitoring</strong>
+            <p>Integrated Microsoft Forms with Power BI to centralize error reporting and provide leadership with actionable insights on technician workflows.</p>
+          </li>
+          <li>
+            <strong>Inventory Optimization & Predictive Procurement</strong>
+            <p>Forecasting models and KPIs to ensure availability of high-priority medications while reducing waste and improving turnover.</p>
+          </li>
+          <li>
+            <strong>Enterprise Reporting & Automation (SharePoint Analytics Hub)</strong>
+            <p>Standardized a SharePoint-based analytics hub, automated report generation with Power Automate, and harmonized datasets with SQL, Power Query, and DAX.</p>
+          </li>
+        </ol>
+        <p>Click any impact card to view detailed role responsibilities and supporting outcomes.</p>`
       },
       automation: {
         title: 'Reporting Efficiency & Automation',
