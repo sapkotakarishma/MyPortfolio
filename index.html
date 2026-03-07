@@ -962,7 +962,6 @@
         <button class="btn" onclick="openLearning('nlp')">Natural Language Processing</button>
         <button class="btn" onclick="openLearning('ml')">Machine Learning</button>
   <button class="btn" onclick="openLearning('excel')">Excel Analytics</button>
-  <button class="btn" onclick="openLearning('teaching')">Teaching</button>
         <button class="btn" onclick="openLearning('sql')">SQL</button>
         <button class="btn" onclick="openLearning('viz')">Data Visualization</button>
         <button class="btn" onclick="openLearning('de')">Data Engineering</button>
@@ -1050,6 +1049,20 @@ weekly = df.groupby(['clinic','week'])['prescriptions'].sum().reset_index()
 pivot = weekly.pivot_table(index='week', columns='clinic', values='prescriptions', aggfunc='sum').fillna(0)
           </pre>
         </div>
+      </div>
+
+  <!-- PYTHON (anchor for Python topic button) -->
+  <div id="learn-python" class="learn-section" aria-hidden="true" style="display:none;">
+    <h3>Python & Essentials</h3>
+    <p>Core Python constructs, data structures, and short code snippets to get started.</p>
+    <div class="python-card">
+      <pre>
+# example: simple list comprehension
+nums = [1,2,3,4]
+squares = [n*n for n in nums]
+      </pre>
+    </div>
+  </div>
   <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> A persisted model file (joblib) and a minimal prediction API returning JSON labels for integration.</p>
 
   <h4 style="margin-top:18px;">6. NLP — small pipeline (tokenize → features → model)</h4>
@@ -1614,26 +1627,7 @@ stats.ttest_ind(group1, group2)
         </div>
       </div>
 
-      <!-- TEACHING -->
-  <div id="learn-teaching" class="learn-section" aria-hidden="true" style="display:none;">
-        <h3>Teaching & Instruction</h3>
-        <p>Guest lectures, workshops, and graduate assistant roles where I taught data science, statistics, and practical ML.</p>
-
-        <h4 style="margin-top:18px;">Guest Lecturer — Advanced ML (University)</h4>
-        <div class="python-card">
-          <p>Delivered a 90-minute guest lecture on model interpretability, SHAP explanations, and communicating results to clinicians.</p>
-        </div>
-
-        <h4 style="margin-top:18px;">Graduate Assistant — Data Science Lab</h4>
-        <div class="python-card">
-          <p>Led weekly lab sessions, graded assignments, and mentored students on end-to-end projects using Python and scikit-learn.</p>
-        </div>
-
-        <h4 style="margin-top:18px;">Workshop — Data Visualization for Health Programs</h4>
-        <div class="python-card">
-          <p>Half-day workshop on dashboard design, DAX basics, and effective visual storytelling for health program managers.</p>
-        </div>
-      </div>
+      <!-- teaching section removed as requested -->
     </section>
     <footer>
       © 2026 Karishma Sapkota · Applied Data Science & Public Health Analytics
@@ -1721,15 +1715,28 @@ stats.ttest_ind(group1, group2)
 
     /* LEARNING HUB SWITCH */
     function openLearning(section) {
-      // hide all sections (both visually and for assistive tech)
-      document.querySelectorAll(".learn-section").forEach(s => { s.setAttribute('aria-hidden','true'); s.style.display='none'; });
-      const el = document.getElementById("learn-" + section);
-      if (el) {
-        el.setAttribute('aria-hidden','false');
-        el.style.display = 'block';
-        // move focus to the opened section for keyboard users
-        el.setAttribute('tabindex','-1');
-        el.focus();
+      try {
+        console.log('openLearning called:', section);
+        // ensure the top-level Learning Hub is shown so subsections are visible in context
+        try{ showSection('learning'); }catch(e){}
+        // hide all subsections (both visually and for assistive tech)
+        document.querySelectorAll(".learn-section").forEach(s => { s.setAttribute('aria-hidden','true'); s.style.display='none'; });
+  // find the requested topic; do not open the large intro as fallback (avoid showing many topics at once)
+  const el = document.getElementById("learn-" + section);
+  if (el) {
+          el.setAttribute('aria-hidden','false');
+          // let CSS handle display via aria attribute, but ensure any inline display is reset
+          try { el.style.display = 'block'; } catch(e){}
+          // move focus to the opened section for keyboard users
+          el.setAttribute('tabindex','-1');
+          el.focus();
+        } else {
+          console.warn('No learning element to open for', section);
+          // show helper instead if requested topic doesn't exist
+          try{ closeAllLearning(); }catch(e){}
+        }
+      } catch (err) {
+        console.error('openLearning error', err);
       }
 
       // Track opens per topic in localStorage
@@ -1746,6 +1753,9 @@ stats.ttest_ind(group1, group2)
   // update helper visibility
   try{ updateLearningHelper(); }catch(e){}
     }
+
+    // ensure openLearning is reachable on window (helps inline handlers in odd scopes)
+    try{ window.openLearning = openLearning; }catch(e){}
 
     /* THEME INDICATOR */
     const themeIndicator = document.getElementById("themeIndicator");
