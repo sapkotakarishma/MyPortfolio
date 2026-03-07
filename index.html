@@ -6,114 +6,53 @@
     <title>Karishma Sapkota | Applied Data Scientist</title>
 
     <style>
-        /* ---------- GLOBAL BACKGROUND ---------- */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background:
-                radial-gradient(circle at 10% 20%, rgba(255, 200, 200, 0.4), transparent 60%),
-                radial-gradient(circle at 90% 10%, rgba(200, 220, 255, 0.4), transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(200, 255, 220, 0.4), transparent 60%),
-                linear-gradient(135deg, #fdf2f8, #e0f2fe, #fef9c3);
-            background-size: 200% 200%;
-            animation: gradientShift 14s ease infinite;
-            color: #333;
+            font-family: Arial, sans-serif;
+            color: #111827;
+            background-color: #f3f4f6;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* ---------- LAYOUT ---------- */
-        .layout {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-        }
-
-        .main-panel {
-            width: 68%;
-            padding-bottom: 60px;
-        }
-
-        .side-panel {
-            width: 32%;
+        /* ---------- BACKGROUND IMAGE (DATA / ANALYTICS FEEL) ---------- */
+        .page-bg {
             min-height: 100vh;
-            border-left: 1px solid rgba(0,0,0,0.08);
-            background: rgba(15, 23, 42, 0.97);
-            color: #e5e7eb;
-            box-shadow: -4px 0 12px rgba(0,0,0,0.2);
-            position: sticky;
-            top: 0;
-            padding: 20px 18px 30px 18px;
+            background-image: url("https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
-        @media (max-width: 900px) {
-            .layout {
-                flex-direction: column;
-            }
-            .main-panel, .side-panel {
-                width: 100%;
-                position: static;
-                box-shadow: none;
-            }
+        .overlay {
+            background: linear-gradient(to bottom, rgba(15,23,42,0.85), rgba(15,23,42,0.95));
+            min-height: 100vh;
         }
 
         /* ---------- HEADER ---------- */
         header {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1d4ed8, #7c3aed, #ec4899, #f97316);
-            background-size: 300% 300%;
-            animation: headerShift 10s ease infinite;
-            color: white;
-            padding: 60px 20px 80px 20px;
+            padding: 60px 20px 40px 20px;
             text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-        }
-
-        @keyframes headerShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        #headerWave {
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            opacity: 0.25;
+            color: #f9fafb;
         }
 
         header h1 {
             margin: 0;
-            font-size: 3rem;
-            letter-spacing: 0.5px;
-            position: relative;
-            z-index: 2;
+            font-size: 2.6rem;
         }
 
         .header-title {
             margin-top: 8px;
-            font-size: 1.2rem;
-            opacity: 0.96;
-            position: relative;
-            z-index: 2;
+            font-size: 1.1rem;
+            opacity: 0.95;
         }
 
         .header-subtitle {
             margin-top: 6px;
             font-size: 0.95rem;
             opacity: 0.9;
-            position: relative;
-            z-index: 2;
             font-style: italic;
         }
 
@@ -121,8 +60,6 @@
             margin-top: 12px;
             font-size: 0.98rem;
             opacity: 0.9;
-            position: relative;
-            z-index: 2;
         }
 
         .header-chips {
@@ -131,12 +68,10 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            position: relative;
-            z-index: 2;
         }
 
         .chip {
-            background: rgba(15, 23, 42, 0.35);
+            background: rgba(15, 23, 42, 0.7);
             border-radius: 999px;
             padding: 6px 14px;
             font-size: 0.78rem;
@@ -148,17 +83,19 @@
         /* ---------- NAV ---------- */
         nav {
             background: #020617;
-            padding: 12px 0;
+            padding: 10px 0;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         nav a {
-            color: #e0e7ff;
+            color: #e5e7eb;
             margin: 0 18px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             cursor: pointer;
         }
 
@@ -166,96 +103,131 @@
             color: #c7d2fe;
         }
 
-        /* ---------- SECTIONS ---------- */
+        /* ---------- MAIN CONTENT ---------- */
+        .content {
+            max-width: 1000px;
+            margin: 30px auto 60px auto;
+            padding: 0 20px 40px 20px;
+            background: rgba(249, 250, 251, 0.98);
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+
         section {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 30px 0;
         }
 
         h2 {
             color: #1e3a8a;
             border-bottom: 3px solid #a5b4fc;
             padding-bottom: 6px;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
-        /* ---------- PROJECT CARDS ---------- */
+        p {
+            line-height: 1.6;
+            font-size: 0.98rem;
+        }
+
+        /* ---------- PROJECTS & SKILLS (HIDDEN UNTIL CLICKED) ---------- */
+        #projects, #skills {
+            display: none;
+        }
+
         .project-card {
             background: white;
-            padding: 20px;
-            margin: 16px 0;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            border-left: 6px solid;
+            padding: 16px;
+            margin: 12px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-left: 5px solid #3b82f6;
         }
-
-        .c1 { border-color: #3b82f6; }
-        .c2 { border-color: #ec4899; }
-        .c3 { border-color: #10b981; }
-        .c4 { border-color: #f59e0b; }
-        .c5 { border-color: #6366f1; }
 
         .project-card h3 {
             margin-top: 0;
         }
 
-        .project-card a {
-            color: #2563eb;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .project-card a:hover {
-            text-decoration: underline;
-        }
-
-        /* ---------- SKILLS ---------- */
         .skill-card {
             background: white;
-            padding: 18px;
-            margin: 12px 0;
+            padding: 14px;
+            margin: 10px 0;
             border-radius: 10px;
-            box-shadow: 0 3px 9px rgba(0,0,0,0.08);
-            border-left: 6px solid #6366f1;
-            cursor: pointer;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-left: 5px solid #6366f1;
         }
 
         .skill-card h3 {
             margin-top: 0;
-            margin-bottom: 6px;
-            color: #4338ca;
         }
 
-        .skill-card p {
-            margin: 4px 0;
-            font-size: 0.95rem;
+        /* ---------- DUMMY DATA SCIENCE DASHBOARD ---------- */
+        #dashboard-section {
+            margin-top: 40px;
+        }
+
+        .dashboard-wrapper {
+            background: #020617;
+            border-radius: 14px;
+            padding: 16px;
+            color: #e5e7eb;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .dashboard-title {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .dashboard-subtitle {
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        .kpi-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .kpi-card {
+            flex: 1;
+            min-width: 120px;
+            background: #0b1120;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #111827;
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        .kpi-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        #dashboard-chart {
+            width: 100%;
+            height: 280px;
         }
 
         /* ---------- SHARE SECTION ---------- */
-        .share-section {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px 40px 20px;
-        }
-
         .share-card {
             background: white;
-            padding: 20px;
+            padding: 18px;
             border-radius: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
             text-align: center;
-        }
-
-        .share-card h3 {
-            margin-top: 0;
-            color: #1e3a8a;
         }
 
         #qrcode {
@@ -284,65 +256,12 @@
             background: #1e40af;
         }
 
-        /* ---------- SIDE PANEL (AGENTIC DASHBOARD) ---------- */
-        .side-title {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #e5e7eb;
-        }
-
-        .side-subtitle {
-            font-size: 0.82rem;
-            color: #9ca3af;
-            margin-bottom: 14px;
-        }
-
-        #agent-console {
-            background: #020617;
-            border-radius: 8px;
-            padding: 10px 10px 8px 10px;
-            font-family: "Courier New", monospace;
-            font-size: 0.78rem;
-            color: #e5e7eb;
-            height: 140px;
-            overflow-y: auto;
-            border: 1px solid #111827;
-            margin-bottom: 14px;
-        }
-
-        #agent-console-line {
-            color: #22c55e;
-        }
-
-        #dashboard {
-            background: #020617;
-            border-radius: 10px;
-            padding: 8px;
-            border: 1px solid #111827;
-        }
-
-        #dashboard-chart {
-            width: 100%;
-            height: 280px;
-        }
-
-        .console-label {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #9ca3af;
-            margin-bottom: 4px;
-        }
-
+        /* ---------- FOOTER ---------- */
         .footer {
             text-align: center;
-            padding: 25px;
+            padding: 18px;
+            color: #e5e7eb;
             background: #020617;
-            color: #e0e7ff;
-            margin-top: 40px;
-            border-top-left-radius: 40px;
-            border-top-right-radius: 40px;
         }
 
         .footer a {
@@ -355,192 +274,188 @@
         }
     </style>
 </head>
-
 <body>
-
-<header>
-    <canvas id="headerWave"></canvas>
-    <h1>Karishma Sapkota</h1>
-    <div class="header-title">Applied Data Scientist</div>
-    <div class="header-subtitle">
-        (specializing in public health, clinical, and operational analytics; ML, NLP &amp; health systems data)
-    </div>
-    <div class="header-tagline">
-        Designing explainable, operational, and equity‑focused analytics across public health, clinical systems, and generative AI.
-    </div>
-    <div class="header-chips">
-        <div class="chip">Public Health &amp; Clinical Analytics</div>
-        <div class="chip">Machine Learning &amp; NLP</div>
-        <div class="chip">Agentic &amp; Generative AI Systems</div>
-    </div>
-</header>
-
-<nav>
-    <a onclick="scrollToSection('about')">About</a>
-    <a onclick="scrollToSection('projects')">Projects</a>
-    <a onclick="scrollToSection('skills')">Skills</a>
-    <a onclick="scrollToSection('share')">Share</a>
-    <a onclick="scrollToSection('contact')">Contact</a>
-</nav>
-
-<div class="layout">
-    <!-- MAIN PANEL -->
-    <div class="main-panel">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                I am an applied data scientist who bridges clinical practice, public health systems, and advanced analytics.
-                My work spans neglected tropical disease elimination, malaria surveillance, basic health service coverage,
-                pharmacy operations, and digital behavioral health. I design interpretable models, interactive dashboards,
-                and mixed‑methods research frameworks that translate complex data into decisions.
-            </p>
-            <p>
-                I have led provincial‑level NTD analytics, municipal health profiling, medication safety surveillance,
-                predictive modeling (heart disease, fraud detection), and NLP for sentiment and emotion classification.
-                I am particularly interested in explainable and agentic AI systems that support safe, equitable, and
-                context‑aware decision‑making in health and operational settings.
-            </p>
-        </section>
-
-        <section id="projects">
-            <h2>Selected Projects &amp; Analytics Work</h2>
-
-            <div class="project-card c1">
-                <h3>📊 NTD &amp; Malaria Surveillance Analytics</h3>
-                <p>
-                    Led analytics for Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria elimination programs at provincial level.
-                    Consolidated municipal datasets, monitored coverage and completion rates, and identified high‑risk areas to guide
-                    targeted interventions and resource allocation.
-                </p>
+<div class="page-bg">
+    <div class="overlay">
+        <header>
+            <h1>Karishma Sapkota</h1>
+            <div class="header-title">Applied Data Scientist</div>
+            <div class="header-subtitle">
+                specializing in public health, clinical, and operational analytics; ML, NLP &amp; health systems data
             </div>
-
-            <div class="project-card c2">
-                <h3>💊 Pharmacy Operations &amp; Medication Safety Dashboards</h3>
-                <p>
-                    Built Power BI dashboards for pharmacy operations, including verification workload, order volume, inventory levels,
-                    revenue trends, and medication safety interventions. Developed a centralized error monitoring system integrating
-                    Microsoft Forms and Power BI to track near‑misses and error types, supporting continuous quality improvement.
-                </p>
+            <div class="header-tagline">
+                Building data products and analytics that connect real‑world systems with interpretable, actionable insights.
             </div>
-
-            <div class="project-card c3">
-                <h3>🧠 Emotion Classification in Social Media Content</h3>
-                <p>
-                    Conducted a comparative study on 37,000+ Reddit posts using rule‑based lexicons and a DistilRoBERTa transformer model.
-                    Evaluated performance across Ekman’s and Plutchik’s emotion taxonomies, highlighting trade‑offs between accuracy,
-                    recall, and interpretability for digital mental health applications.
-                </p>
+            <div class="header-chips">
+                <div class="chip">Data Science</div>
+                <div class="chip">Public Health &amp; Clinical</div>
+                <div class="chip">ML &amp; NLP</div>
+                <div class="chip">Dashboards &amp; Storytelling</div>
             </div>
+        </header>
 
-            <div class="project-card c4">
-                <h3>💳 Credit Card Fraud Detection</h3>
-                <p>
-                    Developed a logistic regression model on a highly imbalanced Kaggle dataset to distinguish fraudulent from
-                    non‑fraudulent transactions. Evaluated performance using ROC and AUC, achieving strong discrimination while
-                    maintaining sensitivity to rare events.
-                </p>
-            </div>
+        <nav>
+            <a onclick="showSection('about')">About</a>
+            <a onclick="showSection('projects')">Projects</a>
+            <a onclick="showSection('skills')">Skills</a>
+            <a onclick="showSection('share')">Share</a>
+            <a onclick="showSection('contact')">Contact</a>
+        </nav>
 
-            <div class="project-card c5">
-                <h3>📈 Interactive Visualization &amp; Network Analysis</h3>
+        <div class="content">
+            <!-- ABOUT (DEFAULT VISIBLE) -->
+            <section id="about">
+                <h2>About</h2>
                 <p>
-                    Built interactive visualizations and network analyses, including Facebook network community detection (Louvain,
-                    Girvan‑Newman) and sentiment analysis on Yelp, IMDB, and Amazon reviews using SVM, Naive Bayes, and Logistic
-                    Regression. Developed Observable notebooks for exploratory analysis and narrative data storytelling.
+                    I’m an applied data scientist with a background that spans clinical nursing, public health programs,
+                    and advanced analytics. I’ve worked on surveillance systems, pharmacy operations, mixed‑methods research,
+                    and machine learning projects that sit close to real decisions and real people.
                 </p>
                 <p>
-                    <a href="https://observablehq.com/d/2b86322043a4ca55" target="_blank">
-                        View Observable Notebook →
-                    </a>
+                    I enjoy designing models, dashboards, and workflows that are technically sound but also readable,
+                    explainable, and grounded in context. I’m especially interested in work that blends health systems,
+                    behavioral data, and intelligent tools.
                 </p>
-            </div>
-        </section>
+            </section>
 
-        <section id="skills">
-            <h2>Skills</h2>
+            <!-- PROJECTS (HIDDEN UNTIL CLICKED) -->
+            <section id="projects">
+                <h2>Projects</h2>
 
-            <div class="skill-card" onclick="updateSkill('ml')">
-                <h3>Machine Learning &amp; AI</h3>
-                <p>Classification, prediction, model evaluation, and explainable analytics across health and operational data.</p>
-            </div>
-
-            <div class="skill-card" onclick="updateSkill('nlp')">
-                <h3>Natural Language Processing (NLP)</h3>
-                <p>Emotion classification, sentiment analysis, transformer models, and lexicon‑based approaches.</p>
-            </div>
-
-            <div class="skill-card" onclick="updateSkill('health')">
-                <h3>Health Informatics &amp; Research Methods</h3>
-                <p>Surveillance, mixed‑methods research, municipal profiling, and policy‑oriented analytics.</p>
-            </div>
-
-            <div class="skill-card" onclick="updateSkill('data_quality')">
-                <h3>Data Quality &amp; Data Management</h3>
-                <p>Handling missingness, multi‑source integration, and real‑world messy datasets.</p>
-            </div>
-
-            <div class="skill-card" onclick="updateSkill('viz')">
-                <h3>Data Visualization &amp; Storytelling</h3>
-                <p>Power BI, Tableau, Python visualization, and interactive narrative dashboards.</p>
-            </div>
-
-            <div class="skill-card" onclick="updateSkill('bigdata')">
-                <h3>Big Data &amp; PySpark</h3>
-                <p>Scaling analytics workflows to larger datasets and batch processing.</p>
-            </div>
-
-            <div class="skill-card" onclick="updateSkill('programming')">
-                <h3>Programming Languages</h3>
-                <p>Python, R, JavaScript for end‑to‑end analytics pipelines and dashboards.</p>
-            </div>
-
-            <div class="skill-card" onclick="updateSkill('db')">
-                <h3>Databases &amp; Data Modeling</h3>
-                <p>SQL Server, PostgreSQL, MongoDB, schema design, and query optimization.</p>
-            </div>
-        </section>
-
-        <section id="share" class="share-section">
-            <h2>Share This Portfolio</h2>
-            <div class="share-card">
-                <h3>Scan or Share</h3>
-                <div id="qrcode"></div>
-                <div class="share-text">
-                    Scan to open this portfolio on your device, or copy the link to share it.
+                <div class="project-card">
+                    <h3>NTD &amp; Malaria Surveillance Analytics</h3>
+                    <p>
+                        Provincial‑level analytics for Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria programs:
+                        coverage monitoring, risk flagging, and municipal‑level profiling to support elimination strategies.
+                    </p>
                 </div>
-                <button class="copy-btn" onclick="copyPortfolioLink()">Copy Portfolio Link</button>
-            </div>
-        </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Email: your-email@example.com</p>
-            <p>LinkedIn: <a href="#" target="_blank">Your LinkedIn Profile</a></p>
-        </section>
+                <div class="project-card">
+                    <h3>Pharmacy Operations &amp; Medication Safety Dashboards</h3>
+                    <p>
+                        Power BI dashboards for verification workload, inventory, revenue, and medication safety events,
+                        integrating data from multiple systems to support continuous quality improvement.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Emotion Classification on Reddit</h3>
+                    <p>
+                        Comparative analysis of lexicon‑based methods and DistilRoBERTa for emotion classification,
+                        exploring trade‑offs between interpretability and performance for digital mental health contexts.
+                    </p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Credit Card Fraud Detection</h3>
+                    <p>
+                        Logistic regression on an imbalanced dataset, focusing on ROC/AUC and sensitivity to rare events
+                        to demonstrate applied ML for risk detection.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SKILLS (HIDDEN UNTIL CLICKED) -->
+            <section id="skills">
+                <h2>Skills</h2>
+
+                <div class="skill-card">
+                    <h3>Machine Learning &amp; AI</h3>
+                    <p>Classification, prediction, model evaluation, and explainable analytics across health and operational data.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Natural Language Processing</h3>
+                    <p>Emotion classification, sentiment analysis, transformer models, and lexicon‑based approaches.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Health Informatics &amp; Research</h3>
+                    <p>Surveillance, mixed‑methods research, municipal profiling, and policy‑oriented analytics.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Data Visualization &amp; Dashboards</h3>
+                    <p>Power BI, Tableau, Python visualization, and interactive narrative dashboards.</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Programming &amp; Data Engineering</h3>
+                    <p>Python, R, JavaScript, SQL, PySpark, and ETL workflows for end‑to‑end analytics.</p>
+                </div>
+            </section>
+
+            <!-- DUMMY INTERACTIVE DATA SCIENCE DASHBOARD (BOTTOM OF HOME) -->
+            <section id="dashboard-section">
+                <h2>Interactive Data Science Dashboard (Demo)</h2>
+                <p>
+                    A simple, dummy dashboard to show how I think about metrics, trends, and model performance.
+                    This is not real project data—just a quick snapshot of how I might structure an analytics view.
+                </p>
+
+                <div class="dashboard-wrapper">
+                    <div class="dashboard-header">
+                        <div>
+                            <div class="dashboard-title">Product &amp; Customer Analytics</div>
+                            <div class="dashboard-subtitle">Dummy data · Interactive Plotly chart</div>
+                        </div>
+                        <div style="font-size:0.8rem;color:#9ca3af;">
+                            View:
+                            <select id="dashboard-select" onchange="updateDashboardChart()" style="background:#020617;color:#e5e7eb;border:1px solid #374151;border-radius:6px;padding:2px 6px;">
+                                <option value="revenue">Revenue Over Time</option>
+                                <option value="churn">Customer Churn</option>
+                                <option value="roc">Model ROC Curve</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="kpi-row">
+                        <div class="kpi-card">
+                            <div class="kpi-label">Monthly Revenue (Dummy)</div>
+                            <div class="kpi-value">$245K</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Active Users</div>
+                            <div class="kpi-value">18,430</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Churn Rate</div>
+                            <div class="kpi-value">4.2%</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Model AUC</div>
+                            <div class="kpi-value">0.93</div>
+                        </div>
+                    </div>
+
+                    <div id="dashboard-chart"></div>
+                </div>
+            </section>
+
+            <!-- SHARE -->
+            <section id="share">
+                <h2>Share This Portfolio</h2>
+                <div class="share-card">
+                    <h3>Scan or Share</h3>
+                    <div id="qrcode"></div>
+                    <div class="share-text">
+                        Scan to open this portfolio on your device, or copy the link to share it.
+                    </div>
+                    <button class="copy-btn" onclick="copyPortfolioLink()">Copy Portfolio Link</button>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <section id="contact">
+                <h2>Contact</h2>
+                <p>Email: your-email@example.com</p>
+                <p>LinkedIn: <a href="#" target="_blank">Your LinkedIn Profile</a></p>
+            </section>
+        </div>
 
         <div class="footer">
-            © 2026 Karishma Sapkota · Applied Data Scientist.<br>
-            <span>Portfolio designed as an interactive analytics workspace.</span>
-        </div>
-    </div>
-
-    <!-- SIDE PANEL: AGENTIC DASHBOARD -->
-    <div class="side-panel">
-        <div class="side-title">Interactive Skill Dashboard</div>
-        <div class="side-subtitle">
-            Click a skill to see how you actually use it — with a short narrative and, when useful, a visualization.
-        </div>
-
-        <div class="console-label">Agent Console</div>
-        <div id="agent-console">
-            <div>> System initialized.</div>
-            <div>> Waiting for skill selection...</div>
-            <div id="agent-console-line">> Ready.</div>
-        </div>
-
-        <div class="console-label">Visualization</div>
-        <div id="dashboard">
-            <div id="dashboard-chart"></div>
+            © 2026 Karishma Sapkota · Applied Data Scientist ·
+            <a href="https://sapkotakarishma.github.io/MyPortfolio/" target="_blank">Portfolio Link</a>
         </div>
     </div>
 </div>
@@ -551,70 +466,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-    /* ---------- SMOOTH SCROLL ---------- */
-    function scrollToSection(id) {
-        const el = document.getElementById(id);
-        if (el) {
-            el.scrollIntoView({ behavior: "smooth" });
-        }
-    }
-
-    /* ---------- HEADER MICRO-VIZ (WAVEFORM) ---------- */
-    const waveCanvas = document.getElementById("headerWave");
-    const ctx = waveCanvas.getContext("2d");
-    function resizeWave() {
-        waveCanvas.width = waveCanvas.offsetWidth;
-        waveCanvas.height = waveCanvas.offsetHeight;
-    }
-    window.addEventListener("resize", resizeWave);
-    resizeWave();
-
-    let t = 0;
-    function drawWave() {
-        const w = waveCanvas.width;
-        const h = waveCanvas.height;
-        ctx.clearRect(0, 0, w, h);
-        ctx.beginPath();
-        for (let x = 0; x < w; x++) {
-            const y = h / 2 + Math.sin((x + t) * 0.02) * 10;
-            if (x === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
-        }
-        ctx.strokeStyle = "rgba(248, 250, 252, 0.7)";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        t += 1.5;
-        requestAnimationFrame(drawWave);
-    }
-    drawWave();
-
-    /* ---------- AGENTIC DASHBOARD ---------- */
-    const consoleEl = document.getElementById("agent-console");
-    const consoleLine = document.getElementById("agent-console-line");
-
-    function logToConsole(lines) {
-        lines.forEach(text => {
-            const div = document.createElement("div");
-            div.textContent = "> " + text;
-            consoleEl.insertBefore(div, consoleLine);
+    /* ---------- SECTION TOGGLE ---------- */
+    function showSection(id) {
+        const sections = ["about", "projects", "skills", "share", "contact"];
+        sections.forEach(sec => {
+            const el = document.getElementById(sec);
+            if (!el) return;
+            if (sec === id) {
+                el.style.display = "block";
+                el.scrollIntoView({ behavior: "smooth" });
+            } else if (sec === "about" && id !== "about") {
+                el.style.display = "none";
+            } else if (sec !== "about") {
+                el.style.display = "none";
+            }
         });
-        consoleLine.textContent = "> Ready.";
-        consoleEl.scrollTop = consoleEl.scrollHeight;
     }
 
+    /* ---------- DUMMY DASHBOARD ---------- */
     function initDashboard() {
-        const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-        const counts = [120, 150, 140, 160, 180];
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+        const revenue = [120, 135, 150, 165, 180, 210, 230, 245];
 
         Plotly.newPlot("dashboard-chart", [{
-            x: days,
-            y: counts,
+            x: months,
+            y: revenue,
             type: "scatter",
             mode: "lines+markers",
-            line: { color: "#38bdf8" },
+            line: { color: "#38bdf8", width: 3 },
             marker: { size: 6 }
         }], {
-            title: { text: "Simulated Daily Records Processed", font: { size: 12 } },
+            title: { text: "Revenue Over Time (Dummy Data)", font: { size: 12 } },
             margin: { t: 60, r: 10, l: 40, b: 40 },
             paper_bgcolor: "#020617",
             plot_bgcolor: "#020617",
@@ -624,14 +506,47 @@
         });
     }
 
-    function updateSkill(skill) {
-        let data = null;
-        let layout = null;
-        let messages = [];
-        let showChart = true;
+    function updateDashboardChart() {
+        const view = document.getElementById("dashboard-select").value;
+        let data, layout;
 
-        if (skill === "ml") {
-            // Simulated ROC curve (realistic pattern)
+        if (view === "revenue") {
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+            const revenue = [120, 135, 150, 165, 180, 210, 230, 245];
+
+            data = [{
+                x: months,
+                y: revenue,
+                type: "scatter",
+                mode: "lines+markers",
+                line: { color: "#38bdf8", width: 3 },
+                marker: { size: 6 }
+            }];
+            layout = {
+                title: { text: "Revenue Over Time (Dummy Data)", font: { size: 12 } },
+                margin: { t: 60, r: 10, l: 40, b: 40 },
+                xaxis: { gridcolor: "#1f2937" },
+                yaxis: { gridcolor: "#1f2937" }
+            };
+
+        } else if (view === "churn") {
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
+            const churn = [5.2, 4.9, 4.7, 4.5, 4.4, 4.3, 4.2, 4.2];
+
+            data = [{
+                x: months,
+                y: churn,
+                type: "bar",
+                marker: { color: "#f97316" }
+            }];
+            layout = {
+                title: { text: "Customer Churn Rate (Dummy Data)", font: { size: 12 } },
+                margin: { t: 60, r: 10, l: 40, b: 40 },
+                xaxis: { gridcolor: "#1f2937" },
+                yaxis: { gridcolor: "#1f2937", title: "Churn (%)", range: [0, 6] }
+            };
+
+        } else if (view === "roc") {
             const fpr = [0, 0.02, 0.05, 0.1, 0.2, 0.4, 1];
             const tpr = [0, 0.6, 0.78, 0.86, 0.92, 0.96, 1];
 
@@ -644,180 +559,19 @@
                 name: "Model ROC"
             }];
             layout = {
-                title: { text: "Simulated ROC Curve (Heart Disease / Fraud Models)", font: { size: 12 } },
-                margin: { t: 70, r: 10, l: 40, b: 40 },
+                title: { text: "Model ROC Curve (Dummy Data)", font: { size: 12 } },
+                margin: { t: 60, r: 10, l: 40, b: 40 },
                 xaxis: { title: "False Positive Rate", gridcolor: "#1f2937" },
                 yaxis: { title: "True Positive Rate", gridcolor: "#1f2937", range: [0, 1] }
             };
-            messages = [
-                "Skill selected: Machine Learning & AI.",
-                "You use ML to solve real problems — heart disease prediction, fraud detection, sentiment and emotion classification.",
-                "You balance accuracy with interpretability, moving between classical ML and deep learning when it actually matters.",
-                "Rendering a ROC curve that reflects your typical model performance patterns."
-            ];
-
-        } else if (skill === "nlp") {
-            const emotions = ["Joy", "Sadness", "Anger", "Fear", "Anxiety", "Neutral"];
-            const freq = [12, 24, 15, 18, 30, 20]; // realistic: anxiety & sadness higher
-
-            data = [{
-                x: emotions,
-                y: freq,
-                type: "bar",
-                marker: { color: "#f97316" }
-            }];
-            layout = {
-                title: { text: "Simulated Emotion Distribution (Reddit Corpus)", font: { size: 12 } },
-                margin: { t: 70, r: 10, l: 40, b: 80 },
-                yaxis: { title: "Relative Frequency", gridcolor: "#1f2937" },
-                xaxis: { gridcolor: "#1f2937" }
-            };
-            messages = [
-                "Skill selected: Natural Language Processing (NLP).",
-                "Your NLP work goes beyond tokenization — you’ve compared lexicons with transformer models on messy Reddit data.",
-                "You care about how language behaves in real human contexts, not just benchmark scores.",
-                "Rendering a realistic emotion distribution inspired by your Reddit classification work."
-            ];
-
-        } else if (skill === "health") {
-            const settings = ["Urban", "Rural", "Remote"];
-            const coverage = [88, 72, 58]; // realistic NTD/BHS coverage pattern
-
-            data = [{
-                x: settings,
-                y: coverage,
-                type: "bar",
-                marker: { color: ["#22c55e", "#3b82f6", "#f97316"] }
-            }];
-            layout = {
-                title: { text: "Simulated Service Coverage by Setting (NTD/BHS Context)", font: { size: 12 } },
-                margin: { t: 70, r: 10, l: 40, b: 60 },
-                yaxis: { title: "Coverage (%)", range: [0, 100], gridcolor: "#1f2937" },
-                xaxis: { gridcolor: "#1f2937" }
-            };
-            messages = [
-                "Skill selected: Health Informatics & Research Methods.",
-                "You’ve worked inside real health systems — NTD elimination, malaria surveillance, BHS coverage, pharmacy operations.",
-                "You know how to turn incomplete, multi‑source data into insights that actually guide decisions.",
-                "Rendering a coverage pattern that echoes your experience with urban, rural, and remote settings."
-            ];
-
-        } else if (skill === "data_quality") {
-            const domains = ["Demographics", "Labs", "Visits", "Medications", "Outcomes"];
-            const missing = [4, 14, 9, 18, 7]; // realistic missingness pattern
-
-            data = [{
-                x: domains,
-                y: missing,
-                type: "bar",
-                marker: { color: "#a855f7" }
-            }];
-            layout = {
-                title: { text: "Simulated Missingness Across Data Domains", font: { size: 12 } },
-                margin: { t: 70, r: 10, l: 40, b: 80 },
-                yaxis: { title: "Missing (%)", range: [0, 30], gridcolor: "#1f2937" },
-                xaxis: { gridcolor: "#1f2937" }
-            };
-            messages = [
-                "Skill selected: Data Quality & Data Management.",
-                "You’ve lived with real‑world data — incomplete, inconsistent, and scattered across systems.",
-                "You think in terms of missingness patterns, data lineage, and what’s safe to infer.",
-                "Rendering a missingness profile that mirrors the kinds of datasets you’ve cleaned and analyzed."
-            ];
-
-        } else if (skill === "viz") {
-            const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-            const views = [120, 190, 175, 210, 230, 150, 140];
-
-            data = [{
-                x: days,
-                y: views,
-                type: "scatter",
-                mode: "lines+markers",
-                line: { color: "#38bdf8", width: 3 },
-                marker: { size: 6 }
-            }];
-            layout = {
-                title: { text: "Simulated Dashboard Engagement Over a Week", font: { size: 12 } },
-                margin: { t: 70, r: 10, l: 40, b: 40 },
-                yaxis: { title: "Views", gridcolor: "#1f2937" },
-                xaxis: { gridcolor: "#1f2937" }
-            };
-            messages = [
-                "Skill selected: Data Visualization & Storytelling.",
-                "You don’t just make charts — you build narratives that decision‑makers can follow.",
-                "From Power BI and Tableau to Python and Observable, you design visuals that stay honest to the data.",
-                "Rendering a realistic engagement pattern for a dashboard over a week."
-            ];
-
-        } else if (skill === "bigdata") {
-            const batches = ["Batch 1", "Batch 2", "Batch 3", "Batch 4", "Batch 5"];
-            const records = [50000, 82000, 67000, 93000, 78000];
-
-            data = [{
-                x: batches,
-                y: records,
-                type: "bar",
-                marker: { color: "#22c55e" }
-            }];
-            layout = {
-                title: { text: "Simulated Records Processed per PySpark Batch", font: { size: 12 } },
-                margin: { t: 70, r: 10, l: 40, b: 60 },
-                yaxis: { title: "Records", gridcolor: "#1f2937" },
-                xaxis: { gridcolor: "#1f2937" }
-            };
-            messages = [
-                "Skill selected: Big Data & PySpark.",
-                "You’ve worked with data that doesn’t fit in memory and needs to be handled in batches.",
-                "PySpark for you is not a buzzword — it’s a way to scale real analytics workflows.",
-                "Rendering a batch‑level processing pattern inspired by your large‑scale analytics work."
-            ];
-
-        } else if (skill === "programming") {
-            showChart = false;
-            messages = [
-                "Skill selected: Programming Languages.",
-                "You use Python, R, and JavaScript as tools, not trophies.",
-                "From ETL pipelines to modeling workflows and interactive dashboards, your code is clean, modular, and built for real users.",
-                "No visualization needed here — the story is in how you structure and ship your work."
-            ];
-
-        } else if (skill === "db") {
-            showChart = false;
-            messages = [
-                "Skill selected: Databases & Data Modeling.",
-                "SQL is one of your quiet superpowers — you design schemas, optimize queries, and keep pipelines stable when the data gets messy.",
-                "You’ve worked with SQL Server, PostgreSQL, and MongoDB, always thinking about how data will actually be used downstream.",
-                "No visualization required — the value here is in structure, reliability, and performance."
-            ];
-
-        } else {
-            showChart = false;
-            messages = [
-                "No specific skill matched. Resetting dashboard.",
-                "Ready for the next selection."
-            ];
         }
 
-        if (showChart && data && layout) {
-            Plotly.newPlot("dashboard-chart", data, {
-                ...layout,
-                paper_bgcolor: "#020617",
-                plot_bgcolor: "#020617",
-                font: { color: "#e5e7eb", size: 11 }
-            });
-        } else if (!showChart) {
-            Plotly.newPlot("dashboard-chart", [], {
-                title: { text: "No Visualization for This Skill", font: { size: 12 } },
-                paper_bgcolor: "#020617",
-                plot_bgcolor: "#020617",
-                margin: { t: 60, r: 10, l: 40, b: 40 },
-                xaxis: { visible: false },
-                yaxis: { visible: false }
-            });
-        }
-
-        logToConsole(messages);
+        Plotly.newPlot("dashboard-chart", data, {
+            ...layout,
+            paper_bgcolor: "#020617",
+            plot_bgcolor: "#020617",
+            font: { color: "#e5e7eb", size: 11 }
+        });
     }
 
     initDashboard();
@@ -833,12 +587,14 @@
 
     function copyPortfolioLink() {
         navigator.clipboard.writeText(portfolioURL).then(() => {
-            logToConsole(["Portfolio link copied to clipboard."]);
+            alert("Portfolio link copied to clipboard.");
         }).catch(() => {
-            logToConsole(["Unable to copy link automatically."]);
+            alert("Unable to copy link automatically.");
         });
     }
-</script>
 
+    // default: only About visible
+    showSection("about");
+</script>
 </body>
 </html>
