@@ -5,678 +5,10 @@
   <title>Karishma Sapkota | Applied Data Scientist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Font: Source Sans Pro -->
+  <!-- Font: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-main: #020617;
-      --bg-hero: radial-gradient(circle at center, #0f172a, #020617);
-      --bg-section: #020617;
-      --bg-card: #0f172a;
-      --bg-card-soft: #020617;
-      --border-card: #1f2937;
-      --text-main: #f9fafb;
-      --text-muted: #cbd5f5;
-      --accent: #3b82f6;
-      --accent-soft: #60a5fa;
-      --nav-bg: rgba(2, 6, 23, 0.9);
-      --btn-bg: #3b82f6;
-      --btn-text: #ffffff;
-      --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.35);
-      --transition-speed: 0.4s;
-    }
-
-    /* Footer + layout fix */
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    #page-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: var(--bg-main);
-      transition: background var(--transition-speed) ease;
-    }
-
-    footer {
-      margin-top: auto;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Source Sans Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text-main);
-      transition:
-        background-color var(--transition-speed) ease,
-        color var(--transition-speed) ease,
-        background var(--transition-speed) ease;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    /* NAVIGATION */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: var(--nav-bg);
-      backdrop-filter: blur(16px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 20px;
-      gap: 24px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-      transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      cursor: pointer;
-      color: var(--text-main);
-      opacity: 0.9;
-      transition: color var(--transition-speed) ease, opacity var(--transition-speed) ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent-soft);
-      opacity: 1;
-    }
-
-    .nav-right {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .theme-select {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.7);
-      color: var(--text-main);
-      font-size: 13px;
-      cursor: pointer;
-      outline: none;
-      transition:
-        background var(--transition-speed) ease,
-        border-color var(--transition-speed) ease,
-        color var(--transition-speed) ease;
-    }
-
-    .theme-select:hover {
-      border-color: var(--accent-soft);
-    }
-
-    /* SECTIONS */
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 20px;
-      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
-    }
-
-    h1, h2, h3, h4 {
-      margin: 0;
-    }
-
-    h2 {
-      font-size: 26px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* HERO */
-    .hero-wrapper {
-      background: var(--bg-hero);
-      position: relative;
-      overflow: hidden;
-      transition: background var(--transition-speed) ease;
-    }
-
-    .hero {
-      text-align: left;
-      padding: 90px 20px 80px;
-      max-width: 1100px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      font-size: 40px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      margin-bottom: 6px;
-    }
-
-    .hero-subtitle {
-      font-size: 16px;
-      color: var(--accent-soft);
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .hero-tagline {
-      max-width: 650px;
-      font-size: 16px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    .hero-meta {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 8px;
-    }
-
-    .hero-grid-overlay {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-      background-size: 40px 40px;
-      opacity: 0.35;
-      pointer-events: none;
-      mix-blend-mode: soft-light;
-    }
-
-    /* BUTTONS */
-    .btn {
-      display: inline-block;
-      margin: 4px;
-      padding: 8px 14px;
-      background: var(--btn-bg);
-      border-radius: 999px;
-      text-decoration: none;
-      color: var(--btn-text);
-      border: none;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      transition:
-        background var(--transition-speed) ease,
-        color var(--transition-speed) ease,
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.25);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.35);
-    }
-
-    /* IMPACT */
-    .impact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      margin-top: 30px;
-    }
-
-    .impact-card {
-      background: var(--bg-card);
-      padding: 20px;
-      border-radius: 14px;
-      border: 1px solid var(--border-card);
-      box-shadow: var(--shadow-soft);
-      text-align: left;
-      transition:
-        background var(--transition-speed) ease,
-        border-color var(--transition-speed) ease,
-        box-shadow var(--transition-speed) ease;
-    }
-
-    .impact-card h3 {
-      font-size: 26px;
-      color: var(--accent);
-      margin-bottom: 4px;
-    }
-
-    .impact-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    /* TIMELINE */
-    .timeline {
-      border-left: 2px solid var(--accent);
-      padding-left: 24px;
-      margin-top: 24px;
-    }
-
-    .timeline-item {
-      margin-bottom: 28px;
-      position: relative;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -10px;
-      top: 4px;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
-    }
-
-    .timeline-date {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent-soft);
-      margin-bottom: 6px;
-    }
-
-    .timeline-content {
-      background: var(--bg-card);
-      padding: 16px 18px;
-      border-radius: 12px;
-      border: 1px solid var(--border-card);
-      box-shadow: var(--shadow-soft);
-      transition:
-        background var(--transition-speed) ease,
-        border-color var(--transition-speed) ease,
-        box-shadow var(--transition-speed) ease;
-    }
-
-    .timeline-content h3 {
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .timeline-content p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    /* PROJECTS */
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 24px;
-    }
-
-    .project {
-      background: var(--bg-card);
-      padding: 18px;
-      border-radius: 12px;
-      border: 1px solid var(--border-card);
-      box-shadow: var(--shadow-soft);
-      transition:
-        background var(--transition-speed) ease,
-        border-color var(--transition-speed) ease,
-        box-shadow var(--transition-speed) ease,
-        transform 0.15s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.35);
-    }
-
-    .project h3 {
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .project p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .tags {
-      margin-top: 8px;
-    }
-
-    .tag {
-      display: inline-block;
-      background: rgba(15, 23, 42, 0.7);
-      padding: 4px 9px;
-      margin: 2px;
-      border-radius: 999px;
-      font-size: 11px;
-      color: var(--accent-soft);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      margin-top: 24px;
-    }
-
-    .skill-card {
-      background: var(--bg-card);
-      padding: 18px;
-      border-radius: 12px;
-      border: 1px solid var(--border-card);
-      box-shadow: var(--shadow-soft);
-      transition:
-        background var(--transition-speed) ease,
-        border-color var(--transition-speed) ease,
-        box-shadow var(--transition-speed) ease;
-    }
-
-    .skill-card h3 {
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
-    .skill-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    /* LEARNING HUB */
-    .topic-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .learn-section {
-      margin-top: 30px;
-    }
-
-    .learn-section h3 {
-      font-size: 18px;
-      margin-bottom: 4px;
-    }
-
-    .learn-section p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .python-card {
-      background: var(--bg-card);
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border-card);
-      box-shadow: var(--shadow-soft);
-      margin-top: 10px;
-      transition:
-        background var(--transition-speed) ease,
-        border-color var(--transition-speed) ease,
-        box-shadow var(--transition-speed) ease;
-    }
-
-    pre {
-      font-size: 12px;
-      color: var(--text-main);
-      background: var(--bg-card-soft);
-      padding: 10px;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin-top: 8px;
-      border: 1px solid rgba(15, 23, 42, 0.6);
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 24px;
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text-muted);
-      font-size: 13px;
-      border-top: 1px solid rgba(148, 163, 184, 0.3);
-      transition:
-        background var(--transition-speed) ease,
-        color var(--transition-speed) ease,
-        border-color var(--transition-speed) ease;
-    }
-
-    /* Theme indicator */
-    .theme-indicator {
-      position: fixed;
-      bottom: 16px;
-      left: 16px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.85);
-      color: #e5e7eb;
-      font-size: 11px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 60;
-    }
-
-    .theme-indicator.show {
-      opacity: 1;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero {
-        padding: 70px 20px 60px;
-      }
-      .hero h1 {
-        font-size: 32px;
-      }
-      nav {
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .nav-right {
-        margin-left: 0;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div id="page-container">
-
-    <nav>
-      <div class="nav-links">
-        <a onclick="showSection('home')">Home</a>
-        <a onclick="showSection('impact')">Impact</a>
-        <a onclick="showSection('experience')">Experience</a>
-        <a onclick="showSection('projects')">Projects</a>
-        <a onclick="showSection('skills')">Skills</a>
-        <a onclick="showSection('learning')">Learning Hub</a>
-      </div>
-      <div class="nav-right">
-        <span>Theme</span>
-        <select class="theme-select" id="themeSelect" onchange="setTheme(this.value)">
-          <option value="pink">Pink Gradient</option>
-          <option value="purple">Purple Gradient</option>
-          <option value="blue">Blue Gradient</option>
-          <option value="teal">Teal Gradient</option>
-          <option value="sunset">Sunset Gradient</option>
-          <option value="emerald">Emerald Gradient</option>
-          <option value="rosegold">Rose Gold</option>
-          <option value="indigo">Indigo Night</option>
-          <option value="dark">Dark Mode</option>
-        </select>
-      </div>
-    </nav>
-
-    <div class="hero-wrapper" id="heroWrapper">
-      <div class="hero-grid-overlay"></div>
-      <section id="home" class="hero">
-        <h1>Karishma Sapkota</h1>
-        <div class="hero-subtitle">Applied Data Scientist</div>
-        <div class="hero-tagline">
-          I design and build analytical systems at the intersection of machine learning, NLP, and public health—turning complex data into clear, actionable decisions.
-        </div>
-        <p class="hero-meta">
-          Focus areas: clinical analytics, social determinants of health, operational dashboards, and model‑driven decision support.
-        </p>
-        <p id="visits" class="hero-meta" style="margin-top:10px;"></p>
-      </section>
-    </div>
-
-    <section id="impact" style="display:none;">
-      <h2>Impact Highlights</h2>
-      <p style="font-size:14px;color:var(--text-muted);max-width:650px;">
-        A snapshot of the scale and depth of work across public health, analytics, and applied machine learning.
-      </p>
-      <div class="impact-grid">
-        <div class="impact-card">
-          <h3>80+</h3>
-          <p>Villages supported through public health programs and outreach initiatives.</p>
-        </div>
-        <div class="impact-card">
-          <h3>37K+</h3>
-          <p>Reddit posts analyzed in NLP research on emotion and mental health signals.</p>
-        </div>
-        <div class="impact-card">
-          <h3>5+</h3>
-          <p>Operational dashboards deployed for pharmacy, inventory, and clinical workflows.</p>
-        </div>
-        <div class="impact-card">
-          <h3>25%</h3>
-          <p>Improvement in reporting efficiency through automation and better data pipelines.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience" style="display:none;">
-      <h2>Professional Journey</h2>
-      <p style="font-size:14px;color:var(--text-muted);max-width:650px;">
-        Blending clinical context with data science to build tools that actually work in real healthcare environments.
-      </p>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-date">2023 – Present</div>
-          <div class="timeline-content">
-            <h3>Business Analyst – UPMC Hamot</h3>
-            <p>
-              Develop Power BI dashboards and analytics for pharmacy operations, inventory management, and medication safety.
-              Partner with clinicians and operations teams to translate questions into measurable metrics.
-            </p>
-            <div class="tags">
-              <span class="tag">Power BI</span>
-              <span class="tag">SQL</span>
-              <span class="tag">Healthcare Analytics</span>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">2022 – 2023</div>
-          <div class="timeline-content">
-            <h3>Research Assistant – University Projects</h3>
-            <p>
-              Conducted research on healthcare access, social determinants of health, and program evaluation using mixed methods.
-              Built reproducible analysis workflows and communicated findings to non‑technical stakeholders.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" style="display:none;">
-      <h2>Data Science Projects</h2>
-      <p style="font-size:14px;color:var(--text-muted);max-width:650px;">
-        Selected projects that combine modeling, domain context, and clear communication of results.
-      </p>
-      <div class="projects">
-        <div class="project">
-          <h3>Emotion Classification (Reddit NLP)</h3>
-          <p>
-            Compared rule‑based emotion lexicons and transformer models to analyze emotional patterns in 37,000+ Reddit posts.
-            Evaluated trade‑offs between interpretability and performance for mental‑health‑related text.
-          </p>
-          <div class="tags">
-            <span class="tag">NLP</span>
-            <span class="tag">Transformers</span>
-            <span class="tag">Python</span>
-          </div>
-        </div>
-        <div class="project">
-          <h3>Heart Disease Prediction</h3>
-          <p>
-            Built classification models to predict cardiovascular disease risk using clinical variables.
-            Focused on feature importance and model explainability for potential clinical decision support.
-          </p>
-          <div class="tags">
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Scikit‑learn</span>
-            <span class="tag">Healthcare</span>
-          </div>
-        </div>
-        <div class="project">
-          <h3>Credit Card Fraud Detection</h3>
-          <p>
-            Developed models to detect fraudulent transactions using imbalanced‑data techniques and anomaly detection.
-            Benchmarked multiple algorithms and evaluated precision‑recall trade‑offs.
-          </p>
-          <div class="tags">
-            <span class="tag">ML</span>
-            <span class="tag">Python</span>
-            <span class="tag">Fraud Detection</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills" style="display:none;">
-      <h2>Technical Skills</h2>
-      <p style="font-size:14px;color:var(--text-muted);max-width:650px;">
-        A toolkit centered on applied machine learning, analytics, and communication—designed to move projects from idea to impact.
-      </p>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h3>Programming</h3>
-          <p>Python · R · SQL · JavaScript</p>
-        </div>
-        <div class="skill-card">
-          <h3>Machine Learning</h3>
-          <p>Scikit‑learn · TensorFlow · PyTorch · XGBoost</p>
-        </div>
-        <div class="skill-card">
-          <h3>Data Analysis</h3>
-          <p>Pandas · NumPy · EDA · Feature Engineering</p>
-        </div>
-        <div class="skill-card">
-          <h3>Visualization & BI</h3>
-          <p>Power BI · Tableau · Matplotlib · Seaborn</p>
-        </div>
-      </div>
-    </section>
-
+    <!-- LEARNING HUB -->
     <section id="learning" style="display:none;">
       <h2>Learning Hub</h2>
       <p style="font-size:14px;color:var(--text-muted);max-width:650px;">
@@ -684,6 +16,7 @@
       </p>
 
       <div class="topic-menu">
+        <button class="btn" onclick="openLearning('intro')">Intro</button>
         <button class="btn" onclick="openLearning('python')">Python</button>
         <button class="btn" onclick="openLearning('nlp')">Natural Language Processing</button>
         <button class="btn" onclick="openLearning('ml')">Machine Learning</button>
@@ -695,196 +28,247 @@
         <button class="btn" onclick="openLearning('projects')">Mini Projects</button>
       </div>
 
-      <div id="learn-python" class="learn-section" style="display:none;">
-        <h3>Python</h3>
-        <p>Python is my primary language for data science: readable syntax, rich ecosystem, and strong community support.</p>
+      <div id="learn-helper" class="learn-helper" tabindex="-1">No topic selected — click a topic above to open learning content. <button class="btn small" id="learnResetBtn" onclick="closeAllLearning()" style="margin-left:8px;">Close all</button></div>
 
-        <h4 style="margin-top:18px;">1. Basics & Control Flow</h4>
-        <div class="python-card">
-          <p>Variables, loops, conditions, and functions form the foundation of any analysis or pipeline.</p>
-          <pre>
-# Variables
-name = "Karishma"
-age = 25
-
-# Loop
-for i in range(3):
-    print("Hello", i)
-
-# Condition
-if age > 18:
-    print("Adult")
-
-# Function
-def add(a, b):
-    return a + b
-          </pre>
+      <!-- Dashboard / usage chart -->
+      <div id="learn-intro" class="learn-section" aria-hidden="true" style="display:none;">
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+          <div class="dash-card" style="min-width:280px; max-width:480px;">
+            <div class="dash-title">
+              <span>Learning Hub Activity</span>
+              <div class="chart-controls">
+                <div class="chart-toggle" id="chartToggle">
+                  <button class="btn small" data-type="bar" onclick="setLearningChartType('bar')">Bar</button>
+                  <button class="btn small" data-type="line" onclick="setLearningChartType('line')">Line</button>
+                </div>
+              </div>
+            </div>
+            <div class="dash-meta">Counts of how many times each topic was opened in this browser</div>
+            <canvas id="chartLearning" style="width:100%;height:200px;"></canvas>
+          </div>
         </div>
+        <p style="margin-top:8px;color:var(--text-muted);"><strong>Outcome:</strong> Small runnable examples and short notes you can copy to a notebook.</p>
+      </div>
 
-        <h4 style="margin-top:18px;">2. Data Structures</h4>
+      <!-- Per-topic sections (hidden until opened) -->
+      <div id="learn-python" class="learn-section" aria-hidden="true" style="display:none;">
+        <h3>Python & Essentials</h3>
         <div class="python-card">
-          <p>Lists, dictionaries, and tuples are the core containers I use to organize data before moving into Pandas.</p>
           <pre>
-my_list = [1, 2, 3]
-my_dict = {"name": "Karishma", "role": "Data Scientist"}
-my_tuple = (10, 20, 30)
-          </pre>
-        </div>
-
-        <h4 style="margin-top:18px;">3. Pandas</h4>
-        <div class="python-card">
-          <p>Pandas is my default tool for cleaning, transforming, and exploring tabular data.</p>
-          <pre>
-import pandas as pd
-
-df = pd.read_csv("data.csv")
-df.head()
-df.describe()
-df["bmi"] = df["weight_kg"] / (df["height_m"]**2)
-          </pre>
-        </div>
-
-        <h4 style="margin-top:18px;">4. NumPy</h4>
-        <div class="python-card">
-          <p>NumPy powers numerical computing and underpins many ML and scientific libraries.</p>
-          <pre>
-import numpy as np
-
-arr = np.array([1, 2, 3, 4])
-matrix = np.random.rand(3, 3)
-mean_val = np.mean(arr)
+# example: list comprehension
+nums = [1,2,3,4]
+squares = [n*n for n in nums]
           </pre>
         </div>
       </div>
 
-      <div id="learn-nlp" class="learn-section" style="display:none;">
+      <div id="learn-nlp" class="learn-section" aria-hidden="true" style="display:none;">
         <h3>Natural Language Processing (NLP)</h3>
-        <p>NLP lets me work with unstructured text—clinical notes, social media, survey responses—and turn it into signals.</p>
-
-        <h4 style="margin-top:18px;">1. Text Preprocessing</h4>
-        <div class="python-card">
-          <p>Cleaning raw text is essential before modeling or feature extraction.</p>
-          <pre>
-import re
-
-text = "Hello!!! This is NLP 101..."
-clean = re.sub(r"[^a-zA-Z ]", "", text).lower().strip()
-print(clean)
-          </pre>
-        </div>
-
-        <h4 style="margin-top:18px;">2. Tokenization</h4>
-        <div class="python-card">
-          <p>Tokenization splits text into words or sentences, which becomes the basis for further analysis.</p>
-          <pre>
-from nltk.tokenize import word_tokenize
-
-tokens = word_tokenize("NLP makes text understandable.")
-print(tokens)
-          </pre>
-        </div>
-
-        <h4 style="margin-top:18px;">3. POS Tagging & Entities (spaCy)</h4>
-        <div class="python-card">
-          <p>Part‑of‑speech tags and named entities help capture structure and meaning in text.</p>
-          <pre>
-import spacy
-nlp = spacy.load("en_core_web_sm")
-
-doc = nlp("Apple is buying a UK startup.")
-
-for ent in doc.ents:
-    print(ent.text, ent.label_)
-          </pre>
-        </div>
-
-        <h4 style="margin-top:18px;">4. TF‑IDF & Transformers</h4>
-        <div class="python-card">
-          <p>I use both classic vectorization and modern transformer models, depending on the problem and constraints.</p>
-          <pre>
-from sklearn.feature_extraction.text import TfidfVectorizer
-from transformers import pipeline
-
-docs = ["I love NLP", "NLP is fun"]
-tfidf = TfidfVectorizer()
-X = tfidf.fit_transform(docs)
-
-classifier = pipeline("sentiment-analysis")
-print(classifier("This portfolio looks amazing!"))
-          </pre>
-        </div>
+        <p>Short pipeline examples and notes.</p>
       </div>
 
-      <div id="learn-ml" class="learn-section" style="display:none;">
+      <div id="learn-ml" class="learn-section" aria-hidden="true" style="display:none;">
         <h3>Machine Learning</h3>
-        <p>Machine learning is about building models that learn patterns from data and generalize to new cases.</p>
-
-        <h4 style="margin-top:18px;">1. Basic Workflow</h4>
-        <div class="python-card">
-          <p>Train → validate → test → evaluate → iterate. I treat this as an experiment loop, not a one‑off step.</p>
-          <pre>
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-
-model = RandomForestClassifier()
-model.fit(X_train, y_train)
-
-pred = model.predict(X_test)
-print(classification_report(y_test, pred))
-          </pre>
-        </div>
-
-        <h4 style="margin-top:18px;">2. Classification vs Regression</h4>
-        <div class="python-card">
-          <p>Classification predicts categories; regression predicts continuous values. The framing shapes everything downstream.</p>
-          <pre>
-# Classification example: heart disease (yes/no)
-# Regression example: predict length of stay (days)
-          </pre>
-        </div>
-
-        <h4 style="margin-top:18px;">3. Feature Importance</h4>
-        <div class="python-card">
-          <p>Understanding which features drive predictions is critical for trust and communication.</p>
-          <pre>
-import pandas as pd
-
-importance = model.feature_importances_
-pd.DataFrame({"feature": X.columns, "importance": importance})
-          </pre>
-        </div>
+        <p>Modeling workflow notes and examples.</p>
       </div>
 
-      <div id="learn-excel" class="learn-section" style="display:none;">
+      <div id="learn-excel" class="learn-section" aria-hidden="true" style="display:none;">
         <h3>Excel Analytics</h3>
+        <p>Pivot table and Power Query snippets.</p>
+      </div>
+
+      <div id="learn-sql" class="learn-section" aria-hidden="true" style="display:none;">
+        <h3>SQL</h3>
+        <p>Query examples and performance notes.</p>
+      </div>
+
+      <div id="learn-viz" class="learn-section" aria-hidden="true" style="display:none;">
+        <h3>Data Visualization</h3>
+        <p>Plotting and dashboard best practices.</p>
+      </div>
+
+      <div id="learn-de" class="learn-section" aria-hidden="true" style="display:none;">
+        <h3>Data Engineering</h3>
+        <p>ETL patterns and data product notes.</p>
+      </div>
+
+      <div id="learn-stats" class="learn-section" aria-hidden="true" style="display:none;">
+        <h3>Statistics</h3>
+        <p>Descriptive and inferential snippets.</p>
+      </div>
+
+      <div id="learn-projects" class="learn-section" aria-hidden="true" style="display:none;">
+        <h3>Mini Projects</h3>
+        <p>Small project outlines with steps and outcomes.</p>
+      </div>
+
+    </section>
+  .skill-card p { color: var(--text-muted); margin-bottom: 8px; }
+  .skill-meta { font-size: 12px; color: var(--text-muted); }
+
+  /* skills filter input and chips */
+  .skill-filter { margin-top:12px; display:flex; gap:8px; align-items:center; }
+  .skill-filter input { flex:1; padding:8px 10px; border-radius:8px; border:1px solid var(--border-card); background:var(--bg-card-soft); color:var(--text-main); outline:none; }
+  .skill-filter .chip { font-size:12px; padding:6px 8px; border-radius:999px; background:var(--bg-card); border:1px solid var(--border-card); color:var(--text-muted); cursor:pointer; }
+
+  /* proficiency bar */
+  .proficiency { margin-top:8px; height:10px; background:var(--bg-card-soft); border-radius:999px; overflow:hidden; border:1px solid rgba(148,163,184,0.06); }
+  .proficiency-bar { height:100%; background: linear-gradient(90deg,var(--accent),var(--accent-soft)); width:0%; transition: width 0.6s ease; }
+
+  /* examples/details inside a card */
+  .skill-examples { margin-top:10px; display:none; font-size:13px; color:var(--text-muted); }
+  .skill-card.expanded .skill-examples { display:block; }
+
+  /* learn-section show/hide with aria for smoother, accessible toggles */
+  /* ensure learning subsections are hidden by default and only shown via aria-hidden="false" */
+  .learn-section { display: none; transition: opacity 0.28s ease, max-height 0.36s ease, padding 0.28s ease; overflow: hidden; }
+  .learn-section[aria-hidden="true"] { display: none; opacity: 0; max-height: 0; padding: 0 0; pointer-events: none; }
+  .learn-section[aria-hidden="false"] { display: block; opacity: 1; max-height: 2000px; padding: 12px 0; pointer-events: auto; }
+
+  /* Helper shown when no learning topic is open */
+  .learn-helper { margin:14px 0; padding:12px; background:var(--card-soft,rgba(0,0,0,0.03)); border-radius:8px; color:var(--text-muted); }
+
+    /* Mobile: hide links and show toggle */
+    @media (max-width: 768px) {
+      .nav-toggle { display: inline-flex; align-items:center; }
+      .nav-right { margin-left: 8px; }
+      .nav-links { display: none; position: absolute; top: 60px; left: 12px; right: 12px; background: var(--nav-bg); padding: 12px; border-radius: 10px; flex-direction: column; gap: 12px; box-shadow: var(--shadow-soft); }
+      .nav-links.show { display: flex; }
+      nav { justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="page-container">
+
+    <!-- NAVIGATION -->
+    <nav aria-label="Primary" role="navigation">
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">☰<span class="sr-only">Menu</span></button>
+
+    <!-- Learning Hub removed by request. Previously this block contained many learning topics, examples, and tracking charts. -->
+  <div id="learn-excel" class="learn-section" aria-hidden="true" style="display:none;">
+  <h3>Excel Analytics</h3>
         <p>Excel remains a practical tool for quick analysis, operational reporting, and stakeholder‑friendly views.</p>
 
-        <h4 style="margin-top:18px;">1. Data Cleaning</h4>
+  <div style="margin-top:10px;">
+    <button class="btn small" id="excelExamplesBtn" onclick="toggleExcelExamples()" aria-expanded="false">Examples</button>
+  </div>
+
+  <h4 style="margin-top:18px;">1. Data Cleaning</h4>
         <div class="python-card">
           <p>Removing duplicates, trimming spaces, and validating data types are the first steps to reliable reporting.</p>
         </div>
 
-        <h4 style="margin-top:18px;">2. Pivot Tables</h4>
+  <h4 style="margin-top:18px;">2. Pivot Tables</h4>
         <div class="python-card">
           <p>Pivot tables let me summarize large datasets by category, time, or region with minimal friction.</p>
         </div>
 
-        <h4 style="margin-top:18px;">3. Key Functions</h4>
+  <h4 style="margin-top:18px;">3. Key Functions</h4>
         <div class="python-card">
           <p>VLOOKUP, INDEX/MATCH, IF, SUMIF, COUNTIF, and XLOOKUP are my go‑to functions for operational work.</p>
         </div>
       </div>
 
-      <div id="learn-sql" class="learn-section" style="display:none;">
-        <h3>SQL (Structured Query Language)</h3>
+  <!-- ENHANCED EXCEL EXAMPLES -->
+  <div id="learn-excel-examples" class="learn-section" aria-hidden="true" style="display:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+          <h3 style="margin:0;">Excel Analytics — Examples & Outcomes</h3>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <a class="btn small" id="downloadSampleCsv" download="sample_excel_example.csv">Download sample CSV</a>
+            <button class="btn small" id="excelExamplesClose" onclick="closeExcelExamples()" aria-label="Close examples">Close</button>
+          </div>
+        </div>
+        <div style="margin-top:12px; max-width:480px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;">
+            <div style="font-size:13px;color:var(--text-muted);">Downloads (this browser)</div>
+            <div id="downloadTotalBadge" style="font-size:13px;color:var(--text-main);background:var(--accent);padding:4px 8px;border-radius:999px;">0</div>
+          </div>
+          <canvas id="chartDownloads" style="width:100%;height:120px;"></canvas>
+        </div>
+        <p>Below are short, copyable examples and a description of how the final outcome (dashboard / KPI) typically looks.</p>
+
+        <h4 style="margin-top:16px;">Data Cleaning (Power Query)</h4>
+        <div class="python-card">
+          <pre>
+let
+  Source = Excel.CurrentWorkbook(){[Name="Table1"]}[Content],
+  Trimmed = Table.TransformColumns(Source, {{"Name", Text.Trim}}),
+  Filled = Table.FillDown(Trimmed, {"Region"}),
+  ChangedTypes = Table.TransformColumnTypes(Filled, {{"Date", type date}, {"Qty", Int64.Type}})
+in
+  ChangedTypes
+          </pre>
+          <p style="margin-top:6px;color:var(--text-muted);">Use Power Query to enforce types, trim whitespace, and fill gaps before analysis.</p>
+        </div>
+
+        <h4 style="margin-top:16px;">Lookup & Join (XLOOKUP)</h4>
+        <div class="python-card">
+          <pre>
+=XLOOKUP($A2, Products[SKU], Products[Description], "Not found")
+
+// fallback example with INDEX/MATCH
+=IFERROR(INDEX(Products[Description],MATCH($A2,Products[SKU],0)),"Not found")
+          </pre>
+          <p style="margin-top:6px;color:var(--text-muted);">Lookup product labels, costs, or categories quickly without complex joins.</p>
+        </div>
+
+        <h4 style="margin-top:16px;">Conditional Aggregation & KPI (SUMIFS / AVERAGEIFS)</h4>
+        <div class="python-card">
+          <pre>
+=SUMIFS(Sales[Amount], Sales[Region], "West", Sales[Date], ">="&EOMONTH(TODAY(),-1)+1)
+=COUNTIFS(Inventory[SKU], A2, Inventory[Status], "In Stock")
+          </pre>
+        </div>
+
+  <h4 style="margin-top:16px;">DAX (Power BI) — example measures</h4>
+        <div class="python-card">
+          <pre>
+Total Sales = SUM(Sales[Amount])
+
+Inventory Turnover = DIVIDE(SUM(Sales[COGS]), AVERAGE(Inventory[Value]))
+
+OnTimeRate = DIVIDE(CALCULATE(COUNTROWS(Orders), Orders[OnTime]=TRUE), COUNTROWS(Orders))
+          </pre>
+          <p style="margin-top:6px;color:var(--text-muted);">DAX measures let dashboards compute ratios and rolling metrics used in KPI cards.</p>
+        </div>
+
+        <h4 style="margin-top:16px;">Conditional Formatting & Alerts</h4>
+        <div class="python-card">
+          <pre>
+// Example rule: highlight low stock
+Select range -> Conditional Formatting -> New Rule -> Use a formula:
+=A2 < Threshold
+Choose red fill to indicate an alert
+          </pre>
+        </div>
+
+        <h4 style="margin-top:16px;">Automation (Power Automate)</h4>
+        <div class="python-card">
+          <p style="color:var(--text-muted);">Automate refreshes and email delivery of weekly snapshot reports to stakeholders (e.g., send PDF export of key dashboard every Monday).</p>
+        </div>
+
+        <h4 style="margin-top:16px;">How the outcome looks</h4>
+        <div class="python-card">
+          <ul>
+            <li><strong>Top KPI cards:</strong> Prescription turnaround time (median & 95th percentile), Stock‑out rate (%), Inventory Days on Hand.</li>
+            <li><strong>Time series chart:</strong> Weekly trend of prescriptions and interventions with slicers for department & drug category.</li>
+            <li><strong>Pivot table + slicers:</strong> Quick breakdown by clinic, pharmacy shift, or supplier with drill-through to transaction-level rows.</li>
+            <li><strong>Heatmap / conditional formatting:</strong> Low-stock alerts and hotspots on a grid for faster operational triage.</li>
+            <li><strong>Automated snapshot:</strong> Weekly emailed PDF and a SharePoint link to the single-source workbook/report.</li>
+          </ul>
+          <p style="margin-top:8px;color:var(--text-muted);">Together these translate raw logs and tables into a single, actionable operations dashboard stakeholders can use to spot issues and make decisions.</p>
+        </div>
+      </div>
+
+      <!-- SQL -->
+  <div id="learn-sql" class="learn-section" aria-hidden="true" style="display:none;">
+  <h3>SQL (Structured Query Language)</h3>
         <p>SQL is how I access, filter, and aggregate data stored in relational databases.</p>
 
-        <h4 style="margin-top:18px;">1. Basic Queries</h4>
+  <h4 style="margin-top:18px;">1. Basic Queries</h4>
         <div class="python-card">
-          <p>SELECT, WHERE, and ORDER BY form the backbone of most analytical queries.</p>
           <pre>
 SELECT name, age, diagnosis
 FROM patients
@@ -893,9 +277,8 @@ ORDER BY age DESC;
           </pre>
         </div>
 
-        <h4 style="margin-top:18px;">2. Joins</h4>
+  <h4 style="margin-top:18px;">2. Joins</h4>
         <div class="python-card">
-          <p>Joins let me combine data from multiple tables into a single, coherent view.</p>
           <pre>
 SELECT p.name, v.visit_date
 FROM patients p
@@ -904,9 +287,8 @@ ON p.patient_id = v.patient_id;
           </pre>
         </div>
 
-        <h4 style="margin-top:18px;">3. Aggregations & Group By</h4>
+  <h4 style="margin-top:18px;">3. Aggregations & Group By</h4>
         <div class="python-card">
-          <p>Aggregations summarize data across groups—critical for reporting and monitoring.</p>
           <pre>
 SELECT diagnosis, COUNT(*) AS count
 FROM patients
@@ -915,9 +297,8 @@ ORDER BY count DESC;
           </pre>
         </div>
 
-        <h4 style="margin-top:18px;">4. Window Functions</h4>
+  <h4 style="margin-top:18px;">4. Window Functions</h4>
         <div class="python-card">
-          <p>Window functions enable ranking, running totals, and more advanced analytics directly in SQL.</p>
           <pre>
 SELECT 
     name,
@@ -926,15 +307,136 @@ SELECT
 FROM patients;
           </pre>
         </div>
+
+  <h4 style="margin-top:18px;">5. Window Aggregates (running totals)</h4>
+        <div class="python-card">
+          <pre>
+SELECT
+  patient_id,
+  visit_date,
+  prescriptions,
+  SUM(prescriptions) OVER (PARTITION BY patient_id ORDER BY visit_date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS prescriptions_7day
+FROM visits;
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">6. Common Table Expressions (CTE) & Stepwise Queries</h4>
+        <div class="python-card">
+          <pre>
+WITH recent_visits AS (
+  SELECT patient_id, clinic, visit_date, prescriptions
+  FROM visits
+  WHERE visit_date >= CURRENT_DATE - INTERVAL '90 days'
+),
+clinic_agg AS (
+  SELECT clinic, COUNT(*) AS visits, SUM(prescriptions) AS total_rx
+  FROM recent_visits
+  GROUP BY clinic
+)
+SELECT * FROM clinic_agg ORDER BY total_rx DESC LIMIT 10;
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">7. Upsert / Merge (safely update or insert)</h4>
+        <div class="python-card">
+          <pre>
+-- Postgres (INSERT ... ON CONFLICT)
+INSERT INTO inventory (sku, qty, last_seen)
+VALUES ('ABC123', 10, now())
+ON CONFLICT (sku) DO UPDATE
+SET qty = EXCLUDED.qty, last_seen = EXCLUDED.last_seen;
+
+-- SQL Server / Oracle: MERGE
+MERGE INTO inventory tgt
+USING (SELECT ? AS sku, ? AS qty) src
+ON (tgt.sku = src.sku)
+WHEN MATCHED THEN UPDATE SET qty = src.qty
+WHEN NOT MATCHED THEN INSERT (sku, qty) VALUES (src.sku, src.qty);
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">8. JSON & Semi-structured Data</h4>
+        <div class="python-card">
+          <pre>
+-- Postgres: extract JSON fields
+SELECT
+  payload->>'user_id' AS user_id,
+  (payload->'metrics'->>'score')::numeric AS score
+FROM events
+WHERE payload->>'event_type' = 'survey_response';
+
+-- unnest JSON array
+SELECT e.id, choice
+FROM events e, jsonb_array_elements_text(e.payload->'choices') AS choice;
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">9. Query Performance & EXPLAIN</h4>
+        <div class="python-card">
+          <pre>
+-- Check plan and cost
+EXPLAIN (ANALYZE, BUFFERS)
+SELECT clinic, COUNT(*) FROM visits WHERE visit_date >= '2025-01-01' GROUP BY clinic;
+
+-- Indexing example
+CREATE INDEX idx_visits_visit_date ON visits(visit_date);
+
+-- Partial index for hot ranges
+CREATE INDEX idx_recent_visits ON visits(visit_date) WHERE visit_date >= now() - INTERVAL '90 days';
+          </pre>
+          <p style="margin-top:6px;color:var(--text-muted);">Use EXPLAIN to identify slow scans and add targeted indexes or materialized views for heavy aggregations.</p>
+        </div>
+
+  <h4 style="margin-top:18px;">10. Advanced Analytics (ROLLUP / FILTER)</h4>
+        <div class="python-card">
+          <pre>
+-- running totals and filter clause
+SELECT clinic, visit_date,
+  SUM(prescriptions) OVER (PARTITION BY clinic ORDER BY visit_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total,
+  COUNT(*) FILTER (WHERE prescriptions > 0) OVER (PARTITION BY clinic) AS nonzero_visits
+FROM visits;
+
+-- rollup for subtotals
+SELECT clinic, department, SUM(prescriptions)
+FROM visits
+GROUP BY ROLLUP(clinic, department);
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">11. Data Engineering Patterns (materialized views, partitioning)</h4>
+        <div class="python-card">
+          <pre>
+-- materialized view for heavy aggregation
+CREATE MATERIALIZED VIEW mv_weekly_rx AS
+SELECT date_trunc('week', visit_date) AS wk, clinic, SUM(prescriptions) AS total_rx
+FROM visits
+GROUP BY wk, clinic;
+
+-- partition large tables by date
+CREATE TABLE events_2025 PARTITION OF events FOR VALUES FROM ('2025-01-01') TO ('2026-01-01');
+          </pre>
+        </div>
+
+  <h4 style="margin-top:18px;">How the outcome looks</h4>
+        <div class="python-card">
+          <ul>
+            <li><strong>Fast, repeatable KPIs:</strong> Aggregated views or materialized tables that feed dashboards with minimal latency.</li>
+            <li><strong>Explainable query plans:</strong> EXPLAIN outputs used to tune indexes and reduce expensive sequential scans.</li>
+            <li><strong>Robust upserts:</strong> Upsert patterns that keep inventory and transaction records consistent and deduplicated.</li>
+            <li><strong>Operational dashboards:</strong> Sliced metrics by clinic, drug class, and time window with drill-down to transaction rows.</li>
+            <li><strong>Data products:</strong> Partitioned tables and scheduled refreshes powering scheduled reports and BI dashboards.</li>
+          </ul>
+          <p style="margin-top:8px;color:var(--text-muted);">These techniques produce reliable, performant queries and data artifacts that scale from ad-hoc analysis to production dashboards.</p>
+        </div>
       </div>
 
-      <div id="learn-viz" class="learn-section" style="display:none;">
-        <h3>Data Visualization</h3>
+      <!-- DATA VISUALIZATION -->
+  <div id="learn-viz" class="learn-section" aria-hidden="true" style="display:none;">
+  <h3>Data Visualization</h3>
         <p>Good visualization is about clarity and context, not just aesthetics.</p>
 
-        <h4 style="margin-top:18px;">1. Matplotlib & Seaborn</h4>
+  <h4 style="margin-top:18px;">1. Matplotlib & Seaborn</h4>
         <div class="python-card">
-          <p>I use Seaborn and Matplotlib for exploratory analysis and statistical plots.</p>
           <pre>
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -945,19 +447,19 @@ plt.show()
           </pre>
         </div>
 
-        <h4 style="margin-top:18px;">2. Dashboards (Power BI / Tableau)</h4>
+  <h4 style="margin-top:18px;">2. Dashboards (Power BI / Tableau)</h4>
         <div class="python-card">
           <p>Interactive dashboards help stakeholders monitor operations and outcomes without needing to touch code.</p>
         </div>
       </div>
 
-      <div id="learn-de" class="learn-section" style="display:none;">
-        <h3>Data Engineering</h3>
+      <!-- DATA ENGINEERING -->
+  <div id="learn-de" class="learn-section" aria-hidden="true" style="display:none;">
+  <h3>Data Engineering</h3>
         <p>Data engineering ensures that models and dashboards have reliable, well‑structured data to work with.</p>
 
-        <h4 style="margin-top:18px;">1. ETL Pipelines</h4>
+  <h4 style="margin-top:18px;">1. ETL Pipelines</h4>
         <div class="python-card">
-          <p>Extract → Transform → Load is the core pattern for moving data from raw sources into analytics‑ready tables.</p>
           <pre>
 # Example: simple ETL pattern in Python
 data = extract()
@@ -966,34 +468,37 @@ load(clean)
           </pre>
         </div>
 
-        <h4 style="margin-top:18px;">2. PySpark</h4>
+  <h4 style="margin-top:18px;">2. PySpark</h4>
         <div class="python-card">
-          <p>PySpark lets me work with datasets that are too large for a single machine’s memory.</p>
           <pre>
 from pyspark.sql import SparkSession
 
-spark = SparkSession.builder.appName("example").getOrCreate()
-df_spark = spark.read.csv("big_data.csv", header=True, inferSchema=True)
-df_spark.groupBy("region").count().show()
-          </pre>
-        </div>
-      </div>
+spark = SparkSession.builder.appName("example).getOrCreate()
 
-      <div id="learn-stats" class="learn-section" style="display:none;">
-        <h3>Statistics</h3>
+# Load a large CSV file
+df_spark = spark.read.csv("big_data.csv", header=True, inferSchema=True)
+
+# Simple aggregation
+df_spark.groupBy("region").count().show()
+  </pre>
+</div>
+
+      
+
+      <!-- STATISTICS -->
+  <div id="learn-stats" class="learn-section" aria-hidden="true" style="display:none;">
+  <h3>Statistics</h3>
         <p>Statistical thinking underpins how I interpret models, experiments, and uncertainty.</p>
 
-        <h4 style="margin-top:18px;">1. Descriptive Statistics</h4>
+  <h4 style="margin-top:18px;">1. Descriptive Statistics</h4>
         <div class="python-card">
-          <p>Descriptive statistics summarize distributions and help catch data quality issues early.</p>
           <pre>
 df["value"].describe()
           </pre>
         </div>
 
-        <h4 style="margin-top:18px;">2. Hypothesis Testing</h4>
+  <h4 style="margin-top:18px;">2. Hypothesis Testing</h4>
         <div class="python-card">
-          <p>Hypothesis tests help compare groups and quantify whether differences are likely due to chance.</p>
           <pre>
 from scipy import stats
 
@@ -1005,13 +510,13 @@ stats.ttest_ind(group1, group2)
         </div>
       </div>
 
-      <div id="learn-projects" class="learn-section" style="display:none;">
-        <h3>Mini Projects</h3>
+      <!-- MINI PROJECTS -->
+  <div id="learn-projects" class="learn-section" aria-hidden="true" style="display:none;">
+  <h3>Mini Projects</h3>
         <p>Small, focused projects that connect multiple skills into end‑to‑end workflows.</p>
 
-        <h4 style="margin-top:18px;">1. Heart Disease Risk Model</h4>
+  <h4 style="margin-top:18px;">1. Heart Disease Risk Model</h4>
         <div class="python-card">
-          <p>Use Python, Pandas, ML, and visualization to predict heart disease risk and explain model behavior.</p>
           <pre>
 # Steps:
 # 1. Load clinical dataset
@@ -1022,9 +527,8 @@ stats.ttest_ind(group1, group2)
           </pre>
         </div>
 
-        <h4 style="margin-top:18px;">2. Reddit Emotion Classifier</h4>
+  <h4 style="margin-top:18px;">2. Reddit Emotion Classifier</h4>
         <div class="python-card">
-          <p>NLP pipeline: preprocessing → embeddings/TF‑IDF → classifier → evaluation and error analysis.</p>
           <pre>
 # Steps:
 # 1. Collect Reddit posts
@@ -1035,237 +539,774 @@ stats.ttest_ind(group1, group2)
           </pre>
         </div>
       </div>
-    </section>
 
+      <!-- teaching section removed as requested -->
+    </section>
     <footer>
       © 2026 Karishma Sapkota · Applied Data Science & Public Health Analytics
     </footer>
 
-  </div>
+  </div> <!-- END page-container -->
 
   <div class="theme-indicator" id="themeIndicator"></div>
 
   <script>
+    // small runtime error overlay to surface exceptions during debugging
+    (function(){
+      try{
+        const overlay = document.createElement('div');
+        overlay.id = 'errOverlay';
+        overlay.style.position = 'fixed';
+        overlay.style.left = '12px';
+        overlay.style.right = '12px';
+        overlay.style.bottom = '12px';
+        overlay.style.zIndex = 99999;
+        overlay.style.background = 'rgba(220,38,38,0.95)';
+        overlay.style.color = 'white';
+        overlay.style.padding = '12px';
+        overlay.style.borderRadius = '8px';
+        overlay.style.fontFamily = 'monospace';
+        overlay.style.fontSize = '13px';
+        overlay.style.display = 'none';
+        overlay.style.maxHeight = '40vh';
+        overlay.style.overflow = 'auto';
+        overlay.style.boxShadow = '0 8px 28px rgba(2,6,23,0.6)';
+        document.addEventListener('DOMContentLoaded', ()=> document.body.appendChild(overlay));
+        window.addEventListener('error', (e)=>{
+          try{ overlay.style.display='block'; overlay.textContent = 'Error: ' + (e && e.message ? e.message : e.toString()) + '\n' + (e && e.error && e.error.stack ? e.error.stack : (e && e.filename ? e.filename+':'+e.lineno : '')); }catch(err){}
+        });
+        window.addEventListener('unhandledrejection', (ev)=>{ try{ overlay.style.display='block'; overlay.textContent = 'UnhandledRejection: ' + (ev && ev.reason ? (ev.reason.stack||ev.reason) : String(ev)); }catch(err){} });
+      }catch(e){}
+    })();
+    /* SECTION SWITCHING */
     function showSection(sectionId) {
       const sections = ["home", "impact", "experience", "projects", "skills", "learning"];
       sections.forEach(id => {
         if (id === "home") {
           const heroWrapper = document.getElementById("heroWrapper");
-          const heroSection = heroWrapper.querySelector(".hero");
           heroWrapper.style.display = (sectionId === "home") ? "block" : "none";
-          if (sectionId === "home") heroSection.style.display = "block";
         } else {
           const el = document.getElementById(id);
           if (el) el.style.display = (id === sectionId) ? "block" : "none";
         }
       });
     }
+  // initial section will be restored after event handlers are wired (from hash or localStorage)
 
-    showSection("home");
-
-    let visits = localStorage.getItem("visits");
-    if (!visits) visits = 0;
-    visits++;
-    localStorage.setItem("visits", visits);
-    const visitsEl = document.getElementById("visits");
-    if (visitsEl) {
-      visitsEl.innerText = "Visitors (this browser): " + visits;
+    /* VISITOR SPARKLINE (last 7 days) */
+    function recordVisitAndRender(){
+      try{
+        const key = 'visits_by_date';
+        const raw = localStorage.getItem(key);
+        const map = raw ? JSON.parse(raw) : {};
+        const today = new Date().toISOString().slice(0,10);
+        map[today] = (map[today] || 0) + 1;
+        // prune to last 14 days to avoid unbounded growth
+        const keys = Object.keys(map).sort().slice(-14);
+        const pruned = {};
+        keys.forEach(k=> pruned[k]=map[k]);
+        localStorage.setItem(key, JSON.stringify(pruned));
+        renderVisitsChart();
+      }catch(e){ console.warn('visit record failed', e); }
     }
 
+    function renderVisitsChart(){
+      try{
+        const key = 'visits_by_date';
+        const raw = localStorage.getItem(key);
+        const map = raw ? JSON.parse(raw) : {};
+        // build last 7 days labels and values
+        const days = [];
+        const values = [];
+        for (let i=6;i>=0;i--){
+          const d = new Date(); d.setDate(d.getDate()-i);
+          const k = d.toISOString().slice(0,10);
+          days.push(k.slice(5)); // MM-DD
+          values.push(map[k] || 0);
+        }
+        const canvas = document.getElementById('visitsChart');
+        if (!canvas) return;
+        // ensure the canvas has real pixel dimensions (CSS-only sizing can cause odd hairline artifacts)
+        try{
+          const W = 140, H = 40;
+          const DPR = window.devicePixelRatio || 1;
+          // set CSS size (logical pixels)
+          canvas.style.width = W + 'px';
+          canvas.style.height = H + 'px';
+          // set backing store size (physical pixels) for crisp rendering
+          canvas.width = Math.floor(W * DPR);
+          canvas.height = Math.floor(H * DPR);
+        }catch(e){}
+        // ensure Chart.js is loaded
+        if (typeof Chart === 'undefined') {
+          const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/chart.js'; s.onload = function(){ renderVisitsChart(); }; document.head.appendChild(s); return;
+        }
+        const ctx = canvas.getContext('2d');
+        if (canvas._chart) canvas._chart.destroy();
+        const styles = getComputedStyle(document.documentElement);
+        const accent = styles.getPropertyValue('--accent').trim() || '#3b82f6';
+        canvas._chart = new Chart(ctx, {
+          type: 'line',
+          data: { labels: days, datasets: [{ data: values, borderColor: accent, backgroundColor: 'transparent', pointRadius: 0, borderWidth: Math.max(1, (window.devicePixelRatio||1)) }] },
+          options: { responsive: false, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } }, elements: { line: { tension: 0.45 } }, animation: { duration: 180 } }
+        });
+      }catch(e){ console.warn('renderVisitsChart error', e); }
+    }
+
+    /* LEARNING HUB SWITCH (removed) */
     function openLearning(section) {
-      document.querySelectorAll(".learn-section").forEach(s => s.style.display = "none");
-      const el = document.getElementById("learn-" + section);
-      if (el) el.style.display = "block";
+      console.info('openLearning called but Learning Hub was removed.');
+      return; // no-op after removal
     }
 
+    // keep a no-op on window to avoid errors from inline handlers
+    try{ window.openLearning = openLearning; }catch(e){}
+
+    /* THEME INDICATOR */
     const themeIndicator = document.getElementById("themeIndicator");
     let themeTimeout = null;
     function showThemeIndicator(label) {
-      if (!themeIndicator) return;
       themeIndicator.textContent = "Theme: " + label;
       themeIndicator.classList.add("show");
       if (themeTimeout) clearTimeout(themeTimeout);
-      themeTimeout = setTimeout(() => {
-        themeIndicator.classList.remove("show");
-      }, 2000);
+      themeTimeout = setTimeout(() => themeIndicator.classList.remove("show"), 2000);
     }
 
+    /* THEME SWITCHER WITH ACCENT-TEXT FIX */
     function setTheme(theme) {
       const root = document.documentElement;
       let label = "";
 
-      if (theme === "pink") {
-        root.style.setProperty("--bg-main", "#fce7f3");
-        root.style.setProperty("--bg-section", "#fdf2f8");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #fce7f3, #fbcfe8, #f9a8d4)");
-        root.style.setProperty("--bg-card", "rgba(255, 255, 255, 0.9)");
-        root.style.setProperty("--bg-card-soft", "#fdf2f8");
-        root.style.setProperty("--border-card", "#f9a8d4");
-        root.style.setProperty("--text-main", "#111827");
-        root.style.setProperty("--text-muted", "#4b5563");
-        root.style.setProperty("--accent", "#db2777");
-        root.style.setProperty("--accent-soft", "#be185d");
-        root.style.setProperty("--nav-bg", "rgba(255, 255, 255, 0.9)");
-        root.style.setProperty("--btn-bg", "#db2777");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 10px 28px rgba(219, 39, 119, 0.25)");
-        label = "Pink Gradient";
-      }
+      const themes = {
+        pink: {
+          main: "#fce7f3",
+          section: "#fdf2f8",
+          hero: "radial-gradient(circle at center, #fce7f3, #fbcfe8, #f9a8d4)",
+          card: "rgba(255,255,255,0.9)",
+          cardSoft: "#fdf2f8",
+          border: "#f9a8d4",
+          text: "#111827",
+          muted: "#4b5563",
+          accent: "#db2777",
+          accentSoft: "#be185d",
+          accentText: "#9d174d",
+          nav: "rgba(255,255,255,0.9)",
+          btn: "#db2777",
+          shadow: "0 10px 28px rgba(219,39,119,0.25)",
+          label: "Pink Gradient"
+        },
 
-      if (theme === "purple") {
-        root.style.setProperty("--bg-main", "#ede9fe");
-        root.style.setProperty("--bg-section", "#f5f3ff");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #ede9fe, #ddd6fe, #c4b5fd)");
-        root.style.setProperty("--bg-card", "rgba(255, 255, 255, 0.95)");
-        root.style.setProperty("--bg-card-soft", "#f5f3ff");
-        root.style.setProperty("--border-card", "#c4b5fd");
-        root.style.setProperty("--text-main", "#111827");
-        root.style.setProperty("--text-muted", "#4b5563");
-        root.style.setProperty("--accent", "#7c3aed");
-        root.style.setProperty("--accent-soft", "#6d28d9");
-        root.style.setProperty("--nav-bg", "rgba(255, 255, 255, 0.9)");
-        root.style.setProperty("--btn-bg", "#7c3aed");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 10px 30px rgba(124, 58, 237, 0.25)");
-        label = "Purple Gradient";
-      }
+        purple: {
+          main: "#ede9fe",
+          section: "#f5f3ff",
+          hero: "radial-gradient(circle at center, #ede9fe, #ddd6fe, #c4b5fd)",
+          card: "rgba(255,255,255,0.95)",
+          cardSoft: "#f5f3ff",
+          border: "#c4b5fd",
+          text: "#111827",
+          muted: "#4b5563",
+          accent: "#7c3aed",
+          accentSoft: "#6d28d9",
+          accentText: "#5b21b6",
+          nav: "rgba(255,255,255,0.9)",
+          btn: "#7c3aed",
+          shadow: "0 10px 30px rgba(124,58,237,0.25)",
+          label: "Purple Gradient"
+        },
 
-      if (theme === "blue") {
-        root.style.setProperty("--bg-main", "#dbeafe");
-        root.style.setProperty("--bg-section", "#eff6ff");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #dbeafe, #bfdbfe, #93c5fd)");
-        root.style.setProperty("--bg-card", "rgba(255, 255, 255, 0.96)");
-        root.style.setProperty("--bg-card-soft", "#eff6ff");
-        root.style.setProperty("--border-card", "#bfdbfe");
-        root.style.setProperty("--text-main", "#0f172a");
-        root.style.setProperty("--text-muted", "#4b5563");
-        root.style.setProperty("--accent", "#2563eb");
-        root.style.setProperty("--accent-soft", "#1d4ed8");
-        root.style.setProperty("--nav-bg", "rgba(255, 255, 255, 0.9)");
-        root.style.setProperty("--btn-bg", "#2563eb");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 10px 30px rgba(37, 99, 235, 0.25)");
-        label = "Blue Gradient";
-      }
+        blue: {
+          main: "#dbeafe",
+          section: "#eff6ff",
+          hero: "radial-gradient(circle at center, #dbeafe, #bfdbfe, #93c5fd)",
+          card: "rgba(255,255,255,0.96)",
+          cardSoft: "#eff6ff",
+          border: "#bfdbfe",
+          text: "#0f172a",
+          muted: "#4b5563",
+          accent: "#2563eb",
+          accentSoft: "#1d4ed8",
+          accentText: "#1e3a8a",
+          nav: "rgba(255,255,255,0.9)",
+          btn: "#2563eb",
+          shadow: "0 10px 30px rgba(37,99,235,0.25)",
+          label: "Blue Gradient"
+        },
 
-      if (theme === "teal") {
-        root.style.setProperty("--bg-main", "#ccfbf1");
-        root.style.setProperty("--bg-section", "#ecfeff");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #ccfbf1, #99f6e4, #5eead4)");
-        root.style.setProperty("--bg-card", "rgba(255, 255, 255, 0.96)");
-        root.style.setProperty("--bg-card-soft", "#ecfeff");
-        root.style.setProperty("--border-card", "#99f6e4");
-        root.style.setProperty("--text-main", "#022c22");
-        root.style.setProperty("--text-muted", "#115e59");
-        root.style.setProperty("--accent", "#0d9488");
-        root.style.setProperty("--accent-soft", "#0f766e");
-        root.style.setProperty("--nav-bg", "rgba(255, 255, 255, 0.9)");
-        root.style.setProperty("--btn-bg", "#0d9488");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 10px 30px rgba(13, 148, 136, 0.25)");
-        label = "Teal Gradient";
-      }
+        teal: {
+          main: "#ccfbf1",
+          section: "#ecfeff",
+          hero: "radial-gradient(circle at center, #ccfbf1, #99f6e4, #5eead4)",
+          card: "rgba(255,255,255,0.96)",
+          cardSoft: "#ecfeff",
+          border: "#99f6e4",
+          text: "#022c22",
+          muted: "#115e59",
+          accent: "#0d9488",
+          accentSoft: "#0f766e",
+          accentText: "#064e3b",
+          nav: "rgba(255,255,255,0.9)",
+          btn: "#0d9488",
+          shadow: "0 10px 30px rgba(13,148,136,0.25)",
+          label: "Teal Gradient"
+        },
 
-      if (theme === "sunset") {
-        root.style.setProperty("--bg-main", "#fef3c7");
-        root.style.setProperty("--bg-section", "#fff7ed");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #fef3c7, #fdba74, #fb7185)");
-        root.style.setProperty("--bg-card", "rgba(255, 255, 255, 0.96)");
-        root.style.setProperty("--bg-card-soft", "#fff7ed");
-        root.style.setProperty("--border-card", "#fdba74");
-        root.style.setProperty("--text-main", "#111827");
-        root.style.setProperty("--text-muted", "#4b5563");
-        root.style.setProperty("--accent", "#ea580c");
-        root.style.setProperty("--accent-soft", "#c2410c");
-        root.style.setProperty("--nav-bg", "rgba(255, 255, 255, 0.9)");
-        root.style.setProperty("--btn-bg", "#ea580c");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 10px 30px rgba(234, 88, 12, 0.25)");
-        label = "Sunset Gradient";
-      }
+        sunset: {
+          main: "#fef3c7",
+          section: "#fff7ed",
+          hero: "radial-gradient(circle at center, #fef3c7, #fdba74, #fb7185)",
+          card: "rgba(255,255,255,0.96)",
+          cardSoft: "#fff7ed",
+          border: "#fdba74",
+          text: "#111827",
+          muted: "#4b5563",
+          accent: "#ea580c",
+          accentSoft: "#c2410c",
+          accentText: "#9a3412",
+          nav: "rgba(255,255,255,0.9)",
+          btn: "#ea580c",
+          shadow: "0 10px 30px rgba(234,88,12,0.25)",
+          label: "Sunset Gradient"
+        },
 
-      if (theme === "emerald") {
-        root.style.setProperty("--bg-main", "#d1fae5");
-        root.style.setProperty("--bg-section", "#ecfdf5");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #d1fae5, #a7f3d0, #6ee7b7)");
-        root.style.setProperty("--bg-card", "rgba(255, 255, 255, 0.96)");
-        root.style.setProperty("--bg-card-soft", "#ecfdf5");
-        root.style.setProperty("--border-card", "#a7f3d0");
-        root.style.setProperty("--text-main", "#022c22");
-        root.style.setProperty("--text-muted", "#065f46");
-        root.style.setProperty("--accent", "#059669");
-        root.style.setProperty("--accent-soft", "#047857");
-        root.style.setProperty("--nav-bg", "rgba(255, 255, 255, 0.9)");
-        root.style.setProperty("--btn-bg", "#059669");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 10px 30px rgba(5, 150, 105, 0.25)");
-        label = "Emerald Gradient";
-      }
+        emerald: {
+          main: "#d1fae5",
+          section: "#ecfdf5",
+          hero: "radial-gradient(circle at center, #d1fae5, #a7f3d0, #6ee7b7)",
+          card: "rgba(255,255,255,0.96)",
+          cardSoft: "#ecfdf5",
+          border: "#a7f3d0",
+          text: "#022c22",
+          muted: "#065f46",
+          accent: "#059669",
+          accentSoft: "#047857",
+          accentText: "#065f46",
+          nav: "rgba(255,255,255,0.9)",
+          btn: "#059669",
+          shadow: "0 10px 30px rgba(5,150,105,0.25)",
+          label: "Emerald Gradient"
+        },
 
-      if (theme === "rosegold") {
-        root.style.setProperty("--bg-main", "#fce7f3");
-        root.style.setProperty("--bg-section", "#fff1f2");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #fce7f3, #ffe4e6, #fecdd3)");
-        root.style.setProperty("--bg-card", "rgba(255, 255, 255, 0.96)");
-        root.style.setProperty("--bg-card-soft", "#fff1f2");
-        root.style.setProperty("--border-card", "#fecdd3");
-        root.style.setProperty("--text-main", "#111827");
-        root.style.setProperty("--text-muted", "#4b5563");
-        root.style.setProperty("--accent", "#be185d");
-        root.style.setProperty("--accent-soft", "#9d174d");
-        root.style.setProperty("--nav-bg", "rgba(255, 255, 255, 0.9)");
-        root.style.setProperty("--btn-bg", "#be185d");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 10px 30px rgba(190, 24, 93, 0.25)");
-        label = "Rose Gold";
-      }
+        rosegold: {
+          main: "#fce7f3",
+          section: "#fff1f2",
+          hero: "radial-gradient(circle at center, #fce7f3, #ffe4e6, #fecdd3)",
+          card: "rgba(255,255,255,0.96)",
+          cardSoft: "#fff1f2",
+          border: "#fecdd3",
+          text: "#111827",
+          muted: "#4b5563",
+          accent: "#be185d",
+          accentSoft: "#9d174d",
+          accentText: "#9d174d",
+          nav: "rgba(255,255,255,0.9)",
+          btn: "#be185d",
+          shadow: "0 10px 30px rgba(190,24,93,0.25)",
+          label: "Rose Gold"
+        },
 
-      if (theme === "indigo") {
-        root.style.setProperty("--bg-main", "#312e81");
-        root.style.setProperty("--bg-section", "#1e1b4b");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #312e81, #3730a3, #4338ca)");
-        root.style.setProperty("--bg-card", "rgba(15, 23, 42, 0.96)");
-        root.style.setProperty("--bg-card-soft", "#020617");
-        root.style.setProperty("--border-card", "#4f46e5");
-        root.style.setProperty("--text-main", "#e5e7eb");
-        root.style.setProperty("--text-muted", "#cbd5f5");
-        root.style.setProperty("--accent", "#6366f1");
-        root.style.setProperty("--accent-soft", "#818cf8");
-        root.style.setProperty("--nav-bg", "rgba(15, 23, 42, 0.9)");
-        root.style.setProperty("--btn-bg", "#6366f1");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 10px 30px rgba(99, 102, 241, 0.35)");
-        label = "Indigo Night";
-      }
+        indigo: {
+          main: "#312e81",
+          section: "#1e1b4b",
+          hero: "radial-gradient(circle at center, #312e81, #3730a3, #4338ca)",
+          card: "rgba(15,23,42,0.96)",
+          cardSoft: "#020617",
+          border: "#4f46e5",
+          text: "#e5e7eb",
+          muted: "#cbd5f5",
+          accent: "#6366f1",
+          accentSoft: "#818cf8",
+          accentText: "#c7d2fe",
+          nav: "rgba(15,23,42,0.9)",
+          btn: "#6366f1",
+          shadow: "0 10px 30px rgba(99,102,241,0.35)",
+          label: "Indigo Night"
+        },
 
-      if (theme === "dark") {
-        root.style.setProperty("--bg-main", "#020617");
-        root.style.setProperty("--bg-section", "#020617");
-        root.style.setProperty("--bg-hero", "radial-gradient(circle at center, #0f172a, #020617)");
-        root.style.setProperty("--bg-card", "#0f172a");
-        root.style.setProperty("--bg-card-soft", "#020617");
-        root.style.setProperty("--border-card", "#1f2937");
-        root.style.setProperty("--text-main", "#f9fafb");
-        root.style.setProperty("--text-muted", "#cbd5f5");
-        root.style.setProperty("--accent", "#3b82f6");
-        root.style.setProperty("--accent-soft", "#60a5fa");
-        root.style.setProperty("--nav-bg", "rgba(2, 6, 23, 0.9)");
-        root.style.setProperty("--btn-bg", "#3b82f6");
-        root.style.setProperty("--btn-text", "#ffffff");
-        root.style.setProperty("--shadow-soft", "0 8px 24px rgba(15, 23, 42, 0.35)");
-        label = "Dark Mode";
+        dark: {
+          main: "#020617",
+          section: "#020617",
+          hero: "radial-gradient(circle at center, #0f172a, #020617)",
+          card: "#0f172a",
+          cardSoft: "#020617",
+          border: "#1f2937",
+          text: "#f9fafb",
+          muted: "#cbd5f5",
+          accent: "#3b82f6",
+          accentSoft: "#60a5fa",
+          accentText: "#60a5fa",
+          nav: "rgba(2,6,23,0.9)",
+          btn: "#3b82f6",
+          shadow: "0 8px 24px rgba(15,23,42,0.35)",
+          label: "Dark Mode"
+        }
+      };
+
+      const t = themes[theme];
+
+      root.style.setProperty("--bg-main", t.main);
+      root.style.setProperty("--bg-section", t.section);
+      root.style.setProperty("--bg-hero", t.hero);
+      root.style.setProperty("--bg-card", t.card);
+      root.style.setProperty("--bg-card-soft", t.cardSoft);
+      root.style.setProperty("--border-card", t.border);
+      root.style.setProperty("--text-main", t.text);
+      root.style.setProperty("--text-muted", t.muted);
+      root.style.setProperty("--accent", t.accent);
+      root.style.setProperty("--accent-soft", t.accentSoft);
+      // compute a high-contrast color for highlighted text (ensure readability)
+      function hexToRgb(hex) {
+        const h = hex.replace('#','').trim();
+        if (h.length === 3) return [parseInt(h[0]+h[0],16), parseInt(h[1]+h[1],16), parseInt(h[2]+h[2],16)];
+        return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
       }
+      function luminance(r,g,b){
+        const a = [r,g,b].map(v=>{
+          v = v/255;
+          return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4);
+        });
+        return 0.2126*a[0] + 0.7152*a[1] + 0.0722*a[2];
+      }
+      // choose accent-text to contrast with the theme text color (t.text)
+      try {
+        const rgbText = hexToRgb(t.text || '#111827');
+        const lumText = luminance(rgbText[0], rgbText[1], rgbText[2]);
+        // if theme text is light (lum > 0.5) use dark accent-text, else use light
+        const contrast = lumText > 0.5 ? '#111827' : '#f9fafb';
+        root.style.setProperty("--accent-text", contrast);
+
+        // compute heading color based on the theme background (t.main) so headings
+        // contrast the page background rather than the text color. This avoids
+        // near-white headings on light themes.
+        const rgbBg = hexToRgb(t.main || '#020617');
+        const lumBg = luminance(rgbBg[0], rgbBg[1], rgbBg[2]);
+        const headingContrast = lumBg > 0.5 ? '#0f172a' : '#f3f4f6';
+        root.style.setProperty("--heading-color", headingContrast);
+
+        // tag text should be clearly readable; prefer dark text on light backgrounds,
+        // otherwise use accent-soft on darker backgrounds
+        const tagTxt = lumBg > 0.5 ? '#0f172a' : (t.accentSoft || '#60a5fa');
+        root.style.setProperty("--tag-text", tagTxt);
+
+        // dashboard title color (muted) should use theme muted or computed muted color
+        const dashTitle = t.muted || (lumBg > 0.5 ? '#6b7280' : '#cbd5f5');
+        root.style.setProperty("--dash-title-color", dashTitle);
+      } catch (e) {
+        root.style.setProperty("--accent-text", t.accentText);
+      }
+      root.style.setProperty("--nav-bg", t.nav);
+      root.style.setProperty("--btn-bg", t.btn);
+      root.style.setProperty("--shadow-soft", t.shadow);
 
       localStorage.setItem("theme", theme);
-      showThemeIndicator(label);
+      showThemeIndicator(t.label);
     }
 
     const savedTheme = localStorage.getItem("theme") || "purple";
-    const themeSelect = document.getElementById("themeSelect");
-    if (themeSelect) {
-      themeSelect.value = savedTheme;
-    }
+    document.getElementById("themeSelect").value = savedTheme;
     setTheme(savedTheme);
+
+    /* NAV TOGGLE + ACTIVE LINK */
+    const navToggle = document.getElementById('navToggle');
+    const primaryNav = document.getElementById('primaryNav');
+
+    function closeNav() {
+      primaryNav.classList.remove('show');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function openNav() {
+      primaryNav.classList.add('show');
+      navToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    if (navToggle) {
+      navToggle.addEventListener('click', (e) => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        if (expanded) closeNav(); else openNav();
+      });
+
+      // close on ESC
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeNav();
+      });
+
+      // close on outside click
+      document.addEventListener('click', (e) => {
+        if (!primaryNav.contains(e.target) && e.target !== navToggle) closeNav();
+      });
+    }
+
+    // Active link highlighting
+    function setActiveLink(section) {
+      document.querySelectorAll('#primaryNav a').forEach(a => {
+        if (a.dataset.section === section) a.classList.add('active'); else a.classList.remove('active');
+      });
+    }
+
+    // update active when showing sections
+    const originalShowSection = showSection;
+    window.showSection = function(sectionId) {
+  originalShowSection(sectionId);
+  setActiveLink(sectionId);
+  // persist last active section to localStorage and URL hash
+  try { localStorage.setItem('active_section', sectionId); } catch (e) {}
+  try { history.replaceState(null, '', '#' + sectionId); } catch (e) {}
+  // close mobile nav after selection
+  closeNav();
+    };
+
+    // initialize active link
+    setActiveLink('home');
+
+    // restore last active section from URL hash or localStorage on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const hash = (location.hash || '').replace('#','');
+      const saved = localStorage.getItem('active_section');
+      const sections = ["home","impact","experience","projects","skills","learning"];
+      let toShow = sections.includes(hash) ? hash : (sections.includes(saved) ? saved : 'home');
+      // If the saved section is 'learning' but the user never opened any learning topic
+      // (no counts and no examples open), prefer showing home to avoid hiding the hero.
+      try{
+        if (toShow === 'learning' && !hash) {
+          const countsRaw = localStorage.getItem('learning_counts');
+          const counts = countsRaw ? JSON.parse(countsRaw) : {};
+          const hasCounts = Object.keys(counts).length > 0;
+          const excelOpen = localStorage.getItem('excel_examples_open') === 'true';
+          if (!hasCounts && !excelOpen) {
+            toShow = 'home';
+          }
+        }
+      }catch(e){}
+      // call the new showSection wrapper to handle persistence and active link
+      window.showSection(toShow);
+      // Ensure no learning topic content is visible until the user explicitly clicks a topic.
+      try{
+  document.querySelectorAll('.learn-section').forEach(s => { s.setAttribute('aria-hidden','true'); });
+  try{ updateLearningHelper(); }catch(e){}
+      }catch(e){}
+      // additionally hide any direct children under #learning that are not the topic menu, helper, or a learn-section
+      try{
+        document.querySelectorAll('#learning > *:not(.topic-menu):not(#learn-helper):not(.learn-section)').forEach(el=>{ el.style.display='none'; el.setAttribute('data-hidden-by-init','true'); });
+      }catch(e){}
+  // record a visit and render the visits sparkline
+  try{ recordVisitAndRender(); }catch(e){}
+    });
+
+    /* DASHBOARD CHARTS: load Chart.js and render simple example charts */
+    (function() {
+      function loadScript(src, cb) {
+        const s = document.createElement('script');
+        s.src = src; s.onload = cb; s.async = true; document.head.appendChild(s);
+      }
+
+      // derive colors from CSS variables
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#3b82f6';
+      const accentSoft = styles.getPropertyValue('--accent-soft').trim() || '#60a5fa';
+      const text = styles.getPropertyValue('--text-main').trim() || '#111827';
+    const muted = styles.getPropertyValue('--text-muted').trim() || '#6b7280';
+    const headingColor = styles.getPropertyValue('--heading-color').trim() || text;
+    const dashTitleColor = styles.getPropertyValue('--dash-title-color').trim() || muted;
+
+      loadScript('https://cdn.jsdelivr.net/npm/chart.js', () => {
+        try {
+          // Admissions (line)
+          const ctxA = document.getElementById('chartAdmissions').getContext('2d');
+          new Chart(ctxA, {
+            type: 'line',
+            data: {
+              labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+              datasets: [{ label: 'Admissions', data: [24, 30, 28, 34, 40, 36, 32], borderColor: accent, backgroundColor: accentSoft, fill: true, tension: 0.3 }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false }, title: { display: true, text: 'Admissions', color: dashTitleColor, font: { size: 12 } } }, scales: { x: { ticks: { color: muted }, grid: { color: 'rgba(148,163,184,0.04)' } }, y: { ticks: { color: muted }, grid: { color: 'rgba(148,163,184,0.04)' } } } }
+          });
+
+          // Model performance (bar)
+          const ctxM = document.getElementById('chartModel').getContext('2d');
+          new Chart(ctxM, {
+            type: 'bar',
+            data: { labels: ['Baseline','Tuned','Ensemble'], datasets: [{ label: 'ROC AUC', data: [0.78, 0.83, 0.86], backgroundColor: [accent, accentSoft, '#10b981'] }] },
+            options: { responsive: true, plugins: { legend: { display: false }, title: { display: true, text: 'Model ROC AUC', color: dashTitleColor, font: { size: 12 } } }, scales: { y: { beginAtZero: true, max: 1, ticks: { callback: v => v.toFixed(2), color: muted }, grid: { color: 'rgba(148,163,184,0.06)' } }, x: { ticks: { color: muted } } } }
+          });
+
+          // Data sources (doughnut)
+          const ctxS = document.getElementById('chartSources').getContext('2d');
+          new Chart(ctxS, {
+            type: 'doughnut',
+            data: { labels: ['EMR','Survey','Claims'], datasets: [{ data: [56, 24, 20], backgroundColor: [accent, '#f59e0b', '#ef4444'] }] },
+            options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: muted } }, title: { display: true, text: 'Data Sources', color: dashTitleColor, font: { size: 12 } } } }
+          });
+        } catch (err) {
+          console.warn('Chart render failed', err);
+        }
+      });
+    })();
+
+  /* Learning Hub removed: stub functions to avoid runtime errors from remaining callers */
+  function renderLearningChart(chartType) { console.info('renderLearningChart called but Learning Hub was removed.'); return; }
+  function setLearningChartType(type) { console.info('setLearningChartType called but Learning Hub was removed.'); try{ localStorage.setItem('learning_chart_type', type); }catch(e){} return; }
+  (function initLearningChartToggle(){ console.info('initLearningChartToggle skipped; Learning Hub removed.'); })();
+  function updateLearningHelper(){ console.info('updateLearningHelper called but Learning Hub removed.'); return; }
+
+  // Learning hub helpers removed — provide no-op stubs to avoid console errors
+  function closeAllLearning(){ console.info('closeAllLearning called but Learning Hub removed.'); return; }
+  function toggleExcelExamples(){ console.info('toggleExcelExamples called but Learning Hub removed.'); return; }
+  function closeExcelExamples(){ console.info('closeExcelExamples called but Learning Hub removed.'); return; }
+
+    // announcer for screen readers
+    (function(){
+      const ann = document.createElement('div');
+      ann.id = 'srAnnouncer';
+      ann.setAttribute('aria-live','polite');
+      ann.setAttribute('aria-atomic','true');
+      ann.style.position = 'absolute';
+      ann.style.width = '1px';
+      ann.style.height = '1px';
+      ann.style.margin = '-1px';
+      ann.style.border = '0';
+      ann.style.padding = '0';
+      ann.style.clip = 'rect(0 0 0 0)';
+      ann.style.overflow = 'hidden';
+      document.body.appendChild(ann);
+      window.announce = function(msg){ try{ ann.textContent = msg; }catch(e){} };
+    })();
+
+    /* IMPACT DETAIL MODAL HANDLING */
+    const impactModal = document.getElementById('impactModal');
+    const impactBackdrop = document.getElementById('impactBackdrop');
+    const impactClose = document.getElementById('impactClose');
+    const impactModalTitle = document.getElementById('impactModalTitle');
+    const impactModalBody = document.getElementById('impactModalBody');
+
+    const impactDetails = {
+      villages: {
+        title: 'Operational Research & Field Programs (NTDs)',
+        html: `<p><strong>Operational Research Contributor - Neglected Tropical Diseases (NTDs)</strong><br>03/2020-05/2022<br>Crown Agents Ltd./ASCEND Program, Nepal (Remote)</p>
+        <ul>
+          <li>Conducted retrospective chart reviews, municipal disease profiling, and service delivery evaluations to support evidence‑based planning for Lymphatic Filariasis and Visceral Leishmaniasis elimination.</li>
+          <li>Analyzed provincial‑level NTD datasets to identify high‑risk areas, service gaps, and program performance trends.</li>
+          <li>Synthesized findings into analytical summaries used by provincial health authorities to guide strategic decision‑making and resource allocation.</li>
+        </ul>`
+      },
+      reddit: {
+        title: 'Independent Research — Emotion Classification (Reddit NLP)',
+        html: `<p>Conducted a comparative study analyzing 37,000+ Reddit posts using rule‑based lexicons and transformer models to detect emotional signals in social media. Evaluated taxonomies, model trade‑offs, and produced analyses for digital mental‑health research.</p>`
+      },
+      dashboards: {
+        title: 'Operational Dashboards & Analytics — 5 Major Projects',
+        html: `<p><strong>Summary:</strong> Below are five representative, major projects delivered as part of the 5+ enterprise dashboards & analytics initiatives.</p>
+        <ol>
+          <li>
+            <strong>Pharmacy Operations Dashboards (Clinical Decision Support)</strong>
+            <p>Real-time Power BI dashboards monitoring pharmacist verification cycles, order volume, and staff workload to optimize medication delivery workflows.</p>
+          </li>
+          <li>
+            <strong>Medication Safety Surveillance & Near-Miss Tracking</strong>
+            <p>Automated surveillance dashboards to capture pharmacist interventions and near-miss events, enabling monthly CQI and safety reviews.</p>
+          </li>
+          <li>
+            <strong>Technician Workflow & Error Monitoring</strong>
+            <p>Integrated Microsoft Forms with Power BI to centralize error reporting and provide leadership with actionable insights on technician workflows.</p>
+          </li>
+          <li>
+            <strong>Inventory Optimization & Predictive Procurement</strong>
+            <p>Forecasting models and KPIs to ensure availability of high-priority medications while reducing waste and improving turnover.</p>
+          </li>
+          <li>
+            <strong>Enterprise Reporting & Automation (SharePoint Analytics Hub)</strong>
+            <p>Standardized a SharePoint-based analytics hub, automated report generation with Power Automate, and harmonized datasets with SQL, Power Query, and DAX.</p>
+          </li>
+        </ol>
+        <p>Click any impact card to view detailed role responsibilities and supporting outcomes.</p>`
+      },
+      automation: {
+        title: 'Reporting Efficiency & Automation',
+        html: `<p>Improved reporting efficiency through automation and pipeline enhancements, achieving measurable time savings and more reliable delivery of operational KPIs.</p>`
+      }
+    };
+
+    // add project impact details
+    impactDetails['proj-reddit'] = {
+      title: 'Emotion Classification (Reddit NLP)',
+      html: `<p>Comparative analysis of 37,000+ Reddit posts using lexicons and transformers. Deliverables: reproducible pipeline, evaluation notebooks, and interpretability reports (SHAP).</p><p><strong>Outcome:</strong> reproducible model and stakeholder-ready summaries.</p>`
+    };
+    impactDetails['proj-heart'] = {
+      title: 'Heart Disease Prediction',
+      html: `<p>Clinical risk prediction models with feature importance analysis and performance validation. Deliverables: model artifact, ROC/AUC reports, and executive summary.</p><p><strong>Outcome:</strong> validated scoring routine suitable for integration.</p>`
+    };
+    impactDetails['proj-fraud'] = {
+      title: 'Credit Card Fraud Detection',
+      html: `<p>Anomaly detection and imbalanced-data modeling to identify suspicious transactions. Deliverables: scoring pipeline, monitoring dashboards, and alerting rules.</p><p><strong>Outcome:</strong> operational detection with reduced false positives.</p>`
+    };
+
+    function openImpactDetail(key) {
+      const data = impactDetails[key];
+      if (!data) return;
+      impactModalTitle.innerText = data.title;
+      impactModalBody.innerHTML = data.html;
+      impactModal.setAttribute('aria-hidden', 'false');
+      // trap focus briefly
+      impactClose.focus();
+    }
+
+    function closeImpactDetail() {
+      impactModal.setAttribute('aria-hidden', 'true');
+    }
+
+    if (impactBackdrop) impactBackdrop.addEventListener('click', closeImpactDetail);
+    if (impactClose) impactClose.addEventListener('click', closeImpactDetail);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeImpactDetail(); });
+
+    // keyboard open support on impact cards
+    document.querySelectorAll('.impact-card[role="button"]').forEach(el => {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const k = el.dataset.key; openImpactDetail(k); }
+      });
+    });
+
+    // project detail toggles
+    function toggleProject(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('open');
+    }
+
+    // render simple SVG sparklines for any .sparkline with data-values
+    function renderSparklines() {
+      document.querySelectorAll('svg.sparkline').forEach(svg => {
+        const values = (svg.dataset.values || '').split(',').map(v=>parseFloat(v.trim())||0);
+        if (!values.length) return;
+        const w = svg.viewBox.baseVal.width || svg.getAttribute('width') || 180;
+        const h = svg.viewBox.baseVal.height || svg.getAttribute('height') || 40;
+        const max = Math.max(...values);
+        const min = Math.min(...values);
+        const span = Math.max(max - min, 1);
+        const step = w / Math.max(values.length - 1, 1);
+        let d = '';
+        values.forEach((v,i)=>{
+          const x = Math.round(i * step);
+          const y = Math.round(h - ((v - min)/span) * h);
+          d += (i===0?`M ${x} ${y}`:` L ${x} ${y}`);
+        });
+        svg.innerHTML = `<path d="${d}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+      });
+    }
+
+    // attach project click -> open modal; buttons inside should not propagate
+    function attachProjectHandlers(){
+      document.querySelectorAll('.project').forEach(card=>{
+        const key = card.dataset.key;
+        if (!key) return;
+        card.addEventListener('click', (e)=>{
+          // ignore clicks if they originated from a control
+          if (e.target.closest('.btn') || e.target.closest('button') || e.target.closest('a')) return;
+          openImpactDetail(key);
+        });
+        // keyboard accessibility
+        card.addEventListener('keydown', (e)=>{ if (e.key==='Enter') { openImpactDetail(card.dataset.key); } });
+        // prevent buttons from opening modal via propagation
+        card.querySelectorAll('.btn').forEach(b=> b.addEventListener('click', (ev)=> ev.stopPropagation()));
+      });
+    }
+
+    // run sparklines and attach handlers on DOM ready
+    document.addEventListener('DOMContentLoaded', () => { 
+      renderSparklines(); 
+      attachProjectHandlers(); 
+      renderProficiencyBars();
+      wireSkillFilters();
+      // teaching timeline keyboard handlers
+      document.querySelectorAll('#teachingTimeline .timeline-item').forEach(item=>{
+        item.setAttribute('aria-expanded','false');
+        item.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExperienceDetail(item.id); } });
+  // click on header h4 toggles detail
+  const h4 = item.querySelector('.timeline-content h4');
+  if (h4) h4.addEventListener('click', (ev)=>{ ev.stopPropagation(); toggleExperienceDetail(item.id); });
+      });
+    });
+
+    function toggleExperienceDetail(id){
+      const el = document.getElementById(id);
+      if (!el) return;
+      const expanded = el.getAttribute('aria-expanded') === 'true';
+      el.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      // smooth scroll into view when expanded
+      if (!expanded) setTimeout(()=> el.scrollIntoView({behavior:'smooth', block:'center'}), 80);
+    }
+
+    // populate sample CSV download as a data URI to avoid external files
+    (function(){
+      const csv = 'clinic,date,prescriptions\nCentral,2026-03-01,120\nCentral,2026-03-08,140\nNorth,2026-03-01,95\nSouth,2026-03-01,80\nEast,2026-03-01,60\n';
+      const a = document.getElementById('downloadSampleCsv');
+          if (a){
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        a.href = url;
+        // revoke on click after a short delay
+        a.addEventListener('click', (e)=>{ 
+          // downloads no longer tracked since Excel examples were removed
+          setTimeout(()=> URL.revokeObjectURL(url), 1500);
+        });
+      }
+    })();
+
+    // Download tracking removed with Learning Hub; stubs left to avoid errors
+    function trackExcelDownload(){ console.info('trackExcelDownload called but Learning Hub removed.'); return; }
+    function renderDownloadChart(){ console.info('renderDownloadChart called but Learning Hub removed.'); return; }
+    try{ /* skip initial render for download chart */ } catch(e){}
+
+    /* SKILLS: filtering, proficiency bars, expand details */
+    function normalize(s){ return (s||'').toString().toLowerCase(); }
+
+    function filterSkills(q){
+      const query = normalize(q);
+      document.querySelectorAll('.skills-grid .skill-card').forEach(card=>{
+        // skip the full-row filter controls which has no id
+        if (!card.id) return;
+        const tags = normalize(card.dataset.tags || '');
+        const title = normalize(card.querySelector('h3')?.innerText || '');
+        const body = normalize(card.querySelector('p')?.innerText || '');
+        const match = !query || title.includes(query) || body.includes(query) || tags.includes(query);
+        card.style.display = match ? '' : 'none';
+      });
+    }
+
+    function wireSkillFilters(){
+      const input = document.getElementById('skillSearch');
+      if (input){
+        input.addEventListener('input', (e)=> filterSkills(e.target.value));
+        input.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') { input.value=''; filterSkills(''); } });
+      }
+      document.querySelectorAll('.skill-filter .chip').forEach(chip=>{
+        chip.addEventListener('click', ()=>{
+          const f = chip.dataset.filter || chip.innerText;
+          if (input) input.value = f;
+          filterSkills(f);
+        });
+      });
+    }
+
+    function toggleSkill(id){
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('expanded');
+      // smooth scroll into view for small screens
+      if (el.classList.contains('expanded')) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function renderProficiencyBars(){
+      document.querySelectorAll('.skill-card').forEach(card=>{
+        const prof = parseInt(card.dataset.proficiency || '0',10);
+        const bar = card.querySelector('.proficiency-bar');
+        if (bar){
+          // clamp 0-100
+          const val = Math.max(0, Math.min(100, isNaN(prof)?0:prof));
+          // small timeout to animate after paint
+          setTimeout(()=>{ bar.style.width = val + '%'; }, 80);
+        }
+      });
+    }
   </script>
+
 </body>
 </html>
