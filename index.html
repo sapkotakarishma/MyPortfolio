@@ -213,7 +213,7 @@
     .about-cards { margin-top:20px; display:flex; gap:12px; flex-wrap:wrap; }
     .about-card { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border-radius:10px; padding:10px 12px; border:1px solid var(--border-card); display:flex; gap:10px; align-items:center; min-width:220px; }
     .about-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px; background: rgba(255,255,255,0.02); }
-    .about-title { font-weight:700; font-size:13px; color:var(--heading-color); }
+  .about-title { font-weight:700; font-size:13px; color:var(--text-main); }
     .about-desc { font-size:13px; color:var(--text-muted); }
 
     @media (max-width: 900px) {
@@ -227,12 +227,12 @@
       font-weight: 700;
       letter-spacing: 0.02em;
   margin-bottom: 6px;
-  color: var(--heading-color);
+  color: var(--text-main);
     }
 
     .hero-subtitle {
       font-size: 16px;
-      color: var(--heading-color);
+      color: var(--text-main);
       font-weight: 600;
       margin-bottom: 12px;
     }
@@ -385,11 +385,11 @@
 
     .project:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(2,6,23,0.55); }
 
-  .project h3 { font-size: 16px; margin-bottom: 8px; color: var(--heading-color); }
+  .project h3 { font-size: 16px; margin-bottom: 8px; color: var(--text-main); }
     .project p { color: var(--text-muted); font-size: 14px; }
 
     .tags { margin-top: 10px; }
-  .tag { display:inline-block; background: rgba(15,23,42,0.6); padding:6px 10px; margin:4px; border-radius:999px; font-size:12px; color:var(--tag-text); border:1px solid rgba(148,163,184,0.12); }
+  .tag { display:inline-block; background: rgba(15,23,42,0.6); padding:6px 10px; margin:4px; border-radius:999px; font-size:12px; color:var(--text-main); border:1px solid rgba(148,163,184,0.12); }
 
     /* DASHBOARD (home) */
     .dashboard-grid {
@@ -446,7 +446,7 @@
   /* generic heading overrides so inline styles aren't required */
   .skill-card h3,
   .learn-section h3,
-  .learn-section h4 { color: var(--heading-color); }
+  .learn-section h4 { color: var(--text-main); }
 
     /* Mobile: hide links and show toggle */
     @media (max-width: 768px) {
@@ -1348,21 +1348,28 @@ stats.ttest_ind(group1, group2)
       }
       // choose accent-text to contrast with the theme text color (t.text)
       try {
-        const rgb = hexToRgb(t.text || '#111827');
-        const lum = luminance(rgb[0], rgb[1], rgb[2]);
+        const rgbText = hexToRgb(t.text || '#111827');
+        const lumText = luminance(rgbText[0], rgbText[1], rgbText[2]);
         // if theme text is light (lum > 0.5) use dark accent-text, else use light
-        const contrast = lum > 0.5 ? '#111827' : '#f9fafb';
+        const contrast = lumText > 0.5 ? '#111827' : '#f9fafb';
         root.style.setProperty("--accent-text", contrast);
-  // heading color should contrast with the background (use text color normally)
-  // pick a heading color that is one step darker/lighter than main text for emphasis
-  const headingContrast = lum > 0.5 ? '#0f172a' : '#f3f4f6';
-  root.style.setProperty("--heading-color", headingContrast);
-  // tag text should be clearly readable; prefer text-main on light themes, accent-soft on dark
-  const tagTxt = lum > 0.5 ? '#0f172a' : t.accentSoft || '#60a5fa';
-  root.style.setProperty("--tag-text", tagTxt);
-  // dashboard title color (muted) should use theme muted or computed muted color
-  const dashTitle = t.muted || (lum > 0.5 ? '#6b7280' : '#cbd5f5');
-  root.style.setProperty("--dash-title-color", dashTitle);
+
+        // compute heading color based on the theme background (t.main) so headings
+        // contrast the page background rather than the text color. This avoids
+        // near-white headings on light themes.
+        const rgbBg = hexToRgb(t.main || '#020617');
+        const lumBg = luminance(rgbBg[0], rgbBg[1], rgbBg[2]);
+        const headingContrast = lumBg > 0.5 ? '#0f172a' : '#f3f4f6';
+        root.style.setProperty("--heading-color", headingContrast);
+
+        // tag text should be clearly readable; prefer dark text on light backgrounds,
+        // otherwise use accent-soft on darker backgrounds
+        const tagTxt = lumBg > 0.5 ? '#0f172a' : (t.accentSoft || '#60a5fa');
+        root.style.setProperty("--tag-text", tagTxt);
+
+        // dashboard title color (muted) should use theme muted or computed muted color
+        const dashTitle = t.muted || (lumBg > 0.5 ? '#6b7280' : '#cbd5f5');
+        root.style.setProperty("--dash-title-color", dashTitle);
       } catch (e) {
         root.style.setProperty("--accent-text", t.accentText);
       }
