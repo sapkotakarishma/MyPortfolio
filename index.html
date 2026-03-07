@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,7 +8,11 @@
 
 <title>Karishma Sapkota | Data Scientist</title>
 
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 <style>
+
+/* GLOBAL */
 
 *{
 box-sizing:border-box;
@@ -17,96 +22,61 @@ padding:0;
 
 body{
 
-font-family:Arial, Helvetica, sans-serif;
-color:#0f172a;
+font-family:Inter,system-ui,Arial;
 background:#0f172a;
+color:#e5e7eb;
+
+line-height:1.6;
 
 }
 
-/* ---------- PROFESSIONAL ANALYTICS BACKGROUND ---------- */
+/* HERO */
 
-.page-bg{
+.hero{
 
-min-height:100vh;
+padding:120px 20px 80px 20px;
+text-align:center;
 
 background:
-linear-gradient(135deg,#0f172a,#1e293b),
-radial-gradient(circle at 20% 30%,rgba(59,130,246,0.15),transparent 40%),
-radial-gradient(circle at 80% 70%,rgba(99,102,241,0.15),transparent 40%);
-
-background-blend-mode:screen;
+radial-gradient(circle at 20% 30%,rgba(59,130,246,.25),transparent 40%),
+radial-gradient(circle at 80% 70%,rgba(139,92,246,.25),transparent 40%),
+linear-gradient(135deg,#020617,#0f172a);
 
 }
 
-/* ---------- HEADER ---------- */
+.hero h1{
 
-header{
-
-text-align:center;
-padding:70px 20px 50px 20px;
-color:white;
-
-}
-
-header h1{
-
-font-size:2.8rem;
+font-size:3rem;
 margin-bottom:10px;
 
 }
 
-.header-title{
+.subtitle{
 
 font-size:1.2rem;
-opacity:0.9;
+opacity:.85;
 
 }
 
-.header-subtitle{
+.tagline{
 
-margin-top:10px;
+margin-top:14px;
 font-size:1rem;
-opacity:0.85;
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
+opacity:.9;
 
 }
 
-.header-tagline{
-
-margin-top:15px;
-font-size:0.95rem;
-opacity:0.9;
-
-}
-
-/* ---------- CHIPS ---------- */
-
-.header-chips{
-
-margin-top:20px;
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:10px;
-
-}
-
-.chip{
-
-background:rgba(255,255,255,0.1);
-border:1px solid rgba(255,255,255,0.2);
-padding:6px 14px;
-border-radius:999px;
-font-size:0.8rem;
-
-}
-
-/* ---------- NAV ---------- */
+/* NAV */
 
 nav{
 
 background:#020617;
-padding:14px;
+padding:16px;
 text-align:center;
+
 position:sticky;
 top:0;
 z-index:100;
@@ -115,199 +85,280 @@ z-index:100;
 
 nav a{
 
-color:#e5e7eb;
-margin:0 18px;
-font-weight:bold;
-text-decoration:none;
+margin:0 16px;
 cursor:pointer;
+font-weight:600;
+color:#cbd5f5;
+text-decoration:none;
 
 }
 
 nav a:hover{
 
-color:#93c5fd;
+color:white;
 
 }
 
-/* ---------- CONTENT ---------- */
+/* CONTAINER */
 
-.content{
+.container{
 
-max-width:1000px;
-margin:40px auto;
-background:#f8fafc;
-padding:40px;
-border-radius:14px;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.35);
+max-width:1100px;
+margin:auto;
+padding:60px 20px;
 
 }
 
-/* ---------- SECTIONS ---------- */
-
-section{
-
-margin-bottom:40px;
-
-}
+/* HEADINGS */
 
 h2{
 
-margin-bottom:16px;
+margin-bottom:25px;
+font-size:1.9rem;
 border-bottom:3px solid #6366f1;
+display:inline-block;
 padding-bottom:6px;
 
 }
 
-/* ---------- PROJECT CARDS ---------- */
+/* METRICS */
 
-.project-card{
+.metrics{
 
-background:white;
-padding:22px;
-margin:18px 0;
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+margin-top:40px;
+
+}
+
+.metric{
+
+flex:1;
+min-width:180px;
+
+background:#1e293b;
+
+padding:20px;
 
 border-radius:12px;
 
-border-left:6px solid #3b82f6;
-
-box-shadow:0 3px 10px rgba(0,0,0,0.08);
-
-transition:all 0.2s;
+text-align:center;
 
 }
 
-.project-card:hover{
+.metric-number{
 
-transform:translateY(-5px);
+font-size:2rem;
+font-weight:700;
 
 }
 
-/* ---------- SKILLS ---------- */
+.metric-label{
 
-.skill-card{
+font-size:.8rem;
+opacity:.7;
 
-background:white;
-padding:16px;
-margin:12px 0;
+}
+
+/* PROJECT GRID */
+
+.projects{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+
+}
+
+.project{
+
+background:#1e293b;
+padding:24px;
+
+border-radius:12px;
+
+transition:all .25s;
+
+}
+
+.project:hover{
+
+transform:translateY(-6px);
+box-shadow:0 12px 25px rgba(0,0,0,.4);
+
+}
+
+.project h3{
+
+margin-bottom:10px;
+
+}
+
+.tags{
+
+margin-top:12px;
+
+}
+
+.tag{
+
+display:inline-block;
+
+background:#334155;
+
+padding:4px 10px;
+
+border-radius:8px;
+
+font-size:.75rem;
+
+margin:4px;
+
+}
+
+/* SKILLS GRID */
+
+.skills{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+.skill{
+
+background:#1e293b;
+padding:20px;
 border-radius:10px;
 
-border-left:5px solid #6366f1;
-
 }
 
-/* ---------- DASHBOARD ---------- */
+/* DASHBOARD */
 
 .dashboard{
 
 background:#020617;
-color:white;
-
-padding:20px;
-border-radius:14px;
+padding:30px;
+border-radius:12px;
 
 }
 
-.kpi-row{
+.kpis{
 
 display:flex;
-gap:10px;
 flex-wrap:wrap;
-margin-bottom:15px;
+gap:20px;
+margin-bottom:20px;
 
 }
 
 .kpi{
 
 flex:1;
-min-width:130px;
+min-width:160px;
 
-background:#0b1120;
+background:#111827;
 
-padding:12px;
+padding:15px;
 border-radius:10px;
-
-}
-
-.kpi-label{
-
-font-size:0.75rem;
-opacity:0.8;
 
 }
 
 .kpi-value{
 
-font-size:1.2rem;
+font-size:1.4rem;
 font-weight:bold;
+
+}
+
+.kpi-label{
+
+font-size:.8rem;
+opacity:.8;
 
 }
 
 #chart{
 
-height:300px;
+height:320px;
 
 }
 
-/* ---------- FOOTER ---------- */
+/* CONTACT */
 
-.footer{
+.contact{
 
-text-align:center;
-color:#cbd5f5;
-padding:20px;
+font-size:1rem;
 
 }
 
-.footer a{
+.contact a{
 
 color:#93c5fd;
-text-decoration:none;
 
 }
 
-.footer a:hover{
+/* FOOTER */
 
-text-decoration:underline;
+footer{
+
+text-align:center;
+padding:30px;
+opacity:.7;
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
-<div class="page-bg">
+<!-- HERO -->
 
-<header>
+<section class="hero">
 
 <h1>Karishma Sapkota</h1>
 
-<div class="header-title">
-Applied Data Scientist | Computational Analytics Researcher
+<div class="subtitle">
+Applied Data Scientist • Computational Analytics
 </div>
 
-<div class="header-subtitle">
-Machine Learning • Data Systems • Decision Analytics • Interpretable AI
+<div class="tagline">
+Building intelligent analytics systems that translate complex data into
+interpretable insights across research, industry, and public systems.
 </div>
 
-<div class="header-tagline">
-Building intelligent data systems that transform complex datasets into
-reliable insights across research, industry, and public systems.
+<div class="metrics">
+
+<div class="metric">
+<div class="metric-number">10+</div>
+<div class="metric-label">Data Science Projects</div>
 </div>
 
-<div class="header-chips">
+<div class="metric">
+<div class="metric-number">5+</div>
+<div class="metric-label">Domains Analyzed</div>
+</div>
 
-<div class="chip">Machine Learning</div>
-<div class="chip">Data Engineering</div>
-<div class="chip">Analytics</div>
-<div class="chip">NLP</div>
-<div class="chip">Decision Systems</div>
+<div class="metric">
+<div class="metric-number">ML</div>
+<div class="metric-label">Modeling & AI</div>
+</div>
+
+<div class="metric">
+<div class="metric-number">NLP</div>
+<div class="metric-label">Text Analytics</div>
+</div>
 
 </div>
 
-</header>
+</section>
 
 
 <nav>
@@ -315,13 +366,13 @@ reliable insights across research, industry, and public systems.
 <a onclick="showSection('about')">About</a>
 <a onclick="showSection('projects')">Projects</a>
 <a onclick="showSection('skills')">Skills</a>
-<a onclick="showSection('dashboard')">Analytics</a>
+<a onclick="showSection('analytics')">Portfolio Analytics</a>
 <a onclick="showSection('contact')">Contact</a>
 
 </nav>
 
 
-<div class="content">
+<div class="container">
 
 <!-- ABOUT -->
 
@@ -331,7 +382,7 @@ reliable insights across research, industry, and public systems.
 
 <p>
 
-I am an applied data scientist with interdisciplinary training spanning clinical practice, public health systems, and computational analytics. My work focuses on building data-driven solutions that translate complex datasets into interpretable insights for real-world decision making.
+I am an applied data scientist with interdisciplinary training spanning clinical practice, public health systems, and computational analytics. My work focuses on building data-driven solutions that transform complex datasets into interpretable insights for real-world decision making.
 
 </p>
 
@@ -339,15 +390,7 @@ I am an applied data scientist with interdisciplinary training spanning clinical
 
 <p>
 
-Across research and applied environments, I have worked with surveillance data, operational systems, behavioral datasets, and unstructured text. My projects combine statistical modeling, machine learning, and data engineering to support decision-making in both research and industry contexts.
-
-</p>
-
-<br>
-
-<p>
-
-I am particularly interested in the design of intelligent data systems that bridge machine learning, human interpretation, and organizational decision processes across diverse domains.
+Across research and industry contexts, I have worked with structured and unstructured datasets including health surveillance systems, operational data, financial transactions, and social media text. My projects integrate statistical modeling, machine learning, and data engineering to support analytics-driven decision making.
 
 </p>
 
@@ -356,67 +399,94 @@ I am particularly interested in the design of intelligent data systems that brid
 
 <!-- PROJECTS -->
 
-<section id="projects" style="display:none;">
+<section id="projects" style="display:none">
 
 <h2>Selected Projects</h2>
 
+<div class="projects">
 
-<div class="project-card">
+<div class="project">
 
-<h3>Population Disease Surveillance Analytics</h3>
+<h3>Disease Surveillance Analytics</h3>
 
 <p>
 
-Developed analytical models supporting elimination programs for neglected tropical diseases including Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria. The work integrated surveillance datasets and generated municipality-level risk indicators used for program planning and intervention prioritization.
+Built analytics models supporting elimination programs for Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria using integrated surveillance datasets.
 
 </p>
 
-<p><strong>Methods:</strong> statistical modeling, epidemiological indicators, program monitoring analytics.</p>
+<div class="tags">
+
+<span class="tag">Public Health</span>
+<span class="tag">Data Analysis</span>
+<span class="tag">Program Analytics</span>
+
+</div>
 
 </div>
 
 
-<div class="project-card">
+<div class="project">
 
-<h3>Operational Analytics for Pharmacy Systems</h3>
+<h3>Pharmacy Operations Dashboard</h3>
 
 <p>
 
-Designed interactive analytics dashboards integrating operational pharmacy datasets including verification workload, medication safety events, inventory patterns, and revenue metrics to support operational decision making and quality improvement.
+Developed operational analytics dashboards integrating verification workload, safety events, and inventory metrics.
 
 </p>
 
-<p><strong>Tools:</strong> Power BI, SQL pipelines, data modeling.</p>
+<div class="tags">
+
+<span class="tag">Power BI</span>
+<span class="tag">SQL</span>
+<span class="tag">Operational Analytics</span>
+
+</div>
 
 </div>
 
 
-<div class="project-card">
+<div class="project">
 
-<h3>Emotion Detection in Social Media Data</h3>
+<h3>Emotion Classification in Social Media</h3>
 
 <p>
 
-Evaluated transformer-based NLP models and lexicon approaches for emotion classification in social media datasets, exploring trade-offs between interpretability and predictive performance in behavioral analytics.
+Compared transformer models and lexicon approaches for emotion detection in large-scale Reddit datasets.
 
 </p>
 
-<p><strong>Methods:</strong> NLP pipelines, DistilRoBERTa, sentiment and emotion analysis.</p>
+<div class="tags">
+
+<span class="tag">NLP</span>
+<span class="tag">DistilRoBERTa</span>
+<span class="tag">Text Analytics</span>
+
+</div>
 
 </div>
 
 
-<div class="project-card">
+<div class="project">
 
-<h3>Financial Fraud Detection Modeling</h3>
+<h3>Credit Card Fraud Detection</h3>
 
 <p>
 
-Implemented predictive models for fraud detection in highly imbalanced transactional datasets. The analysis focused on rare event detection and model evaluation using ROC/AUC and sensitivity metrics.
+Developed predictive models for detecting rare fraudulent transactions using imbalanced datasets.
 
 </p>
 
-<p><strong>Methods:</strong> logistic regression, anomaly detection, model evaluation.</p>
+<div class="tags">
+
+<span class="tag">Machine Learning</span>
+<span class="tag">Logistic Regression</span>
+<span class="tag">Fraud Analytics</span>
+
+</div>
+
+</div>
 
 </div>
 
@@ -425,66 +495,63 @@ Implemented predictive models for fraud detection in highly imbalanced transacti
 
 <!-- SKILLS -->
 
-<section id="skills" style="display:none;">
+<section id="skills" style="display:none">
 
-<h2>Core Skills</h2>
+<h2>Technical Skills</h2>
 
-<div class="skill-card">
+<div class="skills">
+
+<div class="skill">
 
 <h3>Machine Learning</h3>
-
 <p>Predictive modeling, classification, anomaly detection, model evaluation.</p>
 
 </div>
 
-
-<div class="skill-card">
+<div class="skill">
 
 <h3>Natural Language Processing</h3>
-
-<p>Transformer models, text analytics, sentiment and emotion detection.</p>
+<p>Transformer models, sentiment analysis, text classification.</p>
 
 </div>
 
-
-<div class="skill-card">
+<div class="skill">
 
 <h3>Data Engineering</h3>
-
 <p>SQL pipelines, ETL workflows, data integration.</p>
 
 </div>
 
-
-<div class="skill-card">
+<div class="skill">
 
 <h3>Analytics & Visualization</h3>
+<p>Power BI, Tableau, Python visualization.</p>
 
-<p>Power BI, Tableau, Python visualization, analytics dashboards.</p>
+</div>
 
 </div>
 
 </section>
 
 
-<!-- DASHBOARD -->
+<!-- ANALYTICS DASHBOARD -->
 
-<section id="dashboard" style="display:none;">
+<section id="analytics" style="display:none">
 
 <h2>Portfolio Analytics Dashboard</h2>
 
 <div class="dashboard">
 
-<div class="kpi-row">
+<div class="kpis">
 
 <div class="kpi">
-<div class="kpi-label">Visitors Today</div>
 <div class="kpi-value" id="today"></div>
+<div class="kpi-label">Visitors Today</div>
 </div>
 
 <div class="kpi">
-<div class="kpi-label">Total Visitors</div>
 <div class="kpi-value" id="total"></div>
+<div class="kpi-label">Total Visitors</div>
 </div>
 
 </div>
@@ -498,9 +565,11 @@ Implemented predictive models for fraud detection in highly imbalanced transacti
 
 <!-- CONTACT -->
 
-<section id="contact" style="display:none;">
+<section id="contact" style="display:none">
 
 <h2>Contact</h2>
+
+<div class="contact">
 
 <p>Email: karishma.sap@gmail.com</p>
 
@@ -511,33 +580,31 @@ LinkedIn Profile
 </a>
 </p>
 
+</div>
+
 </section>
 
 </div>
 
 
-<div class="footer">
+<footer>
 
 © 2026 Karishma Sapkota
 
-</div>
+</footer>
 
-</div>
-
-
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 <script>
 
-/* ---------- NAVIGATION ---------- */
+/* NAVIGATION */
 
 function showSection(id){
 
-let sections=["about","projects","skills","dashboard","contact"]
+let sections=["about","projects","skills","analytics","contact"]
 
-sections.forEach(sec=>{
+sections.forEach(s=>{
 
-document.getElementById(sec).style.display="none"
+document.getElementById(s).style.display="none"
 
 })
 
@@ -546,45 +613,42 @@ document.getElementById(id).style.display="block"
 }
 
 
-/* ---------- VISITOR COUNTER ---------- */
+/* VISITOR COUNTER */
 
-function visitorStats(){
+function visitors(){
 
-let total=localStorage.getItem("totalVisits")
-let today=localStorage.getItem("todayVisits")
-let date=localStorage.getItem("visitDate")
+let total=localStorage.getItem("total")
+let today=localStorage.getItem("today")
+let date=localStorage.getItem("date")
 
-let currentDate=new Date().toDateString()
+let now=new Date().toDateString()
 
-if(!total){
-total=0
+if(!total){total=0;today=0}
+
+if(date!==now){
 today=0
-}
-
-if(date!==currentDate){
-today=0
-localStorage.setItem("visitDate",currentDate)
+localStorage.setItem("date",now)
 }
 
 total++
 today++
 
-localStorage.setItem("totalVisits",total)
-localStorage.setItem("todayVisits",today)
+localStorage.setItem("total",total)
+localStorage.setItem("today",today)
 
 document.getElementById("today").innerText=today
 document.getElementById("total").innerText=total
 
 }
 
+visitors()
 
-/* ---------- DASHBOARD CHART ---------- */
 
-function loadChart(){
+/* CHART */
 
-let visits=[2,5,7,9,12,15,18,22]
+let visits=[3,6,9,12,18,21,25]
 
-let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Today"]
+let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
 
 Plotly.newPlot("chart",[{
 
@@ -597,17 +661,13 @@ mode:"lines+markers"
 
 {
 
-title:"Portfolio Visits Trend",
+title:"Weekly Portfolio Visits",
+
 paper_bgcolor:"#020617",
 plot_bgcolor:"#020617",
 font:{color:"#e5e7eb"}
 
 })
-
-}
-
-visitorStats()
-loadChart()
 
 </script>
 
