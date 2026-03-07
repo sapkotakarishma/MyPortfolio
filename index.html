@@ -43,7 +43,7 @@
             width: 32%;
             min-height: 100vh;
             border-left: 1px solid rgba(0,0,0,0.08);
-            background: rgba(15, 23, 42, 0.96);
+            background: rgba(15, 23, 42, 0.97);
             color: #e5e7eb;
             box-shadow: -4px 0 12px rgba(0,0,0,0.2);
             position: sticky;
@@ -238,6 +238,52 @@
             font-size: 0.95rem;
         }
 
+        /* ---------- SHARE SECTION ---------- */
+        .share-section {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px 40px 20px;
+        }
+
+        .share-card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .share-card h3 {
+            margin-top: 0;
+            color: #1e3a8a;
+        }
+
+        #qrcode {
+            margin: 16px auto;
+            width: 150px;
+            height: 150px;
+        }
+
+        .share-text {
+            font-size: 0.9rem;
+            color: #4b5563;
+            margin-bottom: 12px;
+        }
+
+        .copy-btn {
+            background: #1d4ed8;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #1e40af;
+        }
+
         /* ---------- SIDE PANEL (AGENTIC DASHBOARD) ---------- */
         .side-title {
             font-size: 1.1rem;
@@ -259,7 +305,7 @@
             font-family: "Courier New", monospace;
             font-size: 0.78rem;
             color: #e5e7eb;
-            height: 120px;
+            height: 140px;
             overflow-y: auto;
             border: 1px solid #111827;
             margin-bottom: 14px;
@@ -272,13 +318,13 @@
         #dashboard {
             background: #020617;
             border-radius: 10px;
-            padding: 6px;
+            padding: 8px;
             border: 1px solid #111827;
         }
 
         #dashboard-chart {
             width: 100%;
-            height: 260px;
+            height: 280px;
         }
 
         .console-label {
@@ -315,15 +361,17 @@
 <header>
     <canvas id="headerWave"></canvas>
     <h1>Karishma Sapkota</h1>
-    <div class="header-title">Population Health & Applied Data Scientist</div>
-    <div class="header-subtitle">(with experience in clinical, operational, and public health analytics)</div>
+    <div class="header-title">Applied Data Scientist</div>
+    <div class="header-subtitle">
+        (specializing in public health, clinical, and operational analytics; ML, NLP &amp; health systems data)
+    </div>
     <div class="header-tagline">
         Designing explainable, operational, and equity‑focused analytics across public health, clinical systems, and generative AI.
     </div>
     <div class="header-chips">
-        <div class="chip">Population Health Surveillance</div>
-        <div class="chip">Clinical & Operational Analytics</div>
-        <div class="chip">Agentic & Generative AI Systems</div>
+        <div class="chip">Public Health &amp; Clinical Analytics</div>
+        <div class="chip">Machine Learning &amp; NLP</div>
+        <div class="chip">Agentic &amp; Generative AI Systems</div>
     </div>
 </header>
 
@@ -331,6 +379,7 @@
     <a onclick="scrollToSection('about')">About</a>
     <a onclick="scrollToSection('projects')">Projects</a>
     <a onclick="scrollToSection('skills')">Skills</a>
+    <a onclick="scrollToSection('share')">Share</a>
     <a onclick="scrollToSection('contact')">Contact</a>
 </nav>
 
@@ -340,38 +389,37 @@
         <section id="about">
             <h2>About Me</h2>
             <p>
-                I am a population health and applied data scientist who bridges clinical practice, public health systems, and advanced
-                analytics. My work spans neglected tropical disease elimination, malaria surveillance, basic health service coverage,
-                pharmacy operations, and digital behavioral health. I design interpretable models, interactive dashboards, and mixed‑methods
-                research frameworks that translate complex data into actionable insights for decision‑makers.
+                I am an applied data scientist who bridges clinical practice, public health systems, and advanced analytics.
+                My work spans neglected tropical disease elimination, malaria surveillance, basic health service coverage,
+                pharmacy operations, and digital behavioral health. I design interpretable models, interactive dashboards,
+                and mixed‑methods research frameworks that translate complex data into decisions.
             </p>
             <p>
-                My experience includes provincial‑level NTD analytics, municipal health profiling, medication safety surveillance,
-                predictive modeling (heart disease, fraud detection), and NLP for sentiment and emotion classification. I am particularly
-                interested in explainable and agentic AI systems that support safe, equitable, and context‑aware decision‑making in
-                health and operational settings.
+                I have led provincial‑level NTD analytics, municipal health profiling, medication safety surveillance,
+                predictive modeling (heart disease, fraud detection), and NLP for sentiment and emotion classification.
+                I am particularly interested in explainable and agentic AI systems that support safe, equitable, and
+                context‑aware decision‑making in health and operational settings.
             </p>
         </section>
 
         <section id="projects">
-            <h2>Selected Projects & Analytics Work</h2>
+            <h2>Selected Projects &amp; Analytics Work</h2>
 
             <div class="project-card c1">
-                <h3>📊 NTD & Malaria Surveillance Analytics</h3>
+                <h3>📊 NTD &amp; Malaria Surveillance Analytics</h3>
                 <p>
-                    Designed and implemented provincial‑level analytics for Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria
-                    elimination programs. Consolidated fragmented municipal datasets, monitored coverage and completion rates, and
-                    identified high‑risk areas to guide targeted interventions and resource allocation.
+                    Led analytics for Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria elimination programs at provincial level.
+                    Consolidated municipal datasets, monitored coverage and completion rates, and identified high‑risk areas to guide
+                    targeted interventions and resource allocation.
                 </p>
             </div>
 
             <div class="project-card c2">
-                <h3>💊 Pharmacy Operations & Medication Safety Dashboards</h3>
+                <h3>💊 Pharmacy Operations &amp; Medication Safety Dashboards</h3>
                 <p>
-                    Built enterprise‑level Power BI dashboards for pharmacy operations, including verification workload, order volume,
-                    inventory levels, revenue trends, and medication safety interventions. Developed a centralized error monitoring
-                    system integrating Microsoft Forms and Power BI to track near‑misses and error types, supporting continuous quality
-                    improvement.
+                    Built Power BI dashboards for pharmacy operations, including verification workload, order volume, inventory levels,
+                    revenue trends, and medication safety interventions. Developed a centralized error monitoring system integrating
+                    Microsoft Forms and Power BI to track near‑misses and error types, supporting continuous quality improvement.
                 </p>
             </div>
 
@@ -388,13 +436,13 @@
                 <h3>💳 Credit Card Fraud Detection</h3>
                 <p>
                     Developed a logistic regression model on a highly imbalanced Kaggle dataset to distinguish fraudulent from
-                    non‑fraudulent transactions. Evaluated performance using ROC and AUC, achieving high discrimination while
+                    non‑fraudulent transactions. Evaluated performance using ROC and AUC, achieving strong discrimination while
                     maintaining sensitivity to rare events.
                 </p>
             </div>
 
             <div class="project-card c5">
-                <h3>📈 Interactive Data Visualization & Network Analysis</h3>
+                <h3>📈 Interactive Visualization &amp; Network Analysis</h3>
                 <p>
                     Built interactive visualizations and network analyses, including Facebook network community detection (Louvain,
                     Girvan‑Newman) and sentiment analysis on Yelp, IMDB, and Amazon reviews using SVM, Naive Bayes, and Logistic
@@ -411,68 +459,56 @@
         <section id="skills">
             <h2>Skills</h2>
 
-            <div class="skill-card" onclick="updateDashboard('programming')">
-                <h3>Programming Languages</h3>
-                <p>Python, R, JavaScript</p>
+            <div class="skill-card" onclick="updateSkill('ml')">
+                <h3>Machine Learning &amp; AI</h3>
+                <p>Classification, prediction, model evaluation, and explainable analytics across health and operational data.</p>
             </div>
 
-            <div class="skill-card" onclick="updateDashboard('ml')">
-                <h3>Machine Learning & AI</h3>
-                <p>
-                    Scikit‑learn, TensorFlow, PyTorch, Keras, XGBoost, Random Forest, Linear & Logistic Regression,
-                    Decision Tree classifiers, SVM, CNN, RNN, Computer Vision
-                </p>
-            </div>
-
-            <div class="skill-card" onclick="updateDashboard('stats')">
-                <h3>Statistical Modeling</h3>
-                <p>
-                    SPSS, Hypothesis testing, Discriminant Analysis, Exploratory Data Analysis (EDA), PCA, Correlational & Covariance
-                    Analysis, Time Series Analysis, Regression (Linear, Logistic, Multinomial)
-                </p>
-            </div>
-
-            <div class="skill-card" onclick="updateDashboard('health')">
-                <h3>Health Informatics & Research Methods</h3>
-                <p>
-                    Survey design & validation, mixed‑methods data collection (key informant interviews, focus groups, structured &
-                    unstructured questionnaires, group interviews, observational studies), health systems research, program monitoring &
-                    evaluation, data‑driven policy analysis
-                </p>
-            </div>
-
-            <div class="skill-card" onclick="updateDashboard('data')">
-                <h3>Data Collection, Manipulation & Analysis</h3>
-                <p>
-                    Web scraping (Scrapy, BeautifulSoup, Requests), Pandas, NumPy, SciPy, Excel, SAS, ETL processes
-                </p>
-            </div>
-
-            <div class="skill-card" onclick="updateDashboard('viz')">
-                <h3>Data Visualization</h3>
-                <p>
-                    Power BI, Tableau, JavaScript, Matplotlib, Seaborn, Heatmaps, Plotly, Pandas
-                </p>
-            </div>
-
-            <div class="skill-card" onclick="updateDashboard('bigdata')">
-                <h3>Big Data Analytics</h3>
-                <p>PySpark, PySpark SQL</p>
-            </div>
-
-            <div class="skill-card" onclick="updateDashboard('nlp')">
+            <div class="skill-card" onclick="updateSkill('nlp')">
                 <h3>Natural Language Processing (NLP)</h3>
-                <p>
-                    NLTK, SpaCy, TextBlob, BERT, Word2Vec, Gensim, GloVe, LangChain
-                </p>
+                <p>Emotion classification, sentiment analysis, transformer models, and lexicon‑based approaches.</p>
             </div>
 
-            <div class="skill-card" onclick="updateDashboard('db')">
-                <h3>Database & Data Modeling</h3>
-                <p>
-                    Data modeling (Conceptual & Physical), schema design, querying and manipulating databases,
-                    SQL Server, PostgreSQL, MongoDB (NoSQL)
-                </p>
+            <div class="skill-card" onclick="updateSkill('health')">
+                <h3>Health Informatics &amp; Research Methods</h3>
+                <p>Surveillance, mixed‑methods research, municipal profiling, and policy‑oriented analytics.</p>
+            </div>
+
+            <div class="skill-card" onclick="updateSkill('data_quality')">
+                <h3>Data Quality &amp; Data Management</h3>
+                <p>Handling missingness, multi‑source integration, and real‑world messy datasets.</p>
+            </div>
+
+            <div class="skill-card" onclick="updateSkill('viz')">
+                <h3>Data Visualization &amp; Storytelling</h3>
+                <p>Power BI, Tableau, Python visualization, and interactive narrative dashboards.</p>
+            </div>
+
+            <div class="skill-card" onclick="updateSkill('bigdata')">
+                <h3>Big Data &amp; PySpark</h3>
+                <p>Scaling analytics workflows to larger datasets and batch processing.</p>
+            </div>
+
+            <div class="skill-card" onclick="updateSkill('programming')">
+                <h3>Programming Languages</h3>
+                <p>Python, R, JavaScript for end‑to‑end analytics pipelines and dashboards.</p>
+            </div>
+
+            <div class="skill-card" onclick="updateSkill('db')">
+                <h3>Databases &amp; Data Modeling</h3>
+                <p>SQL Server, PostgreSQL, MongoDB, schema design, and query optimization.</p>
+            </div>
+        </section>
+
+        <section id="share" class="share-section">
+            <h2>Share This Portfolio</h2>
+            <div class="share-card">
+                <h3>Scan or Share</h3>
+                <div id="qrcode"></div>
+                <div class="share-text">
+                    Scan to open this portfolio on your device, or copy the link to share it.
+                </div>
+                <button class="copy-btn" onclick="copyPortfolioLink()">Copy Portfolio Link</button>
             </div>
         </section>
 
@@ -483,8 +519,8 @@
         </section>
 
         <div class="footer">
-            © 2026 Karishma Sapkota · Built as an interactive analytics workspace.<br>
-            <span>Shareable with PhD programs, research labs, public health agencies, and industry data science teams.</span>
+            © 2026 Karishma Sapkota · Applied Data Scientist.<br>
+            <span>Portfolio designed as an interactive analytics workspace.</span>
         </div>
     </div>
 
@@ -492,7 +528,7 @@
     <div class="side-panel">
         <div class="side-title">Interactive Skill Dashboard</div>
         <div class="side-subtitle">
-            Click any skill to see a domain‑specific visualization and a light agentic reasoning trace.
+            Click a skill to see how you actually use it — with a short narrative and, when useful, a visualization.
         </div>
 
         <div class="console-label">Agent Console</div>
@@ -511,6 +547,8 @@
 
 <!-- PLOTLY -->
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!-- QRCode.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
     /* ---------- SMOOTH SCROLL ---------- */
@@ -573,10 +611,11 @@
             y: counts,
             type: "scatter",
             mode: "lines+markers",
-            line: { color: "#38bdf8" }
+            line: { color: "#38bdf8" },
+            marker: { size: 6 }
         }], {
-            title: "Daily Records Processed (Simulated)",
-            margin: { t: 30, r: 10, l: 40, b: 40 },
+            title: { text: "Simulated Daily Records Processed", font: { size: 12 } },
+            margin: { t: 60, r: 10, l: 40, b: 40 },
             paper_bgcolor: "#020617",
             plot_bgcolor: "#020617",
             font: { color: "#e5e7eb", size: 11 },
@@ -585,147 +624,135 @@
         });
     }
 
-    function updateDashboard(skill) {
-        let data, layout, messages;
+    function updateSkill(skill) {
+        let data = null;
+        let layout = null;
+        let messages = [];
+        let showChart = true;
 
-        if (skill === "programming") {
-            const stages = ["Ingest", "Clean", "Model", "Report"];
-            const timePython = [5, 8, 12, 4];
-            const timeR = [6, 7, 10, 5];
+        if (skill === "ml") {
+            // Simulated ROC curve (realistic pattern)
+            const fpr = [0, 0.02, 0.05, 0.1, 0.2, 0.4, 1];
+            const tpr = [0, 0.6, 0.78, 0.86, 0.92, 0.96, 1];
 
-            data = [
-                { x: stages, y: timePython, type: "bar", name: "Python", marker: { color: "#22c55e" } },
-                { x: stages, y: timeR, type: "bar", name: "R", marker: { color: "#3b82f6" } }
-            ];
+            data = [{
+                x: fpr,
+                y: tpr,
+                type: "scatter",
+                mode: "lines",
+                line: { color: "#22c55e", width: 3 },
+                name: "Model ROC"
+            }];
             layout = {
-                barmode: "group",
-                title: "Pipeline Time by Stage (Simulated Python & R Workflow)",
-                margin: { t: 40, r: 10, l: 40, b: 60 }
-            };
-            messages = [
-                "Skill selected: Programming Languages.",
-                "Initializing end‑to‑end analytics pipeline view.",
-                "Comparing simulated execution time across Python and R stages."
-            ];
-
-        } else if (skill === "ml") {
-            const x1 = [], y1 = [], x2 = [], y2 = [];
-            for (let i = 0; i < 40; i++) {
-                x1.push(Math.random() * 1.5 + 1);
-                y1.push(Math.random() * 1.5 + 1);
-                x2.push(Math.random() * 1.5 + 4);
-                y2.push(Math.random() * 1.5 + 4);
-            }
-            data = [
-                { x: x1, y: y1, mode: "markers", type: "scatter", name: "Class A", marker: { color: "#22c55e" } },
-                { x: x2, y: y2, mode: "markers", type: "scatter", name: "Class B", marker: { color: "#ef4444" } }
-            ];
-            layout = {
-                title: "Cluster Separation (Simulated Classification Problem)",
-                margin: { t: 40, r: 10, l: 40, b: 40 }
+                title: { text: "Simulated ROC Curve (Heart Disease / Fraud Models)", font: { size: 12 } },
+                margin: { t: 70, r: 10, l: 40, b: 40 },
+                xaxis: { title: "False Positive Rate", gridcolor: "#1f2937" },
+                yaxis: { title: "True Positive Rate", gridcolor: "#1f2937", range: [0, 1] }
             };
             messages = [
                 "Skill selected: Machine Learning & AI.",
-                "Initializing classification scenario.",
-                "Rendering separable clusters to evoke decision boundaries and model behavior."
+                "You use ML to solve real problems — heart disease prediction, fraud detection, sentiment and emotion classification.",
+                "You balance accuracy with interpretability, moving between classical ML and deep learning when it actually matters.",
+                "Rendering a ROC curve that reflects your typical model performance patterns."
             ];
 
-        } else if (skill === "stats") {
-            const x = Array.from({ length: 40 }, (_, i) => i);
-            const trend = x.map(v => 0.4 * v);
-            const noise = x.map(() => (Math.random() * 8 - 4));
-            const y = trend.map((t, i) => t + noise[i]);
+        } else if (skill === "nlp") {
+            const emotions = ["Joy", "Sadness", "Anger", "Fear", "Anxiety", "Neutral"];
+            const freq = [12, 24, 15, 18, 30, 20]; // realistic: anxiety & sadness higher
 
             data = [{
-                x: x,
-                y: y,
-                mode: "markers",
-                type: "scatter",
-                marker: { color: "#f97316" },
-                name: "Observed"
-            },
-            {
-                x: x,
-                y: trend,
-                mode: "lines",
-                type: "scatter",
-                line: { color: "#e5e7eb", dash: "dash" },
-                name: "Fitted Trend"
+                x: emotions,
+                y: freq,
+                type: "bar",
+                marker: { color: "#f97316" }
             }];
             layout = {
-                title: "Observed vs Fitted Trend (Simulated Regression Scenario)",
-                margin: { t: 40, r: 10, l: 40, b: 40 }
+                title: { text: "Simulated Emotion Distribution (Reddit Corpus)", font: { size: 12 } },
+                margin: { t: 70, r: 10, l: 40, b: 80 },
+                yaxis: { title: "Relative Frequency", gridcolor: "#1f2937" },
+                xaxis: { gridcolor: "#1f2937" }
             };
             messages = [
-                "Skill selected: Statistical Modeling.",
-                "Loading simulated regression context.",
-                "Contrasting observed data with an underlying fitted trend."
+                "Skill selected: Natural Language Processing (NLP).",
+                "Your NLP work goes beyond tokenization — you’ve compared lexicons with transformer models on messy Reddit data.",
+                "You care about how language behaves in real human contexts, not just benchmark scores.",
+                "Rendering a realistic emotion distribution inspired by your Reddit classification work."
             ];
 
         } else if (skill === "health") {
+            const settings = ["Urban", "Rural", "Remote"];
+            const coverage = [88, 72, 58]; // realistic NTD/BHS coverage pattern
+
             data = [{
-                x: ["Urban", "Rural", "Remote"],
-                y: [85, 68, 54],
+                x: settings,
+                y: coverage,
                 type: "bar",
                 marker: { color: ["#22c55e", "#3b82f6", "#f97316"] }
             }];
             layout = {
-                title: "Service Coverage by Setting (Simulated Health System Metric)",
-                margin: { t: 40, r: 10, l: 40, b: 60 },
-                yaxis: { title: "Coverage (%)", range: [0, 100] }
+                title: { text: "Simulated Service Coverage by Setting (NTD/BHS Context)", font: { size: 12 } },
+                margin: { t: 70, r: 10, l: 40, b: 60 },
+                yaxis: { title: "Coverage (%)", range: [0, 100], gridcolor: "#1f2937" },
+                xaxis: { gridcolor: "#1f2937" }
             };
             messages = [
                 "Skill selected: Health Informatics & Research Methods.",
-                "Loading simulated service coverage indicators.",
-                "Highlighting equity gaps across urban, rural, and remote settings."
+                "You’ve worked inside real health systems — NTD elimination, malaria surveillance, BHS coverage, pharmacy operations.",
+                "You know how to turn incomplete, multi‑source data into insights that actually guide decisions.",
+                "Rendering a coverage pattern that echoes your experience with urban, rural, and remote settings."
             ];
 
-        } else if (skill === "data") {
-            const vars = ["Demographics", "Labs", "Visits", "Medications", "Outcomes"];
-            const missing = [5, 12, 8, 15, 6];
+        } else if (skill === "data_quality") {
+            const domains = ["Demographics", "Labs", "Visits", "Medications", "Outcomes"];
+            const missing = [4, 14, 9, 18, 7]; // realistic missingness pattern
 
             data = [{
-                x: vars,
+                x: domains,
                 y: missing,
                 type: "bar",
                 marker: { color: "#a855f7" }
             }];
             layout = {
-                title: "Missingness by Data Domain (Simulated Dataset)",
-                margin: { t: 40, r: 10, l: 40, b: 80 },
-                yaxis: { title: "Missing (%)", range: [0, 30] }
+                title: { text: "Simulated Missingness Across Data Domains", font: { size: 12 } },
+                margin: { t: 70, r: 10, l: 40, b: 80 },
+                yaxis: { title: "Missing (%)", range: [0, 30], gridcolor: "#1f2937" },
+                xaxis: { gridcolor: "#1f2937" }
             };
             messages = [
-                "Skill selected: Data Collection, Manipulation & Analysis.",
-                "Inspecting simulated missingness across key domains.",
-                "Echoing real‑world work with messy health and operational datasets."
+                "Skill selected: Data Quality & Data Management.",
+                "You’ve lived with real‑world data — incomplete, inconsistent, and scattered across systems.",
+                "You think in terms of missingness patterns, data lineage, and what’s safe to infer.",
+                "Rendering a missingness profile that mirrors the kinds of datasets you’ve cleaned and analyzed."
             ];
 
         } else if (skill === "viz") {
             const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-            const views = [120, 180, 160, 190, 210, 140, 130];
+            const views = [120, 190, 175, 210, 230, 150, 140];
 
             data = [{
                 x: days,
                 y: views,
                 type: "scatter",
                 mode: "lines+markers",
-                line: { color: "#38bdf8" }
+                line: { color: "#38bdf8", width: 3 },
+                marker: { size: 6 }
             }];
             layout = {
-                title: "Dashboard Engagement Over a Week (Simulated)",
-                margin: { t: 40, r: 10, l: 40, b: 40 },
-                yaxis: { title: "Views" }
+                title: { text: "Simulated Dashboard Engagement Over a Week", font: { size: 12 } },
+                margin: { t: 70, r: 10, l: 40, b: 40 },
+                yaxis: { title: "Views", gridcolor: "#1f2937" },
+                xaxis: { gridcolor: "#1f2937" }
             };
             messages = [
-                "Skill selected: Data Visualization.",
-                "Simulating dashboard engagement over a week.",
-                "Reflecting experience with Power BI, Tableau, and narrative visual analytics."
+                "Skill selected: Data Visualization & Storytelling.",
+                "You don’t just make charts — you build narratives that decision‑makers can follow.",
+                "From Power BI and Tableau to Python and Observable, you design visuals that stay honest to the data.",
+                "Rendering a realistic engagement pattern for a dashboard over a week."
             ];
 
         } else if (skill === "bigdata") {
             const batches = ["Batch 1", "Batch 2", "Batch 3", "Batch 4", "Batch 5"];
-            const records = [50000, 80000, 65000, 90000, 75000];
+            const records = [50000, 82000, 67000, 93000, 78000];
 
             data = [{
                 x: batches,
@@ -734,79 +761,83 @@
                 marker: { color: "#22c55e" }
             }];
             layout = {
-                title: "Records Processed per Batch (Simulated PySpark Workload)",
-                margin: { t: 40, r: 10, l: 40, b: 60 },
-                yaxis: { title: "Records" }
+                title: { text: "Simulated Records Processed per PySpark Batch", font: { size: 12 } },
+                margin: { t: 70, r: 10, l: 40, b: 60 },
+                yaxis: { title: "Records", gridcolor: "#1f2937" },
+                xaxis: { gridcolor: "#1f2937" }
             };
             messages = [
-                "Skill selected: Big Data Analytics.",
-                "Activating simulated PySpark batch processing view.",
-                "Emphasizing readiness for scalable, distributed analytics."
+                "Skill selected: Big Data & PySpark.",
+                "You’ve worked with data that doesn’t fit in memory and needs to be handled in batches.",
+                "PySpark for you is not a buzzword — it’s a way to scale real analytics workflows.",
+                "Rendering a batch‑level processing pattern inspired by your large‑scale analytics work."
             ];
 
-        } else if (skill === "nlp") {
-            const terms = ["equity", "access", "burden", "risk", "behavior", "policy", "care", "outcome"];
-            const freq = terms.map(() => Math.floor(Math.random() * 40) + 10);
-
-            data = [{
-                x: terms,
-                y: freq,
-                type: "bar",
-                marker: { color: "#f97316" }
-            }];
-            layout = {
-                title: "Term Frequency in Corpus (Simulated NLP Task)",
-                margin: { t: 40, r: 10, l: 40, b: 80 },
-                yaxis: { title: "Frequency" }
-            };
+        } else if (skill === "programming") {
+            showChart = false;
             messages = [
-                "Skill selected: Natural Language Processing (NLP).",
-                "Activating simulated corpus analysis.",
-                "Rendering term frequencies for health‑related concepts."
+                "Skill selected: Programming Languages.",
+                "You use Python, R, and JavaScript as tools, not trophies.",
+                "From ETL pipelines to modeling workflows and interactive dashboards, your code is clean, modular, and built for real users.",
+                "No visualization needed here — the story is in how you structure and ship your work."
             ];
 
         } else if (skill === "db") {
-            const queries = ["Read", "Write", "Aggregate", "Join"];
-            const latency = [40, 60, 90, 120];
-
-            data = [{
-                x: queries,
-                y: latency,
-                type: "bar",
-                marker: { color: "#3b82f6" }
-            }];
-            layout = {
-                title: "Query Latency by Operation (Simulated)",
-                margin: { t: 40, r: 10, l: 40, b: 60 },
-                yaxis: { title: "Latency (ms)" }
-            };
+            showChart = false;
             messages = [
-                "Skill selected: Database & Data Modeling.",
-                "Inspecting simulated latency across query types.",
-                "Echoing work with SQL Server, PostgreSQL, and MongoDB pipelines."
+                "Skill selected: Databases & Data Modeling.",
+                "SQL is one of your quiet superpowers — you design schemas, optimize queries, and keep pipelines stable when the data gets messy.",
+                "You’ve worked with SQL Server, PostgreSQL, and MongoDB, always thinking about how data will actually be used downstream.",
+                "No visualization required — the value here is in structure, reliability, and performance."
             ];
 
         } else {
-            initDashboard();
+            showChart = false;
             messages = [
                 "No specific skill matched. Resetting dashboard.",
-                "Ready for next selection."
+                "Ready for the next selection."
             ];
         }
 
-        Plotly.newPlot("dashboard-chart", data, {
-            ...layout,
-            paper_bgcolor: "#020617",
-            plot_bgcolor: "#020617",
-            font: { color: "#e5e7eb", size: 11 },
-            xaxis: { gridcolor: "#1f2937" },
-            yaxis: { gridcolor: "#1f2937" }
-        });
+        if (showChart && data && layout) {
+            Plotly.newPlot("dashboard-chart", data, {
+                ...layout,
+                paper_bgcolor: "#020617",
+                plot_bgcolor: "#020617",
+                font: { color: "#e5e7eb", size: 11 }
+            });
+        } else if (!showChart) {
+            Plotly.newPlot("dashboard-chart", [], {
+                title: { text: "No Visualization for This Skill", font: { size: 12 } },
+                paper_bgcolor: "#020617",
+                plot_bgcolor: "#020617",
+                margin: { t: 60, r: 10, l: 40, b: 40 },
+                xaxis: { visible: false },
+                yaxis: { visible: false }
+            });
+        }
 
         logToConsole(messages);
     }
 
     initDashboard();
+
+    /* ---------- QR CODE & COPY LINK ---------- */
+    const portfolioURL = "https://sapkotakarishma.github.io/MyPortfolio/";
+
+    new QRCode(document.getElementById("qrcode"), {
+        text: portfolioURL,
+        width: 150,
+        height: 150
+    });
+
+    function copyPortfolioLink() {
+        navigator.clipboard.writeText(portfolioURL).then(() => {
+            logToConsole(["Portfolio link copied to clipboard."]);
+        }).catch(() => {
+            logToConsole(["Unable to copy link automatically."]);
+        });
+    }
 </script>
 
 </body>
