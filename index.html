@@ -329,6 +329,37 @@
     .tags { margin-top: 10px; }
     .tag { display:inline-block; background: rgba(15,23,42,0.6); padding:6px 10px; margin:4px; border-radius:999px; font-size:12px; color:var(--accent-soft); border:1px solid rgba(148,163,184,0.12); }
 
+    /* DASHBOARD (home) */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+      align-items: stretch;
+    }
+
+    .dash-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      padding: 14px;
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(2,6,23,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .dash-title { font-size: 13px; font-weight: 700; color: var(--text-main); }
+    .dash-meta { font-size: 12px; color: var(--text-muted); }
+    .dash-canvas { width: 100%; height: 160px; }
+
+    @media (max-width: 900px) {
+      .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+    }
+
     /* NAV TOGGLE (mobile) */
     .nav-toggle {
       display: none;
@@ -404,6 +435,24 @@
           Focus areas: clinical analytics, social determinants of health, operational dashboards, and model‑driven decision support.
         </p>
         <p id="visits" class="hero-meta" style="margin-top:10px;"></p>
+        <!-- DASHBOARD PREVIEW -->
+        <div class="dashboard-grid" aria-hidden="false">
+          <div class="dash-card">
+            <div class="dash-title">Weekly Admissions</div>
+            <div class="dash-meta">Admissions by day — clinical volume trend</div>
+            <canvas id="chartAdmissions" class="dash-canvas"></canvas>
+          </div>
+          <div class="dash-card">
+            <div class="dash-title">Model Performance</div>
+            <div class="dash-meta">ROC AUC by model variant</div>
+            <canvas id="chartModel" class="dash-canvas"></canvas>
+          </div>
+          <div class="dash-card">
+            <div class="dash-title">Data Sources</div>
+            <div class="dash-meta">Proportion by source (EMR, Survey, Claims)</div>
+            <canvas id="chartSources" class="dash-canvas"></canvas>
+          </div>
+        </div>
       </section>
     </div>
 
@@ -1209,6 +1258,54 @@ stats.ttest_ind(group1, group2)
 
     // initialize active link
     setActiveLink('home');
+
+    /* DASHBOARD CHARTS: load Chart.js and render simple example charts */
+    (function() {
+      function loadScript(src, cb) {
+        const s = document.createElement('script');
+        s.src = src; s.onload = cb; s.async = true; document.head.appendChild(s);
+      }
+
+      // derive colors from CSS variables
+      const styles = getComputedStyle(document.documentElement);
+      const accent = styles.getPropertyValue('--accent').trim() || '#3b82f6';
+      const accentSoft = styles.getPropertyValue('--accent-soft').trim() || '#60a5fa';
+      const text = styles.getPropertyValue('--text-main').trim() || '#111827';
+      const muted = styles.getPropertyValue('--text-muted').trim() || '#6b7280';
+
+      loadScript('https://cdn.jsdelivr.net/npm/chart.js', () => {
+        try {
+          // Admissions (line)
+          const ctxA = document.getElementById('chartAdmissions').getContext('2d');
+          new Chart(ctxA, {
+            type: 'line',
+            data: {
+              labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+              datasets: [{ label: 'Admissions', data: [24, 30, 28, 34, 40, 36, 32], borderColor: accent, backgroundColor: accentSoft, fill: true, tension: 0.3 }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: muted } }, y: { ticks: { color: muted } } } }
+          });
+
+          // Model performance (bar)
+          const ctxM = document.getElementById('chartModel').getContext('2d');
+          new Chart(ctxM, {
+            type: 'bar',
+            data: { labels: ['Baseline','Tuned','Ensemble'], datasets: [{ label: 'ROC AUC', data: [0.78, 0.83, 0.86], backgroundColor: [accent, accentSoft, '#10b981'] }] },
+            options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 1, ticks: { callback: v => v.toFixed(2), color: muted }, grid: { color: 'rgba(148,163,184,0.06)' } }, x: { ticks: { color: muted } } } }
+          });
+
+          // Data sources (doughnut)
+          const ctxS = document.getElementById('chartSources').getContext('2d');
+          new Chart(ctxS, {
+            type: 'doughnut',
+            data: { labels: ['EMR','Survey','Claims'], datasets: [{ data: [56, 24, 20], backgroundColor: [accent, '#f59e0b', '#ef4444'] }] },
+            options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: muted } } } }
+          });
+        } catch (err) {
+          console.warn('Chart render failed', err);
+        }
+      });
+    })();
   </script>
 
 </body>
