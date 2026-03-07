@@ -1,621 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karishma Sapkota | Applied Data Scientist</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            color: #111827;
-            background-color: #f3f4f6;
-        }
+<title>Karishma Sapkota | Data Scientist</title>
 
-        /* ---------- PAGE BACKGROUND (LIGHT ANALYTICS / WORKSPACE VIBE) ---------- */
-        .page-bg {
-            min-height: 100vh;
-            background-image:
-                linear-gradient(to bottom, rgba(248, 250, 252, 0.9), rgba(241, 245, 249, 0.95)),
-                url("https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+<style>
 
-        .overlay {
-            min-height: 100vh;
-        }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-        /* ---------- HEADER ---------- */
-        header {
-            padding: 60px 20px 40px 20px;
-            text-align: center;
-            color: #0f172a;
-        }
+body{
 
-        header h1 {
-            margin: 0;
-            font-size: 2.6rem;
-        }
+font-family:Arial, Helvetica, sans-serif;
+color:#0f172a;
+background:#0f172a;
 
-        .header-title {
-            margin-top: 8px;
-            font-size: 1.1rem;
-            opacity: 0.95;
-        }
+}
 
-        .header-subtitle {
-            margin-top: 6px;
-            font-size: 0.95rem;
-            opacity: 0.9;
-            font-style: italic;
-        }
+/* ---------- PROFESSIONAL ANALYTICS BACKGROUND ---------- */
 
-        .header-tagline {
-            margin-top: 12px;
-            font-size: 0.98rem;
-            opacity: 0.9;
-        }
+.page-bg{
 
-        .header-chips {
-            margin-top: 16px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+min-height:100vh;
 
-        .chip {
-            background: rgba(15, 23, 42, 0.85);
-            color: #f9fafb;
-            border-radius: 999px;
-            padding: 6px 14px;
-            font-size: 0.78rem;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            border: 1px solid rgba(248, 250, 252, 0.3);
-        }
+background:
+linear-gradient(135deg,#0f172a,#1e293b),
+radial-gradient(circle at 20% 30%,rgba(59,130,246,0.15),transparent 40%),
+radial-gradient(circle at 80% 70%,rgba(99,102,241,0.15),transparent 40%);
 
-        /* ---------- NAV ---------- */
-        nav {
-            background: #020617;
-            padding: 10px 0;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+background-blend-mode:screen;
 
-        nav a {
-            color: #e5e7eb;
-            margin: 0 18px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            cursor: pointer;
-        }
+}
 
-        nav a:hover {
-            color: #c7d2fe;
-        }
+/* ---------- HEADER ---------- */
 
-        /* ---------- MAIN CONTENT ---------- */
-        .content {
-            max-width: 1000px;
-            margin: 30px auto 60px auto;
-            padding: 0 20px 40px 20px;
-            background: rgba(249, 250, 251, 0.98);
-            border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
-        }
+header{
 
-        section {
-            margin: 30px 0;
-        }
+text-align:center;
+padding:70px 20px 50px 20px;
+color:white;
 
-        h2 {
-            color: #1e3a8a;
-            border-bottom: 3px solid #a5b4fc;
-            padding-bottom: 6px;
-            font-size: 1.6rem;
-        }
+}
 
-        p {
-            line-height: 1.6;
-            font-size: 0.98rem;
-        }
+header h1{
 
-        /* ---------- PROJECTS & SKILLS (HIDDEN UNTIL CLICKED) ---------- */
-        #projects, #skills {
-            display: none;
-        }
+font-size:2.8rem;
+margin-bottom:10px;
 
-        .project-card {
-            background: white;
-            padding: 16px;
-            margin: 12px 0;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-            border-left: 5px solid #3b82f6;
-        }
+}
 
-        .project-card h3 {
-            margin-top: 0;
-        }
+.header-title{
 
-        .skill-card {
-            background: white;
-            padding: 14px;
-            margin: 10px 0;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-            border-left: 5px solid #6366f1;
-        }
+font-size:1.2rem;
+opacity:0.9;
 
-        .skill-card h3 {
-            margin-top: 0;
-        }
+}
 
-        /* ---------- DATA SCIENCE DASHBOARD ---------- */
-        #dashboard-section {
-            margin-top: 40px;
-        }
+.header-subtitle{
 
-        .dashboard-wrapper {
-            background: #020617;
-            border-radius: 14px;
-            padding: 16px;
-            color: #e5e7eb;
-        }
+margin-top:10px;
+font-size:1rem;
+opacity:0.85;
 
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
+}
 
-        .dashboard-title {
-            font-size: 1rem;
-            font-weight: bold;
-        }
+.header-tagline{
 
-        .dashboard-subtitle {
-            font-size: 0.8rem;
-            color: #9ca3af;
-        }
+margin-top:15px;
+font-size:0.95rem;
+opacity:0.9;
 
-        .kpi-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
+}
 
-        .kpi-card {
-            flex: 1;
-            min-width: 120px;
-            background: #0b1120;
-            border-radius: 10px;
-            padding: 10px;
-            border: 1px solid #111827;
-        }
+/* ---------- CHIPS ---------- */
 
-        .kpi-label {
-            font-size: 0.75rem;
-            color: #9ca3af;
-        }
+.header-chips{
 
-        .kpi-value {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-top: 4px;
-        }
+margin-top:20px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
 
-        #dashboard-chart {
-            width: 100%;
-            height: 280px;
-        }
+}
 
-        /* ---------- SHARE SECTION ---------- */
-        .share-card {
-            background: white;
-            padding: 18px;
-            border-radius: 14px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            text-align: center;
-        }
+.chip{
 
-        #qrcode {
-            margin: 16px auto;
-            width: 150px;
-            height: 150px;
-        }
+background:rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.2);
+padding:6px 14px;
+border-radius:999px;
+font-size:0.8rem;
 
-        .share-text {
-            font-size: 0.9rem;
-            color: #4b5563;
-            margin-bottom: 12px;
-        }
+}
 
-        .copy-btn {
-            background: #1d4ed8;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 999px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
+/* ---------- NAV ---------- */
 
-        .copy-btn:hover {
-            background: #1e40af;
-        }
+nav{
 
-        /* ---------- FOOTER ---------- */
-        .footer {
-            text-align: center;
-            padding: 18px;
-            color: #e5e7eb;
-            background: #020617;
-        }
+background:#020617;
+padding:14px;
+text-align:center;
+position:sticky;
+top:0;
+z-index:100;
 
-        .footer a {
-            color: #a5b4fc;
-            text-decoration: none;
-        }
+}
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+nav a{
+
+color:#e5e7eb;
+margin:0 18px;
+font-weight:bold;
+text-decoration:none;
+cursor:pointer;
+
+}
+
+nav a:hover{
+
+color:#93c5fd;
+
+}
+
+/* ---------- CONTENT ---------- */
+
+.content{
+
+max-width:1000px;
+margin:40px auto;
+background:#f8fafc;
+padding:40px;
+border-radius:14px;
+
+box-shadow:0 10px 30px rgba(0,0,0,0.35);
+
+}
+
+/* ---------- SECTIONS ---------- */
+
+section{
+
+margin-bottom:40px;
+
+}
+
+h2{
+
+margin-bottom:16px;
+border-bottom:3px solid #6366f1;
+padding-bottom:6px;
+
+}
+
+/* ---------- PROJECT CARDS ---------- */
+
+.project-card{
+
+background:white;
+padding:22px;
+margin:18px 0;
+
+border-radius:12px;
+
+border-left:6px solid #3b82f6;
+
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+
+transition:all 0.2s;
+
+}
+
+.project-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+/* ---------- SKILLS ---------- */
+
+.skill-card{
+
+background:white;
+padding:16px;
+margin:12px 0;
+border-radius:10px;
+
+border-left:5px solid #6366f1;
+
+}
+
+/* ---------- DASHBOARD ---------- */
+
+.dashboard{
+
+background:#020617;
+color:white;
+
+padding:20px;
+border-radius:14px;
+
+}
+
+.kpi-row{
+
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:15px;
+
+}
+
+.kpi{
+
+flex:1;
+min-width:130px;
+
+background:#0b1120;
+
+padding:12px;
+border-radius:10px;
+
+}
+
+.kpi-label{
+
+font-size:0.75rem;
+opacity:0.8;
+
+}
+
+.kpi-value{
+
+font-size:1.2rem;
+font-weight:bold;
+
+}
+
+#chart{
+
+height:300px;
+
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer{
+
+text-align:center;
+color:#cbd5f5;
+padding:20px;
+
+}
+
+.footer a{
+
+color:#93c5fd;
+text-decoration:none;
+
+}
+
+.footer a:hover{
+
+text-decoration:underline;
+
+}
+
+</style>
 </head>
+
+
 <body>
+
 <div class="page-bg">
-    <div class="overlay">
-        <header>
-            <h1>Karishma Sapkota</h1>
-            <div class="header-title">Applied Data Scientist</div>
-            <div class="header-subtitle">
-                specializing in public health, clinical, and operational analytics; ML, NLP &amp; health systems data
-            </div>
-            <div class="header-tagline">
-                Building data products and analytics that connect real‑world systems with interpretable, actionable insights.
-            </div>
-            <div class="header-chips">
-                <div class="chip">Data Science</div>
-                <div class="chip">Public Health &amp; Clinical</div>
-                <div class="chip">ML &amp; NLP</div>
-                <div class="chip">Dashboards &amp; Storytelling</div>
-            </div>
-        </header>
 
-        <nav>
-            <a onclick="showSection('about')">About</a>
-            <a onclick="showSection('projects')">Projects</a>
-            <a onclick="showSection('skills')">Skills</a>
-            <a onclick="showSection('share')">Share</a>
-            <a onclick="showSection('contact')">Contact</a>
-        </nav>
+<header>
 
-        <div class="content">
-            <!-- ABOUT (DEFAULT VISIBLE) -->
-            <section id="about">
-                <h2>About</h2>
-                <p>
-                    I’m an applied data scientist with a background that spans clinical nursing, public health programs,
-                    and advanced analytics. I’ve worked on surveillance systems, pharmacy operations, mixed‑methods research,
-                    and machine learning projects that sit close to real decisions and real people.
-                </p>
-                <p>
-                    I enjoy designing models, dashboards, and workflows that are technically sound but also readable,
-                    explainable, and grounded in context. I’m especially interested in work that blends health systems,
-                    behavioral data, and intelligent tools.
-                </p>
-            </section>
+<h1>Karishma Sapkota</h1>
 
-            <!-- PROJECTS (HIDDEN UNTIL CLICKED) -->
-            <section id="projects">
-                <h2>Projects</h2>
-
-                <div class="project-card">
-                    <h3>NTD &amp; Malaria Surveillance Analytics</h3>
-                    <p>
-                        Provincial‑level analytics for Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria programs:
-                        coverage monitoring, risk flagging, and municipal‑level profiling to support elimination strategies.
-                    </p>
-                </div>
-
-                <div class="project-card">
-                    <h3>Pharmacy Operations &amp; Medication Safety Dashboards</h3>
-                    <p>
-                        Power BI dashboards for verification workload, inventory, revenue, and medication safety events,
-                        integrating data from multiple systems to support continuous quality improvement.
-                    </p>
-                </div>
-
-                <div class="project-card">
-                    <h3>Emotion Classification on Reddit</h3>
-                    <p>
-                        Comparative analysis of lexicon‑based methods and DistilRoBERTa for emotion classification,
-                        exploring trade‑offs between interpretability and performance for digital mental health contexts.
-                    </p>
-                </div>
-
-                <div class="project-card">
-                    <h3>Credit Card Fraud Detection</h3>
-                    <p>
-                        Logistic regression on an imbalanced dataset, focusing on ROC/AUC and sensitivity to rare events
-                        to demonstrate applied ML for risk detection.
-                    </p>
-                </div>
-            </section>
-
-            <!-- SKILLS (HIDDEN UNTIL CLICKED) -->
-            <section id="skills">
-                <h2>Skills</h2>
-
-                <div class="skill-card">
-                    <h3>Machine Learning &amp; AI</h3>
-                    <p>Classification, prediction, model evaluation, and explainable analytics across health and operational data.</p>
-                </div>
-
-                <div class="skill-card">
-                    <h3>Natural Language Processing</h3>
-                    <p>Emotion classification, sentiment analysis, transformer models, and lexicon‑based approaches.</p>
-                </div>
-
-                <div class="skill-card">
-                    <h3>Health Informatics &amp; Research</h3>
-                    <p>Surveillance, mixed‑methods research, municipal profiling, and policy‑oriented analytics.</p>
-                </div>
-
-                <div class="skill-card">
-                    <h3>Data Visualization &amp; Dashboards</h3>
-                    <p>Power BI, Tableau, Python visualization, and interactive narrative dashboards.</p>
-                </div>
-
-                <div class="skill-card">
-                    <h3>Programming &amp; Data Engineering</h3>
-                    <p>Python, R, JavaScript, SQL, PySpark, and ETL workflows for end‑to‑end analytics.</p>
-                </div>
-            </section>
-
-            <!-- DATA SCIENCE DASHBOARD (BOTTOM OF HOME) -->
-            <section id="dashboard-section">
-                <h2>Interactive Data Science Dashboard</h2>
-                <p>
-                    A compact analytics view showing product metrics, churn, and model performance—similar to how I think about
-                    structuring data science dashboards for decision‑makers.
-                </p>
-
-                <div class="dashboard-wrapper">
-                    <div class="dashboard-header">
-                        <div>
-                            <div class="dashboard-title">Product &amp; Customer Analytics</div>
-                            <div class="dashboard-subtitle">Interactive Plotly chart · Simulated metrics</div>
-                        </div>
-                        <div style="font-size:0.8rem;color:#9ca3af;">
-                            View:
-                            <select id="dashboard-select" onchange="updateDashboardChart()" style="background:#020617;color:#e5e7eb;border:1px solid #374151;border-radius:6px;padding:2px 6px;">
-                                <option value="revenue">Revenue Over Time</option>
-                                <option value="churn">Customer Churn</option>
-                                <option value="roc">Model ROC Curve</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="kpi-row">
-                        <div class="kpi-card">
-                            <div class="kpi-label">Monthly Revenue</div>
-                            <div class="kpi-value" id="kpi-revenue">$245K</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Active Users</div>
-                            <div class="kpi-value" id="kpi-users">18,430</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Churn Rate</div>
-                            <div class="kpi-value" id="kpi-churn">4.2%</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Model AUC</div>
-                            <div class="kpi-value" id="kpi-auc">0.93</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Visitors Today</div>
-                            <div class="kpi-value" id="kpi-visitors-today">0</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-label">Total Visitors</div>
-                            <div class="kpi-value" id="kpi-visitors-total">0</div>
-                        </div>
-                    </div>
-
-                    <div id="dashboard-chart"></div>
-                </div>
-            </section>
-
-            <!-- SHARE -->
-            <section id="share">
-                <h2>Share This Portfolio</h2>
-                <div class="share-card">
-                    <h3>Scan or Share</h3>
-                    <div id="qrcode"></div>
-                    <div class="share-text">
-                        Scan to open this portfolio on your device, or copy the link to share it.
-                    </div>
-                    <button class="copy-btn" onclick="copyPortfolioLink()">Copy Portfolio Link</button>
-                </div>
-            </section>
-
-            <!-- CONTACT -->
-            <section id="contact">
-                <h2>Contact</h2>
-                <p>Email: your-email@example.com</p>
-                <p>LinkedIn: <a href="#" target="_blank">Your LinkedIn Profile</a></p>
-            </section>
-        </div>
-
-        <div class="footer">
-            © 2026 Karishma Sapkota · Applied Data Scientist ·
-            <a href="https://sapkotakarishma.github.io/MyPortfolio/" target="_blank">Portfolio Link</a>
-        </div>
-    </div>
+<div class="header-title">
+Applied Data Scientist | Computational Analytics Researcher
 </div>
 
-<!-- PLOTLY -->
+<div class="header-subtitle">
+Machine Learning • Data Systems • Decision Analytics • Interpretable AI
+</div>
+
+<div class="header-tagline">
+Building intelligent data systems that transform complex datasets into
+reliable insights across research, industry, and public systems.
+</div>
+
+<div class="header-chips">
+
+<div class="chip">Machine Learning</div>
+<div class="chip">Data Engineering</div>
+<div class="chip">Analytics</div>
+<div class="chip">NLP</div>
+<div class="chip">Decision Systems</div>
+
+</div>
+
+</header>
+
+
+<nav>
+
+<a onclick="showSection('about')">About</a>
+<a onclick="showSection('projects')">Projects</a>
+<a onclick="showSection('skills')">Skills</a>
+<a onclick="showSection('dashboard')">Analytics</a>
+<a onclick="showSection('contact')">Contact</a>
+
+</nav>
+
+
+<div class="content">
+
+<!-- ABOUT -->
+
+<section id="about">
+
+<h2>About</h2>
+
+<p>
+
+I am an applied data scientist with interdisciplinary training spanning clinical practice, public health systems, and computational analytics. My work focuses on building data-driven solutions that translate complex datasets into interpretable insights for real-world decision making.
+
+</p>
+
+<br>
+
+<p>
+
+Across research and applied environments, I have worked with surveillance data, operational systems, behavioral datasets, and unstructured text. My projects combine statistical modeling, machine learning, and data engineering to support decision-making in both research and industry contexts.
+
+</p>
+
+<br>
+
+<p>
+
+I am particularly interested in the design of intelligent data systems that bridge machine learning, human interpretation, and organizational decision processes across diverse domains.
+
+</p>
+
+</section>
+
+
+<!-- PROJECTS -->
+
+<section id="projects" style="display:none;">
+
+<h2>Selected Projects</h2>
+
+
+<div class="project-card">
+
+<h3>Population Disease Surveillance Analytics</h3>
+
+<p>
+
+Developed analytical models supporting elimination programs for neglected tropical diseases including Lymphatic Filariasis, Visceral Leishmaniasis, and Malaria. The work integrated surveillance datasets and generated municipality-level risk indicators used for program planning and intervention prioritization.
+
+</p>
+
+<p><strong>Methods:</strong> statistical modeling, epidemiological indicators, program monitoring analytics.</p>
+
+</div>
+
+
+<div class="project-card">
+
+<h3>Operational Analytics for Pharmacy Systems</h3>
+
+<p>
+
+Designed interactive analytics dashboards integrating operational pharmacy datasets including verification workload, medication safety events, inventory patterns, and revenue metrics to support operational decision making and quality improvement.
+
+</p>
+
+<p><strong>Tools:</strong> Power BI, SQL pipelines, data modeling.</p>
+
+</div>
+
+
+<div class="project-card">
+
+<h3>Emotion Detection in Social Media Data</h3>
+
+<p>
+
+Evaluated transformer-based NLP models and lexicon approaches for emotion classification in social media datasets, exploring trade-offs between interpretability and predictive performance in behavioral analytics.
+
+</p>
+
+<p><strong>Methods:</strong> NLP pipelines, DistilRoBERTa, sentiment and emotion analysis.</p>
+
+</div>
+
+
+<div class="project-card">
+
+<h3>Financial Fraud Detection Modeling</h3>
+
+<p>
+
+Implemented predictive models for fraud detection in highly imbalanced transactional datasets. The analysis focused on rare event detection and model evaluation using ROC/AUC and sensitivity metrics.
+
+</p>
+
+<p><strong>Methods:</strong> logistic regression, anomaly detection, model evaluation.</p>
+
+</div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section id="skills" style="display:none;">
+
+<h2>Core Skills</h2>
+
+<div class="skill-card">
+
+<h3>Machine Learning</h3>
+
+<p>Predictive modeling, classification, anomaly detection, model evaluation.</p>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Natural Language Processing</h3>
+
+<p>Transformer models, text analytics, sentiment and emotion detection.</p>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Data Engineering</h3>
+
+<p>SQL pipelines, ETL workflows, data integration.</p>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Analytics & Visualization</h3>
+
+<p>Power BI, Tableau, Python visualization, analytics dashboards.</p>
+
+</div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" style="display:none;">
+
+<h2>Portfolio Analytics Dashboard</h2>
+
+<div class="dashboard">
+
+<div class="kpi-row">
+
+<div class="kpi">
+<div class="kpi-label">Visitors Today</div>
+<div class="kpi-value" id="today"></div>
+</div>
+
+<div class="kpi">
+<div class="kpi-label">Total Visitors</div>
+<div class="kpi-value" id="total"></div>
+</div>
+
+</div>
+
+<div id="chart"></div>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" style="display:none;">
+
+<h2>Contact</h2>
+
+<p>Email: karishma.sap@gmail.com</p>
+
+<p>
+LinkedIn:
+<a href="https://linkedin.com" target="_blank">
+LinkedIn Profile
+</a>
+</p>
+
+</section>
+
+</div>
+
+
+<div class="footer">
+
+© 2026 Karishma Sapkota
+
+</div>
+
+</div>
+
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<!-- QRCode.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-    /* ---------- SECTION TOGGLE ---------- */
-    function showSection(id) {
-        const sections = ["about", "projects", "skills", "share", "contact"];
-        sections.forEach(sec => {
-            const el = document.getElementById(sec);
-            if (!el) return;
-            if (sec === id) {
-                el.style.display = "block";
-                el.scrollIntoView({ behavior: "smooth" });
-            } else if (sec === "about" && id !== "about") {
-                el.style.display = "none";
-            } else if (sec !== "about") {
-                el.style.display = "none";
-            }
-        });
-    }
 
-    /* ---------- SIMULATED VISITOR COUNTS ---------- */
-    function setVisitorCounts() {
-        const today = Math.floor(50 + Math.random() * 120);      // 50–170
-        const total = Math.floor(2000 + Math.random() * 4000);   // 2000–6000
+/* ---------- NAVIGATION ---------- */
 
-        document.getElementById("kpi-visitors-today").innerText = today.toLocaleString();
-        document.getElementById("kpi-visitors-total").innerText = total.toLocaleString();
-    }
+function showSection(id){
 
-    /* ---------- DATA SCIENCE DASHBOARD ---------- */
-    function initDashboard() {
-        setVisitorCounts();
+let sections=["about","projects","skills","dashboard","contact"]
 
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-        const revenue = [120, 135, 150, 165, 180, 210, 230, 245];
+sections.forEach(sec=>{
 
-        Plotly.newPlot("dashboard-chart", [{
-            x: months,
-            y: revenue,
-            type: "scatter",
-            mode: "lines+markers",
-            line: { color: "#38bdf8", width: 3 },
-            marker: { size: 6 }
-        }], {
-            title: { text: "Revenue Over Time", font: { size: 12 } },
-            margin: { t: 60, r: 10, l: 40, b: 40 },
-            paper_bgcolor: "#020617",
-            plot_bgcolor: "#020617",
-            font: { color: "#e5e7eb", size: 11 },
-            xaxis: { gridcolor: "#1f2937" },
-            yaxis: { gridcolor: "#1f2937" }
-        });
-    }
+document.getElementById(sec).style.display="none"
 
-    function updateDashboardChart() {
-        const view = document.getElementById("dashboard-select").value;
-        let data, layout;
+})
 
-        if (view === "revenue") {
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-            const revenue = [120, 135, 150, 165, 180, 210, 230, 245];
+document.getElementById(id).style.display="block"
 
-            data = [{
-                x: months,
-                y: revenue,
-                type: "scatter",
-                mode: "lines+markers",
-                line: { color: "#38bdf8", width: 3 },
-                marker: { size: 6 }
-            }];
-            layout = {
-                title: { text: "Revenue Over Time", font: { size: 12 } },
-                margin: { t: 60, r: 10, l: 40, b: 40 },
-                xaxis: { gridcolor: "#1f2937" },
-                yaxis: { gridcolor: "#1f2937" }
-            };
+}
 
-        } else if (view === "churn") {
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
-            const churn = [5.2, 4.9, 4.7, 4.5, 4.4, 4.3, 4.2, 4.2];
 
-            data = [{
-                x: months,
-                y: churn,
-                type: "bar",
-                marker: { color: "#f97316" }
-            }];
-            layout = {
-                title: { text: "Customer Churn Rate", font: { size: 12 } },
-                margin: { t: 60, r: 10, l: 40, b: 40 },
-                xaxis: { gridcolor: "#1f2937" },
-                yaxis: { gridcolor: "#1f2937", title: "Churn (%)", range: [0, 6] }
-            };
+/* ---------- VISITOR COUNTER ---------- */
 
-        } else if (view === "roc") {
-            const fpr = [0, 0.02, 0.05, 0.1, 0.2, 0.4, 1];
-            const tpr = [0, 0.6, 0.78, 0.86, 0.92, 0.96, 1];
+function visitorStats(){
 
-            data = [{
-                x: fpr,
-                y: tpr,
-                type: "scatter",
-                mode: "lines",
-                line: { color: "#22c55e", width: 3 },
-                name: "Model ROC"
-            }];
-            layout = {
-                title: { text: "Model ROC Curve", font: { size: 12 } },
-                margin: { t: 60, r: 10, l: 40, b: 40 },
-                xaxis: { title: "False Positive Rate", gridcolor: "#1f2937" },
-                yaxis: { title: "True Positive Rate", gridcolor: "#1f2937", range: [0, 1] }
-            };
-        }
+let total=localStorage.getItem("totalVisits")
+let today=localStorage.getItem("todayVisits")
+let date=localStorage.getItem("visitDate")
 
-        Plotly.newPlot("dashboard-chart", data, {
-            ...layout,
-            paper_bgcolor: "#020617",
-            plot_bgcolor: "#020617",
-            font: { color: "#e5e7eb", size: 11 }
-        });
-    }
+let currentDate=new Date().toDateString()
 
-    initDashboard();
+if(!total){
+total=0
+today=0
+}
 
-    /* ---------- QR CODE & COPY LINK ---------- */
-    const portfolioURL = "https://sapkotakarishma.github.io/MyPortfolio/";
+if(date!==currentDate){
+today=0
+localStorage.setItem("visitDate",currentDate)
+}
 
-    new QRCode(document.getElementById("qrcode"), {
-        text: portfolioURL,
-        width: 150,
-        height: 150
-    });
+total++
+today++
 
-    function copyPortfolioLink() {
-        navigator.clipboard.writeText(portfolioURL).then(() => {
-            alert("Portfolio link copied to clipboard.");
-        }).catch(() => {
-            alert("Unable to copy link automatically.");
-        });
-    }
+localStorage.setItem("totalVisits",total)
+localStorage.setItem("todayVisits",today)
 
-    // default: only About visible
-    showSection("about");
+document.getElementById("today").innerText=today
+document.getElementById("total").innerText=total
+
+}
+
+
+/* ---------- DASHBOARD CHART ---------- */
+
+function loadChart(){
+
+let visits=[2,5,7,9,12,15,18,22]
+
+let days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun","Today"]
+
+Plotly.newPlot("chart",[{
+
+x:days,
+y:visits,
+type:"scatter",
+mode:"lines+markers"
+
+}],
+
+{
+
+title:"Portfolio Visits Trend",
+paper_bgcolor:"#020617",
+plot_bgcolor:"#020617",
+font:{color:"#e5e7eb"}
+
+})
+
+}
+
+visitorStats()
+loadChart()
+
 </script>
+
 </body>
 </html>
