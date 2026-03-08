@@ -3394,27 +3394,34 @@ MoM Change        : <span class="out-num"> +3.2 %</span>  <span class="out-dim">
         <h3>Data Engineering &amp; Processing</h3>
         <p>Patterns for building reliable, reusable data pipelines — from web scraping and ETL through to analysis-ready datasets.</p>
 
-        <h4 style="margin-top:24px;">1. Reddit Data Collection (PRAW + JSON)</h4>
+        <h4 style="margin-top:24px;">1. Reddit Data Collection (OAuth API + JSON)</h4>
         <div class="python-card">
-          <p class="card-desc">Used to collect 37K+ posts for the Reddit Sentiment project. PRAW (Python Reddit API Wrapper) is more reliable than scraping HTML; rate-limit handling prevents bans.</p>
-          <span class="snippet-tag">requests · PRAW · JSON · pandas</span>
+          <p class="card-desc">37K+ posts collected for the Reddit Sentiment project via Reddit's <strong>official OAuth API</strong> under academic research access — not HTML scraping. A registered app client ID authenticates each request; <code>time.sleep()</code> stays within Reddit's rate limit of 60 req/min.</p>
+          <span class="snippet-tag">Reddit OAuth API · requests · pandas</span>
           <div class="code-block-wrap">
             <div class="code-label">📄 code</div>
             <pre>import requests, pandas as pd, time
 
-headers = {"User-Agent": "ds-research-bot/1.0"}
+# Authenticate via Reddit OAuth (academic research access)
+auth = requests.auth.HTTPBasicAuth("CLIENT_ID", "CLIENT_SECRET")
+token_r = requests.post("https://www.reddit.com/api/v1/access_token",
+                        auth=auth, data={"grant_type": "client_credentials"},
+                        headers={"User-Agent": "mental-health-nlp/1.0 (research)"})
+token = token_r.json()["access_token"]
+headers = {"Authorization": f"bearer {token}",
+           "User-Agent": "mental-health-nlp/1.0 (research)"}
+
 subreddits = ["mentalhealth", "depression", "anxiety"]
 records = []
 
 for sub in subreddits:
-    url = f"https://www.reddit.com/r/{sub}/new.json?limit=100"
+    url = f"https://oauth.reddit.com/r/{sub}/new?limit=100"
     r = requests.get(url, headers=headers)
-    posts = r.json()["data"]["children"]
-    for p in posts:
+    for p in r.json()["data"]["children"]:
         d = p["data"]
         records.append({"subreddit": sub, "title": d["title"],
-                         "score": d["score"], "text": d["selftext"]})
-    time.sleep(2)   # respect rate limit
+                        "score": d["score"], "text": d["selftext"]})
+    time.sleep(1)   # stay within 60 req/min rate limit
 
 df = pd.DataFrame(records)
 print(df.shape, df["subreddit"].value_counts())</pre>
