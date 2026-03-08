@@ -3586,12 +3586,16 @@ plt.show()</pre>
         tracker.lastVisit = new Date().toISOString().slice(0,10);
         saveTracker(tracker);
       }
-      updateExplorerUI();
+      updateExplorerUI(true);
     }
 
     function renderOverallRadar() {
       const ctx = document.getElementById("skillRadarChart").getContext("2d");
-      if (radarChart) { updateExplorerUI(); return; }
+
+      // Always refresh bars + subtitle from stored data immediately
+      updateExplorerUI(/*chartReady=*/!!radarChart);
+
+      if (radarChart) return;  // chart already built, just needed UI refresh
 
       const accent    = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()     || "#6366f1";
       const textMuted = getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#94a3b8";
@@ -3637,7 +3641,7 @@ plt.show()</pre>
         }
       });
 
-      updateExplorerUI();
+      updateExplorerUI(true);
     }
 
     function formatDate(iso) {
@@ -3647,17 +3651,17 @@ plt.show()</pre>
       return `${d} ${months[+m-1]} ${y}`;
     }
 
-    function updateExplorerUI() {
-      if (!radarChart) return;
-
+    function updateExplorerUI(chartReady) {
       const values = topicMeta.map(t => tracker.clicks[t.key]);
       const total  = values.reduce((a, b) => a + b, 0);
       const maxVal = Math.max(...values, 1);
 
-      // Update radar
-      radarChart.data.datasets[0].data = values;
-      radarChart.options.scales.r.max  = maxVal + 1;
-      radarChart.update();
+      // Update radar only if chart instance exists
+      if (radarChart && chartReady !== false) {
+        radarChart.data.datasets[0].data = values;
+        radarChart.options.scales.r.max  = maxVal + 1;
+        radarChart.update();
+      }
 
       // Update subtitle
       const sub = document.getElementById("skillRadarSub");
