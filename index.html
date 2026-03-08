@@ -3535,7 +3535,7 @@ plt.show()</pre>
       trackTopicClick(section);
     }
 
-    // ── Topic click tracker ──────────────────────────────────────────
+    // ── Topic click tracker (localStorage-persisted) ────────────────
     const topicMeta = [
       { key: "python", label: "🐍 Python & EDA" },
       { key: "nlp",    label: "🗣️ NLP" },
@@ -3546,31 +3546,64 @@ plt.show()</pre>
       { key: "stats",  label: "📐 Statistics" }
     ];
 
-    // clicks[key] = number of times that topic was opened
-    const clicks = { python:0, nlp:0, ml:0, sql:0, viz:0, de:0, stats:0 };
+    const STORAGE_KEY = "dsNotebook_tracker_v1";
+
+    function loadTracker() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch(e) {}
+      return {
+        clicks:    { python:0, nlp:0, ml:0, sql:0, viz:0, de:0, stats:0 },
+        firstVisit: new Date().toISOString().slice(0,10),
+        lastVisit:  new Date().toISOString().slice(0,10),
+        totalDays:  1
+      };
+    }
+
+    function saveTracker(data) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+    }
+
+    // Load persisted data
+    let tracker = loadTracker();
+
+    // Update lastVisit + totalDays on each page load
+    (function() {
+      const today = new Date().toISOString().slice(0,10);
+      if (tracker.lastVisit !== today) {
+        tracker.lastVisit = today;
+        tracker.totalDays = (tracker.totalDays || 1) + 1;
+        saveTracker(tracker);
+      }
+    })();
+
     let radarChart = null;
 
     function trackTopicClick(section) {
-      if (clicks.hasOwnProperty(section)) clicks[section]++;
+      if (tracker.clicks.hasOwnProperty(section)) {
+        tracker.clicks[section]++;
+        tracker.lastVisit = new Date().toISOString().slice(0,10);
+        saveTracker(tracker);
+      }
       updateExplorerUI();
     }
 
     function renderOverallRadar() {
-      // build chart once with all-zero data; UI will update via trackTopicClick
       const ctx = document.getElementById("skillRadarChart").getContext("2d");
-      if (radarChart) return;
+      if (radarChart) { updateExplorerUI(); return; }
 
-      const accent     = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()      || "#6366f1";
-      const textMuted  = getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim()  || "#94a3b8";
-      const borderCol  = getComputedStyle(document.documentElement).getPropertyValue("--border").trim()       || "rgba(255,255,255,0.1)";
+      const accent    = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim()     || "#6366f1";
+      const textMuted = getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#94a3b8";
+      const borderCol = getComputedStyle(document.documentElement).getPropertyValue("--border").trim()     || "rgba(255,255,255,0.1)";
 
       radarChart = new Chart(ctx, {
         type: "radar",
         data: {
           labels: topicMeta.map(t => t.label),
           datasets: [{
-            label: "Times opened",
-            data: topicMeta.map(t => clicks[t.key]),
+            label: "Total opens",
+            data: topicMeta.map(t => tracker.clicks[t.key]),
             backgroundColor: accent + "33",
             borderColor: accent,
             pointBackgroundColor: accent,
@@ -3597,7 +3630,7 @@ plt.show()</pre>
             legend: { display: false },
             tooltip: {
               callbacks: {
-                label: c => ` Opened ${c.raw} time${c.raw !== 1 ? "s" : ""}`
+                label: c => ` Opened ${c.raw} time${c.raw !== 1 ? "s" : ""} total`
               }
             }
           }
@@ -3607,14 +3640,21 @@ plt.show()</pre>
       updateExplorerUI();
     }
 
+    function formatDate(iso) {
+      if (!iso) return "";
+      const [y, m, d] = iso.split("-");
+      const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      return `${d} ${months[+m-1]} ${y}`;
+    }
+
     function updateExplorerUI() {
       if (!radarChart) return;
 
-      const values  = topicMeta.map(t => clicks[t.key]);
-      const total   = values.reduce((a, b) => a + b, 0);
-      const maxVal  = Math.max(...values, 1);
+      const values = topicMeta.map(t => tracker.clicks[t.key]);
+      const total  = values.reduce((a, b) => a + b, 0);
+      const maxVal = Math.max(...values, 1);
 
-      // Update radar data
+      // Update radar
       radarChart.data.datasets[0].data = values;
       radarChart.options.scales.r.max  = maxVal + 1;
       radarChart.update();
@@ -3622,24 +3662,26 @@ plt.show()</pre>
       // Update subtitle
       const sub = document.getElementById("skillRadarSub");
       if (total === 0) {
-        sub.textContent = "Click any topic above to start exploring — the chart tracks which areas you've visited.";
+        sub.innerHTML = `Click any topic above to start exploring — visits are saved across sessions.`;
       } else {
         const explored = values.filter(v => v > 0).length;
-        sub.textContent = `${explored} of 7 topics explored · ${total} total visit${total !== 1 ? "s" : ""} this session.`;
+        const days     = tracker.totalDays || 1;
+        const since    = formatDate(tracker.firstVisit);
+        sub.innerHTML  = `<strong>${explored}/7</strong> topics explored &nbsp;·&nbsp; <strong>${total}</strong> total opens &nbsp;·&nbsp; <strong>${days}</strong> day${days!==1?"s":""} since ${since}`;
       }
 
-      // Update bars — show visit count and a relative bar (relative to max clicks)
+      // Update bars
       const bars = document.getElementById("skillRadarBars");
       bars.innerHTML = topicMeta.map((t, i) => {
-        const pct   = Math.round((values[i] / maxVal) * 100);
         const count = values[i];
+        const pct   = Math.round((count / maxVal) * 100);
         return `<div class="skill-bar-row">
           <span class="skill-bar-label">${t.label}</span>
           <div class="skill-bar-track">
-            <div class="skill-bar-fill" style="width:${count > 0 ? Math.max(pct, 8) : 0}%"></div>
+            <div class="skill-bar-fill" style="width:${count > 0 ? Math.max(pct, 6) : 0}%"></div>
           </div>
-          <span class="skill-bar-pct" style="color:${count>0?'var(--text-main)':'var(--text-muted)'}">
-            ${count} visit${count !== 1 ? "s" : ""}
+          <span class="skill-bar-pct" style="color:${count>0?"var(--text-main)":"var(--text-muted)"}">
+            ${count} open${count !== 1 ? "s" : ""}
           </span>
         </div>`;
       }).join("");
