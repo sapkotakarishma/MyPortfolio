@@ -194,15 +194,15 @@
       transition: background var(--transition-speed) ease;
     }
 
-    /* Hero particle canvas */
+    /* Particle canvas — fixed full-page, visible on all sections */
     #heroCanvas {
-      position: absolute;
+      position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.28;
+      opacity: 0.22;
     }
 
     /* Decorative glow blob behind avatar */
@@ -271,14 +271,42 @@
       margin-bottom: 10px;
       line-height: 1.08;
       color: var(--text-main);
+      position: relative;
+    }
+    /* Soft ambient glow behind the name */
+    .hero h1::before {
+      content: '';
+      position: absolute;
+      left: -30px;
+      top: -18px;
+      width: 360px;
+      height: 120px;
+      background: radial-gradient(ellipse at 28% 50%, var(--accent), transparent 68%);
+      opacity: 0.13;
+      filter: blur(32px);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      animation: name-glow-pulse 7s ease-in-out infinite;
+    }
+    @keyframes name-glow-pulse {
+      0%, 100% { opacity: 0.10; transform: scale(1); }
+      50%       { opacity: 0.20; transform: scale(1.06); }
     }
 
-    /* Gradient name highlight */
+    /* Gradient name highlight — slow shimmer sweep */
     .hero h1 .name-highlight {
-      background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+      background: linear-gradient(90deg, var(--accent), var(--accent-soft), var(--accent));
+      background-size: 220% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: name-shimmer 6s ease-in-out infinite;
+    }
+    @keyframes name-shimmer {
+      0%   { background-position: 0% center; }
+      50%  { background-position: 100% center; }
+      100% { background-position: 0% center; }
     }
 
     .hero-role-line {
@@ -324,7 +352,75 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
+      margin-bottom: 28px;
     }
+
+    /* Stats row */
+    .hero-stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 28px;
+      margin-top: 4px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .hero-stat-num {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent-soft);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      pointer-events: none;
+      animation: scroll-bounce 2.2s ease-in-out infinite;
+    }
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0);   opacity: 0.45; }
+      50%       { transform: translateX(-50%) translateY(5px); opacity: 0.22; }
+    }
+
+    /* Hero fade-in entry */
+    @keyframes hero-fade-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content > * {
+      animation: hero-fade-up 0.6s ease both;
+    }
+    .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.25s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.35s; }
+    .hero-content > *:nth-child(5) { animation-delay: 0.45s; }
+    .hero-content > *:nth-child(6) { animation-delay: 0.55s; }
     .hero-btn-primary {
       display: inline-flex;
       align-items: center;
@@ -942,6 +1038,29 @@
       padding: 3px 9px;
     }
 
+    /* Project card link row */
+    .proj-card-links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 6px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .proj-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent-soft);
+      text-decoration: none;
+      transition: color 0.18s, opacity 0.18s;
+    }
+    .proj-card-link:hover { color: var(--accent); opacity: 0.85; }
+    .proj-card-link-demo { color: #22c55e; }
+    .proj-card-link-demo:hover { color: #16a34a; }
+
     .tags { margin-top: 8px; }
     .tag {
       display: inline-block;
@@ -1146,6 +1265,191 @@
       gap: 3px;
     }
 
+    /* ── RESEARCH SECTION ──────────────────────────────────────── */
+    .res-group-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .res-group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Research interest cards */
+    .res-interest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .res-interest-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .res-interest-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .res-interest-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 10px 28px rgba(0,0,0,0.2); }
+    .res-interest-card:hover::before { opacity: 1; }
+    .res-interest-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .res-interest-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .res-interest-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Publication card */
+    .res-pub-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-left: 3px solid var(--accent);
+      border-radius: 14px;
+      padding: 24px 24px 20px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 8px;
+    }
+    .res-pub-status { margin-bottom: 12px; }
+    .res-status-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+    .res-status-prep {
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.4);
+      color: #f59e0b;
+    }
+    .res-pub-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.45;
+      margin-bottom: 6px;
+    }
+    .res-pub-authors {
+      font-size: 12px;
+      color: var(--accent-soft);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .res-pub-abstract {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .res-pub-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .res-pub-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      background: rgba(99,179,237,0.1);
+      border: 1px solid rgba(99,179,237,0.22);
+      border-radius: 999px;
+      padding: 3px 9px;
+    }
+
+    /* Research background timeline */
+    .res-bg-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-left: 24px;
+      position: relative;
+    }
+    .res-bg-grid::before {
+      content: '';
+      position: absolute;
+      left: 3px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent) 0%, var(--border) 70%, transparent 100%);
+      border-radius: 2px;
+      opacity: 0.55;
+    }
+    .res-bg-item {
+      display: flex;
+      gap: 20px;
+      padding: 0 0 28px 0;
+      position: relative;
+    }
+    .res-bg-item::before {
+      content: '';
+      position: absolute;
+      left: -21px; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border-card);
+      border: 2px solid var(--bg-main);
+      transition: background 0.2s;
+      z-index: 1;
+    }
+    .res-bg-item:hover::before { background: var(--accent); }
+    .res-bg-year {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-soft);
+      white-space: nowrap;
+      padding-top: 3px;
+      min-width: 80px;
+    }
+    .res-bg-body { flex: 1; min-width: 0; }
+    .res-bg-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+    .res-bg-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
     /* LEARNING HUB */
     .topic-menu {
       display: flex;
@@ -1307,6 +1611,268 @@
     @media (max-width: 480px) {
       .lwc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       .lwc-item { padding: 14px 10px; }
+    }
+
+    /* ── TESTIMONIALS ─────────────────────────────────────────── */
+    .testimonials-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 20px 40px;
+    }
+    .testimonials-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 8px;
+    }
+    .testimonials-heading {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+    .testimonials-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+    }
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 28px 24px 22px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 16px;
+      left: 22px;
+      font-size: 48px;
+      font-family: Georgia, serif;
+      color: var(--accent);
+      opacity: 0.25;
+      line-height: 1;
+    }
+    .testimonial-text {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.72;
+      font-style: italic;
+      margin-bottom: 18px;
+      padding-top: 10px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .testimonial-info {
+      flex: 1;
+    }
+    .testimonial-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .testimonial-role {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .testimonial-stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 10px;
+      padding-top: 8px;
+    }
+    .testimonial-stars svg {
+      color: #f59e0b;
+    }
+
+    /* ── CONTACT / AVAILABILITY ────────────────────────────────── */
+    .contact-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 20px 48px;
+    }
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 48px 40px;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-soft), #a78bfa);
+    }
+    .contact-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 12px;
+    }
+    .contact-heading {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+    .contact-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .contact-links-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.15s, opacity 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .contact-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .contact-link-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .contact-link-outline {
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+    }
+    .contact-link-outline:hover {
+      background: rgba(99,179,237,0.08);
+    }
+    .contact-link-ghost {
+      border: 1.5px solid var(--border);
+      color: var(--text-muted);
+      background: transparent;
+    }
+    .contact-link-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .contact-availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #22c55e;
+      margin-top: 24px;
+    }
+    .contact-avail-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+
+    /* ── LEADERSHIP PHILOSOPHY ───────────────────────────────── */
+    .philosophy-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 20px 20px;
+    }
+    .philosophy-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 20px;
+    }
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 768px) { .philosophy-grid { grid-template-columns: 1fr; } }
+    .philosophy-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .philosophy-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+    .philosophy-num {
+      font-size: 32px;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .philosophy-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .philosophy-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
     /* FOOTER */
@@ -1503,12 +2069,138 @@
       letter-spacing: 0;
     }
 
+    /* Credibility line */
+    .hero-cred-line {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px 10px;
+      margin-bottom: 24px;
+    }
+    .hero-cred-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+    .hero-cred-item svg { opacity: 0.6; flex-shrink: 0; }
+    .hero-cred-dot {
+      font-size: 14px;
+      color: var(--border);
+      line-height: 1;
+    }
+
     /* ── HOME: Short bio ─────────────────────────────────────── */
     .home-bio {
       background: var(--bg-card);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       padding: 32px 20px;
+    }
+    .home-bio-inner {
+      max-width: 740px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 24px;
+    }
+    .home-bio-inner::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 4px; bottom: 4px;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-soft));
+      border-radius: 2px;
+    }
+    .home-bio p {
+      font-size: 15px;
+      line-height: 1.82;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .home-bio strong { color: var(--text-main); }
+
+    /* ── HOME: Career arc timeline ──────────────────────────── */
+    .home-journey {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 8px;
+    }
+    .home-journey-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 24px;
+    }
+    .home-journey-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+    }
+    .home-journey-node {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .home-journey-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2.5px solid var(--border);
+      z-index: 1;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .home-journey-node--active .home-journey-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(99,179,237,0.45);
+    }
+    .home-journey-connector {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      margin-top: 5px;
+      align-self: flex-start;
+      position: relative;
+      top: 0;
+    }
+    .home-journey-connector--done {
+      background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+    }
+    .home-journey-year {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-soft);
+      letter-spacing: 0.05em;
+      margin-top: 8px;
+    }
+    .home-journey-node--active .home-journey-year { color: var(--accent); }
+    .home-journey-role {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+    .home-journey-sub {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+    @media (max-width: 680px) {
+      .home-journey-track { flex-direction: column; align-items: flex-start; gap: 0; }
+      .home-journey-node { flex-direction: row; align-items: flex-start; text-align: left; gap: 14px; flex: none; width: 100%; padding-bottom: 20px; }
+      .home-journey-connector { width: 2px; height: 24px; flex: none; margin: 0 0 0 5px; }
     }
     .home-bio-inner {
       max-width: 1100px;
@@ -1670,31 +2362,63 @@
     .lang-icon-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 24px;
-      align-items: flex-start;
+      gap: 20px;
+      align-items: stretch;
     }
     .lang-icon-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 18px 16px;
+      min-width: 105px;
+      transition: transform 0.25s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .lang-icon-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 0 0 1px var(--accent);
     }
     .lang-icon-badge {
-      width: 56px;
-      height: 56px;
+      width: 52px;
+      height: 52px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+      transition: transform 0.2s;
     }
-    .lang-icon-badge:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.35); }
+    .lang-icon-item:hover .lang-icon-badge { transform: scale(1.08); }
     .lang-icon-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-primary);
       white-space: nowrap;
+    }
+    .lang-icon-level {
+      width: 100%;
+      height: 4px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+      margin-top: -2px;
+    }
+    .lang-icon-level-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+    .lang-icon-tag {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      margin-top: -4px;
     }
 
     /* Theme indicator */
@@ -2314,6 +3038,9 @@
         <a class="db-nav-link" data-section="skills" onclick="showSection('skills')" href="#skills">
           <span class="db-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span> Skills
         </a>
+        <a class="db-nav-link" data-section="research" onclick="showSection('research')" href="#research">
+          <span class="db-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span> Research
+        </a>
         <a class="db-nav-link" data-section="learning" onclick="showSection('learning')" href="#learning">
           <span class="db-nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></span> DS Notebook
         </a>
@@ -2361,18 +3088,14 @@
           <span class="db-topbar-section" id="topbarSection">Home</span>
         </div>
         <div class="db-topbar-right">
-          <a class="db-download-btn" href="#" onclick="event.preventDefault();" title="Download Résumé">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Résumé
-          </a>
         </div>
       </div>
 
       <!-- Content body -->
+      <canvas id="heroCanvas"></canvas>
       <div class="db-content">
 
     <div class="hero-wrapper" id="heroWrapper">
-      <canvas id="heroCanvas"></canvas>
       <div class="hero-grid-overlay"></div>
       <div class="hero-blob"></div>
       <section id="home" class="hero">
@@ -2384,20 +3107,46 @@
           </h1>
 
           <div class="hero-role-line">
-            <span class="typed-role">Data Scientist &nbsp;•&nbsp; Analytics Engineer &nbsp;•&nbsp; Product&#8209;Driven Problem Solver</span>
+            <span class="typed-role">Data Scientist &nbsp;|&nbsp; Healthcare Analytics &nbsp;|&nbsp; Clinical Informatics</span>
           </div>
 
-          <p class="hero-value-stmt">I build intelligent data systems that turn complex datasets into decisions, automation, and measurable business impact across industries.</p>
+          <p class="hero-value-stmt">I&#39;m someone who thinks in systems &#8212; how data flows, how decisions are made, and how small improvements compound into meaningful change. I enjoy building things that feel clean, intentional, and intelligent, whether it&#39;s a pipeline, a dashboard, or an entire product experience. My work blends analytical rigor with design sensibility, and I&#39;m most energized when turning messy, ambiguous problems into something structured, usable, and quietly powerful.</p>
+
+          <div class="hero-cred-line">
+            <span class="hero-cred-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+              Healthcare & Data Science
+            </span>
+            <span class="hero-cred-dot">·</span>
+            <span class="hero-cred-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              MSc Data Science · Mercyhurst
+            </span>
+            <span class="hero-cred-dot">·</span>
+            <span class="hero-cred-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Nursing & Public Health
+            </span>
+          </div>
 
           <!-- CTA buttons -->
           <div class="hero-cta">
-            <a class="hero-btn-icon" href="https://linkedin.com" target="_blank" title="LinkedIn">
+            <a class="hero-btn-primary" href="#projects" onclick="showSection('projects')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              View Projects
+            </a>
+            <a class="hero-btn-outline" href="https://sapkotakarishma.github.io/MyPortfolio/resume.pdf" target="_blank" rel="noopener noreferrer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Résumé
+            </a>
+            <a class="hero-btn-icon" href="https://www.linkedin.com/in/karishma-sapkota/" target="_blank" title="LinkedIn" rel="noopener noreferrer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
-            <a class="hero-btn-icon" href="https://github.com" target="_blank" title="GitHub">
+            <a class="hero-btn-icon" href="https://github.com/sapkotakarishma" target="_blank" title="GitHub" rel="noopener noreferrer">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
             </a>
           </div>
+
         </div>
 
       </section>
@@ -2408,7 +3157,7 @@
           <span class="trusted-label">Worked with</span>
           <div class="trusted-divider"></div>
           <div class="trusted-orgs">
-            <span class="trusted-org">UPMC</span>
+            <span class="trusted-org">UPMC Hamot</span>
             <span class="trusted-org">Crown Agents (UK)</span>
             <span class="trusted-org">Mercyhurst University</span>
             <span class="trusted-org">Department of Health Nepal</span>
@@ -2419,7 +3168,49 @@
       <!-- ── SHORT BIO ─────────────────────────────────────── -->
       <div class="home-bio">
         <div class="home-bio-inner">
-          <p>I’m someone who thinks in systems — how data flows, how decisions are made, and how small improvements compound into meaningful change. I enjoy building things that feel clean, intentional, and intelligent, whether it’s a pipeline, a dashboard, or an entire product experience. My work blends analytical rigor with design sensibility, and I’m most energized when turning messy, ambiguous problems into something structured, usable, and quietly powerful.</p>
+          <p>I'm someone who thinks in systems &#8212; how data flows, how decisions are made, and how small improvements compound into meaningful change. That instinct was shaped across a few different worlds: I started as a nursing officer in Nepal, moved into public health data work with Crown Agents UK, then pursued an MSc in Data Science at Mercyhurst &#8212; each step deepening my belief that the best analytical work is fundamentally about people.</p>
+          <p>My work blends analytical rigor with design sensibility, and I'm most energized when turning messy, ambiguous problems into something structured, usable, and quietly powerful.</p>
+        </div>
+
+      <!-- ── CAREER ARC ──────────────────────────────────────── -->
+      <div class="home-journey">
+        <div class="home-journey-label">Career Arc</div>
+        <div class="home-journey-track">
+
+          <div class="home-journey-node">
+            <div class="home-journey-dot"></div>
+            <div class="home-journey-year">2017 &#8211; 2020</div>
+            <div class="home-journey-role">Clinical Practice</div>
+            <div class="home-journey-sub">Nursing Officer &middot; Nepal DoH</div>
+          </div>
+
+          <div class="home-journey-connector home-journey-connector--done"></div>
+
+          <div class="home-journey-node">
+            <div class="home-journey-dot"></div>
+            <div class="home-journey-year">2020 &#8211; 2022</div>
+            <div class="home-journey-role">Public Health Data</div>
+            <div class="home-journey-sub">NTD Coordinator &middot; Crown Agents UK</div>
+          </div>
+
+          <div class="home-journey-connector home-journey-connector--done"></div>
+
+          <div class="home-journey-node">
+            <div class="home-journey-dot"></div>
+            <div class="home-journey-year">2022 &#8211; 2024</div>
+            <div class="home-journey-role">MSc Data Science</div>
+            <div class="home-journey-sub">Mercyhurst University</div>
+          </div>
+
+          <div class="home-journey-connector home-journey-connector--done"></div>
+
+          <div class="home-journey-node home-journey-node--active">
+            <div class="home-journey-dot"></div>
+            <div class="home-journey-year">2024 &#8211; 2025</div>
+            <div class="home-journey-role">Clinical Informatics &amp; AI</div>
+            <div class="home-journey-sub">Business Analyst &middot; UPMC Hamot</div>
+          </div>
+
         </div>
       </div>
 
@@ -2430,93 +3221,141 @@
 
           <div class="strength-card">
             <div class="strength-card-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
             </div>
-            <div class="strength-card-title">Data Engineering</div>
-            <div class="strength-card-desc">I design clean, reliable data pipelines and validation systems that turn raw, messy information into structured, analysis-ready datasets.</div>
+            <div class="strength-card-title">Healthcare Analytics &amp; Clinical Informatics</div>
+            <div class="strength-card-desc">I design and deploy data pipelines, dashboards, and decision-support systems within clinical environments — translating messy EHR and operational data into insights that improve care delivery and outcomes.</div>
+            <div class="strength-card-pills">
+              <span class="strength-pill">Power BI</span><span class="strength-pill">SQL</span><span class="strength-pill">HIPAA</span><span class="strength-pill">Clinical CDS</span>
+            </div>
           </div>
 
           <div class="strength-card">
             <div class="strength-card-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
             </div>
-            <div class="strength-card-title">Analytics &amp; BI</div>
-            <div class="strength-card-desc">I build dashboards, KPI systems, and analytical workflows that help teams understand performance, spot patterns, and make informed decisions.</div>
+            <div class="strength-card-title">Public Health Intelligence &amp; Epidemiology</div>
+            <div class="strength-card-desc">I analyse surveillance data, map disease burden, and build monitoring systems that support evidence-based decision-making in public health programs — from field data to policy insight.</div>
+            <div class="strength-card-pills">
+              <span class="strength-pill">Epidemiology</span><span class="strength-pill">SPSS</span><span class="strength-pill">M&amp;E</span><span class="strength-pill">Geo Analytics</span>
+            </div>
           </div>
 
           <div class="strength-card">
             <div class="strength-card-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
             </div>
-            <div class="strength-card-title">Machine Learning</div>
-            <div class="strength-card-desc">I develop predictive models and intelligent workflows with a focus on interpretability, scalability, and solving real-world problems.</div>
+            <div class="strength-card-title">Applied ML &amp; AI Research</div>
+            <div class="strength-card-desc">I build and evaluate machine learning models for classification, NLP, and predictive analytics — with a focus on explainability and real-world healthcare applications.</div>
+            <div class="strength-card-pills">
+              <span class="strength-pill">Python</span><span class="strength-pill">Scikit-learn</span><span class="strength-pill">NLP</span><span class="strength-pill">XAI / SHAP</span>
+            </div>
           </div>
 
           <div class="strength-card">
             <div class="strength-card-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
             </div>
-            <div class="strength-card-title">Product Thinking</div>
-            <div class="strength-card-desc">I create data solutions that feel intuitive and purposeful — blending design, usability, and analytical rigor to deliver systems people actually want to use.</div>
+            <div class="strength-card-title">Business Intelligence &amp; Process Automation</div>
+            <div class="strength-card-desc">I deliver BI dashboards, KPI frameworks, and automated reporting pipelines that reduce manual overhead and give teams clear, timely visibility into operational performance.</div>
+            <div class="strength-card-pills">
+              <span class="strength-pill">DAX</span><span class="strength-pill">Power Query</span><span class="strength-pill">Power Automate</span><span class="strength-pill">SQL</span>
+            </div>
           </div>
 
         </div>
       </div>
-
       <!-- ── FEATURED PROJECTS ───────────────────────────────── -->
       <div class="home-fp-section">
         <div class="home-fp-label">Featured Projects</div>
         <div class="home-fp-grid">
 
           <div class="home-fp-card">
-            <div class="home-fp-thumb">
-              <canvas id="fpChart1" height="110"></canvas>
+            <div class="home-fp-thumb" style="background:#0d1117;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 200 110" width="100%" height="110" xmlns="http://www.w3.org/2000/svg">
+                <line x1="20" y1="14" x2="20" y2="90" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <line x1="20" y1="90" x2="190" y2="90" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <path d="M25,84 C45,76 65,68 85,58 C105,50 125,40 145,32 C160,27 170,24 185,20" stroke="#60a5fa" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M25,84 C45,76 65,68 85,58 C105,50 125,40 145,32 C160,27 170,24 185,20 L185,90 L25,90 Z" fill="rgba(37,99,235,0.08)"/>
+                <circle cx="110" cy="55" r="5" fill="rgba(244,63,94,0.1)" stroke="rgba(244,63,94,0.6)" stroke-width="1.5"/><circle cx="110" cy="55" r="2.5" fill="#f43f5e"/>
+                <rect x="24" y="4" width="42" height="10" rx="5" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+                <text x="45" y="12" font-size="7" fill="#22c55e" text-anchor="middle" font-family="sans-serif" font-weight="700">100% Avail</text>
+                <rect x="72" y="4" width="36" height="10" rx="5" fill="rgba(37,99,235,0.15)" stroke="rgba(37,99,235,0.4)" stroke-width="1"/>
+                <text x="90" y="12" font-size="7" fill="#60a5fa" text-anchor="middle" font-family="sans-serif" font-weight="700">&#8722;25% Time</text>
+              </svg>
             </div>
             <div class="home-fp-body">
-              <div class="home-fp-title">Inventory Forecasting &amp; Optimization</div>
-              <div class="home-fp-impact">Achieved 100% availability of critical inventory items by forecasting demand and optimizing supply workflows with a predictive model + automated reporting pipeline.</div>
-              <div class="home-fp-tags">
-                <span class="home-fp-tag">Python</span>
-                <span class="home-fp-tag">Prophet</span>
-                <span class="home-fp-tag">SQL</span>
-              </div>
-              <button class="home-fp-btn" onclick="showSection('projects')">
-                View Project
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="home-fp-card">
-            <div class="home-fp-thumb">
-              <canvas id="fpChart2" height="110"></canvas>
-            </div>
-            <div class="home-fp-body">
-              <div class="home-fp-title">Automated Data Quality Monitoring System</div>
-              <div class="home-fp-impact">Reduced data defects by 25–30% through automated QA checks and anomaly detection — a scalable SQL-based validation system flagging inconsistencies in real time.</div>
-              <div class="home-fp-tags">
-                <span class="home-fp-tag">SQL</span>
-                <span class="home-fp-tag">Python</span>
-                <span class="home-fp-tag">Automated QA</span>
-              </div>
-              <button class="home-fp-btn" onclick="showSection('projects')">
-                View Project
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="home-fp-card">
-            <div class="home-fp-thumb">
-              <canvas id="fpChart3" height="110"></canvas>
-            </div>
-            <div class="home-fp-body">
-              <div class="home-fp-title">Multi-Region Performance &amp; KPI Dashboard</div>
-              <div class="home-fp-impact">Integrated multi-region data for real-time KPI monitoring and operational insights — a unified dashboard with performance trends, risk flags, and region-level analytics.</div>
+              <div class="home-fp-title">Healthcare Analytics Dashboard Suite</div>
+              <div class="home-fp-impact">8+ enterprise Power BI dashboards at UPMC Hamot tracking pharmacy workflows, medication safety, and clinical KPIs in real time. 100% medication availability. 25&#8211;30% reduction in manual reporting.</div>
               <div class="home-fp-tags">
                 <span class="home-fp-tag">Power BI</span>
                 <span class="home-fp-tag">SQL</span>
                 <span class="home-fp-tag">DAX</span>
+                <span class="home-fp-tag">HIPAA</span>
+              </div>
+              <button class="home-fp-btn" onclick="showSection('projects')">
+                View Project
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="home-fp-card">
+            <div class="home-fp-thumb" style="background:#0d1117;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 200 110" width="100%" height="110" xmlns="http://www.w3.org/2000/svg">
+                <line x1="22" y1="8" x2="22" y2="92" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                <line x1="22" y1="92" x2="188" y2="92" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                <path d="M22,92 Q42,26 84,18 Q128,12 188,10" stroke="#6366f1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                <path d="M22,92 Q42,26 84,18 Q128,12 188,10 L188,92 Z" fill="rgba(99,102,241,0.10)"/>
+                <circle cx="55" cy="38" r="3.5" fill="#6366f1"/><circle cx="120" cy="17" r="3.5" fill="#6366f1"/>
+                <rect x="58" y="42" width="52" height="16" rx="8" fill="rgba(99,102,241,0.28)" stroke="rgba(99,102,241,0.45)" stroke-width="1"/>
+                <text x="84" y="53" font-size="9" fill="#818cf8" text-anchor="middle" font-family="sans-serif" font-weight="700">AUC 0.86</text>
+              </svg>
+            </div>
+            <div class="home-fp-body">
+              <div class="home-fp-title">Heart Disease Prediction — Clinical ML</div>
+              <div class="home-fp-impact">Ensemble ML classifier for early heart disease detection. Achieved 0.86 ROC AUC using clinical feature engineering and stacking to reduce false negatives in high-risk patient groups.</div>
+              <div class="home-fp-tags">
+                <span class="home-fp-tag">Python</span>
+                <span class="home-fp-tag">Scikit-learn</span>
+                <span class="home-fp-tag">Healthcare ML</span>
+              </div>
+              <button class="home-fp-btn" onclick="showSection('projects')">
+                View Project
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="home-fp-card">
+            <div class="home-fp-thumb" style="background:#0d1117;">
+              <svg viewBox="0 0 200 110" width="100%" height="110" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="10" width="55" height="88" rx="4" fill="rgba(37,99,235,0.10)" stroke="rgba(37,99,235,0.25)" stroke-width="1"/>
+                <line x1="18" y1="28" x2="56" y2="28" stroke="rgba(96,165,250,0.55)" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="18" y1="38" x2="56" y2="38" stroke="rgba(96,165,250,0.3)" stroke-width="1.2" stroke-linecap="round"/>
+                <line x1="18" y1="48" x2="46" y2="48" stroke="rgba(96,165,250,0.25)" stroke-width="1.2" stroke-linecap="round"/>
+                <line x1="18" y1="58" x2="52" y2="58" stroke="rgba(96,165,250,0.2)" stroke-width="1.2" stroke-linecap="round"/>
+                <rect x="84" y="16" width="32" height="14" rx="4" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.45)" stroke-width="1"/>
+                <text x="100" y="26" font-size="7.5" fill="#a78bfa" text-anchor="middle" font-family="monospace">Tokenize</text>
+                <line x1="116" y1="23" x2="126" y2="23" stroke="rgba(139,92,246,0.4)" stroke-width="1.2"/>
+                <polygon points="126,20 132,23 126,26" fill="rgba(139,92,246,0.5)"/>
+                <rect x="132" y="16" width="34" height="14" rx="4" fill="rgba(99,102,241,0.2)" stroke="rgba(99,102,241,0.45)" stroke-width="1"/>
+                <text x="149" y="26" font-size="7.5" fill="#818cf8" text-anchor="middle" font-family="monospace">Classify</text>
+                <rect x="84" y="42" width="32" height="14" rx="4" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+                <text x="100" y="52" font-size="7.5" fill="#34d399" text-anchor="middle" font-family="monospace">Embed</text>
+                <line x1="116" y1="49" x2="126" y2="49" stroke="rgba(16,185,129,0.4)" stroke-width="1.2"/>
+                <polygon points="126,46 132,49 126,52" fill="rgba(16,185,129,0.5)"/>
+                <rect x="132" y="42" width="34" height="14" rx="4" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+                <text x="149" y="52" font-size="7.5" fill="#6ee7b7" text-anchor="middle" font-family="monospace">Sentiment</text>
+              </svg>
+            </div>
+            <div class="home-fp-body">
+              <div class="home-fp-title">Co-Developing NLP Graduate Curriculum</div>
+              <div class="home-fp-impact">Collaborated with Mercyhurst faculty to design graduate NLP coursework and hands-on labs covering tokenisation, embeddings, classification, and health-domain NLP applications.</div>
+              <div class="home-fp-tags">
+                <span class="home-fp-tag">NLP</span>
+                <span class="home-fp-tag">Python</span>
+                <span class="home-fp-tag">Curriculum Design</span>
               </div>
               <button class="home-fp-btn" onclick="showSection('projects')">
                 View Project
@@ -2535,12 +3374,18 @@
 
         <div class="lang-icon-row">
 
-          <!-- Python — "Py" wordmark, no snake -->
+          <!-- Python -->
           <div class="lang-icon-item">
             <div class="lang-icon-badge" style="background:linear-gradient(135deg,#3776ab 0%,#ffd343 100%);">
-              <span style="font-size:14px;font-weight:900;color:#fff;letter-spacing:-0.02em;text-shadow:0 1px 3px rgba(0,0,0,0.3);">Py</span>
+              <svg width="28" height="28" viewBox="0 0 256 255" xmlns="http://www.w3.org/2000/svg">
+                <defs><linearGradient id="pyTop" x1="12.96%" y1="12.07%" x2="79.64%" y2="78.57%"><stop offset="0%" stop-color="#387eb8"/><stop offset="100%" stop-color="#366994"/></linearGradient><linearGradient id="pyBot" x1="19.13%" y1="20.58%" x2="90.43%" y2="88.01%"><stop offset="0%" stop-color="#ffe052"/><stop offset="100%" stop-color="#ffc331"/></linearGradient></defs>
+                <path d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072zM92.802 19.66a11.12 11.12 0 110 22.24 11.12 11.12 0 010-22.24z" fill="url(#pyTop)"/>
+                <path d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.519 33.897zm34.114-19.586a11.12 11.12 0 110-22.24 11.12 11.12 0 010 22.24z" fill="url(#pyBot)"/>
+              </svg>
             </div>
             <span class="lang-icon-label">Python</span>
+            <div class="lang-icon-level"><div class="lang-icon-level-fill" style="width:92%;background:linear-gradient(90deg,#3776ab,#ffd343);"></div></div>
+            <span class="lang-icon-tag">ML · NLP · Pandas</span>
           </div>
 
           <!-- SQL -->
@@ -2549,6 +3394,8 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/></svg>
             </div>
             <span class="lang-icon-label">SQL</span>
+            <div class="lang-icon-level"><div class="lang-icon-level-fill" style="width:90%;background:linear-gradient(90deg,#e38c00,#f7b731);"></div></div>
+            <span class="lang-icon-tag">Queries · ETL · CTE</span>
           </div>
 
           <!-- R -->
@@ -2557,6 +3404,8 @@
               <span style="font-size:20px;font-weight:900;color:#fff;font-style:italic;line-height:1;">R</span>
             </div>
             <span class="lang-icon-label">R</span>
+            <div class="lang-icon-level"><div class="lang-icon-level-fill" style="width:72%;background:linear-gradient(90deg,#276dc3,#75aadb);"></div></div>
+            <span class="lang-icon-tag">Stats · ggplot2</span>
           </div>
 
           <!-- DAX -->
@@ -2565,6 +3414,8 @@
               <span style="font-size:11px;font-weight:900;color:#1a1a1a;letter-spacing:0.06em;">DAX</span>
             </div>
             <span class="lang-icon-label">DAX</span>
+            <div class="lang-icon-level"><div class="lang-icon-level-fill" style="width:85%;background:linear-gradient(90deg,#f2c811,#e97627);"></div></div>
+            <span class="lang-icon-tag">Power BI · Measures</span>
           </div>
 
           <!-- JavaScript -->
@@ -2573,6 +3424,8 @@
               <span style="font-size:13px;font-weight:900;color:#1a1a1a;letter-spacing:-0.02em;">JS</span>
             </div>
             <span class="lang-icon-label">JavaScript</span>
+            <div class="lang-icon-level"><div class="lang-icon-level-fill" style="width:65%;background:linear-gradient(90deg,#f7df1e,#d4b800);"></div></div>
+            <span class="lang-icon-tag">D3 · Web · Chart.js</span>
           </div>
 
         </div>
@@ -2586,44 +3439,35 @@
       <div class="dashboard-section">
         <div class="dashboard-heading">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;opacity:0.8;"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Analytics Panel
+          Analytics Snapshot
         </div>
         <div class="dashboard-grid">
 
-          <!-- KPI: Page Visits (sparkline) -->
-          <div class="dash-card dash-visits">
-            <div class="dash-card-title">Page Visits · last 7 days</div>
-            <div class="dash-card-value" id="visitsTodayCount">—</div>
-            <div class="dash-card-sub">Tracked in this browser via localStorage</div>
-            <canvas id="chartVisits" height="120"></canvas>
-            <div class="dash-card-note">Each page load adds to today's count — revisit to see the line grow.</div>
-          </div>
-
           <!-- KPI: Model Accuracy -->
           <div class="dash-card">
-            <div class="dash-card-title">Model Performance · ROC AUC</div>
+            <div class="dash-card-title">Model Performance &middot; ROC AUC</div>
             <div class="dash-card-value">0.86</div>
-            <div class="dash-card-sub">Heart Disease Classifier — ensemble model</div>
+            <div class="dash-card-sub">Heart Disease Classifier &mdash; ensemble stacking model</div>
             <canvas id="chartModel" height="120"></canvas>
-            <div class="dash-card-note">Ensemble stacking pushed AUC from 0.74 → 0.86, reducing false negatives in high-risk predictions.</div>
+            <div class="dash-card-note">Ensemble stacking pushed AUC from 0.74 &rarr; 0.86, reducing false negatives in high-risk predictions.</div>
           </div>
 
           <!-- KPI: Skills breakdown -->
           <div class="dash-card">
             <div class="dash-card-title">Skills Breakdown</div>
             <div class="dash-card-value">6 domains</div>
-            <div class="dash-card-sub">ML · NLP · SQL · BI · Cloud · Stats</div>
+            <div class="dash-card-sub">ML &middot; NLP &middot; SQL &middot; BI &middot; Stats &middot; Health Informatics</div>
             <canvas id="chartSkills" height="120"></canvas>
-            <div class="dash-card-note">ML &amp; NLP lead at 46% combined — grounded in statistical reasoning and production BI delivery.</div>
+            <div class="dash-card-note">ML &amp; NLP lead at 46% combined &mdash; grounded in statistical reasoning and production BI delivery.</div>
           </div>
 
-          <!-- Wide: pipeline / project activity timeline -->
+          <!-- Wide: project activity -->
           <div class="dash-card wide">
-            <div class="dash-card-title">Project Activity · commits & deliverables over 12 months</div>
-            <div class="dash-card-value" style="font-size:18px;">Consistent delivery across ML, NLP & analytics tracks</div>
-            <div class="dash-card-sub">Illustrative activity — reflects relative effort distribution</div>
+            <div class="dash-card-title">Project Activity &middot; deliverables across career tracks</div>
+            <div class="dash-card-value" style="font-size:18px;">Consistent delivery across ML, BI &amp; public health tracks</div>
+            <div class="dash-card-sub">Relative effort distribution across project domains</div>
             <canvas id="chartActivity" height="90"></canvas>
-            <div class="dash-card-note">Consistent upward trend across all tracks — Mar 2026 marks the highest delivery month, driven by analytics automation and NLP model refinements.</div>
+            <div class="dash-card-note">Upward trend across all tracks &mdash; 2024&ndash;25 marks the highest delivery period, driven by clinical analytics and NLP model work.</div>
           </div>
 
         </div>
@@ -2985,9 +3829,8 @@
       <div class="section-eyebrow">Career History</div>
       <h2>Professional Journey</h2>
       <div class="exp-featured-intro">
-        7+ years across clinical informatics, public health systems, and applied data science — delivering analytical pipelines, BI dashboards, and ML models that drive real decisions.
+        7+ years leading data-driven initiatives across clinical informatics, global public health, and applied data science — architecting analytical pipelines, enterprise BI platforms, and ML systems that drive measurable outcomes at the intersection of healthcare and technology.
       </div>
-      <p class="exp-intro">Click any role to expand full details. Spanning clinical informatics, public health, research, and teaching.</p>
 
       <!-- ── PROFESSIONAL EXPERIENCE ───────────────────────────── -->
       <div class="exp-group">
@@ -3463,8 +4306,155 @@
             </div>
           </div>
 
+          <!-- Healthcare Analytics Dashboard -->
+          <div class="proj-card">
+            <div class="proj-card-thumb">
+              <svg viewBox="0 0 200 88" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="200" height="88" fill="#0d1117"/>
+                <!-- grid lines -->
+                <line x1="20" y1="14" x2="20" y2="74" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <line x1="20" y1="74" x2="190" y2="74" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <line x1="20" y1="44" x2="190" y2="44" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="3,3"/>
+                <!-- trend line -->
+                <path d="M25,68 C45,62 65,55 85,48 C105,42 125,34 145,28 C160,24 170,22 185,18" stroke="#60a5fa" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M25,68 C45,62 65,55 85,48 C105,42 125,34 145,28 C160,24 170,22 185,18 L185,74 L25,74 Z" fill="rgba(37,99,235,0.08)"/>
+                <!-- alert dot -->
+                <circle cx="110" cy="45" r="5" fill="rgba(244,63,94,0.1)" stroke="rgba(244,63,94,0.6)" stroke-width="1.5"/>
+                <circle cx="110" cy="45" r="2.5" fill="#f43f5e"/>
+                <!-- KPI chips -->
+                <rect x="24" y="4" width="36" height="10" rx="5" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+                <text x="42" y="12" font-size="7" fill="#22c55e" text-anchor="middle" font-family="sans-serif" font-weight="700">100% Avail</text>
+                <rect x="66" y="4" width="36" height="10" rx="5" fill="rgba(37,99,235,0.15)" stroke="rgba(37,99,235,0.4)" stroke-width="1"/>
+                <text x="84" y="12" font-size="7" fill="#60a5fa" text-anchor="middle" font-family="sans-serif" font-weight="700">−25% Time</text>
+                <rect x="108" y="4" width="40" height="10" rx="5" fill="rgba(139,92,246,0.12)" stroke="rgba(139,92,246,0.35)" stroke-width="1"/>
+                <text x="128" y="12" font-size="7" fill="#a78bfa" text-anchor="middle" font-family="sans-serif" font-weight="700">8+ Dashboards</text>
+              </svg>
+            </div>
+            <div class="proj-card-top">
+              <div class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+              <div class="proj-card-head">
+                <div class="proj-title">Healthcare Analytics Dashboard Suite — UPMC</div>
+                <div class="proj-type">BI · Clinical Informatics · Power BI</div>
+              </div>
+              <div class="proj-metric">8+ Live</div>
+            </div>
+            <ul>
+              <li>Deployed 8+ enterprise Power BI dashboards for UPMC Hamot Pharmacy tracking pharmacist verification cycles, order volume, staff workload, and medication error patterns in real time.</li>
+              <li>Integrated SQL, Power Query, and DAX pipelines across clinical databases and pharmacy management systems to support executive decision-making.</li>
+              <li>Achieved 100% high-priority medication availability through forecasting and reduced report generation time by 25–30% via Power Automate workflows.</li>
+            </ul>
+            <div class="proj-tags">
+              <span class="proj-tag">Power BI</span><span class="proj-tag">DAX</span><span class="proj-tag">SQL</span><span class="proj-tag">Power Query</span><span class="proj-tag">Power Automate</span><span class="proj-tag">HIPAA</span>
+            </div>
+          </div>
+
+          <!-- NLP Curriculum -->
+          <div class="proj-card">
+            <div class="proj-card-thumb">
+              <svg viewBox="0 0 200 88" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="200" height="88" fill="#0d1117"/>
+                <!-- document lines -->
+                <rect x="18" y="10" width="60" height="70" rx="4" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.3)" stroke-width="1"/>
+                <line x1="26" y1="26" x2="70" y2="26" stroke="rgba(96,165,250,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="26" y1="35" x2="70" y2="35" stroke="rgba(96,165,250,0.3)" stroke-width="1.2" stroke-linecap="round"/>
+                <line x1="26" y1="44" x2="58" y2="44" stroke="rgba(96,165,250,0.3)" stroke-width="1.2" stroke-linecap="round"/>
+                <line x1="26" y1="53" x2="66" y2="53" stroke="rgba(96,165,250,0.2)" stroke-width="1.2" stroke-linecap="round"/>
+                <line x1="26" y1="62" x2="52" y2="62" stroke="rgba(96,165,250,0.2)" stroke-width="1.2" stroke-linecap="round"/>
+                <!-- NLP pipeline -->
+                <rect x="98" y="14" width="30" height="14" rx="4" fill="rgba(139,92,246,0.2)" stroke="rgba(139,92,246,0.45)" stroke-width="1"/>
+                <text x="113" y="24" font-size="7.5" fill="#a78bfa" text-anchor="middle" font-family="monospace">Tokenize</text>
+                <line x1="128" y1="21" x2="140" y2="21" stroke="rgba(139,92,246,0.4)" stroke-width="1.2"/>
+                <polygon points="140,18 146,21 140,24" fill="rgba(139,92,246,0.5)"/>
+                <rect x="146" y="14" width="36" height="14" rx="4" fill="rgba(99,102,241,0.2)" stroke="rgba(99,102,241,0.45)" stroke-width="1"/>
+                <text x="164" y="24" font-size="7.5" fill="#818cf8" text-anchor="middle" font-family="monospace">Classify</text>
+                <rect x="98" y="38" width="30" height="14" rx="4" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+                <text x="113" y="48" font-size="7.5" fill="#34d399" text-anchor="middle" font-family="monospace">Embed</text>
+                <line x1="128" y1="45" x2="140" y2="45" stroke="rgba(16,185,129,0.4)" stroke-width="1.2"/>
+                <polygon points="140,42 146,45 140,48" fill="rgba(16,185,129,0.5)"/>
+                <rect x="146" y="38" width="36" height="14" rx="4" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.4)" stroke-width="1"/>
+                <text x="164" y="48" font-size="7.5" fill="#6ee7b7" text-anchor="middle" font-family="monospace">Sentiment</text>
+                <rect x="4" y="4" width="82" height="11" rx="5" fill="rgba(139,92,246,0.12)"/>
+                <text x="45" y="12.5" font-size="7.5" fill="#a78bfa" text-anchor="middle" font-family="sans-serif">NLP Curriculum · Mercyhurst</text>
+              </svg>
+            </div>
+            <div class="proj-card-top">
+              <div class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+              <div class="proj-card-head">
+                <div class="proj-title">Co-Developing NLP Graduate Curriculum</div>
+                <div class="proj-type">NLP &middot; Curriculum Design &middot; Teaching</div>
+              </div>
+              <div class="proj-metric">Mercyhurst</div>
+            </div>
+            <ul>
+              <li>Collaborated with faculty to design and build graduate-level NLP coursework covering tokenisation, text classification, embeddings, and sentiment analysis pipelines.</li>
+              <li>Developed hands-on lab materials and code-along notebooks using Python, NLTK, and transformer-based models, aligning content with real-world health data applications.</li>
+              <li>Contributed to curriculum structure, assessment design, and student-facing documentation for the MSc Data Science programme.</li>
+            </ul>
+            <div class="proj-tags">
+              <span class="proj-tag">NLP</span><span class="proj-tag">Python</span><span class="proj-tag">NLTK</span><span class="proj-tag">Transformers</span><span class="proj-tag">Curriculum Design</span><span class="proj-tag">Mercyhurst</span>
+            </div>
+          </div>
+
+      <!-- ── PUBLIC HEALTH & FIELD RESEARCH ───────────────────── -->
+      <div class="proj-group">
+        <div class="proj-group-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Public Health &amp; Field Research</div>
+        <div class="proj-grid">
+
+          <!-- Filariasis Case Study -->
+          <div class="proj-card">
+            <div class="proj-card-thumb">
+              <svg viewBox="0 0 200 88" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="200" height="88" fill="#0d1117"/>
+                <!-- timeline axis -->
+                <line x1="24" y1="72" x2="188" y2="72" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <!-- cohort track lines -->
+                <line x1="24" y1="20" x2="24" y2="72" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <line x1="80" y1="20" x2="80" y2="72" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <line x1="136" y1="20" x2="136" y2="72" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <!-- client tracking bars -->
+                <rect x="24" y="26" width="112" height="7" rx="3.5" fill="rgba(20,184,166,0.65)"/>
+                <rect x="24" y="38" width="80" height="7" rx="3.5" fill="rgba(20,184,166,0.5)"/>
+                <rect x="24" y="50" width="136" height="7" rx="3.5" fill="rgba(20,184,166,0.4)"/>
+                <rect x="24" y="62" width="56" height="7" rx="3.5" fill="rgba(20,184,166,0.3)"/>
+                <!-- endpoint dots -->
+                <circle cx="136" cy="29.5" r="4" fill="rgba(20,184,166,0.9)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <circle cx="104" cy="41.5" r="4" fill="rgba(250,204,21,0.8)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <circle cx="160" cy="53.5" r="4" fill="rgba(20,184,166,0.9)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <circle cx="80" cy="65.5" r="4" fill="rgba(244,63,94,0.8)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <!-- legend -->
+                <circle cx="14" cy="29.5" r="3" fill="rgba(20,184,166,0.6)"/>
+                <circle cx="14" cy="41.5" r="3" fill="rgba(20,184,166,0.6)"/>
+                <circle cx="14" cy="53.5" r="3" fill="rgba(20,184,166,0.6)"/>
+                <circle cx="14" cy="65.5" r="3" fill="rgba(20,184,166,0.6)"/>
+                <!-- KPI chip -->
+                <rect x="144" y="4" width="50" height="13" rx="6" fill="rgba(20,184,166,0.15)" stroke="rgba(20,184,166,0.45)" stroke-width="1"/>
+                <text x="169" y="13.5" font-size="7.5" fill="#2dd4bf" text-anchor="middle" font-family="sans-serif" font-weight="700">QoL Tracked</text>
+                <!-- label -->
+                <rect x="4" y="4" width="62" height="11" rx="5" fill="rgba(20,184,166,0.12)"/>
+                <text x="35" y="12.5" font-size="7.5" fill="#2dd4bf" text-anchor="middle" font-family="sans-serif">Cohort Monitoring</text>
+              </svg>
+            </div>
+            <div class="proj-card-top">
+              <div class="proj-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+              <div class="proj-card-head">
+                <div class="proj-title">Lymphatic Filariasis — Client Case Tracking &amp; Quality-of-Life Impact Study</div>
+                <div class="proj-type">Public Health · Case Study · Mixed Methods</div>
+              </div>
+              <div class="proj-metric">Field Study</div>
+            </div>
+            <ul>
+              <li>Conducted a longitudinal case tracking study on individuals affected by lymphatic filariasis, monitoring disease progression, treatment adherence, and morbidity management outcomes across a defined client cohort.</li>
+              <li>Assessed the multidimensional impact of bodily disfigurement — including lymphedema and elephantiasis — on clients' physical mobility, social participation, economic productivity, mental well-being, and household dynamics.</li>
+              <li>Documented life-altering changes reported by affected individuals: social stigma and withdrawal from community life, loss of livelihood due to reduced mobility, increased dependency on caregivers, and diminished self-esteem and psychological resilience.</li>
+              <li>Synthesized case data into structured narratives and analytical summaries to inform program planning and to advocate for disability-inclusive health services.</li>
+            </ul>
+            <div class="proj-tags">
+              <span class="proj-tag">Epidemiology</span><span class="proj-tag">Case Tracking</span><span class="proj-tag">Quality of Life</span><span class="proj-tag">Mixed Methods</span><span class="proj-tag">NTDs</span><span class="proj-tag">Public Health</span><span class="proj-tag">Morbidity Management</span>
+            </div>
+          </div>
+
         </div>
-      </div><!-- /ML & NLP -->
+      </div><!-- /Public Health -->
 
       <!-- ── BUSINESS ANALYSIS & INDEPENDENT ───────────────────── -->
       <div class="proj-group">
@@ -3655,7 +4645,7 @@
           </div>
           <div class="skill-pill-row">
             <span class="skill-pill">HIPAA Compliance</span>
-            <span class="skill-pill">Mixed Methods Research</span>
+            <span class="skill-pill">Mixed-Methods Research</span>
             <span class="skill-pill">M&amp;E</span>
             <span class="skill-pill">Survey Design &amp; Validation</span>
             <span class="skill-pill">Key Informant Interviews</span>
@@ -3786,6 +4776,130 @@
       </div><!-- /training-strip -->
 
       </div><!-- /skills inner wrapper -->
+    </section>
+
+    <div class="section-rule"></div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         RESEARCH SECTION
+    ═══════════════════════════════════════════════════════════ -->
+    <section id="research" style="display:none;">
+      <div style="max-width:1100px;margin:0 auto;padding:60px 20px;">
+
+      <div class="section-eyebrow">Scholarly Work</div>
+      <h2>Research</h2>
+      <p style="font-size:14px;color:var(--text-muted);max-width:700px;line-height:1.7;margin-bottom:44px;">
+        My research sits at the intersection of AI, healthcare, and human-computer interaction — focused on building intelligent systems that are interpretable, equitable, and clinically meaningful.
+      </p>
+
+      <!-- ── RESEARCH INTERESTS ─────────────────────────────── -->
+      <div class="res-group-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Research Interests
+      </div>
+
+      <div class="res-interest-grid">
+
+        <div class="res-interest-card">
+          <div class="res-interest-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="res-interest-title">AI for Healthcare</div>
+          <div class="res-interest-desc">Applying machine learning and deep learning to clinical decision support, disease prediction, and patient risk stratification across diverse healthcare settings.</div>
+        </div>
+
+        <div class="res-interest-card">
+          <div class="res-interest-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="res-interest-title">Multimodal Health Data</div>
+          <div class="res-interest-desc">Integrating heterogeneous data sources — clinical records, wearable signals, imaging, and social signals — to build richer, more complete patient representations.</div>
+        </div>
+
+        <div class="res-interest-card">
+          <div class="res-interest-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+          </div>
+          <div class="res-interest-title">ML for Decision Support</div>
+          <div class="res-interest-desc">Developing predictive and prescriptive models that translate data into actionable clinical or public health recommendations — bridging algorithmic outputs and human decision-making.</div>
+        </div>
+
+        <div class="res-interest-card">
+          <div class="res-interest-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="res-interest-title">Explainable AI (XAI)</div>
+          <div class="res-interest-desc">Designing interpretable models and post-hoc explanation methods (SHAP, LIME) that make AI decisions transparent, auditable, and trustworthy for clinical stakeholders.</div>
+        </div>
+
+        <div class="res-interest-card">
+          <div class="res-interest-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div class="res-interest-title">NLP in Clinical Settings</div>
+          <div class="res-interest-desc">Leveraging natural language processing on clinical notes, social media health discourse, and medical literature to surface patterns and support population health insights.</div>
+        </div>
+
+        <div class="res-interest-card">
+          <div class="res-interest-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="res-interest-title">Assistive &amp; Inclusive Tech</div>
+          <div class="res-interest-desc">Building AI-driven assistive communication tools using non-verbal signals — body language, gesture, and pose — to improve quality of life for individuals with communication impairments.</div>
+        </div>
+
+      </div><!-- /res-interest-grid -->
+
+      <!-- ── PUBLICATION / IN PREPARATION ──────────────────── -->
+      <div class="res-group-label" style="margin-top:48px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Publications &amp; Research Output
+      </div>
+
+
+
+      <!-- ── RESEARCH FOCUS TIMELINE ────────────────────────── -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><path d="M6 2L6 8L2 19a2 2 0 001.84 2.77h16.32A2 2 0 0022 19L18 8V2"/><path d="M6 2h12"/><path d="M5 13h14"/></svg>
+        Research Background
+      </div>
+
+      <div class="res-bg-grid">
+
+        <div class="res-bg-item">
+          <div class="res-bg-year">2024 – 2025</div>
+          <div class="res-bg-body">
+            <div class="res-bg-title">Clinical Informatics Research — UPMC</div>
+            <div class="res-bg-desc">Applied predictive analytics, time-series forecasting, and process automation in a live hospital pharmacy environment. Developed HIPAA-compliant clinical data pipelines and real-time decision-support dashboards.</div>
+          </div>
+        </div>
+
+        <div class="res-bg-item">
+          <div class="res-bg-year">2023 – 2024</div>
+          <div class="res-bg-body">
+            <div class="res-bg-title">Graduate Research &amp; NLP — Mercyhurst University</div>
+            <div class="res-bg-desc">Researched NLP for mental health: 37K+ Reddit posts analyzed for depression and suicidality signals using transformer-based classifiers. Co-developed graduate NLP curriculum covering tokenisation, embeddings, and health-domain text classification.</div>
+          </div>
+        </div>
+
+        <div class="res-bg-item">
+          <div class="res-bg-year">2020 – 2022</div>
+          <div class="res-bg-body">
+            <div class="res-bg-title">Operational Research — NTD Programs, Nepal</div>
+            <div class="res-bg-desc">Spatio-temporal analysis of Lymphatic Filariasis and Visceral Leishmaniasis surveillance data. Designed M&amp;E frameworks and analytical dashboards used by provincial health authorities for strategic planning.</div>
+          </div>
+        </div>
+
+        <div class="res-bg-item">
+          <div class="res-bg-year">2019</div>
+          <div class="res-bg-body">
+            <div class="res-bg-title">Clinical Outcomes Research — Ipas Nepal &amp; OPM</div>
+            <div class="res-bg-desc">Multi-facility clinical data abstraction and QA for second-trimester care research. Mixed-methods health systems study integrating HMIS data with qualitative stakeholder coding for national policy input.</div>
+          </div>
+        </div>
+
+      </div><!-- /res-bg-grid -->
+
+      </div><!-- /max-width wrapper -->
     </section>
 
     <div class="section-rule"></div>
@@ -4825,9 +5939,8 @@ plt.show()</pre>
       }
 
       function resize() {
-        const wrapper = document.getElementById('heroWrapper');
-        W = canvas.width  = wrapper ? wrapper.offsetWidth  : window.innerWidth;
-        H = canvas.height = wrapper ? wrapper.offsetHeight : 400;
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
       }
 
       function initParticles() {
