@@ -6722,48 +6722,6 @@ plt.show()</pre>
     /* \u2500\u2500 SCROLL-REVEAL ANIMATION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
     window.showSection = window.showSection || function() {};
 
-    /* ── DEBUG: section visibility overlay ─────────────────────── */
-    (function initSectionDebugOverlay() {
-      const ids = ['home', 'impact', 'experience', 'projects', 'skills', 'research', 'learning'];
-      const panel = document.createElement('div');
-      panel.id = 'sectionDebugOverlay';
-      panel.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9999;font:12px/1.4 "Fira Mono",monospace;background:rgba(0,0,0,0.75);color:#f8fafc;padding:10px 14px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.4);max-width:260px;pointer-events:none;white-space:pre-wrap;';
-      panel.textContent = 'Section visibility debug…';
-      document.body.appendChild(panel);
-
-      function describe(id) {
-        let el = null;
-        if (id === 'home') {
-          el = document.getElementById('heroWrapper');
-        } else {
-          el = document.getElementById(id);
-        }
-        if (!el) return `${id}: missing`;
-        const style = window.getComputedStyle(el);
-        const classes = [];
-        if (el.classList.contains('sr-hidden')) classes.push('sr-hidden');
-        if (el.classList.contains('sr-visible')) classes.push('sr-visible');
-        return `${id.padEnd(10)} ${style.display.padEnd(10)} opacity=${style.opacity} ${classes.join(',')}`.trim();
-      }
-
-      function render() {
-        const lines = ids.map(describe);
-        panel.textContent = 'Section debug\n' + lines.join('\n');
-      }
-
-      const orig = window.showSection;
-      window.showSection = function(id) {
-        if (typeof orig === 'function') orig(id);
-        render();
-      };
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', render, { once: true });
-      } else {
-        render();
-      }
-      setInterval(render, 2000);
-    })();
   </script>
 </body>
 </html>
