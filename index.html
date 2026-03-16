@@ -3474,7 +3474,7 @@
       </div>
     </div>
 
-    <section id="impact" style="display:none;">
+    <section id="impact">
       <div style="max-width:1100px;margin:0 auto;padding:60px 20px;">
 
       <div class="section-eyebrow">Measurable Outcomes</div>
@@ -3823,7 +3823,7 @@
 
     <div class="section-rule"></div>
 
-    <section id="experience" style="display:none;">
+    <section id="experience">
       <div style="max-width:1100px;margin:0 auto;padding:60px 20px;">
 
       <div class="section-eyebrow">Career History</div>
@@ -4132,7 +4132,7 @@
 
     <div class="section-rule"></div>
 
-    <section id="projects" style="display:none;">
+    <section id="projects">
       <div style="max-width:1100px;margin:0 auto;padding:60px 20px;">
 
       <div class="section-eyebrow">Portfolio</div>
@@ -4512,7 +4512,7 @@
 
     <div class="section-rule"></div>
 
-    <section id="skills" style="display:none;">
+    <section id="skills">
       <div style="max-width:1100px;margin:0 auto;padding:60px 20px;">
       <div class="section-eyebrow">Toolkit</div>
       <h2>Skills &amp; Certifications</h2>
@@ -4783,7 +4783,7 @@
     <!-- ══════════════════════════════════════════════════════════
          RESEARCH SECTION
     ═══════════════════════════════════════════════════════════ -->
-    <section id="research" style="display:none;">
+    <section id="research">
       <div style="max-width:1100px;margin:0 auto;padding:60px 20px;">
 
       <div class="section-eyebrow">Scholarly Work</div>
@@ -4904,7 +4904,7 @@
 
     <div class="section-rule"></div>
 
-    <section id="learning" style="display:none;">
+    <section id="learning">
       <div style="max-width:1100px;margin:0 auto;padding:60px 20px;">
       <div class="section-eyebrow">Technical Reference</div>
       <h2>DS Notebook</h2>
@@ -6013,44 +6013,87 @@ plt.show()</pre>
     })();
 
     function showSection(sectionId) {
-      const sections = ["home", "impact", "experience", "projects", "skills", "learning"];
+      const sections = ["home", "impact", "experience", "projects", "skills", "research", "learning"];
+      if (!sections.includes(sectionId)) sectionId = "home";
+
+      const heroWrapper = document.getElementById("heroWrapper");
+      const homeDashboard = document.getElementById("homeDashboard");
+      const dbContent = document.querySelector('.db-content');
+      const contentSections = ["impact", "experience", "projects", "skills", "research", "learning"];
       let targetEl = null;
-      sections.forEach(id => {
-        if (id === "home") {
-          const heroWrapper = document.getElementById("heroWrapper");
-          const heroSection = heroWrapper.querySelector(".hero");
-          heroWrapper.style.display = (sectionId === "home") ? "block" : "none";
-          if (sectionId === "home") {
-            heroSection.style.display = "block";
-            targetEl = heroWrapper;
-          }
-        } else {
-          const el = document.getElementById(id);
-          if (el) {
-            el.style.display = (id === sectionId) ? "block" : "none";
-            if (id === sectionId) targetEl = el;
-          }
-        }
+
+      // Always hide all content sections first, then show only the target.
+      contentSections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = (id === sectionId) ? "block" : "none";
+        if (id === sectionId && el) targetEl = el;
       });
-      // Show dashboard only on home
-      const dash = document.getElementById('homeDashboard');
-      if (dash) {
-        dash.style.display = (sectionId === 'home') ? 'block' : 'none';
-        if (sectionId === 'home') targetEl = dash;
+
+      if (heroWrapper) {
+        heroWrapper.style.display = (sectionId === "home") ? "block" : "none";
+        if (sectionId === "home") targetEl = heroWrapper;
+      }
+
+      if (homeDashboard) {
+        homeDashboard.style.display = (sectionId === "home") ? "block" : "none";
+        // Keep hero as the scroll target while still showing dashboard panels
+        if (sectionId === "home" && heroWrapper) {
+          targetEl = heroWrapper;
+        }
+      }
+
+      // Fail-safe: if a target section is accidentally nested or overridden, force it visible.
+      if (sectionId !== "home") {
+        const activeSection = document.getElementById(sectionId);
+        if (activeSection) {
+          if (dbContent) {
+            const footerEl = dbContent.querySelector('footer');
+            const shouldReparent = activeSection.parentElement !== dbContent;
+            const isAfterFooter = footerEl && (footerEl.compareDocumentPosition(activeSection) & Node.DOCUMENT_POSITION_FOLLOWING);
+
+            if (shouldReparent || isAfterFooter) {
+              if (footerEl) {
+                dbContent.insertBefore(activeSection, footerEl);
+              } else {
+                dbContent.appendChild(activeSection);
+              }
+            }
+          }
+          activeSection.style.display = "block";
+          activeSection.style.visibility = "visible";
+          activeSection.style.opacity = "1";
+          activeSection.hidden = false;
+          const inner = activeSection.firstElementChild;
+          if (inner && inner.style && inner.style.display === "none") {
+            inner.style.display = "block";
+          }
+          targetEl = activeSection;
+        }
       }
       // Fade-in animation on the visible content
       if (targetEl) {
+        // Ensure any scroll-reveal placeholders inside the active section are visible immediately
+        targetEl.querySelectorAll('.sr-hidden').forEach(el => {
+          el.classList.remove('sr-hidden');
+          el.classList.add('sr-visible');
+        });
         targetEl.classList.remove('sec-entering');
         void targetEl.offsetWidth; // force reflow
         targetEl.classList.add('sec-entering');
         setTimeout(() => targetEl.classList.remove('sec-entering'), 400);
+        // Ensure the section is brought into view for users who might be scrolled elsewhere
+        if (typeof targetEl.scrollIntoView === 'function') {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
       }
       // Highlight active sidebar nav link
       document.querySelectorAll('.db-nav-link[data-section]').forEach(a => {
         a.classList.toggle('nav-active', a.dataset.section === sectionId);
       });
       // Update topbar breadcrumb
-      const _secNames = {home:'Home',impact:'Impact',experience:'Experience',projects:'Projects',skills:'Skills',learning:'DS Notebook'};
+      const _secNames = {home:'Home',impact:'Impact',experience:'Experience',projects:'Projects',skills:'Skills',research:'Research',learning:'DS Notebook'};
       const _topbarSec = document.getElementById('topbarSection');
       if (_topbarSec) _topbarSec.textContent = _secNames[sectionId] || sectionId;
       // Auto-close sidebar on mobile after navigation
@@ -6064,9 +6107,29 @@ plt.show()</pre>
       history.replaceState(null, '', '#' + sectionId);
     }
 
+    // Keep URL hash navigation and click navigation in sync.
+    window.addEventListener('hashchange', function() {
+      const hashSection = (location.hash || '#home').replace('#', '');
+      if (typeof window.showSection === 'function') {
+        window.showSection(hashSection);
+      }
+    });
+
+    document.querySelectorAll('.db-nav-link[data-section]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const sectionId = link.dataset.section || 'home';
+        if (typeof window.showSection === 'function') {
+          window.showSection(sectionId);
+        }
+      });
+    });
+
     // On load, restore section from hash (default to home)
     const _initialSection = (location.hash || '#home').replace('#', '');
-    showSection(_initialSection);
+    if (typeof window.showSection === 'function') {
+      window.showSection(_initialSection);
+    }
 
 
     function openLearning(section) {
@@ -6657,59 +6720,49 @@ plt.show()</pre>
       }
     })();
     /* \u2500\u2500 SCROLL-REVEAL ANIMATION \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */
-    (function initScrollReveal() {
-      const revealEls = [
-        '.impact-kpi', '.impact-card', '.exp-item', '.proj-card',
-        '.skill-cat-card', '.cert-badge', '.training-item', '.dash-card', '.lwc-item'
-      ];
-      const style = document.createElement('style');
-      style.textContent = `
-        .sr-hidden {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1);
-        }
-        .sr-visible {
-          opacity: 1 !important;
-          transform: translateY(0) !important;
-        }
-      `;
-      document.head.appendChild(style);
+    window.showSection = window.showSection || function() {};
 
-      function markHidden() {
-        revealEls.forEach(selector => {
-          document.querySelectorAll(selector).forEach((el, i) => {
-            el.classList.add('sr-hidden');
-            el.style.transitionDelay = (i * 0.045) + 's';
-          });
-        });
+    /* ── DEBUG: section visibility overlay ─────────────────────── */
+    (function initSectionDebugOverlay() {
+      const ids = ['home', 'impact', 'experience', 'projects', 'skills', 'research', 'learning'];
+      const panel = document.createElement('div');
+      panel.id = 'sectionDebugOverlay';
+      panel.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9999;font:12px/1.4 "Fira Mono",monospace;background:rgba(0,0,0,0.75);color:#f8fafc;padding:10px 14px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.4);max-width:260px;pointer-events:none;white-space:pre-wrap;';
+      panel.textContent = 'Section visibility debug…';
+      document.body.appendChild(panel);
+
+      function describe(id) {
+        let el = null;
+        if (id === 'home') {
+          el = document.getElementById('heroWrapper');
+        } else {
+          el = document.getElementById(id);
+        }
+        if (!el) return `${id}: missing`;
+        const style = window.getComputedStyle(el);
+        const classes = [];
+        if (el.classList.contains('sr-hidden')) classes.push('sr-hidden');
+        if (el.classList.contains('sr-visible')) classes.push('sr-visible');
+        return `${id.padEnd(10)} ${style.display.padEnd(10)} opacity=${style.opacity} ${classes.join(',')}`.trim();
       }
 
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('sr-visible');
-            io.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      function bindReveal() {
-        revealEls.forEach(selector => {
-          document.querySelectorAll(selector + ':not(.sr-visible)').forEach(el => {
-            io.observe(el);
-          });
-        });
+      function render() {
+        const lines = ids.map(describe);
+        panel.textContent = 'Section debug\n' + lines.join('\n');
       }
 
-      // Hook into showSection to re-bind after section switch
-      const _origShow = window.showSection;
+      const orig = window.showSection;
       window.showSection = function(id) {
-        _origShow(id);
-        setTimeout(() => { markHidden(); bindReveal(); }, 50);
+        if (typeof orig === 'function') orig(id);
+        render();
       };
 
-      document.addEventListener('DOMContentLoaded', () => { markHidden(); bindReveal(); });
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', render, { once: true });
+      } else {
+        render();
+      }
+      setInterval(render, 2000);
     })();
   </script>
 </body>
