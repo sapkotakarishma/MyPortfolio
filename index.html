@@ -2876,81 +2876,6 @@
     }
     .proj-card-thumb svg { width: 100%; height: 100%; display: block; }
 
-    /* ══════════════════════════════════════════════════════════════
-       FLOATING LIVE DATA WIDGET
-    ══════════════════════════════════════════════════════════════ */
-    .float-widget {
-      position: fixed;
-      bottom: 24px; right: 24px;
-      width: 188px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 16px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
-      z-index: 200;
-      overflow: hidden;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      transition: background var(--transition-speed) ease,
-                  border-color var(--transition-speed) ease;
-    }
-    .fw-header {
-      display: flex; align-items: center; gap: 8px;
-      padding: 9px 13px;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer; user-select: none;
-    }
-    .fw-header-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--accent);
-      animation: pulse-dot 2s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-    .fw-header-label {
-      font-size: 10px; font-weight: 800;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent-soft); flex: 1;
-    }
-    .fw-header-chevron {
-      font-size: 10px; color: var(--text-muted);
-      transition: transform 0.25s;
-    }
-    .float-widget.fw-collapsed .fw-header-chevron { transform: rotate(-90deg); }
-    .fw-body {
-      overflow: hidden;
-      max-height: 260px;
-      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s;
-    }
-    .float-widget.fw-collapsed .fw-body { max-height: 0; opacity: 0; }
-    .fw-chart-wrap { padding: 10px 12px 4px; }
-    .fw-chart-wrap canvas { width: 100% !important; }
-    .fw-kpi-row {
-      display: flex;
-      border-top: 1px solid var(--border);
-      margin-top: 6px;
-    }
-    .fw-kpi {
-      flex: 1; text-align: center;
-      padding: 7px 4px;
-      border-right: 1px solid var(--border);
-    }
-    .fw-kpi:last-child { border-right: none; }
-    .fw-kpi-val { font-size: 14px; font-weight: 800; color: var(--accent-soft); display: block; }
-    .fw-kpi-lbl {
-      font-size: 8.5px; font-weight: 700;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--text-faint); display: block; margin-top: 2px;
-    }
-    .fw-console {
-      padding: 6px 12px 9px;
-      font-size: 9.5px;
-      font-family: 'Fira Mono','Courier New',monospace;
-      color: #22c55e;
-      letter-spacing: 0.03em;
-      border-top: 1px solid var(--border);
-    }
-    @media (max-width: 600px) { .float-widget { display: none; } }
-
     /* ── TOPBAR DOWNLOAD BUTTON ───────────────────────────────── */
     .db-download-btn {
       display: inline-flex;
@@ -2975,18 +2900,6 @@
       color: #fff;
       transform: translateY(-1px);
       box-shadow: 0 4px 14px rgba(37,99,235,0.3);
-    }
-
-    /* ── FLOAT WIDGET OUTER LABEL ─────────────────────────────── */
-    .fw-outer-label {
-      font-size: 8px;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      text-align: right;
-      padding: 6px 13px 0;
-      opacity: 0.65;
     }
 
     /* ── PROJ & SKILL CARD HOVER ELEVATION ───────────────────── */
@@ -5854,9 +5767,9 @@ plt.show()</pre>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
               GitHub
             </a>
-            <a href="mailto:karishma.sapkota@email.com" style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:5px 12px;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--accent-soft)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'">
+            <a href="mailto:karishmasapkota08@gmail.com" style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);border-radius:8px;padding:5px 12px;transition:color 0.2s,border-color 0.2s;" onmouseover="this.style.color='var(--accent-soft)';this.style.borderColor='var(--accent)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Email
+              karishmasapkota08@gmail.com
             </a>
           </div>
         </div>
@@ -5880,39 +5793,6 @@ plt.show()</pre>
   </div><!-- /page-container -->
 
   <div class="theme-indicator" id="themeIndicator"></div>
-
-  <!-- ══════════════════════════════════════════════════════════════
-       FLOATING LIVE DATA WIDGET
-  ═══════════════════════════════════════════════════════════════ -->
-  <div class="float-widget fw-collapsed" id="floatWidget">
-    <div class="fw-outer-label">Dashboard</div>
-    <div class="fw-header" onclick="toggleWidget()">
-      <div class="fw-header-dot"></div>
-      <span class="fw-header-label">Live Analytics</span>
-      <span class="fw-header-chevron">▾</span>
-    </div>
-    <div class="fw-body" id="fwBody">
-      <div class="fw-chart-wrap">
-        <div style="font-size:9.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint);margin-bottom:6px;">Model AUC · progression</div>
-        <canvas id="fwChart" height="72"></canvas>
-      </div>
-      <div class="fw-kpi-row">
-        <div class="fw-kpi">
-          <span class="fw-kpi-val">0.92</span>
-          <span class="fw-kpi-lbl">Best AUC</span>
-        </div>
-        <div class="fw-kpi">
-          <span class="fw-kpi-val">10+</span>
-          <span class="fw-kpi-lbl">Projects</span>
-        </div>
-        <div class="fw-kpi">
-          <span class="fw-kpi-val">7+</span>
-          <span class="fw-kpi-lbl">Yrs Exp</span>
-        </div>
-      </div>
-      <div class="fw-console" id="fwConsole">● system nominal</div>
-    </div>
-  </div>
 
   <script>
     /* ── HERO PARTICLE NETWORK ANIMATION ──────────────────────── */
@@ -6333,43 +6213,6 @@ plt.show()</pre>
       if (overlay) overlay.classList.toggle('sidebar-open', !isOpen);
     }
 
-    /* ── FLOATING WIDGET TOGGLE ─────────────────────────────────── */
-    function toggleWidget() {
-      document.getElementById('floatWidget').classList.toggle('fw-collapsed');
-    }
-
-    /* ── FLOATING WIDGET CHART ──────────────────────────────────── */
-    (function initFloatWidget() {
-      const _init = () => {
-        const canvas = document.getElementById('fwChart');
-        if (!canvas || !window.Chart) return;
-        const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#3b82f6';
-        new Chart(canvas, {
-          type: 'line',
-          data: {
-            labels: ['LR','NB','DT','RF','XGB','Ens'],
-            datasets: [{
-              data: [0.72, 0.76, 0.79, 0.83, 0.87, 0.92],
-              borderColor: accent,
-              backgroundColor: accent + '22',
-              fill: true, tension: 0.45,
-              pointRadius: 3, pointHoverRadius: 5, borderWidth: 2
-            }]
-          },
-          options: {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-              x: { ticks: { color: 'rgba(148,163,184,0.7)', font: { size: 9 } }, grid: { display: false } },
-              y: { min: 0.65, max: 1, ticks: { color: 'rgba(148,163,184,0.7)', font: { size: 9 }, callback: v => v.toFixed(2) }, grid: { color: 'rgba(148,163,184,0.06)' } }
-            }
-          }
-        });
-      };
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _init);
-      else _init();
-    })();
-
     /* ── HERO CONSOLE CYCLING MESSAGES ─────────────────────────── */
     (function initConsole() {
       const msgs = [
@@ -6391,23 +6234,6 @@ plt.show()</pre>
         setTimeout(() => { el.textContent = msgs[i]; el.style.opacity = '1'; }, 180);
       }, 2800);
       el.style.transition = 'opacity 0.18s';
-    })();
-
-    /* ── WIDGET CONSOLE STATUS CYCLING ─────────────────────────── */
-    (function initWidgetConsole() {
-      const statuses = [
-        '● system nominal',
-        '▶ model inference ready',
-        '◈ dashboard live',
-        '✓ pipelines healthy',
-      ];
-      let wi = 0;
-      const el = document.getElementById('fwConsole');
-      if (!el) return;
-      setInterval(() => {
-        wi = (wi + 1) % statuses.length;
-        el.textContent = statuses[wi];
-      }, 3200);
     })();
 
     /* ── EXPERIENCE: accordion toggle ──────────────────────────── */
